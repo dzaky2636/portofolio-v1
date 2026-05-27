@@ -1,3 +1,5 @@
+import RetroCanvas from '@/components/RetroCanvas';
+
 export default async function Page({
   params,
 }: {
@@ -5,12 +7,7 @@ export default async function Page({
 }) {
   const { lang } = await params;
 
-  const quotes = [
-    "THE SYSTEM IS OPERATIONAL.",
-    "REALITY IS JUST A CONSISTENT HACK.",
-    "CODE IS POETRY. POETRY IS CHAOS.",
-  ];
-  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+  const randomQuote = "THE SYSTEM IS OPERATIONAL.";
 
   const experience = [
     {
@@ -39,7 +36,7 @@ export default async function Page({
       <header className="sticky top-0 z-50 bg-[#F4F3ED] border-b-4 border-black">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
           <div className="font-mono uppercase tracking-widest text-xs font-bold border-2 border-black px-2 py-1 bg-white shadow-[4px_4px_0px_#0C0C0C]">
-            DZAKY_SYS // V1.0
+            {'DZAKY_SYS // V1.0'}
           </div>
 
           <nav className="hidden md:flex items-center gap-6">
@@ -122,17 +119,13 @@ export default async function Page({
             </div>
           </div>
 
-          {/* 3D Canvas Placeholder */}
+          {/* 3D Canvas */}
           <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-4 max-w-md mx-auto lg:mr-0 lg:ml-auto">
             <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-3 flex justify-between">
               <span>RENDER_VIEW.exe</span>
-              <span>[PENDING]</span>
+              <span>[ACTIVE]</span>
             </div>
-            <div className="border-2 border-dashed border-[#0C0C0C] aspect-video flex items-center justify-center bg-[#E5E5E5]">
-              <span className="font-mono uppercase tracking-widest text-xs text-[#0C0C0C]">
-                [ 3D_RENDER_PENDING ]
-              </span>
-            </div>
+            <RetroCanvas />
           </div>
         </div>
       </section>
@@ -147,7 +140,7 @@ export default async function Page({
             USER_INVENTORY.LOG
           </h2>
           <div className="font-mono uppercase tracking-widest text-xs mt-3">
-            /// EDUCATION & SPECIFICATIONS
+            {'/// EDUCATION & SPECIFICATIONS'}
           </div>
         </div>
 
@@ -247,7 +240,7 @@ export default async function Page({
             PROJECT_REALMS
           </h2>
           <div className="font-mono uppercase tracking-widest text-xs mt-3">
-            /// SELECT A DIALOGUE BOX TO INSPECT
+            {'/// SELECT A DIALOGUE BOX TO INSPECT'}
           </div>
         </div>
 
@@ -260,7 +253,7 @@ export default async function Page({
                   CHATRIGO
                 </h3>
                 <p className="font-mono uppercase tracking-widest text-xs mt-2 text-[#2945FF]">
-                  SaaS & AI Orchestration // REALM_01
+                  {'SaaS & AI Orchestration // REALM_01'}
                 </p>
               </div>
               <div className="font-mono uppercase tracking-widest text-xs border-2 border-black px-3 py-2 bg-[#F4F3ED] shadow-[2px_2px_0px_#0C0C0C] whitespace-nowrap">
@@ -296,7 +289,7 @@ export default async function Page({
                   BALIKPAPAN E-GOVERNMENT SYSTEMS
                 </h3>
                 <p className="font-mono uppercase tracking-widest text-xs mt-2 text-[#2945FF]">
-                  Civic Tech // REALM_02
+                  {'Civic Tech // REALM_02'}
                 </p>
               </div>
               <div className="font-mono uppercase tracking-widest text-xs border-2 border-black px-3 py-2 bg-[#F4F3ED] shadow-[2px_2px_0px_#0C0C0C] whitespace-nowrap">
@@ -331,7 +324,7 @@ export default async function Page({
                   INTELLIGENT TUTORING SYSTEM
                 </h3>
                 <p className="font-mono uppercase tracking-widest text-xs mt-2 text-[#2945FF]">
-                  Academic/AI // REALM_03
+                  {'Academic/AI // REALM_03'}
                 </p>
               </div>
               <div className="font-mono uppercase tracking-widest text-xs border-2 border-black px-3 py-2 bg-[#F4F3ED] shadow-[2px_2px_0px_#0C0C0C] whitespace-nowrap">
@@ -368,7 +361,7 @@ export default async function Page({
             EXPERIENCE_LOGS
           </h2>
           <div className="font-mono uppercase tracking-widest text-xs mt-3">
-            /// EXPAND RECORDS FOR DETAILS
+            {'/// EXPAND RECORDS FOR DETAILS'}
           </div>
         </div>
 
@@ -431,7 +424,7 @@ export default async function Page({
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-10">
           <div className="space-y-4">
             <div className="font-mono uppercase tracking-widest text-xs font-bold border-2 border-black px-2 py-1 bg-white shadow-[4px_4px_0px_#0C0C0C] inline-block">
-              DZAKY_SYS // V1.0
+              {'DZAKY_SYS // V1.0'}
             </div>
             <p className="font-serif text-xl">Dzaky Fatur Rahman</p>
             <div className="flex gap-2">
