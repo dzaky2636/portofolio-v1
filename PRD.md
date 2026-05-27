@@ -1,44 +1,59 @@
 # PRD.md: Portfolio Architecture & System Instructions
 
 ## 1. Role & Objective
-You are an Expert Frontend Architect specializing in Next.js 16, React 19.2, Tailwind CSS, and React Three Fiber. Your objective is to build a high-performance, single-page Bento Grid portfolio with expandable case studies. 
+You are an Expert Frontend Architect specializing in Next.js 16, React 19.2, Tailwind CSS, and React Three Fiber. Your objective is to build a highly distinctive, single-page portfolio utilizing a "Corporate Weirdcore" aesthetic. 
 
-Do NOT generate generic web templates. You must strictly adhere to the constraints and design systems outlined in this document.
+Do NOT generate generic, smooth web templates. You must strictly adhere to the chunky, retro OS constraints and design systems outlined in this document and `DESIGN.md`.
 
 ## 2. Technical Stack & Constraints
 * **Framework:** Next.js 16 (App Router) with React 19.2.
-* **Bundler:** Turbopack (must be compatible with Turbopack dev server).
+* **Bundler:** Turbopack.
 * **Language:** TypeScript (Strict mode).
-* **Styling:** Tailwind CSS.
+* **Styling:** Tailwind CSS (extended with custom variables for hard shadows and thick borders).
 * **3D Engine:** `@react-three/fiber` and `three`.
-    * *Constraint:* All 3D elements must be procedurally generated via code (math/arrays). Do NOT import external `.gltf` or `.obj` files.
-* **Localization (i18n):** Native Next.js dynamic routing (`app/[lang]`) utilizing raw JSON dictionaries (`en.json`, `id.json`). Do NOT use third-party i18n libraries like `next-i18next`.
-* **Animations:** Rely purely on the Next.js 16 native View Transitions API (`startTransition`) for route changes. Do NOT use Framer Motion.
+    * *Constraint:* The 3D element should mimic PS1-era low-poly graphics. Use flat shading (`MeshBasicMaterial` or `MeshToonMaterial`) and rigid rotations.
+* **Localization (i18n):** Native Next.js dynamic routing (`app/[lang]`) utilizing raw JSON dictionaries (`en.json`, `id.json`). No heavy third-party i18n libraries.
+* **State Management:** React `useState`/`useTransition` for the project carousel modals.
 
-## 3. Design System: "Blueprint Brutalism"
-This project looks like a highly functional engineering workbench or architectural blueprint. 
-* **Colors:** Pure black (`#000000`) background, stark white (`#FFFFFF`) primary text, deep slate (`#0A0A0A`) structural elements, and zinc/gray for muted text. Use ONE accent color (e.g., Teal or Orange) only for active states/indicators.
-* **Borders & Grid:** Use the "1px gap hack". The parent container uses `gap-[1px]` and a `bg-zinc-800` background. Child elements use `bg-black`. This creates perfect 1px blueprint lines.
-* **Typography:** * Primary Headers/Reading: Strict geometric sans-serif (e.g., Geist, Inter).
-    * Metadata/Data/Tech Stack: Strict monospace (e.g., Geist Mono, JetBrains Mono).
-* **PROHIBITED ELEMENTS (CRITICAL):**
-    * NO gradients (`bg-gradient-*`).
-    * NO drop shadows or glows (`shadow-*`, `ring-*`).
-    * NO glassmorphism (`backdrop-blur-*`).
-    * NO rounded corners larger than `rounded-sm`.
+## 3. Layout Architecture (The 8-Point Flow)
+The application abandons a rigid full-page grid for a sequential, narrative layout using retro OS "Windows".
 
-## 4. Layout Architecture (The Bento Grid)
-The primary landing page is a CSS Grid (3 columns on desktop, 1 column on mobile) containing the following blocks:
+1. **Header:** Clunky, bordered nav bar with a physical-feeling toggle switch for `EN / ID`.
+2. **Main Profile (Hero):** Massive serif typography paired with a harshly bordered Profile Picture container. Includes the 3D `<Canvas>` rendering a low-poly geometric object.
+3. **Education:** Presented as a clunky system log or "Window" block.
+4. **Short Profile (The Inventory):** A cluster of small windows displaying tech stack tags (`Next.js`, `TypeScript`) and current status.
+5. **Projects (The Realms):** Massive, text-heavy dialogue boxes.
+    * *Interaction:* Clicking a project opens `Image_Viewer.exe` (A modal overlay with a harsh backdrop and raw `[ < ]` `[ > ]` navigation buttons to cycle through project screenshots).
+6. **Experience:** An interactive accordion or zig-zag timeline. Expanding a role snaps it open instantly.
+7. **Contact ("Let's Talk"):** Screen-filling section with a massive, blocky email button.
+8. **Footer:** Thick top border, containing retro web badges, social links, and a dynamic randomized quote string.
 
-* **Block A (Top Left, col-span-2): Executive Identity**
-    * Name, Title, and Professional Summary.
-* **Block B (Right Column, col-span-1, row-span-2): The 3D Engine**
-    * The React Three Fiber canvas displaying a procedural wireframe node network. Slowly rotating.
-* **Block C (Middle Left, col-span-2): Flagship SaaS**
-    * Chatrigo Case Study summary.
-* **Block D (Bottom Left, col-span-1): Academic/AI Research**
-    * Intelligent Tutoring System summary.
-* **Block E (Bottom Middle, col-span-1): Civic Infrastructure**
-    * Balikpapan E-Government Systems summary.
-* **Block F (Bottom Right, col-span-1): I/O & Links**
-    * Resume
+## 4. Content Dictionary (The Source of Truth)
+When generating UI components, use ONLY the following verified data. **Do NOT invent, hallucinate, or add marketing fluff.**
+
+### Identity
+* **Name:** Dzaky Fatur Rahman
+* **Title:** Lead Fullstack Engineer & AI Integrator
+* **Summary:** Architecting scalable omnichannel SaaS platforms, AI-integrated systems, and secure civic web infrastructure. Proven track record of managing the end-to-end SDLC and leading technical divisions.
+
+### Project 1: Chatrigo (SaaS & AI Orchestration)
+* **Role:** Lead Fullstack Engineer at PT Rigo Inovasi Digital
+* **Stack:** Next.js 15/16, Prisma, Supabase, PostgreSQL (pgvector)
+* **Details:** Led the engineering architecture for a multi-tenant B2B omnichannel AI chatbot platform centralizing interactions across WhatsApp and Telegram. Engineered an anti-hallucination AI orchestrator featuring RAG and an AI Business Advisor. Managed and mentored the technical division, establishing code quality standards.
+* **Images:** (To be mapped in JSON array: `['/chatrigo-1.jpg', '/chatrigo-2.jpg']`)
+
+### Project 2: Balikpapan E-Government Systems (Civic Tech)
+* **Role:** Fullstack Web & Mobile Developer at Diskominfo Balikpapan
+* **Stack:** Laravel, Tailwind CSS, Queue Processing, Flutter
+* **Details:** Developed enterprise-grade municipal systems to enhance public services. Built an automated E-Signature platform (E-Sign) with background queue processing deployed across city schools. Developed a secure personnel management dashboard (E-KGB).
+* **Images:** (To be mapped in JSON array: `['/egov-1.jpg', '/egov-2.jpg']`)
+
+### Project 3: Intelligent Tutoring System (Academic/AI)
+* **Role:** Informatics Graduate (GPA 3.71/4.00) at Universitas Multimedia Nusantara
+* **Stack:** Python, AI Agents, LLM Engineering
+* **Details:** Undergraduate thesis engineering an adaptive tutoring system utilizing Octalysis-based gamification and autonomous AI agents for real-time feedback and adaptive support. Mentored 200+ students as a Laboratory Assistant.
+* **Images:** (To be mapped in JSON array: `['/thesis-1.jpg', '/thesis-2.jpg']`)
+
+### Certifications & Specs
+* **Language:** TOEIC (960/990), Duolingo English Test (145/160)
+* **Tech:** Huawei HCIA-AI, Data Science Fundamentals (DQLab)
