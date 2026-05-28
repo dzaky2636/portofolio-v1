@@ -4,6 +4,7 @@ import ExperienceAccordion from '@/components/ExperienceAccordion';
 import AnimateOnScroll from '@/components/AnimateOnScroll';
 import GlitchText from '@/components/GlitchText';
 import LanguageToggle from '@/components/LanguageToggle';
+import { FaGithub, FaLinkedin, FaEnvelope, FaWhatsapp, FaInstagram } from 'react-icons/fa';
 
 export default async function Page({
   params,
@@ -12,7 +13,23 @@ export default async function Page({
 }) {
   const { lang } = await params;
 
-  const randomQuote = "THE SYSTEM IS OPERATIONAL.";
+  const quotes = [
+    "WHEN CODING SUCKS, I WANT TO BE AN ANIMAL INSTEAD",
+    "youtu.be/iik25wqIuFo?si=InD3NtRqOl4Y8sMr",
+    ".-.- - . -... .-.- .-.. ..-- -... .-.. ..--",
+    "WHAT DO YOU CALL A 7 THAT HAS A FLU?",
+    "I HAVE TWO MICROSOFT OUTLOOKS AND NEITHER ONE OF THOSE ARE WORKING",
+    "WHAT IS THIS? ..DIORITE?",
+    "BUFFALO BUFFALO BUFFALO BUFFALO BUFFALO BUFFALO BUFFALO BUFFALO",
+    "SCIENCE COMPELS US TO EXPLODE THE SUN",
+    "WE MAY NOT HAVE MUCH IN COMMON, YOU AND I. STILL, I CONSIDER YOU AS A FRIEND",
+    "THIS SONG IS NEW TO ME, BUT I AM HONORED TO BE PART OF IT",
+    "OF ALL THE LIFE FORMS THAT WILL PERISH IN THE ONCOMING DEATH OF THE UNIVERSE, WE WILL MISS THE ANGLERFISH THE LEAST",
+    "I LOVE THE WORLD AND EVERYTHING IN IT",
+    "IF EVERY PORKCHOP WERE PERFECT, WE WOULDN'T HAVE HOTDOGS",
+    "I JUST TURNED ALL MY FINGERS INTO CATS!",
+    "WHAT AN INCREDIBLE POWER -- THE ABILITY TO.. GROW UP"
+  ];
 
   const experience = [
     {
@@ -47,7 +64,7 @@ export default async function Page({
             data-twitch
             className="font-mono uppercase tracking-widest text-xs font-bold border-2 border-black px-2 py-1 bg-white shadow-[4px_4px_0px_#0C0C0C] animate-flicker"
           >
-            {'DZAKY_SYS // V1.0'}
+            {'DZAKY\'S CORNER'}
           </div>
 
           <nav className="hidden md:flex items-center gap-6">
@@ -310,27 +327,27 @@ export default async function Page({
               data-twitch
               className="font-mono uppercase tracking-widest text-xs font-bold border-2 border-black px-2 py-1 bg-white shadow-[4px_4px_0px_#0C0C0C] inline-block"
             >
-              {'DZAKY_SYS // V1.0'}
+              {'DZAKY\'S CORNER'}
             </div>
-            <p className="font-serif text-xl">Dzaky Fatur Rahman</p>
+            <p className="font-serif text-xl">This Website Was Made With:</p>
             <div className="flex gap-2">
               <div
                 className="bg-[#2945FF] text-white font-mono uppercase tracking-widest text-[10px] px-2 py-1 border-2 border-black animate-led-blink"
                 style={{ animationDelay: '0.1s', animationFillMode: 'both' }}
               >
-                HTML5
+                NEXTJS
               </div>
               <div
                 className="bg-[#FFD700] text-[#0C0C0C] font-mono uppercase tracking-widest text-[10px] px-2 py-1 border-2 border-black animate-led-blink"
                 style={{ animationDelay: '0.2s', animationFillMode: 'both' }}
               >
-                REACT
+                A LOT OF ANIMATIONS
               </div>
               <div
                 className="bg-[#0C0C0C] text-white font-mono uppercase tracking-widest text-[10px] px-2 py-1 border-2 border-white animate-led-blink"
                 style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
               >
-                NEXT.JS
+                UHHH.. AND LOVE
               </div>
             </div>
           </div>
@@ -339,40 +356,57 @@ export default async function Page({
             <div className="font-mono uppercase tracking-widest text-xs">
               [ CONNECT ]
             </div>
-            <div className="flex gap-4 md:justify-end">
+            <div className="flex gap-3 md:justify-end">
               <a
-                href="#"
-                className="font-mono uppercase tracking-widest text-xs border-b-2 border-black hover:text-[#2945FF] transition-colors duration-75 hover-jam"
+                href="https://github.com/dzaky2636"
+                aria-label="GitHub"
+                className="bg-white border-2 border-black shadow-[4px_4px_0px_#0C0C0C] p-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] hover:border-[#2945FF] hover:text-[#2945FF] transition-all duration-75"
               >
-                GITHUB
+                <FaGithub className="w-5 h-5" />
               </a>
               <a
-                href="#"
-                className="font-mono uppercase tracking-widest text-xs border-b-2 border-black hover:text-[#2945FF] transition-colors duration-75 hover-jam"
+                href="https://www.linkedin.com/in/dzakyfaturr/"
+                aria-label="LinkedIn"
+                className="bg-white border-2 border-black shadow-[4px_4px_0px_#0C0C0C] p-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] hover:border-[#2945FF] hover:text-[#2945FF] transition-all duration-75"
               >
-                LINKEDIN
+                <FaLinkedin className="w-5 h-5" />
               </a>
               <a
-                href="#"
-                className="font-mono uppercase tracking-widest text-xs border-b-2 border-black hover:text-[#2945FF] transition-colors duration-75 hover-jam"
+                href="mailto:dzaky2636@gmail.com"
+                aria-label="Email"
+                className="bg-white border-2 border-black shadow-[4px_4px_0px_#0C0C0C] p-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] hover:border-[#2945FF] hover:text-[#2945FF] transition-all duration-75"
               >
-                EMAIL
+                <FaEnvelope className="w-5 h-5" />
+              </a>
+              <a
+                href="https://wa.me/6281377752644"
+                aria-label="WhatsApp"
+                className="bg-white border-2 border-black shadow-[4px_4px_0px_#0C0C0C] p-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] hover:border-[#2945FF] hover:text-[#2945FF] transition-all duration-75"
+              >
+                <FaWhatsapp className="w-5 h-5" />
+              </a>
+              <a
+                href="https://instagram.com/dzakyfaturr"
+                aria-label="Instagram"
+                className="bg-white border-2 border-black shadow-[4px_4px_0px_#0C0C0C] p-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] hover:border-[#2945FF] hover:text-[#2945FF] transition-all duration-75"
+              >
+                <FaInstagram className="w-5 h-5" />
               </a>
             </div>
             <p className="font-mono uppercase tracking-widest text-xs border-2 border-dashed border-black p-3 inline-block max-w-xs">
-              QUOTE:{' '}
               <GlitchText
-                text={randomQuote}
+                text={quotes[0]}
+                texts={quotes}
                 trigger="interval"
-                intervalMs={10000}
+                intervalMs={7000}
               />
             </p>
           </div>
         </div>
 
         <div className="max-w-7xl mx-auto mt-12 pt-4 border-t-2 border-black flex flex-col sm:flex-row justify-between items-center gap-2 font-mono uppercase tracking-widest text-[10px]">
-          <span> 2026 DZAKY FATUR RAHMAN</span>
-          <span data-twitch>ALL SYSTEMS OPERATIONAL</span>
+          <span> dzaky2636@gmail.com</span>
+          <span data-twitch>PORTOFOLIO V1</span>
         </div>
       </footer>
     </main>
