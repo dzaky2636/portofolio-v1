@@ -36,7 +36,7 @@ export default async function Page({
   ];
 
   return (
-    <main className="min-h-screen bg-[#F4F3ED] text-[#0C0C0C] font-serif selection:bg-[#2945FF] selection:text-white">
+    <main className="min-h-screen text-[#0C0C0C] font-serif selection:bg-[#2945FF] selection:text-white">
       {/* 1. HEADER */}
       <header className="sticky top-0 z-50 bg-[#F4F3ED] border-b-4 border-black">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
