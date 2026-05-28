@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 
 export interface ProjectImageData {
   src: string;
@@ -22,18 +22,28 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isPressedPrev, setIsPressedPrev] = useState(false);
   const [isPressedNext, setIsPressedNext] = useState(false);
+  const [imageTransition, setImageTransition] = useState(false);
+  const [modalFlicker, setModalFlicker] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
 
   const totalImages = project?.images.length ?? 0;
 
+  const triggerImageTransition = useCallback(() => {
+    setImageTransition(true);
+    setTimeout(() => setImageTransition(false), 150);
+  }, []);
+
   const handlePrev = useCallback(() => {
     if (totalImages === 0) return;
+    triggerImageTransition();
     setCurrentImageIndex((prev) => (prev === 0 ? totalImages - 1 : prev - 1));
-  }, [totalImages]);
+  }, [totalImages, triggerImageTransition]);
 
   const handleNext = useCallback(() => {
     if (totalImages === 0) return;
+    triggerImageTransition();
     setCurrentImageIndex((prev) => (prev === totalImages - 1 ? 0 : prev + 1));
-  }, [totalImages]);
+  }, [totalImages, triggerImageTransition]);
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -54,6 +64,8 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
     if (isOpen) {
       setCurrentImageIndex(0);
       document.body.style.overflow = 'hidden';
+      setModalFlicker(true);
+      setTimeout(() => setModalFlicker(false), 300);
     } else {
       document.body.style.overflow = '';
     }
@@ -68,7 +80,9 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90"
+      className={`fixed inset-0 z-[100] flex items-center justify-center bg-black/90 ${
+        modalFlicker ? 'animate-flicker' : ''
+      }`}
       onClick={onClose}
       role="dialog"
       aria-modal="true"
@@ -76,7 +90,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
     >
       {/* Modal Window */}
       <div
-        className="relative w-[90vw] max-w-4xl bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] animate-[modalSnap_0.15s_ease-out]"
+        className="relative w-[90vw] max-w-4xl bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] animate-iris"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Title Bar */}
@@ -94,12 +108,15 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
         </div>
 
         {/* Image Display Area */}
-        <div className="relative bg-[#0C0C0C] flex items-center justify-center min-h-[300px] md:min-h-[450px] p-4">
+        <div className="relative bg-[#0C0C0C] flex items-center justify-center min-h-[300px] md:min-h-[450px] p-4 overflow-hidden">
           {currentImage ? (
             <img
+              ref={imgRef}
               src={currentImage.src}
               alt={currentImage.alt}
-              className="max-w-full max-h-[60vh] object-contain border-2 border-black"
+              className={`max-w-full max-h-[60vh] object-contain border-2 border-black ${
+                imageTransition ? 'animate-memoryCorrupt' : ''
+              }`}
             />
           ) : (
             <div className="font-mono uppercase tracking-widest text-xs text-white">
@@ -124,7 +141,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             onTouchEnd={() => setIsPressedPrev(false)}
             className={`font-mono uppercase tracking-widest text-sm border-2 border-black px-4 py-2 bg-[#F4F3ED] shadow-[4px_4px_0px_#0C0C0C] select-none transition-all duration-75 ${
               isPressedPrev
-                ? 'translate-x-[4px] translate-y-[4px] shadow-[0px_0px_0px_#0C0C0C]'
+                ? 'translate-x-[4px] translate-y-[4px] shadow-[0px_0px_0px_#0C0C0C] scale-95'
                 : 'hover:border-[#2945FF]'
             }`}
             aria-label="Previous image"
@@ -145,7 +162,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             onTouchEnd={() => setIsPressedNext(false)}
             className={`font-mono uppercase tracking-widest text-sm border-2 border-black px-4 py-2 bg-[#F4F3ED] shadow-[4px_4px_0px_#0C0C0C] select-none transition-all duration-75 ${
               isPressedNext
-                ? 'translate-x-[4px] translate-y-[4px] shadow-[0px_0px_0px_#0C0C0C]'
+                ? 'translate-x-[4px] translate-y-[4px] shadow-[0px_0px_0px_#0C0C0C] scale-95'
                 : 'hover:border-[#2945FF]'
             }`}
             aria-label="Next image"
@@ -154,19 +171,6 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
           </button>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes modalSnap {
-          0% {
-            transform: scale(0.95);
-            opacity: 0;
-          }
-          100% {
-            transform: scale(1);
-            opacity: 1;
-          }
-        }
-      `}</style>
     </div>
   );
 }

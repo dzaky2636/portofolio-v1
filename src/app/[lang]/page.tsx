@@ -1,6 +1,9 @@
 import RetroCanvas from '@/components/RetroCanvas';
 import ProjectSection from '@/components/ProjectSection';
 import ExperienceAccordion from '@/components/ExperienceAccordion';
+import AnimateOnScroll from '@/components/AnimateOnScroll';
+import GlitchText from '@/components/GlitchText';
+import LanguageToggle from '@/components/LanguageToggle';
 
 export default async function Page({
   params,
@@ -40,54 +43,32 @@ export default async function Page({
       {/* 1. HEADER */}
       <header className="sticky top-0 z-50 bg-[#F4F3ED] border-b-4 border-black">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
-          <div className="font-mono uppercase tracking-widest text-xs font-bold border-2 border-black px-2 py-1 bg-white shadow-[4px_4px_0px_#0C0C0C]">
+          <div
+            data-twitch
+            className="font-mono uppercase tracking-widest text-xs font-bold border-2 border-black px-2 py-1 bg-white shadow-[4px_4px_0px_#0C0C0C] animate-flicker"
+          >
             {'DZAKY_SYS // V1.0'}
           </div>
 
           <nav className="hidden md:flex items-center gap-6">
-            <a
-              href="#profile"
-              className="font-mono uppercase tracking-widest text-xs hover:text-[#2945FF] transition-colors duration-75"
-            >
-              [PROFILE]
-            </a>
-            <a
-              href="#inventory"
-              className="font-mono uppercase tracking-widest text-xs hover:text-[#2945FF] transition-colors duration-75"
-            >
-              [INVENTORY]
-            </a>
-            <a
-              href="#realms"
-              className="font-mono uppercase tracking-widest text-xs hover:text-[#2945FF] transition-colors duration-75"
-            >
-              [REALMS]
-            </a>
-            <a
-              href="#logs"
-              className="font-mono uppercase tracking-widest text-xs hover:text-[#2945FF] transition-colors duration-75"
-            >
-              [LOGS]
-            </a>
-            <a
-              href="#contact"
-              className="font-mono uppercase tracking-widest text-xs hover:text-[#2945FF] transition-colors duration-75"
-            >
-              [TRANSMIT]
-            </a>
+            {[
+              { href: '#profile', label: '[PROFILE]' },
+              { href: '#inventory', label: '[INVENTORY]' },
+              { href: '#realms', label: '[REALMS]' },
+              { href: '#logs', label: '[LOGS]' },
+              { href: '#contact', label: '[TRANSMIT]' },
+            ].map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="relative font-mono uppercase tracking-widest text-xs hover:text-[#2945FF] transition-colors duration-75 hover-jam"
+              >
+                {link.label}
+              </a>
+            ))}
           </nav>
 
-          <div className="flex items-center border-2 border-black bg-white">
-            <span className="px-3 py-1 font-mono uppercase tracking-widest text-xs bg-[#0C0C0C] text-white">
-              EN
-            </span>
-            <a
-              href={`/${lang === "en" ? "id" : "en"}`}
-              className="px-3 py-1 font-mono uppercase tracking-widest text-xs hover:bg-[#2945FF] hover:text-white transition-colors duration-75"
-            >
-              ID
-            </a>
-          </div>
+          <LanguageToggle currentLang={lang} />
         </div>
       </header>
 
@@ -98,16 +79,27 @@ export default async function Page({
       >
         <div className="space-y-8">
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif font-bold leading-[0.85] tracking-tight">
-            DZAKY
-            <br />
-            FATUR
-            <br />
-            RAHMAN
+            <span className="block animate-hydraulic" style={{ animationDelay: '0.05s', animationFillMode: 'both' }}>
+              DZAKY
+            </span>
+            <span className="block animate-hydraulic" style={{ animationDelay: '0.15s', animationFillMode: 'both' }}>
+              FATUR
+            </span>
+            <span className="block animate-hydraulic" style={{ animationDelay: '0.25s', animationFillMode: 'both' }}>
+              RAHMAN
+            </span>
           </h1>
-          <div className="font-mono uppercase tracking-widest text-xs bg-[#0C0C0C] text-white inline-block px-3 py-2 border-2 border-white shadow-[4px_4px_0px_#2945FF]">
+          <div
+            className="font-mono uppercase tracking-widest text-xs bg-[#0C0C0C] text-white inline-block px-3 py-2 border-2 border-white shadow-[4px_4px_0px_#2945FF] animate-stamp"
+            style={{ animationDelay: '0.4s', animationFillMode: 'both' }}
+          >
             Lead Fullstack Engineer & AI Integrator
           </div>
-          <p className="text-xl md:text-2xl font-serif leading-relaxed max-w-xl">
+          <p
+            data-packet
+            className="text-xl md:text-2xl font-serif leading-relaxed max-w-xl animate-drawer"
+            style={{ animationDelay: '0.5s', animationFillMode: 'both' }}
+          >
             Architecting scalable omnichannel SaaS platforms, AI-integrated
             systems, and secure civic web infrastructure. Proven track record of
             managing the end-to-end SDLC and leading technical divisions.
@@ -116,7 +108,10 @@ export default async function Page({
 
         <div className="space-y-8">
           {/* Profile Picture Container */}
-          <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-3 max-w-md mx-auto lg:mr-0 lg:ml-auto">
+          <div
+            className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-3 max-w-md mx-auto lg:mr-0 lg:ml-auto animate-eject"
+            style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
+          >
             <div className="w-full aspect-square bg-[#0C0C0C] flex items-center justify-center">
               <span className="font-mono uppercase tracking-widest text-xs text-white">
                 [IMG://PROFILE_PIC]
@@ -125,7 +120,10 @@ export default async function Page({
           </div>
 
           {/* 3D Canvas */}
-          <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-4 max-w-md mx-auto lg:mr-0 lg:ml-auto">
+          <div
+            className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-4 max-w-md mx-auto lg:mr-0 lg:ml-auto animate-boot"
+            style={{ animationDelay: '0.45s', animationFillMode: 'both' }}
+          >
             <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-3 flex justify-between">
               <span>RENDER_VIEW.exe</span>
               <span>[ACTIVE]</span>
@@ -151,87 +149,111 @@ export default async function Page({
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
           {/* Education */}
-          <div className="lg:col-span-5 bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] transition-all duration-75 rounded-none">
-            <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
-              <span>EDU_RECORD.exe</span>
-              <span>[OK]</span>
+          <AnimateOnScroll
+            animation="animate-rack-in"
+            delay="0.05s"
+            className="lg:col-span-5"
+          >
+            <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none">
+              <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
+                <span>EDU_RECORD.exe</span>
+                <span>[OK]</span>
+              </div>
+              <h3 className="text-2xl md:text-3xl font-serif font-bold mb-2">
+                Universitas Multimedia Nusantara
+              </h3>
+              <p className="font-serif text-lg">Informatics Graduate</p>
+              <div className="mt-4 inline-block font-mono uppercase tracking-widest text-xs bg-[#FFD700] text-[#0C0C0C] px-3 py-2 border-2 border-black">
+                GPA: 3.71/4.00
+              </div>
             </div>
-            <h3 className="text-2xl md:text-3xl font-serif font-bold mb-2">
-              Universitas Multimedia Nusantara
-            </h3>
-            <p className="font-serif text-lg">Informatics Graduate</p>
-            <div className="mt-4 inline-block font-mono uppercase tracking-widest text-xs bg-[#FFD700] text-[#0C0C0C] px-3 py-2 border-2 border-black">
-              GPA: 3.71/4.00
-            </div>
-          </div>
+          </AnimateOnScroll>
 
           {/* Certifications */}
-          <div className="lg:col-span-4 bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] transition-all duration-75 rounded-none">
-            <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
-              <span>CERTS.dll</span>
-              <span>[VERIFIED]</span>
+          <AnimateOnScroll
+            animation="animate-rack-in"
+            delay="0.15s"
+            className="lg:col-span-4"
+          >
+            <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none">
+              <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
+                <span>CERTS.dll</span>
+                <span>[VERIFIED]</span>
+              </div>
+              <ul className="space-y-3 font-serif text-lg">
+                <li className="flex justify-between items-end border-b border-dashed border-black pb-2">
+                  <span>TOEIC</span>
+                  <span className="font-mono text-xs uppercase">960/990</span>
+                </li>
+                <li className="flex justify-between items-end border-b border-dashed border-black pb-2">
+                  <span>Duolingo English</span>
+                  <span className="font-mono text-xs uppercase">145/160</span>
+                </li>
+                <li className="flex justify-between items-end border-b border-dashed border-black pb-2">
+                  <span>Huawei HCIA-AI</span>
+                  <span className="font-mono text-xs uppercase">[PASS]</span>
+                </li>
+                <li className="flex justify-between items-end">
+                  <span>Data Science (DQLab)</span>
+                  <span className="font-mono text-xs uppercase">[PASS]</span>
+                </li>
+              </ul>
             </div>
-            <ul className="space-y-3 font-serif text-lg">
-              <li className="flex justify-between items-end border-b border-dashed border-black pb-2">
-                <span>TOEIC</span>
-                <span className="font-mono text-xs uppercase">960/990</span>
-              </li>
-              <li className="flex justify-between items-end border-b border-dashed border-black pb-2">
-                <span>Duolingo English</span>
-                <span className="font-mono text-xs uppercase">145/160</span>
-              </li>
-              <li className="flex justify-between items-end border-b border-dashed border-black pb-2">
-                <span>Huawei HCIA-AI</span>
-                <span className="font-mono text-xs uppercase">[PASS]</span>
-              </li>
-              <li className="flex justify-between items-end">
-                <span>Data Science (DQLab)</span>
-                <span className="font-mono text-xs uppercase">[PASS]</span>
-              </li>
-            </ul>
-          </div>
+          </AnimateOnScroll>
 
           {/* Tech Stack */}
-          <div className="lg:col-span-3 bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] transition-all duration-75 rounded-none">
-            <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
-              <span>TECH_STACK.cfg</span>
-              <span>[LOADED]</span>
+          <AnimateOnScroll
+            animation="animate-rack-in"
+            delay="0.25s"
+            className="lg:col-span-3"
+          >
+            <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none">
+              <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
+                <span>TECH_STACK.cfg</span>
+                <span>[LOADED]</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "Next.js",
+                  "TypeScript",
+                  "Prisma",
+                  "Supabase",
+                  "PostgreSQL",
+                  "Laravel",
+                  "Tailwind CSS",
+                  "Flutter",
+                  "Python",
+                  "AI Agents",
+                  "LLM Engineering",
+                ].map((tech) => (
+                  <span
+                    key={tech}
+                    className="relative font-mono uppercase tracking-widest text-[10px] border-2 border-black px-2 py-1 bg-[#F4F3ED] shadow-[2px_2px_0px_#0C0C0C] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] active:translate-y-[3px] active:shadow-[0px_0px_0px_#0C0C0C] transition-all duration-75 cursor-default select-none"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
-            <div className="flex flex-wrap gap-2">
-              {[
-                "Next.js",
-                "TypeScript",
-                "Prisma",
-                "Supabase",
-                "PostgreSQL",
-                "Laravel",
-                "Tailwind CSS",
-                "Flutter",
-                "Python",
-                "AI Agents",
-                "LLM Engineering",
-              ].map((tech) => (
-                <span
-                  key={tech}
-                  className="font-mono uppercase tracking-widest text-[10px] border-2 border-black px-2 py-1 bg-[#F4F3ED] shadow-[2px_2px_0px_#0C0C0C]"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
+          </AnimateOnScroll>
 
           {/* Status */}
-          <div className="lg:col-span-12 bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] transition-all duration-75 rounded-none">
-            <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
-              <span>STATUS.mon</span>
-              <span className="text-[#2945FF]">[ACTIVE]</span>
+          <AnimateOnScroll
+            animation="animate-rack-in"
+            delay="0.35s"
+            className="lg:col-span-12"
+          >
+            <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none">
+              <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
+                <span>STATUS.mon</span>
+                <span className="text-[#2945FF]">[ACTIVE]</span>
+              </div>
+              <p data-packet className="font-serif text-xl md:text-2xl">
+                Currently operating as Lead Fullstack Engineer & AI Integrator.
+                Mentored 200+ students as a Laboratory Assistant.
+              </p>
             </div>
-            <p className="font-serif text-xl md:text-2xl">
-              Currently operating as Lead Fullstack Engineer & AI Integrator.
-              Mentored 200+ students as a Laboratory Assistant.
-            </p>
-          </div>
+          </AnimateOnScroll>
         </div>
       </section>
 
@@ -261,16 +283,19 @@ export default async function Page({
         className="border-t-4 border-black bg-[#0C0C0C] text-white py-24 lg:py-32 px-4"
       >
         <div className="max-w-4xl mx-auto text-center space-y-10">
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tight">
+          <h2 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tight animate-siren">
             INITIATE_CONTACT
           </h2>
-          <p className="font-serif text-xl md:text-2xl text-[#F4F3ED] max-w-2xl mx-auto leading-relaxed">
+          <p
+            data-packet
+            className="font-serif text-xl md:text-2xl text-[#F4F3ED] max-w-2xl mx-auto leading-relaxed"
+          >
             Ready to architect scalable platforms, integrate AI systems, or
             build secure civic infrastructure?
           </p>
           <a
             href="mailto:dzaky.fatur@email.com"
-            className="inline-block bg-white text-[#0C0C0C] border-4 border-white font-mono uppercase tracking-widest text-lg md:text-xl px-12 py-6 shadow-[8px_8px_0px_#2945FF] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#2945FF] transition-all duration-75 rounded-none"
+            className="inline-block bg-white text-[#0C0C0C] border-4 border-white font-mono uppercase tracking-widest text-lg md:text-xl px-12 py-6 shadow-[8px_8px_0px_#2945FF] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#2945FF] active:translate-x-[4px] active:translate-y-[4px] active:shadow-[0px_0px_0px_#2945FF] active:scale-[0.98] transition-all duration-75 rounded-none select-none"
           >
             [ SEND_TRANSMISSION ]
           </a>
@@ -281,18 +306,30 @@ export default async function Page({
       <footer className="border-t-4 border-black bg-[#F4F3ED] py-12 lg:py-16 px-4">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-10">
           <div className="space-y-4">
-            <div className="font-mono uppercase tracking-widest text-xs font-bold border-2 border-black px-2 py-1 bg-white shadow-[4px_4px_0px_#0C0C0C] inline-block">
+            <div
+              data-twitch
+              className="font-mono uppercase tracking-widest text-xs font-bold border-2 border-black px-2 py-1 bg-white shadow-[4px_4px_0px_#0C0C0C] inline-block"
+            >
               {'DZAKY_SYS // V1.0'}
             </div>
             <p className="font-serif text-xl">Dzaky Fatur Rahman</p>
             <div className="flex gap-2">
-              <div className="bg-[#2945FF] text-white font-mono uppercase tracking-widest text-[10px] px-2 py-1 border-2 border-black">
+              <div
+                className="bg-[#2945FF] text-white font-mono uppercase tracking-widest text-[10px] px-2 py-1 border-2 border-black animate-led-blink"
+                style={{ animationDelay: '0.1s', animationFillMode: 'both' }}
+              >
                 HTML5
               </div>
-              <div className="bg-[#FFD700] text-[#0C0C0C] font-mono uppercase tracking-widest text-[10px] px-2 py-1 border-2 border-black">
+              <div
+                className="bg-[#FFD700] text-[#0C0C0C] font-mono uppercase tracking-widest text-[10px] px-2 py-1 border-2 border-black animate-led-blink"
+                style={{ animationDelay: '0.2s', animationFillMode: 'both' }}
+              >
                 REACT
               </div>
-              <div className="bg-[#0C0C0C] text-white font-mono uppercase tracking-widest text-[10px] px-2 py-1 border-2 border-white">
+              <div
+                className="bg-[#0C0C0C] text-white font-mono uppercase tracking-widest text-[10px] px-2 py-1 border-2 border-white animate-led-blink"
+                style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
+              >
                 NEXT.JS
               </div>
             </div>
@@ -305,32 +342,37 @@ export default async function Page({
             <div className="flex gap-4 md:justify-end">
               <a
                 href="#"
-                className="font-mono uppercase tracking-widest text-xs border-b-2 border-black hover:text-[#2945FF] transition-colors duration-75"
+                className="font-mono uppercase tracking-widest text-xs border-b-2 border-black hover:text-[#2945FF] transition-colors duration-75 hover-jam"
               >
                 GITHUB
               </a>
               <a
                 href="#"
-                className="font-mono uppercase tracking-widest text-xs border-b-2 border-black hover:text-[#2945FF] transition-colors duration-75"
+                className="font-mono uppercase tracking-widest text-xs border-b-2 border-black hover:text-[#2945FF] transition-colors duration-75 hover-jam"
               >
                 LINKEDIN
               </a>
               <a
                 href="#"
-                className="font-mono uppercase tracking-widest text-xs border-b-2 border-black hover:text-[#2945FF] transition-colors duration-75"
+                className="font-mono uppercase tracking-widest text-xs border-b-2 border-black hover:text-[#2945FF] transition-colors duration-75 hover-jam"
               >
                 EMAIL
               </a>
             </div>
             <p className="font-mono uppercase tracking-widest text-xs border-2 border-dashed border-black p-3 inline-block max-w-xs">
-              QUOTE: {randomQuote}
+              QUOTE:{' '}
+              <GlitchText
+                text={randomQuote}
+                trigger="interval"
+                intervalMs={10000}
+              />
             </p>
           </div>
         </div>
 
         <div className="max-w-7xl mx-auto mt-12 pt-4 border-t-2 border-black flex flex-col sm:flex-row justify-between items-center gap-2 font-mono uppercase tracking-widest text-[10px]">
           <span> 2026 DZAKY FATUR RAHMAN</span>
-          <span>ALL SYSTEMS OPERATIONAL</span>
+          <span data-twitch>ALL SYSTEMS OPERATIONAL</span>
         </div>
       </footer>
     </main>

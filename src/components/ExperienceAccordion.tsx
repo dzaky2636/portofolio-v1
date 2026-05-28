@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export interface Experience {
   role: string;
@@ -17,10 +17,25 @@ export default function ExperienceAccordion({
   experiences,
 }: ExperienceAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const handleToggle = (index: number) => {
     setOpenIndex((prev) => (prev === index ? null : index));
   };
+
+  useEffect(() => {
+    // Trigger guillotine animation when content opens
+    contentRefs.current.forEach((el, idx) => {
+      if (!el) return;
+      if (openIndex === idx) {
+        el.classList.remove("animate-guillotine");
+        void el.offsetWidth; // force reflow
+        el.classList.add("animate-guillotine");
+      } else {
+        el.classList.remove("animate-guillotine");
+      }
+    });
+  }, [openIndex]);
 
   return (
     <div className="space-y-4">
@@ -28,14 +43,14 @@ export default function ExperienceAccordion({
         const isOpen = openIndex === index;
 
         return (
-          <div key={index}>
+          <div key={index} className="animate-rack-in" style={{ animationDelay: `${index * 0.1}s`, animationFillMode: 'both' }}>
             {/* Directory Tab Header */}
             <button
               type="button"
               onClick={() => handleToggle(index)}
-              className={`w-full flex items-center justify-between gap-4 border-[3px] border-black p-4 md:p-6 text-left rounded-none ${
+              className={`w-full flex items-center justify-between gap-4 border-[3px] border-black p-4 md:p-6 text-left rounded-none active:translate-y-[2px] active:shadow-[inset_0px_2px_0px_rgba(0,0,0,0.2)] transition-all duration-75 ${
                 isOpen
-                  ? "bg-[#FFD700] text-black"
+                  ? "bg-[#FFD700] text-black animate-[warningLamp_1s_steps(5,end)_1]"
                   : "bg-white text-[#0C0C0C]"
               } hover:bg-[#2945FF] hover:text-white`}
             >
@@ -61,14 +76,19 @@ export default function ExperienceAccordion({
               </span>
             </button>
 
-            {/* Expanded Content - Instant toggle, no animation */}
-            {isOpen && (
-              <div className="border-[3px] border-t-0 border-black bg-white shadow-[4px_4px_0px_#0C0C0C] p-6 md:p-8">
-                <p className="font-serif text-lg md:text-xl leading-relaxed text-[#0C0C0C]">
+            {/* Expanded Content - Guillotine Drop */}
+            <div
+              ref={(el) => { contentRefs.current[index] = el; }}
+              className={`border-[3px] border-t-0 border-black bg-white shadow-[4px_4px_0px_#0C0C0C] overflow-hidden ${
+                isOpen ? "block" : "hidden"
+              }`}
+            >
+              <div className="p-6 md:p-8">
+                <p data-packet className="font-serif text-lg md:text-xl leading-relaxed text-[#0C0C0C]">
                   {exp.details}
                 </p>
               </div>
-            )}
+            </div>
           </div>
         );
       })}
