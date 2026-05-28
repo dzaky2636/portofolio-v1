@@ -1,4 +1,5 @@
 import RetroCanvas from '@/components/RetroCanvas';
+import ProjectSection from '@/components/ProjectSection';
 
 export default async function Page({
   params,
@@ -231,125 +232,7 @@ export default async function Page({
       </section>
 
       {/* 5. PROJECTS (THE REALMS) */}
-      <section
-        id="realms"
-        className="max-w-7xl mx-auto px-4 py-16 lg:py-24 border-t-4 border-black"
-      >
-        <div className="mb-12">
-          <h2 className="text-4xl md:text-6xl font-serif font-bold tracking-tight">
-            PROJECT_REALMS
-          </h2>
-          <div className="font-mono uppercase tracking-widest text-xs mt-3">
-            {'/// SELECT A DIALOGUE BOX TO INSPECT'}
-          </div>
-        </div>
-
-        <div className="space-y-10">
-          {/* Project 1 */}
-          <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-8 md:p-10 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] transition-all duration-75 cursor-pointer rounded-none">
-            <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6 border-b-2 border-black pb-4">
-              <div>
-                <h3 className="text-3xl md:text-5xl font-serif font-bold">
-                  CHATRIGO
-                </h3>
-                <p className="font-mono uppercase tracking-widest text-xs mt-2 text-[#2945FF]">
-                  {'SaaS & AI Orchestration // REALM_01'}
-                </p>
-              </div>
-              <div className="font-mono uppercase tracking-widest text-xs border-2 border-black px-3 py-2 bg-[#F4F3ED] shadow-[2px_2px_0px_#0C0C0C] whitespace-nowrap">
-                PT RIGO INOVASI DIGITAL
-              </div>
-            </div>
-            <p className="font-serif text-lg md:text-2xl leading-relaxed mb-8 max-w-4xl">
-              Led the engineering architecture for a multi-tenant B2B omnichannel
-              AI chatbot platform centralizing interactions across WhatsApp and
-              Telegram. Engineered an anti-hallucination AI orchestrator
-              featuring RAG and an AI Business Advisor. Managed and mentored the
-              technical division, establishing code quality standards.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {["Next.js 15/16", "Prisma", "Supabase", "PostgreSQL (pgvector)"].map(
-                (t) => (
-                  <span
-                    key={t}
-                    className="font-mono uppercase tracking-widest text-xs border-2 border-black px-3 py-1 bg-[#F4F3ED] shadow-[2px_2px_0px_#0C0C0C]"
-                  >
-                    [{t}]
-                  </span>
-                )
-              )}
-            </div>
-          </div>
-
-          {/* Project 2 */}
-          <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-8 md:p-10 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] transition-all duration-75 cursor-pointer rounded-none">
-            <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6 border-b-2 border-black pb-4">
-              <div>
-                <h3 className="text-3xl md:text-5xl font-serif font-bold">
-                  BALIKPAPAN E-GOVERNMENT SYSTEMS
-                </h3>
-                <p className="font-mono uppercase tracking-widest text-xs mt-2 text-[#2945FF]">
-                  {'Civic Tech // REALM_02'}
-                </p>
-              </div>
-              <div className="font-mono uppercase tracking-widest text-xs border-2 border-black px-3 py-2 bg-[#F4F3ED] shadow-[2px_2px_0px_#0C0C0C] whitespace-nowrap">
-                DISKOMINFO BALIKPAPAN
-              </div>
-            </div>
-            <p className="font-serif text-lg md:text-2xl leading-relaxed mb-8 max-w-4xl">
-              Developed enterprise-grade municipal systems to enhance public
-              services. Built an automated E-Signature platform (E-Sign) with
-              background queue processing deployed across city schools. Developed
-              a secure personnel management dashboard (E-KGB).
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {["Laravel", "Tailwind CSS", "Queue Processing", "Flutter"].map(
-                (t) => (
-                  <span
-                    key={t}
-                    className="font-mono uppercase tracking-widest text-xs border-2 border-black px-3 py-1 bg-[#F4F3ED] shadow-[2px_2px_0px_#0C0C0C]"
-                  >
-                    [{t}]
-                  </span>
-                )
-              )}
-            </div>
-          </div>
-
-          {/* Project 3 */}
-          <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-8 md:p-10 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] transition-all duration-75 cursor-pointer rounded-none">
-            <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6 border-b-2 border-black pb-4">
-              <div>
-                <h3 className="text-3xl md:text-5xl font-serif font-bold">
-                  INTELLIGENT TUTORING SYSTEM
-                </h3>
-                <p className="font-mono uppercase tracking-widest text-xs mt-2 text-[#2945FF]">
-                  {'Academic/AI // REALM_03'}
-                </p>
-              </div>
-              <div className="font-mono uppercase tracking-widest text-xs border-2 border-black px-3 py-2 bg-[#F4F3ED] shadow-[2px_2px_0px_#0C0C0C] whitespace-nowrap">
-                UMN THESIS
-              </div>
-            </div>
-            <p className="font-serif text-lg md:text-2xl leading-relaxed mb-8 max-w-4xl">
-              Undergraduate thesis engineering an adaptive tutoring system
-              utilizing Octalysis-based gamification and autonomous AI agents for
-              real-time feedback and adaptive support. Mentored 200+ students as
-              a Laboratory Assistant.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {["Python", "AI Agents", "LLM Engineering"].map((t) => (
-                <span
-                  key={t}
-                  className="font-mono uppercase tracking-widest text-xs border-2 border-black px-3 py-1 bg-[#F4F3ED] shadow-[2px_2px_0px_#0C0C0C]"
-                >
-                  [{t}]
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <ProjectSection />
 
       {/* 6. EXPERIENCE */}
       <section
