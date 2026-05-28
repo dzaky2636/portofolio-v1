@@ -5,33 +5,33 @@ import { useEffect, useRef } from 'react';
 export default function EnvironmentalEffects() {
   const scanlineRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    // Scanline follows scroll with lag
-    const scanline = scanlineRef.current;
-    if (!scanline) return;
+  // useEffect(() => {
+  //   // Scanline follows scroll with lag
+  //   const scanline = scanlineRef.current;
+  //   if (!scanline) return;
 
-    let rafId: number;
-    let currentY = 0;
+  //   let rafId: number;
+  //   let currentY = 0;
 
-    const handleScroll = () => {
-      const targetY = window.scrollY + window.innerHeight * 0.3;
-      const step = () => {
-        currentY += (targetY - currentY) * 0.15;
-        if (scanline) scanline.style.transform = `translateY(${currentY}px)`;
-        rafId = requestAnimationFrame(step);
-      };
-      cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(step);
-    };
+  //   const handleScroll = () => {
+  //     const targetY = window.scrollY + window.innerHeight * 0.3;
+  //     const step = () => {
+  //       currentY += (targetY - currentY) * 0.15;
+  //       if (scanline) scanline.style.transform = `translateY(${currentY}px)`;
+  //       rafId = requestAnimationFrame(step);
+  //     };
+  //     cancelAnimationFrame(rafId);
+  //     rafId = requestAnimationFrame(step);
+  //   };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+  //   window.addEventListener('scroll', handleScroll, { passive: true });
+  //   handleScroll();
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      cancelAnimationFrame(rafId);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //     cancelAnimationFrame(rafId);
+  //   };
+  // }, []);
 
   useEffect(() => {
     // Random relay twitch on elements
@@ -81,8 +81,8 @@ export default function EnvironmentalEffects() {
 
   return (
     <>
-      {/* CRT Scanline follower */}
-      <div
+      {/* CRT Scanline follower — DISABLED */}
+      {/* <div
         ref={scanlineRef}
         className="fixed left-0 right-0 h-16 pointer-events-none z-[1]"
         style={{
@@ -98,7 +98,6 @@ export default function EnvironmentalEffects() {
           `,
         }}
       >
-        {/* Active electron beam — bright leading edge */}
         <div
           className="absolute left-0 right-0 h-[2px] bg-[#0C0C0C]/40"
           style={{
@@ -109,7 +108,6 @@ export default function EnvironmentalEffects() {
             `,
           }}
         />
-        {/* Phosphor trail — warm decay band */}
         <div
           className="absolute left-0 right-0 h-8"
           style={{
@@ -123,7 +121,7 @@ export default function EnvironmentalEffects() {
             `,
           }}
         />
-      </div>
+      </div> */}
     </>
   );
 }
