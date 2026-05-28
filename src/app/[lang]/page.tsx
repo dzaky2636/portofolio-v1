@@ -1,5 +1,6 @@
 import RetroCanvas from '@/components/RetroCanvas';
 import ProjectSection from '@/components/ProjectSection';
+import ExperienceAccordion from '@/components/ExperienceAccordion';
 
 export default async function Page({
   params,
@@ -12,21 +13,24 @@ export default async function Page({
 
   const experience = [
     {
-      title: "Lead Fullstack Engineer",
-      org: "PT Rigo Inovasi Digital",
-      detail:
+      role: "Lead Fullstack Engineer",
+      company: "PT Rigo Inovasi Digital",
+      duration: "2023 — PRESENT",
+      details:
         "Led the engineering architecture for a multi-tenant B2B omnichannel AI chatbot platform (Chatrigo) centralizing interactions across WhatsApp and Telegram. Engineered an anti-hallucination AI orchestrator featuring RAG and an AI Business Advisor. Managed and mentored the technical division, establishing code quality standards.",
     },
     {
-      title: "Fullstack Web & Mobile Developer",
-      org: "Diskominfo Balikpapan",
-      detail:
+      role: "Fullstack Web & Mobile Developer",
+      company: "Diskominfo Balikpapan",
+      duration: "2021 — 2023",
+      details:
         "Developed enterprise-grade municipal systems to enhance public services. Built an automated E-Signature platform (E-Sign) with background queue processing deployed across city schools. Developed a secure personnel management dashboard (E-KGB).",
     },
     {
-      title: "Laboratory Assistant & Researcher",
-      org: "Universitas Multimedia Nusantara",
-      detail:
+      role: "Laboratory Assistant & Researcher",
+      company: "Universitas Multimedia Nusantara",
+      duration: "2019 — 2021",
+      details:
         "Undergraduate thesis engineering an adaptive tutoring system utilizing Octalysis-based gamification and autonomous AI agents for real-time feedback and adaptive support. Mentored 200+ students as a Laboratory Assistant.",
     },
   ];
@@ -248,36 +252,7 @@ export default async function Page({
           </div>
         </div>
 
-        <div className="space-y-4">
-          {experience.map((exp, i) => (
-            <details
-              key={i}
-              className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] rounded-none group open:shadow-[4px_4px_0px_#0C0C0C]"
-            >
-              <summary className="p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer list-none hover:bg-[#F4F3ED] transition-colors duration-75">
-                <div>
-                  <h3 className="text-2xl md:text-3xl font-serif font-bold">
-                    {exp.title}
-                  </h3>
-                  <p className="font-mono uppercase tracking-widest text-xs mt-1">
-                    {exp.org}
-                  </p>
-                </div>
-                <div className="font-mono uppercase tracking-widest text-xs border-2 border-black px-4 py-2 bg-white shadow-[2px_2px_0px_#0C0C0C] group-open:hidden">
-                  [ EXPAND ]
-                </div>
-                <div className="font-mono uppercase tracking-widest text-xs border-2 border-black px-4 py-2 bg-[#2945FF] text-white shadow-[2px_2px_0px_#0C0C0C] hidden group-open:block">
-                  [ COLLAPSE ]
-                </div>
-              </summary>
-              <div className="border-t-2 border-black p-6 md:p-8 bg-[#F4F3ED]">
-                <p className="font-serif text-lg md:text-xl leading-relaxed max-w-4xl">
-                  {exp.detail}
-                </p>
-              </div>
-            </details>
-          ))}
-        </div>
+        <ExperienceAccordion experiences={experience} />
       </section>
 
       {/* 7. CONTACT */}
