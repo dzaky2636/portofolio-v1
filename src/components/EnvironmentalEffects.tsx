@@ -81,12 +81,49 @@ export default function EnvironmentalEffects() {
 
   return (
     <>
-      {/* Scanline follower */}
+      {/* CRT Scanline follower */}
       <div
         ref={scanlineRef}
-        className="fixed left-0 right-0 h-[2px] bg-black/20 pointer-events-none z-[9999]"
-        style={{ willChange: 'transform' }}
-      />
+        className="fixed left-0 right-0 h-16 pointer-events-none z-[1]"
+        style={{
+          willChange: 'transform',
+          background: `
+            repeating-linear-gradient(
+              to bottom,
+              rgba(0,0,0,0.22) 0px,
+              rgba(0,0,0,0.22) 1px,
+              transparent 1px,
+              transparent 3px
+            )
+          `,
+        }}
+      >
+        {/* Active electron beam — bright leading edge */}
+        <div
+          className="absolute left-0 right-0 h-[2px] bg-[#0C0C0C]/40"
+          style={{
+            top: 0,
+            boxShadow: `
+              0 0 6px 1px rgba(12,12,12,0.15),
+              0 2px 8px 0px rgba(12,12,12,0.10)
+            `,
+          }}
+        />
+        {/* Phosphor trail — warm decay band */}
+        <div
+          className="absolute left-0 right-0 h-8"
+          style={{
+            top: '2px',
+            background: `
+              linear-gradient(
+                to bottom,
+                rgba(244,243,237,0.06) 0%,
+                transparent 100%
+              )
+            `,
+          }}
+        />
+      </div>
     </>
   );
 }
