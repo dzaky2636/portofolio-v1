@@ -393,20 +393,23 @@ export default async function Page({
                 <FaInstagram className="w-5 h-5" />
               </a>
             </div>
-            <p className="font-mono uppercase tracking-widest text-xs border-2 border-dashed border-black p-3 inline-block max-w-xs">
-              <GlitchText
-                text={quotes[0]}
-                texts={quotes}
-                trigger="interval"
-                intervalMs={7000}
-              />
-            </p>
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto mt-12 pt-4 border-t-2 border-black flex flex-col sm:flex-row justify-between items-center gap-2 font-mono uppercase tracking-widest text-[10px]">
+        <div className="max-w-7xl mx-auto mt-10 pt-4 border-t-2 border-black flex flex-col sm:flex-row justify-between items-center gap-2 font-mono uppercase tracking-widest text-[10px]">
           <span> dzaky2636@gmail.com</span>
           <span data-twitch>PORTOFOLIO V1</span>
+        </div>
+
+        <div className="max-w-7xl mx-auto mt-8 flex justify-center">
+          <p className="font-mono uppercase tracking-widest text-xs border-2 border-dashed border-black p-3 text-center">
+            <GlitchText
+              text={quotes[0]}
+              texts={quotes}
+              trigger="interval"
+              intervalMs={5000}
+            />
+          </p>
         </div>
       </footer>
     </main>
