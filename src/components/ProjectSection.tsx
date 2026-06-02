@@ -21,7 +21,7 @@ const projects: Project[] = [
     realm: 'SaaS & AI Orchestration // REALM_01',
     org: 'PT RIGO INOVASI DIGITAL',
     description:
-      'Led the engineering architecture for a multi-tenant B2B omnichannel AI chatbot platform centralizing interactions across WhatsApp and Telegram. Engineered an anti-hallucination AI orchestrator featuring RAG and an AI Business Advisor. Managed and mentored the technical division, establishing code quality standards.',
+      'Architected a multi-tenant B2B SaaS omnichannel AI chatbot platform utilizing Next.js 15, Prisma, Supabase, and PostgreSQL (pgvector) to centralize customer interactions across WhatsApp and Telegram. Engineered an anti-hallucination AI orchestrator featuring Retrieval-Augmented Generation (RAG), full sales cycle management, and an AI Business Advisor for strategic analytics.',
     stack: ['Next.js 15/16', 'Prisma', 'Supabase', 'PostgreSQL (pgvector)'],
     images: ['/chatrigo-1.jpg', '/chatrigo-2.jpg'],
   },
@@ -31,7 +31,7 @@ const projects: Project[] = [
     realm: 'Civic Tech // REALM_02',
     org: 'DISKOMINFO BALIKPAPAN',
     description:
-      'Developed enterprise-grade municipal systems to enhance public services. Built an automated E-Signature platform (E-Sign) with background queue processing deployed across city schools. Developed a secure personnel management dashboard (E-KGB).',
+      'Developed a Laravel-based E-Signature system (E-Sign) for digital documents featuring QR code integration, background queue processing, and automated PDF management, currently deployed across all schools in Balikpapan. Built a web-based Periodic Salary and Promotion management application (E-KGB) using Laravel and Tailwind CSS, with process automation, interactive data dashboards, and a secure authentication system.',
     stack: ['Laravel', 'Tailwind CSS', 'Queue Processing', 'Flutter'],
     images: ['/egov-1.jpg', '/egov-2.jpg'],
   },
@@ -41,7 +41,7 @@ const projects: Project[] = [
     realm: 'Academic/AI // REALM_03',
     org: 'UMN THESIS',
     description:
-      'Undergraduate thesis engineering an adaptive tutoring system utilizing Octalysis-based gamification and autonomous AI agents for real-time feedback and adaptive support. Mentored 200+ students as a Laboratory Assistant.',
+      'Thesis Project: Octalysis-Based Gamification in Intelligent Tutoring Systems with AI Agents for Feedback and Adaptive Support. Engineered an adaptive tutoring system utilizing Octalysis-based gamification and autonomous AI agents for real-time feedback and adaptive support.',
     stack: ['Python', 'AI Agents', 'LLM Engineering'],
     images: ['/thesis-1.jpg', '/thesis-2.jpg'],
   },

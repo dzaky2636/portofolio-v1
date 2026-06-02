@@ -33,25 +33,46 @@ export default async function Page({
 
   const experience = [
     {
-      role: "Lead Fullstack Engineer",
+      role: "Chief Technology Officer (CTO) & Lead Fullstack Engineer",
       company: "PT Rigo Inovasi Digital",
-      duration: "2023 — PRESENT",
+      duration: "2026 — NOW",
       details:
-        "Led the engineering architecture for a multi-tenant B2B omnichannel AI chatbot platform (Chatrigo) centralizing interactions across WhatsApp and Telegram. Engineered an anti-hallucination AI orchestrator featuring RAG and an AI Business Advisor. Managed and mentored the technical division, establishing code quality standards.",
+        "Lead the technological vision and engineering architecture for a comprehensive omnichannel AI chatbot SaaS platform, centralizing customer interactions across WhatsApp, Telegram, and social commerce. Manage and mentor the technical division (including full-stack developer interns), establishing code quality standards, SDLC guidelines, and remote engineering operational efficiency.",
     },
     {
       role: "Fullstack Web & Mobile Developer",
       company: "Diskominfo Balikpapan",
-      duration: "2021 — 2023",
+      duration: "2025",
       details:
-        "Developed enterprise-grade municipal systems to enhance public services. Built an automated E-Signature platform (E-Sign) with background queue processing deployed across city schools. Developed a secure personnel management dashboard (E-KGB).",
+        "Designed and developed Flutter-based web and mobile applications to enhance public services in communications and informatics for the citizens of Balikpapan. Implemented new features and resolved system bugs to ensure optimal performance, maintainability, and a seamless user experience.",
     },
     {
-      role: "Laboratory Assistant & Researcher",
-      company: "Universitas Multimedia Nusantara",
-      duration: "2019 — 2021",
+      role: "Website Coordinator",
+      company: "UNITY UMN",
+      duration: "2025",
       details:
-        "Undergraduate thesis engineering an adaptive tutoring system utilizing Octalysis-based gamification and autonomous AI agents for real-time feedback and adaptive support. Mentored 200+ students as a Laboratory Assistant.",
+        "Spearheaded the development and maintenance of the UNITY UMN English competition website, ensuring content accuracy and optimal functionality. Coordinated with cross-functional teams to integrate organizational requirements into the system, such as event registration and content publication pipelines.",
+    },
+    {
+      role: "Laboratory Assistant",
+      company: "UMN Informatics",
+      duration: "2022 — 2026",
+      details:
+        "Instructed courses including Machine Learning, Algorithms & Data Structures, Web Programming, and Introduction to Internet Technology. Developed comprehensive examination materials utilized for official university assessments. Evaluated and mentored approximately 200+ students across various laboratory sessions.",
+    },
+    {
+      role: "Teaching Assistant",
+      company: "Boarding School Multimedia Training Program (UMN x LPDP)",
+      duration: "2023",
+      details:
+        "Selected by university faculty to instruct 25 boarding school students on building dynamic and responsive websites. Developed and managed daily course materials focused on modern Web Development principles.",
+    },
+    {
+      role: "Web Developer Intern",
+      company: "Department of Land and Spatial Planning, Balikpapan",
+      duration: "2021",
+      details:
+        "Completed a three-month internship focusing on web application maintenance and infrastructure. Utilized PHP, HTML, and SQL to support fundamental data operations and UI/UX design updates.",
     },
   ];
 
@@ -110,16 +131,20 @@ export default async function Page({
             className="font-mono uppercase tracking-widest text-xs bg-[#0C0C0C] text-white inline-block px-3 py-2 border-2 border-white shadow-[4px_4px_0px_#2945FF] animate-stamp"
             style={{ animationDelay: '0.4s', animationFillMode: 'both' }}
           >
-            Lead Fullstack Engineer & AI Integrator
+            Chief Technology Officer (CTO) & Lead Fullstack Engineer
           </div>
           <p
             data-packet
             className="text-xl md:text-2xl font-serif leading-relaxed max-w-xl animate-drawer"
             style={{ animationDelay: '0.5s', animationFillMode: 'both' }}
           >
-            Architecting scalable omnichannel SaaS platforms, AI-integrated
-            systems, and secure civic web infrastructure. Proven track record of
-            managing the end-to-end SDLC and leading technical divisions.
+            Highly motivated Informatics graduate with comprehensive experience in
+            full-stack development, Machine Learning (AI) integration, and web
+            architecture. Skilled in building dynamic, large-scale applications,
+            leading engineering teams, and directing technology strategy. Proficient
+            in both front-end and back-end environments, with a proven track record
+            of managing the end-to-end software development life cycle (SDLC). Poised
+            to deliver high-impact technological innovations in a professional setting.
           </p>
         </div>
 
@@ -181,10 +206,17 @@ export default async function Page({
               <h3 className="text-2xl md:text-3xl font-serif font-bold mb-2">
                 Universitas Multimedia Nusantara
               </h3>
-              <p className="font-serif text-lg">Informatics Graduate</p>
+              <p className="font-serif text-lg">Bachelor of Computer Science in Informatics</p>
+              <p className="font-serif text-lg mt-1">Grade A Accredited Major</p>
               <div className="mt-4 inline-block font-mono uppercase tracking-widest text-xs bg-[#FFD700] text-[#0C0C0C] px-3 py-2 border-2 border-black">
                 GPA: 3.71/4.00
               </div>
+              <p className="font-serif text-sm mt-3 italic">
+                Thesis: Octalysis-Based Gamification in Intelligent Tutoring Systems with AI Agents for Feedback and Adaptive Support.
+              </p>
+              <p className="font-serif text-sm mt-1">
+                Award: Merit-based scholarship for ranking in the top 20% highest GPA of the cohort.
+              </p>
             </div>
           </AnimateOnScroll>
 
@@ -205,15 +237,27 @@ export default async function Page({
                   <span className="font-mono text-xs uppercase">960/990</span>
                 </li>
                 <li className="flex justify-between items-end border-b border-dashed border-black pb-2">
-                  <span>Duolingo English</span>
+                  <span>Duolingo English Test</span>
                   <span className="font-mono text-xs uppercase">145/160</span>
                 </li>
                 <li className="flex justify-between items-end border-b border-dashed border-black pb-2">
                   <span>Huawei HCIA-AI</span>
                   <span className="font-mono text-xs uppercase">[PASS]</span>
                 </li>
+                <li className="flex justify-between items-end border-b border-dashed border-black pb-2">
+                  <span>Python Intermediate Course</span>
+                  <span className="font-mono text-xs uppercase">[PASS]</span>
+                </li>
+                <li className="flex justify-between items-end border-b border-dashed border-black pb-2">
+                  <span>Laboratory Assistant Certification</span>
+                  <span className="font-mono text-xs uppercase">[PASS]</span>
+                </li>
+                <li className="flex justify-between items-end border-b border-dashed border-black pb-2">
+                  <span>UTOPIA Speech</span>
+                  <span className="font-mono text-xs uppercase">[PASS]</span>
+                </li>
                 <li className="flex justify-between items-end">
-                  <span>Data Science (DQLab)</span>
+                  <span>Data Science Fundamentals (DQLab)</span>
                   <span className="font-mono text-xs uppercase">[PASS]</span>
                 </li>
               </ul>
@@ -233,17 +277,37 @@ export default async function Page({
               </div>
               <div className="flex flex-wrap gap-2">
                 {[
-                  "Next.js",
+                  "Next.js 15",
+                  "React 19",
                   "TypeScript",
-                  "Prisma",
-                  "Supabase",
-                  "PostgreSQL",
-                  "Laravel",
+                  "HTML",
+                  "JavaScript",
+                  "CSS",
                   "Tailwind CSS",
-                  "Flutter",
+                  "Bootstrap",
+                  "Jetpack Compose",
+                  "Figma",
+                  "Laravel",
+                  "Kotlin",
+                  "Node.js",
+                  "Express",
                   "Python",
-                  "AI Agents",
+                  "Django",
+                  "Flask",
+                  "Java",
+                  "C/C++",
+                  "PostgreSQL",
+                  "Prisma ORM",
+                  "Supabase",
                   "LLM Engineering",
+                  "Prompt Engineering",
+                  "RAG",
+                  "OpenRouter API",
+                  "Jira",
+                  "Git & GitHub",
+                  "Leadership",
+                  "Communication",
+                  "Problem Solving",
                 ].map((tech) => (
                   <span
                     key={tech}
@@ -268,8 +332,7 @@ export default async function Page({
                 <span className="text-[#2945FF]">[ACTIVE]</span>
               </div>
               <p data-packet className="font-serif text-xl md:text-2xl">
-                Currently operating as Lead Fullstack Engineer & AI Integrator.
-                Mentored 200+ students as a Laboratory Assistant.
+                Currently serving as Chief Technology Officer (CTO) & Lead Fullstack Engineer at PT Rigo Inovasi Digital. Alumni of Universitas Multimedia Nusantara (GPA 3.71/4.00).
               </p>
             </div>
           </AnimateOnScroll>
@@ -313,7 +376,7 @@ export default async function Page({
             build secure civic infrastructure?
           </p>
           <a
-            href="mailto:dzaky.fatur@email.com"
+            href="mailto:dzaky2636@gmail.com"
             className="inline-block bg-white text-[#0C0C0C] border-4 border-white font-mono uppercase tracking-widest text-lg md:text-xl px-12 py-6 shadow-[8px_8px_0px_#2945FF] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#2945FF] active:translate-x-[4px] active:translate-y-[4px] active:shadow-[0px_0px_0px_#2945FF] active:scale-[0.98] transition-all duration-75 rounded-none select-none"
           >
             [ SEND_TRANSMISSION ]
