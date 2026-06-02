@@ -383,6 +383,55 @@ interface DebrisData {
   color: string;
 }
 
+/* ─── Even spatial distribution helpers ─── */
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function stratifiedGridPositions(
+  count: number,
+  width: number,
+  height: number,
+  cols: number,
+  rows: number,
+  jitterRatio = 0.35
+): [number, number][] {
+  const cells: [number, number][] = [];
+  const cellW = width / cols;
+  const cellH = height / rows;
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      const cx = (col + 0.5) * cellW - width / 2;
+      const cy = (row + 0.5) * cellH - height / 2;
+      cells.push([cx, cy]);
+    }
+  }
+  const picked = shuffle(cells).slice(0, count);
+  return picked.map(([x, y]) => {
+    const jx = (Math.random() - 0.5) * cellW * jitterRatio;
+    const jy = (Math.random() - 0.5) * cellH * jitterRatio;
+    return [x + jx, y + jy] as [number, number];
+  });
+}
+
+function layeredZ(count: number, near: number, far: number): number[] {
+  const layers = 4;
+  const perLayer = Math.ceil(count / layers);
+  const zs: number[] = [];
+  for (let i = 0; i < count; i++) {
+    const layer = Math.floor(i / perLayer);
+    const layerNear = near + ((far - near) / layers) * layer;
+    const layerFar = near + ((far - near) / layers) * (layer + 1);
+    zs.push(layerNear + Math.random() * (layerFar - layerNear));
+  }
+  return shuffle(zs);
+}
+
 /* ─── Scene Content ─── */
 function Scene() {
   const { shapes, debris, rings, panels } = useMemo(() => {
@@ -391,15 +440,13 @@ function Scene() {
     const r: { id: number; position: [number, number, number]; scale: number; speed: number }[] = [];
     const p: { id: number; position: [number, number, number]; scale: number; speed: number; color: string }[] = [];
 
-    // 26 main shapes with diverse geometry — spread wide to fill viewport
+    /* Main shapes — 5×6 grid, 26 of 30 cells, 4 depth layers */
+    const mainXY = stratifiedGridPositions(26, 38, 28, 6, 5, 0.45);
+    const mainZ = layeredZ(26, -2, -12);
     for (let i = 0; i < 26; i++) {
       s.push({
         id: i,
-        position: [
-          (Math.random() - 0.5) * 36,
-          (Math.random() - 0.5) * 26,
-          -2 - Math.random() * 10,
-        ],
+        position: [mainXY[i][0], mainXY[i][1], mainZ[i]],
         rotation: [
           Math.random() * Math.PI,
           Math.random() * Math.PI,
@@ -419,15 +466,13 @@ function Scene() {
       });
     }
 
-    // 60 tiny debris particles — spread to edges
+    /* Debris — 8×8 grid, 60 of 64 cells, scattered depth */
+    const debrisXY = stratifiedGridPositions(60, 42, 32, 8, 8, 0.55);
+    const debrisZ = layeredZ(60, -1, -13);
     for (let i = 0; i < 60; i++) {
       d.push({
         id: i,
-        position: [
-          (Math.random() - 0.5) * 38,
-          (Math.random() - 0.5) * 28,
-          -1 - Math.random() * 12,
-        ],
+        position: [debrisXY[i][0], debrisXY[i][1], debrisZ[i]],
         scale: 0.12 + Math.random() * 0.28,
         geoType: DEBRIS_TYPES[Math.floor(Math.random() * DEBRIS_TYPES.length)],
         rotSpeed: 0.5 + Math.random() * 2,
@@ -435,29 +480,25 @@ function Scene() {
       });
     }
 
-    // 8 floating rings — pushed to periphery
+    /* Rings — 4×2 grid, all 8 cells, offset from shape grid */
+    const ringXY = stratifiedGridPositions(8, 32, 24, 4, 2, 0.5);
+    const ringZ = layeredZ(8, -2, -10);
     for (let i = 0; i < 8; i++) {
       r.push({
         id: i,
-        position: [
-          (Math.random() - 0.5) * 30,
-          (Math.random() - 0.5) * 22,
-          -2 - Math.random() * 8,
-        ],
+        position: [ringXY[i][0], ringXY[i][1], ringZ[i]],
         scale: 0.55 + Math.random() * 0.85,
         speed: 0.3 + Math.random() * 0.8,
       });
     }
 
-    // 10 floating panels (3D OS window fragments)
+    /* Panels — 5×2 grid, all 10 cells */
+    const panelXY = stratifiedGridPositions(10, 34, 24, 5, 2, 0.5);
+    const panelZ = layeredZ(10, -2, -11);
     for (let i = 0; i < 10; i++) {
       p.push({
         id: i,
-        position: [
-          (Math.random() - 0.5) * 32,
-          (Math.random() - 0.5) * 22,
-          -2 - Math.random() * 9,
-        ],
+        position: [panelXY[i][0], panelXY[i][1], panelZ[i]],
         scale: 0.45 + Math.random() * 0.65,
         speed: 0.2 + Math.random() * 0.5,
         color: [PALETTE.blue, PALETTE.yellow, '#FFFFFF', PALETTE.paper][Math.floor(Math.random() * 4)],
