@@ -168,13 +168,13 @@ function PS1Shape({
           color={currentColor}
           side={THREE.DoubleSide}
           transparent
-          opacity={hovered ? Math.min(fillOpacity + 0.15, 0.6) : fillOpacity}
+          opacity={hovered ? Math.min(fillOpacity + 0.08, 0.25) : fillOpacity}
         />
       </mesh>
 
       {/* Harsh wireframe edges */}
       <lineSegments geometry={edgesGeometry} frustumCulled={false}>
-        <lineBasicMaterial color={WIREFRAME_COLOR} transparent opacity={hovered ? 1 : 0.85} />
+        <lineBasicMaterial color={WIREFRAME_COLOR} transparent opacity={hovered ? 0.55 : 0.35} />
       </lineSegments>
     </group>
   );
@@ -211,10 +211,10 @@ function DebrisParticle({ position, scale, geoType, rotSpeed, color }: DebrisPro
   return (
     <group ref={ref} position={position} scale={scale}>
       <mesh geometry={geometry}>
-        <meshBasicMaterial color={color} side={THREE.DoubleSide} transparent opacity={0.35} />
+        <meshBasicMaterial color={color} side={THREE.DoubleSide} transparent opacity={0.12} />
       </mesh>
       <lineSegments geometry={edgesGeometry}>
-        <lineBasicMaterial color={WIREFRAME_COLOR} transparent opacity={0.5} />
+        <lineBasicMaterial color={WIREFRAME_COLOR} transparent opacity={0.22} />
       </lineSegments>
     </group>
   );
@@ -230,7 +230,7 @@ function ConstellationLines({ shapePositions }: ConstellationProps) {
 
   const { geometry, edgePairs } = useMemo(() => {
     const pairs: [number, number][] = [];
-    const threshold = 7;
+    const threshold = 10;
     for (let i = 0; i < shapePositions.length; i++) {
       for (let j = i + 1; j < shapePositions.length; j++) {
         const a = new THREE.Vector3(...shapePositions[i]);
@@ -268,7 +268,7 @@ function ConstellationLines({ shapePositions }: ConstellationProps) {
 
   return (
     <lineSegments ref={lineRef} geometry={geometry}>
-      <lineBasicMaterial color={PALETTE.blue} transparent opacity={0.1} />
+      <lineBasicMaterial color={PALETTE.blue} transparent opacity={0.025} />
     </lineSegments>
   );
 }
@@ -281,21 +281,21 @@ function GridFloor() {
     if (!gridRef.current) return;
     const mat = gridRef.current.material as THREE.LineBasicMaterial;
     mat.transparent = true;
-    mat.opacity = 0.04;
+    mat.opacity = 0.008;
   }, []);
 
   useFrame((state) => {
     if (!gridRef.current) return;
     const time = state.clock.getElapsedTime();
     const mat = gridRef.current.material as THREE.LineBasicMaterial;
-    mat.opacity = 0.04 + Math.sin(time * 0.3) * 0.02;
+    mat.opacity = 0.008 + Math.sin(time * 0.3) * 0.004;
   });
 
   return (
     <gridHelper
       ref={gridRef}
-      args={[40, 20, PALETTE.ink, PALETTE.ink]}
-      position={[0, -8, -5]}
+      args={[60, 30, PALETTE.ink, PALETTE.ink]}
+      position={[0, -12, -5]}
       rotation={[0, 0, 0]}
     />
   );
@@ -318,10 +318,10 @@ function FloatingRing({ position, scale, speed }: { position: [number, number, n
   return (
     <group ref={ref} position={position} scale={scale}>
       <mesh geometry={geometry}>
-        <meshBasicMaterial color={PALETTE.yellow} side={THREE.DoubleSide} transparent opacity={0.25} />
+        <meshBasicMaterial color={PALETTE.yellow} side={THREE.DoubleSide} transparent opacity={0.08} />
       </mesh>
       <lineSegments geometry={edges}>
-        <lineBasicMaterial color={PALETTE.ink} transparent opacity={0.6} />
+        <lineBasicMaterial color={PALETTE.ink} transparent opacity={0.30} />
       </lineSegments>
     </group>
   );
@@ -348,10 +348,10 @@ function FloatingPanel({ position, scale, speed, color }: { position: [number, n
   return (
     <group ref={ref} position={position} scale={scale}>
       <mesh geometry={geometry}>
-        <meshBasicMaterial color={color} side={THREE.DoubleSide} transparent opacity={0.15} />
+        <meshBasicMaterial color={color} side={THREE.DoubleSide} transparent opacity={0.05} />
       </mesh>
       <lineSegments geometry={edgesGeometry}>
-        <lineBasicMaterial color={PALETTE.ink} transparent opacity={0.7} />
+        <lineBasicMaterial color={PALETTE.ink} transparent opacity={0.35} />
       </lineSegments>
     </group>
   );
@@ -391,21 +391,21 @@ function Scene() {
     const r: { id: number; position: [number, number, number]; scale: number; speed: number }[] = [];
     const p: { id: number; position: [number, number, number]; scale: number; speed: number; color: string }[] = [];
 
-    // 22 main shapes with diverse geometry
-    for (let i = 0; i < 22; i++) {
+    // 26 main shapes with diverse geometry — spread wide to fill viewport
+    for (let i = 0; i < 26; i++) {
       s.push({
         id: i,
         position: [
-          (Math.random() - 0.5) * 22,
-          (Math.random() - 0.5) * 16,
-          -4 - Math.random() * 8,
+          (Math.random() - 0.5) * 36,
+          (Math.random() - 0.5) * 26,
+          -2 - Math.random() * 10,
         ],
         rotation: [
           Math.random() * Math.PI,
           Math.random() * Math.PI,
           Math.random() * Math.PI,
         ],
-        scale: 0.3 + Math.random() * 0.55,
+        scale: 0.45 + Math.random() * 0.75,
         geoType: GEO_TYPES[Math.floor(Math.random() * GEO_TYPES.length)],
         rotSpeed: [
           (Math.random() - 0.5) * 0.5,
@@ -414,51 +414,51 @@ function Scene() {
         ],
         wobbleIntensity: 0.5 + Math.random() * 1.5,
         wobbleSpeed: 1.5 + Math.random() * 2.5,
-        fillOpacity: 0.12 + Math.random() * 0.18,
+        fillOpacity: 0.04 + Math.random() * 0.05,
         floatSpeed: 0.6 + Math.random() * 1.4,
       });
     }
 
-    // 50 tiny debris particles
-    for (let i = 0; i < 50; i++) {
+    // 60 tiny debris particles — spread to edges
+    for (let i = 0; i < 60; i++) {
       d.push({
         id: i,
         position: [
-          (Math.random() - 0.5) * 24,
-          (Math.random() - 0.5) * 18,
-          -2 - Math.random() * 10,
+          (Math.random() - 0.5) * 38,
+          (Math.random() - 0.5) * 28,
+          -1 - Math.random() * 12,
         ],
-        scale: 0.08 + Math.random() * 0.18,
+        scale: 0.12 + Math.random() * 0.28,
         geoType: DEBRIS_TYPES[Math.floor(Math.random() * DEBRIS_TYPES.length)],
         rotSpeed: 0.5 + Math.random() * 2,
         color: Math.random() > 0.6 ? PALETTE.blue : Math.random() > 0.5 ? PALETTE.yellow : PALETTE.ink,
       });
     }
 
-    // 6 floating rings
-    for (let i = 0; i < 6; i++) {
+    // 8 floating rings — pushed to periphery
+    for (let i = 0; i < 8; i++) {
       r.push({
         id: i,
         position: [
-          (Math.random() - 0.5) * 18,
-          (Math.random() - 0.5) * 14,
-          -3 - Math.random() * 6,
+          (Math.random() - 0.5) * 30,
+          (Math.random() - 0.5) * 22,
+          -2 - Math.random() * 8,
         ],
-        scale: 0.4 + Math.random() * 0.6,
+        scale: 0.55 + Math.random() * 0.85,
         speed: 0.3 + Math.random() * 0.8,
       });
     }
 
-    // 8 floating panels (3D OS window fragments)
-    for (let i = 0; i < 8; i++) {
+    // 10 floating panels (3D OS window fragments)
+    for (let i = 0; i < 10; i++) {
       p.push({
         id: i,
         position: [
-          (Math.random() - 0.5) * 20,
-          (Math.random() - 0.5) * 14,
-          -3 - Math.random() * 7,
+          (Math.random() - 0.5) * 32,
+          (Math.random() - 0.5) * 22,
+          -2 - Math.random() * 9,
         ],
-        scale: 0.35 + Math.random() * 0.45,
+        scale: 0.45 + Math.random() * 0.65,
         speed: 0.2 + Math.random() * 0.5,
         color: [PALETTE.blue, PALETTE.yellow, '#FFFFFF', PALETTE.paper][Math.floor(Math.random() * 4)],
       });
@@ -548,8 +548,8 @@ function ParallaxCamera() {
   useFrame((_, delta) => {
     targetRef.current.x += (mouseRef.current.x - targetRef.current.x) * delta * 2;
     targetRef.current.y += (mouseRef.current.y - targetRef.current.y) * delta * 2;
-    camera.position.x = targetRef.current.x * 1.5;
-    camera.position.y = targetRef.current.y * 1.0;
+    camera.position.x = targetRef.current.x * 0.8;
+    camera.position.y = targetRef.current.y * 0.5;
     camera.lookAt(0, 0, 0);
   });
 
@@ -569,7 +569,7 @@ function ParallaxCamera() {
 /* ─── Main Export ─── */
 export default function Interactive3DScatter() {
   const camera = useMemo(
-    () => ({ position: [0, 0, 14] as [number, number, number], fov: 55 }),
+    () => ({ position: [0, 0, 8] as [number, number, number], fov: 80 }),
     []
   );
 
