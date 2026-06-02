@@ -17,49 +17,67 @@ interface MutatingShapeProps {
 function MutatingShape({ position, rotation, baseScale }: MutatingShapeProps) {
   const [hovered, setHovered] = useState(false);
   const [colorIndex, setColorIndex] = useState(0);
-  const meshRef = useRef<THREE.Mesh>(null);
+  const groupRef = useRef<THREE.Group>(null);
 
-  /* Slow idle tumble */
+  /* Slow idle tumble on the whole group */
   useFrame((_, delta) => {
-    if (!meshRef.current) return;
-    meshRef.current.rotation.x += delta * 0.06;
-    meshRef.current.rotation.y += delta * 0.1;
+    if (!groupRef.current) return;
+    groupRef.current.rotation.x += delta * 0.04;
+    groupRef.current.rotation.y += delta * 0.07;
   });
 
   const currentScale = hovered ? baseScale * 1.2 : baseScale;
-  const currentDistort = hovered ? 0.6 : 0.2;
-  const currentSpeed = hovered ? 6 : 1.5;
+  const currentDistort = hovered ? 0.5 : 0.15;
+  const currentSpeed = hovered ? 5 : 1.2;
 
   return (
-    <mesh
-      ref={meshRef}
+    <group
+      ref={groupRef}
       position={position}
       rotation={rotation}
       scale={currentScale}
-      onPointerOver={(e) => {
-        e.stopPropagation();
-        setHovered(true);
-        document.body.style.cursor = 'pointer';
-      }}
-      onPointerOut={(e) => {
-        e.stopPropagation();
-        setHovered(false);
-        document.body.style.cursor = 'auto';
-      }}
-      onClick={(e) => {
-        e.stopPropagation();
-        setColorIndex((prev) => (prev + 1) % COLORS.length);
-      }}
     >
-      <icosahedronGeometry args={[1, 1]} />
-      <MeshDistortMaterial
-        color={COLORS[colorIndex]}
-        distort={currentDistort}
-        speed={currentSpeed}
-        transparent
-        opacity={0.25}
-      />
-    </mesh>
+      {/* 
+        Invisible hit-target sphere.
+        MeshDistortMaterial displaces vertices in the GPU shader, which means
+        the CPU-side geometry bounding box used by the raycaster does NOT match
+        the visible distorted mesh. Without a stable hit target, rapid distort
+        changes cause the raycaster to miss, creating a hover/unhover loop that
+        makes the shape flicker or appear to vanish.
+      */}
+      <mesh
+        visible={false}
+        onPointerOver={(e) => {
+          e.stopPropagation();
+          setHovered(true);
+          document.body.style.cursor = 'pointer';
+        }}
+        onPointerOut={(e) => {
+          e.stopPropagation();
+          setHovered(false);
+          document.body.style.cursor = 'auto';
+        }}
+        onClick={(e) => {
+          e.stopPropagation();
+          setColorIndex((prev) => (prev + 1) % COLORS.length);
+        }}
+      >
+        <sphereGeometry args={[1.8, 16, 16]} />
+        <meshBasicMaterial visible={false} />
+      </mesh>
+
+      {/* Visible distorted shape */}
+      <mesh frustumCulled={false}>
+        <icosahedronGeometry args={[1, 1]} />
+        <MeshDistortMaterial
+          color={COLORS[colorIndex]}
+          distort={currentDistort}
+          speed={currentSpeed}
+          transparent
+          opacity={0.2}
+        />
+      </mesh>
+    </group>
   );
 }
 
@@ -75,21 +93,21 @@ interface ShapeData {
 function Scene() {
   const shapes = useMemo<ShapeData[]>(() => {
     const data: ShapeData[] = [];
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 10; i++) {
       data.push({
         id: i,
         position: [
-          (Math.random() - 0.5) * 24,
-          (Math.random() - 0.5) * 16,
-          (Math.random() - 0.5) * 10 - 2,
+          (Math.random() - 0.5) * 20,
+          (Math.random() - 0.5) * 14,
+          -3 - Math.random() * 5,
         ],
         rotation: [
           Math.random() * Math.PI,
           Math.random() * Math.PI,
           Math.random() * Math.PI,
         ],
-        scale: 0.35 + Math.random() * 0.65,
-        floatSpeed: 0.6 + Math.random() * 1.4,
+        scale: 0.35 + Math.random() * 0.5,
+        floatSpeed: 0.5 + Math.random() * 1.2,
       });
     }
     return data;
@@ -105,8 +123,8 @@ function Scene() {
         <Float
           key={shape.id}
           speed={shape.floatSpeed}
-          rotationIntensity={0.3}
-          floatIntensity={0.7}
+          rotationIntensity={0.2}
+          floatIntensity={0.5}
         >
           <MutatingShape
             position={shape.position}
@@ -121,12 +139,29 @@ function Scene() {
 
 /* ─── Main Export ─── */
 export default function Interactive3DScatter() {
+  const camera = useMemo(
+    () => ({ position: [0, 0, 12] as [number, number, number], fov: 60 }),
+    []
+  );
+
+  const gl = useMemo(
+    () => ({ antialias: true, alpha: true }),
+    []
+  );
+
   return (
-    <div className="fixed inset-0 z-0">
+    <div className="fixed inset-0 z-0 overflow-hidden">
       <Canvas
-        camera={{ position: [0, 0, 12], fov: 60 }}
-        style={{ width: '100%', height: '100%' }}
-        gl={{ antialias: true, alpha: true }}
+        camera={camera}
+        gl={gl}
+        dpr={[1, 2]}
+        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+        onCreated={({ gl: renderer, scene }) => {
+          // Defensive: force transparent background so the canvas never
+          // accidentally renders an opaque clear that covers the page.
+          renderer.setClearColor(0x000000, 0);
+          scene.background = null;
+        }}
       >
         <Scene />
       </Canvas>

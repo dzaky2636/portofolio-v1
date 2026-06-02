@@ -69,18 +69,18 @@ export default function EnvironmentalEffects() {
     return () => clearInterval(packetInterval);
   }, []);
 
-  useEffect(() => {
-    // Fan vibration burst on viewport
-    const vibrateInterval = setInterval(() => {
-      document.body.classList.add('animate-fan');
-      setTimeout(() => document.body.classList.remove('animate-fan'), 2000);
-    }, 20000);
-
-    return () => clearInterval(vibrateInterval);
-  }, []);
-
   return (
     <>
+      {/* Fan Vibration Overlay — rendered as a sibling (NOT applied to body)
+          Applying transform to body would make it the containing block for all
+          fixed-positioned descendants, causing 3D canvas and other fixed elements
+          to shift out of the viewport. As a sibling overlay, this div's own
+          transform cannot corrupt sibling elements' containing blocks. */}
+      <div
+        aria-hidden="true"
+        className="animate-fan fixed inset-0 z-[1] pointer-events-none"
+      />
+
       {/* CRT Scanline follower — DISABLED */}
       {/* <div
         ref={scanlineRef}
