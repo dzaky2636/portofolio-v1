@@ -129,11 +129,13 @@ export default async function Page({
             className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-3 max-w-md mx-auto lg:mr-0 lg:ml-auto animate-eject"
             style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
           >
-            <div className="w-full aspect-square bg-[#0C0C0C] flex items-center justify-center">
-              <span className="font-mono uppercase tracking-widest text-xs text-white">
-                [IMG://PROFILE_PIC]
-              </span>
-            </div>
+            <div className="w-full aspect-square bg-[#0C0C0C] overflow-hidden">
+                <img
+                  src="/images/profile-pic.jpg"
+                  alt="Dzaky Fatur Rahman"
+                  className="w-full h-full object-cover"
+                />
+              </div>
           </div>
 
           {/* 3D Canvas */}
