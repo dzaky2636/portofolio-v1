@@ -90,7 +90,7 @@ export default function ProjectSection() {
             >
               <div
                 onClick={() => openModal(project)}
-                className="group bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-8 md:p-10 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:-translate-y-1 hover:shadow-[12px_12px_0px_#0C0C0C] active:translate-y-[2px] active:shadow-[4px_4px_0px_#0C0C0C] transition-all duration-75 cursor-pointer rounded-none"
+                className="group bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-8 md:p-10 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:-translate-y-1 hover:shadow-[12px_12px_0px_#0C0C0C] active:translate-y-[2px] active:shadow-[4px_4px_0px_#0C0C0C] transition-all duration-75 cursor-pointer rounded-none pointer-events-auto"
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {

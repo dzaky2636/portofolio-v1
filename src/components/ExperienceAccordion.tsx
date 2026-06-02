@@ -48,7 +48,7 @@ export default function ExperienceAccordion({
             <button
               type="button"
               onClick={() => handleToggle(index)}
-              className={`w-full flex items-center justify-between gap-4 border-[3px] border-black p-4 md:p-6 text-left rounded-none active:translate-y-[2px] active:shadow-[inset_0px_2px_0px_rgba(0,0,0,0.2)] transition-all duration-75 ${
+              className={`w-full flex items-center justify-between gap-4 border-[3px] border-black p-4 md:p-6 text-left rounded-none active:translate-y-[2px] active:shadow-[inset_0px_2px_0px_rgba(0,0,0,0.2)] transition-all duration-75 pointer-events-auto ${
                 isOpen
                   ? "bg-[#FFD700] text-black animate-[warningLamp_1s_steps(5,end)_1]"
                   : "bg-white text-[#0C0C0C]"

@@ -77,9 +77,9 @@ export default async function Page({
   ];
 
   return (
-    <main className="min-h-screen text-[#0C0C0C] font-serif selection:bg-[#2945FF] selection:text-white">
+    <main className="relative z-10 min-h-screen text-[#0C0C0C] font-serif selection:bg-[#2945FF] selection:text-white pointer-events-none">
       {/* 1. HEADER */}
-      <header className="sticky top-0 z-50 bg-[#F4F3ED] border-b-4 border-black">
+      <header className="sticky top-0 z-50 bg-[#F4F3ED] border-b-4 border-black pointer-events-auto">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
           <div
             data-twitch
@@ -99,14 +99,16 @@ export default async function Page({
               <a
                 key={link.href}
                 href={link.href}
-                className="relative font-mono uppercase tracking-widest text-xs hover:text-[#2945FF] transition-colors duration-75 hover-jam"
+                className="relative font-mono uppercase tracking-widest text-xs hover:text-[#2945FF] transition-colors duration-75 hover-jam pointer-events-auto"
               >
                 {link.label}
               </a>
             ))}
           </nav>
 
-          <LanguageToggle currentLang={lang} />
+          <div className="pointer-events-auto">
+            <LanguageToggle currentLang={lang} />
+          </div>
         </div>
       </header>
 
@@ -151,7 +153,7 @@ export default async function Page({
         <div className="space-y-8">
           {/* Profile Picture Container */}
           <div
-            className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-3 max-w-md mx-auto lg:mr-0 lg:ml-auto animate-eject"
+            className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-3 max-w-md mx-auto lg:mr-0 lg:ml-auto animate-eject pointer-events-auto"
             style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
           >
             <div className="w-full aspect-square bg-[#0C0C0C] overflow-hidden">
@@ -198,7 +200,7 @@ export default async function Page({
             delay="0.05s"
             className="lg:col-span-5"
           >
-            <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none">
+            <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none pointer-events-auto">
               <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
                 <span>EDU_RECORD.exe</span>
                 <span>[OK]</span>
@@ -226,7 +228,7 @@ export default async function Page({
             delay="0.15s"
             className="lg:col-span-4"
           >
-            <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none">
+            <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none pointer-events-auto">
               <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
                 <span>CERTS.dll</span>
                 <span>[VERIFIED]</span>
@@ -270,7 +272,7 @@ export default async function Page({
             delay="0.25s"
             className="lg:col-span-3"
           >
-            <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none">
+            <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none pointer-events-auto">
               <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
                 <span>TECH_STACK.cfg</span>
                 <span>[LOADED]</span>
@@ -326,7 +328,7 @@ export default async function Page({
             delay="0.35s"
             className="lg:col-span-12"
           >
-            <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none">
+            <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none pointer-events-auto">
               <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
                 <span>STATUS.mon</span>
                 <span className="text-[#2945FF]">[ACTIVE]</span>
@@ -377,7 +379,7 @@ export default async function Page({
           </p>
           <a
             href="mailto:dzaky2636@gmail.com"
-            className="inline-block bg-white text-[#0C0C0C] border-4 border-white font-mono uppercase tracking-widest text-lg md:text-xl px-12 py-6 shadow-[8px_8px_0px_#2945FF] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#2945FF] active:translate-x-[4px] active:translate-y-[4px] active:shadow-[0px_0px_0px_#2945FF] active:scale-[0.98] transition-all duration-75 rounded-none select-none"
+            className="inline-block bg-white text-[#0C0C0C] border-4 border-white font-mono uppercase tracking-widest text-lg md:text-xl px-12 py-6 shadow-[8px_8px_0px_#2945FF] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#2945FF] active:translate-x-[4px] active:translate-y-[4px] active:shadow-[0px_0px_0px_#2945FF] active:scale-[0.98] transition-all duration-75 rounded-none select-none pointer-events-auto"
           >
             [ SEND_TRANSMISSION ]
           </a>
@@ -425,35 +427,35 @@ export default async function Page({
               <a
                 href="https://github.com/dzaky2636"
                 aria-label="GitHub"
-                className="bg-white border-2 border-black shadow-[4px_4px_0px_#0C0C0C] p-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] hover:border-[#2945FF] hover:text-[#2945FF] transition-all duration-75"
+                className="bg-white border-2 border-black shadow-[4px_4px_0px_#0C0C0C] p-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] hover:border-[#2945FF] hover:text-[#2945FF] transition-all duration-75 pointer-events-auto"
               >
                 <FaGithub className="w-5 h-5" />
               </a>
               <a
                 href="https://www.linkedin.com/in/dzakyfaturr/"
                 aria-label="LinkedIn"
-                className="bg-white border-2 border-black shadow-[4px_4px_0px_#0C0C0C] p-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] hover:border-[#2945FF] hover:text-[#2945FF] transition-all duration-75"
+                className="bg-white border-2 border-black shadow-[4px_4px_0px_#0C0C0C] p-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] hover:border-[#2945FF] hover:text-[#2945FF] transition-all duration-75 pointer-events-auto"
               >
                 <FaLinkedin className="w-5 h-5" />
               </a>
               <a
                 href="mailto:dzaky2636@gmail.com"
                 aria-label="Email"
-                className="bg-white border-2 border-black shadow-[4px_4px_0px_#0C0C0C] p-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] hover:border-[#2945FF] hover:text-[#2945FF] transition-all duration-75"
+                className="bg-white border-2 border-black shadow-[4px_4px_0px_#0C0C0C] p-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] hover:border-[#2945FF] hover:text-[#2945FF] transition-all duration-75 pointer-events-auto"
               >
                 <FaEnvelope className="w-5 h-5" />
               </a>
               <a
                 href="https://wa.me/6281377752644"
                 aria-label="WhatsApp"
-                className="bg-white border-2 border-black shadow-[4px_4px_0px_#0C0C0C] p-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] hover:border-[#2945FF] hover:text-[#2945FF] transition-all duration-75"
+                className="bg-white border-2 border-black shadow-[4px_4px_0px_#0C0C0C] p-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] hover:border-[#2945FF] hover:text-[#2945FF] transition-all duration-75 pointer-events-auto"
               >
                 <FaWhatsapp className="w-5 h-5" />
               </a>
               <a
                 href="https://instagram.com/dzakyfaturr"
                 aria-label="Instagram"
-                className="bg-white border-2 border-black shadow-[4px_4px_0px_#0C0C0C] p-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] hover:border-[#2945FF] hover:text-[#2945FF] transition-all duration-75"
+                className="bg-white border-2 border-black shadow-[4px_4px_0px_#0C0C0C] p-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] hover:border-[#2945FF] hover:text-[#2945FF] transition-all duration-75 pointer-events-auto"
               >
                 <FaInstagram className="w-5 h-5" />
               </a>

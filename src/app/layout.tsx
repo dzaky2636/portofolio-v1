@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import InteractiveBackground from "@/components/InteractiveBackground";
+import Interactive3DScatter from "@/components/Interactive3DScatter";
 import EnvironmentalEffects from "@/components/EnvironmentalEffects";
 import "./globals.css";
 
@@ -31,6 +32,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <InteractiveBackground />
+        <Interactive3DScatter />
         <EnvironmentalEffects />
         {children}
       </body>
