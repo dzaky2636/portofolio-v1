@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useRef, useEffect } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Float } from '@react-three/drei';
 import * as THREE from 'three';
@@ -15,6 +15,9 @@ const PALETTE = {
 
 const COLORS = [PALETTE.blue, PALETTE.yellow, PALETTE.ink, PALETTE.paper];
 const WIREFRAME_COLOR = PALETTE.ink;
+
+/* ─── Shared scroll + mouse state ─── */
+const globalInput = { x: 0, y: 0, scroll: 0 };
 
 /* ─── Geometry Factory ─── */
 type GeoType = 'dodecahedron' | 'icosahedron' | 'octahedron' | 'tetrahedron' | 'box' | 'cone' | 'torusKnot' | 'ring' | 'cylinder';
@@ -125,8 +128,8 @@ function PS1Shape({
 
   useFrame((_, delta) => {
     if (!groupRef.current) return;
-    groupRef.current.rotation.x += delta * rotSpeed[0];
-    groupRef.current.rotation.y += delta * rotSpeed[1];
+    groupRef.current.rotation.x += delta * (rotSpeed[0] + globalInput.y * 2.0);
+    groupRef.current.rotation.y += delta * (rotSpeed[1] + globalInput.x * 2.0);
     groupRef.current.rotation.z += delta * rotSpeed[2];
   });
 
@@ -204,8 +207,8 @@ function DebrisParticle({ position, scale, geoType, rotSpeed, color }: DebrisPro
 
   useFrame((_, delta) => {
     if (!ref.current) return;
-    ref.current.rotation.x += delta * rotSpeed;
-    ref.current.rotation.y += delta * rotSpeed * 0.7;
+    ref.current.rotation.x += delta * (rotSpeed + globalInput.y * 1.4);
+    ref.current.rotation.y += delta * (rotSpeed * 0.7 + globalInput.x * 1.4);
   });
 
   return (
@@ -308,8 +311,8 @@ function FloatingRing({ position, scale, speed }: { position: [number, number, n
   useFrame((state) => {
     if (!ref.current) return;
     const time = state.clock.getElapsedTime();
-    ref.current.rotation.x = Math.sin(time * speed) * 0.3;
-    ref.current.rotation.y = time * speed * 0.5;
+    ref.current.rotation.x = Math.sin(time * speed) * 0.3 + globalInput.y * 0.6;
+    ref.current.rotation.y = time * speed * 0.5 + globalInput.x * 0.6;
   });
 
   const geometry = useMemo(() => new THREE.RingGeometry(0.6, 1, 6), []);
@@ -334,8 +337,8 @@ function FloatingPanel({ position, scale, speed, color }: { position: [number, n
   useFrame((state) => {
     if (!ref.current) return;
     const time = state.clock.getElapsedTime();
-    ref.current.rotation.x = Math.sin(time * speed * 0.4) * 0.2;
-    ref.current.rotation.y = time * speed * 0.3;
+    ref.current.rotation.x = Math.sin(time * speed * 0.4) * 0.2 + globalInput.y * 0.5;
+    ref.current.rotation.y = time * speed * 0.3 + globalInput.x * 0.5;
     ref.current.rotation.z = Math.cos(time * speed * 0.5) * 0.1;
   });
 
@@ -511,7 +514,7 @@ function Scene() {
   const shapePositions = useMemo(() => shapes.map((s) => s.position), [shapes]);
 
   return (
-    <>
+    <ScrollScene>
       <ambientLight intensity={0.4} />
       <directionalLight position={[10, 10, 5]} intensity={0.5} />
       <pointLight position={[-10, -5, -5]} intensity={0.4} color={PALETTE.blue} />
@@ -576,32 +579,73 @@ function Scene() {
           color={d.color}
         />
       ))}
-    </>
+    </ScrollScene>
   );
+}
+
+/* ─── Scroll-Driven Scene Group ─── */
+function ScrollScene({ children }: { children: React.ReactNode }) {
+  const groupRef = useRef<THREE.Group>(null);
+
+  useFrame(() => {
+    if (!groupRef.current) return;
+    const s = globalInput.scroll;
+    groupRef.current.position.y = s * 0.005;
+    groupRef.current.rotation.x = s * 0.00012;
+    groupRef.current.rotation.z = s * 0.00004;
+  });
+
+  return <group ref={groupRef}>{children}</group>;
 }
 
 /* ─── Camera Parallax Hook ─── */
 function ParallaxCamera() {
   const { camera } = useThree();
   const mouseRef = useRef({ x: 0, y: 0 });
-  const targetRef = useRef({ x: 0, y: 0 });
+  const scrollRef = useRef(0);
+  const targetRef = useRef({ mx: 0, my: 0, scroll: 0 });
 
   useFrame((_, delta) => {
-    targetRef.current.x += (mouseRef.current.x - targetRef.current.x) * delta * 2;
-    targetRef.current.y += (mouseRef.current.y - targetRef.current.y) * delta * 2;
-    camera.position.x = targetRef.current.x * 0.8;
-    camera.position.y = targetRef.current.y * 0.5;
-    camera.lookAt(0, 0, 0);
+    const lerp = 1 - Math.exp(-delta * 3);
+
+    targetRef.current.mx += (mouseRef.current.x - targetRef.current.mx) * lerp;
+    targetRef.current.my += (mouseRef.current.y - targetRef.current.my) * lerp;
+    targetRef.current.scroll += (scrollRef.current - targetRef.current.scroll) * lerp;
+
+    const s = targetRef.current.scroll;
+
+    /* Camera flies downward through the scene as user scrolls */
+    camera.position.x = targetRef.current.mx * 0.8;
+    camera.position.y = targetRef.current.my * 0.5 - s * 0.008;
+    camera.position.z = 8 + s * 0.003;
+
+    /* Gentle orbit + dive tilt on scroll */
+    camera.rotation.y = s * 0.0004;
+    camera.rotation.x = s * 0.00012;
+
+    camera.lookAt(0, -s * 0.006, -5);
   });
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const handleMove = (e: MouseEvent) => {
-      mouseRef.current.x = (e.clientX / window.innerWidth - 0.5) * 2;
-      mouseRef.current.y = -(e.clientY / window.innerHeight - 0.5) * 2;
+      const nx = (e.clientX / window.innerWidth - 0.5) * 2;
+      const ny = -(e.clientY / window.innerHeight - 0.5) * 2;
+      mouseRef.current.x = nx;
+      mouseRef.current.y = ny;
+      globalInput.x = nx;
+      globalInput.y = ny;
+    };
+    const handleScroll = () => {
+      scrollRef.current = window.scrollY;
+      globalInput.scroll = window.scrollY;
     };
     window.addEventListener('mousemove', handleMove);
-    return () => window.removeEventListener('mousemove', handleMove);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('mousemove', handleMove);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return null;
