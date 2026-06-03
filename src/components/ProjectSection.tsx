@@ -18,30 +18,30 @@ const projects: Project[] = [
   {
     id: 'chatrigo',
     name: 'CHATRIGO',
-    realm: 'SaaS & AI Orchestration // REALM_01',
+    realm: 'SaaS & AI Orchestration',
     org: 'PT RIGO INOVASI DIGITAL',
     description:
-      'Built a multi-tenant B2B SaaS chatbot platform on Next.js 15 + Supabase that handles customer chats across WhatsApp and Telegram. Added an anti-hallucination AI pipeline using RAG, plus an AI Business Advisor that actually helps with sales strategy. Managed a small team and kept the codebase clean.',
+      'Built a multi-tenant B2B SaaS chatbot platform on Next.js 15 + Supabase that handles customer chats across WhatsApp and Telegram. Added an anti-hallucination AI pipeline using RAG, plus an AI Business Advisor that helps with sales strategy. Managed a small team (around 8~ interns) and kept the codebase clean.',
     stack: ['Next.js 15/16', 'Prisma', 'Supabase', 'PostgreSQL (pgvector)'],
     images: ['/chatrigo-1.jpg', '/chatrigo-2.jpg'],
   },
   {
     id: 'egov',
-    name: 'BALIKPAPAN E-GOVERNMENT SYSTEMS',
-    realm: 'Civic Tech // REALM_02',
-    org: 'DISKOMINFO BALIKPAPAN',
+    name: 'E-GOVERNMENT SYSTEMS',
+    realm: 'Civic Tech',
+    org: 'DISKOMINFO',
     description:
-      'Made a digital E-Signature system for Balikpapan city schools — QR codes, queue processing, auto PDF handling, the works. Also built E-KGB, a salary & promotion management web app with dashboards and secure auth. Both running on Laravel + Tailwind.',
+      'Made a digital E-Signature system for the local government — QR codes generation, queue processing, using official government API verification. Also built E-KGB, a salary & promotion management web app with dashboards and secure auth. Both running on Laravel + Tailwind. The mobile app was built with Flutter.',
     stack: ['Laravel', 'Tailwind CSS', 'Queue Processing', 'Flutter'],
     images: ['/egov-1.jpg', '/egov-2.jpg'],
   },
   {
     id: 'thesis',
     name: 'INTELLIGENT TUTORING SYSTEM',
-    realm: 'Academic/AI // REALM_03',
+    realm: 'Academic/AI',
     org: 'UMN THESIS',
     description:
-      'My undergrad thesis — an AI tutoring system that uses gamification (Octalysis framework) and autonomous agents to give real-time feedback and adapt to each student. Basically, a smart study buddy.',
+      'My undergrad thesis — an AI tutoring system that uses gamification (Octalysis framework) and autonomous agents to give real-time feedback and adapt to each student.',
     stack: ['Python', 'AI Agents', 'LLM Engineering'],
     images: ['/thesis-1.jpg', '/thesis-2.jpg'],
   },
@@ -76,8 +76,11 @@ export default function ProjectSection() {
           <h2 className="text-4xl md:text-6xl font-serif font-bold tracking-tight">
             SELECTED PROJECTS
           </h2>
-          <div className="font-mono uppercase tracking-widest text-xs mt-3">
-            {'/// CLICK ON A PROJECT TO SEE PHOTOS'}
+          <div className="mt-4 inline-flex items-center gap-3 bg-white border-4 border-black shadow-[4px_4px_0px_#0C0C0C] px-4 py-3 max-w-full">
+            <span className="inline-block w-3 h-3 bg-[#FFD700] border-2 border-black shadow-[1px_1px_0px_#0C0C0C]" />
+            <span className="font-mono uppercase tracking-widest text-xs leading-tight">
+              CLICK ANY PROJECT TO OPEN IMAGE VIEWER
+            </span>
           </div>
         </div>
 
@@ -109,8 +112,13 @@ export default function ProjectSection() {
                       {project.realm}
                     </p>
                   </div>
-                  <div className="font-mono uppercase tracking-widest text-xs border-2 border-black px-3 py-2 bg-[#F4F3ED] shadow-[2px_2px_0px_#0C0C0C] whitespace-nowrap group-hover:shadow-[1px_1px_0px_#0C0C0C] group-hover:translate-x-[1px] group-hover:translate-y-[1px] transition-all duration-75">
-                    {project.org}
+                  <div className="flex flex-col gap-2">
+                    <div className="font-mono uppercase tracking-widest text-xs border-2 border-black px-3 py-2 bg-[#F4F3ED] shadow-[2px_2px_0px_#0C0C0C] whitespace-nowrap group-hover:shadow-[1px_1px_0px_#0C0C0C] group-hover:translate-x-[1px] group-hover:translate-y-[1px] transition-all duration-75">
+                      {project.org}
+                    </div>
+                    <div className="font-mono uppercase tracking-widest text-xs border-2 border-black px-3 py-2 bg-[#FFD700] text-[#0C0C0C] shadow-[2px_2px_0px_#0C0C0C] whitespace-nowrap group-hover:bg-[#2945FF] group-hover:text-white group-hover:border-[#2945FF] group-hover:shadow-[1px_1px_0px_#0C0C0C] group-hover:translate-x-[1px] group-hover:translate-y-[1px] transition-all duration-75">
+                      [ {project.images.length} IMAGES ]
+                    </div>
                   </div>
                 </div>
                 <p className="font-serif text-lg md:text-2xl leading-relaxed mb-8 max-w-4xl">
@@ -126,6 +134,14 @@ export default function ProjectSection() {
                       [{t}]
                     </span>
                   ))}
+                </div>
+                <div className="mt-6 pt-4 border-t-2 border-dashed border-black flex items-center justify-between">
+                  <span className="font-mono uppercase tracking-widest text-xs text-[#2945FF]">
+                    [ OPEN IMAGE_VIEWER.EXE ]
+                  </span>
+                  <span className="font-mono uppercase tracking-widest text-xs">
+                    [ -&gt; ]
+                  </span>
                 </div>
               </div>
             </AnimateOnScroll>

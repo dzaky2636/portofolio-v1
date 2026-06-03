@@ -140,7 +140,7 @@ export default async function Page({
             className="text-xl md:text-2xl font-serif leading-relaxed max-w-xl animate-drawer"
             style={{ animationDelay: '0.5s', animationFillMode: 'both' }}
           >
-            Recent Informatics graduate who loves building full-stack apps, playing around with AI/ML, and designing solid web architecture. Been leading teams, shipping features from scratch, and figuring out tech directions for a while now. This portofolio is a work in progress.
+            Recent Informatics graduate who loves building full-stack apps, playing around with AI/ML, and designing solid web architecture. Been leading teams, shipping features from scratch, and figuring out tech directions for a while now. This portofolio is a work in progress, but you can check out my highlighted work to check out my expertise.
           </p>
         </div>
 
@@ -241,15 +241,7 @@ export default async function Page({
                   <span className="font-mono text-xs uppercase">[PASS]</span>
                 </li>
                 <li className="flex justify-between items-end border-b border-dashed border-black pb-2">
-                  <span>Python Intermediate Course</span>
-                  <span className="font-mono text-xs uppercase">[PASS]</span>
-                </li>
-                <li className="flex justify-between items-end border-b border-dashed border-black pb-2">
                   <span>Laboratory Assistant Certification</span>
-                  <span className="font-mono text-xs uppercase">[PASS]</span>
-                </li>
-                <li className="flex justify-between items-end border-b border-dashed border-black pb-2">
-                  <span>UTOPIA Speech</span>
                   <span className="font-mono text-xs uppercase">[PASS]</span>
                 </li>
                 <li className="flex justify-between items-end">
@@ -276,32 +268,21 @@ export default async function Page({
                   "Next.js 15",
                   "React 19",
                   "TypeScript",
-                  "HTML",
                   "JavaScript",
-                  "CSS",
                   "Tailwind CSS",
                   "Bootstrap",
-                  "Jetpack Compose",
                   "Figma",
                   "Laravel",
                   "Kotlin",
                   "Node.js",
                   "Express",
                   "Python",
-                  "Django",
-                  "Flask",
                   "Java",
                   "C/C++",
                   "PostgreSQL",
-                  "Prisma ORM",
                   "Supabase",
-                  "LLM Engineering",
-                  "Prompt Engineering",
                   "RAG",
-                  "OpenRouter API",
-                  "Jira",
-                  "Git & GitHub",
-                  "Leadership"
+                  "..AND MORE!"
                 ].map((tech) => (
                   <span
                     key={tech}
@@ -326,7 +307,7 @@ export default async function Page({
                 <span className="text-[#2945FF]">[ACTIVE]</span>
               </div>
               <p data-packet className="font-serif text-xl md:text-2xl">
-                Currently CTO & Lead Fullstack Engineer at PT Rigo Inovasi Digital. UMN Alumni (GPA 3.71/4.00).
+                Currently Lead Fullstack Engineer at PT Rigo Inovasi Digital. Open to working on new projects.
               </p>
             </div>
           </AnimateOnScroll>
@@ -359,9 +340,9 @@ export default async function Page({
         className="border-t-4 border-black bg-[#0C0C0C] text-white py-24 lg:py-32 px-4"
       >
         <div className="max-w-4xl mx-auto text-center space-y-10">
-          {/* <h2 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tight animate-siren">
+          <h2 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tight animate-siren">
             CONTACT
-          </h2> */}
+          </h2>
           <p
             data-packet
             className="font-serif text-xl md:text-2xl text-[#F4F3ED] max-w-2xl mx-auto leading-relaxed"
