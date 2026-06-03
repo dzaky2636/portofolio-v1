@@ -140,7 +140,7 @@ export default async function Page({
             className="text-xl md:text-2xl font-serif leading-relaxed max-w-xl animate-drawer"
             style={{ animationDelay: '0.5s', animationFillMode: 'both' }}
           >
-            Informatics grad who loves building full-stack apps, playing around with AI/ML, and designing solid web architecture. Been leading teams, shipping features from scratch, and figuring out tech directions for a while now. Cool if we work together.
+            Recent Informatics graduate who loves building full-stack apps, playing around with AI/ML, and designing solid web architecture. Been leading teams, shipping features from scratch, and figuring out tech directions for a while now. This portofolio is a work in progress.
           </p>
         </div>
 
@@ -180,7 +180,7 @@ export default async function Page({
       >
         <div className="mb-10">
           <h2 className="text-4xl md:text-6xl font-serif font-bold tracking-tight">
-            USER_INVENTORY.LOG
+            SHORT PROFILE
           </h2>
           <div className="font-mono uppercase tracking-widest text-xs mt-3">
             {'/// EDUCATION & SPECIFICATIONS'}
@@ -196,13 +196,13 @@ export default async function Page({
           >
             <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none pointer-events-auto">
               <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
-                <span>EDU_RECORD.exe</span>
+                <span>EDUCATION RECORD</span>
                 <span>[OK]</span>
               </div>
               <h3 className="text-2xl md:text-3xl font-serif font-bold mb-2">
                 Universitas Multimedia Nusantara
               </h3>
-              <p className="font-serif text-lg">Informatics major — Computer Science track</p>
+              <p className="font-serif text-lg">Informatics major</p>
               <p className="font-serif text-lg mt-1">Grade A accredited program</p>
               <div className="mt-4 inline-block font-mono uppercase tracking-widest text-xs bg-[#FFD700] text-[#0C0C0C] px-3 py-2 border-2 border-black">
                 GPA: 3.71/4.00
@@ -224,7 +224,7 @@ export default async function Page({
           >
             <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none pointer-events-auto">
               <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
-                <span>CERTS.dll</span>
+                <span>CERTIFICATIONS</span>
                 <span>[VERIFIED]</span>
               </div>
               <ul className="space-y-3 font-serif text-lg">
@@ -268,7 +268,7 @@ export default async function Page({
           >
             <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none pointer-events-auto">
               <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
-                <span>TECH_STACK.cfg</span>
+                <span>MY TECH STACKS</span>
                 <span>[LOADED]</span>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -301,9 +301,7 @@ export default async function Page({
                   "OpenRouter API",
                   "Jira",
                   "Git & GitHub",
-                  "Leadership",
-                  "Communication",
-                  "Problem Solving",
+                  "Leadership"
                 ].map((tech) => (
                   <span
                     key={tech}
@@ -324,7 +322,7 @@ export default async function Page({
           >
             <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none pointer-events-auto">
               <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
-                <span>STATUS.mon</span>
+                <span>CURRENT BUSY-NESS</span>
                 <span className="text-[#2945FF]">[ACTIVE]</span>
               </div>
               <p data-packet className="font-serif text-xl md:text-2xl">
@@ -345,10 +343,10 @@ export default async function Page({
       >
         <div className="mb-10">
           <h2 className="text-4xl md:text-6xl font-serif font-bold tracking-tight">
-            EXPERIENCE_LOGS
+            EXPERIENCE
           </h2>
           <div className="font-mono uppercase tracking-widest text-xs mt-3">
-            {'/// EXPAND RECORDS FOR DETAILS'}
+            {'/// CLICK ON EACH FOR DETAILS'}
           </div>
         </div>
 
@@ -361,20 +359,20 @@ export default async function Page({
         className="border-t-4 border-black bg-[#0C0C0C] text-white py-24 lg:py-32 px-4"
       >
         <div className="max-w-4xl mx-auto text-center space-y-10">
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tight animate-siren">
-            INITIATE_CONTACT
-          </h2>
+          {/* <h2 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tight animate-siren">
+            CONTACT
+          </h2> */}
           <p
             data-packet
             className="font-serif text-xl md:text-2xl text-[#F4F3ED] max-w-2xl mx-auto leading-relaxed"
           >
-            Want to build something cool together? Let's talk about it.
+            Want to collaborate? Click on the button below or contact me on my socials, they are on the bottom right.
           </p>
           <a
             href="mailto:dzaky2636@gmail.com"
             className="inline-block bg-white text-[#0C0C0C] border-4 border-white font-mono uppercase tracking-widest text-lg md:text-xl px-12 py-6 shadow-[8px_8px_0px_#2945FF] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#2945FF] active:translate-x-[4px] active:translate-y-[4px] active:shadow-[0px_0px_0px_#2945FF] active:scale-[0.98] transition-all duration-75 rounded-none select-none pointer-events-auto"
           >
-            [ SEND_TRANSMISSION ]
+            [ SEND EMAIL ]
           </a>
         </div>
       </section>

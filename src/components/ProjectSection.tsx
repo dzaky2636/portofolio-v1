@@ -74,10 +74,10 @@ export default function ProjectSection() {
       >
         <div className="mb-12">
           <h2 className="text-4xl md:text-6xl font-serif font-bold tracking-tight">
-            PROJECT_REALMS
+            SELECTED PROJECTS
           </h2>
           <div className="font-mono uppercase tracking-widest text-xs mt-3">
-            {'/// SELECT A DIALOGUE BOX TO INSPECT'}
+            {'/// CLICK ON A PROJECT TO SEE PHOTOS'}
           </div>
         </div>
 
