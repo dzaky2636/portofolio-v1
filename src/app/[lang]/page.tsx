@@ -6,12 +6,40 @@ import GlitchText from '@/components/GlitchText';
 import LanguageToggle from '@/components/LanguageToggle';
 import { FaGithub, FaLinkedin, FaEnvelope, FaWhatsapp, FaInstagram } from 'react-icons/fa';
 
+interface Dict {
+  nav: { profile: string; inventory: string; realms: string; logs: string; contact: string };
+  hero: { title: string; summary: string };
+  inventory: {
+    title: string;
+    subtitle: string;
+    education: { title: string; status: string; school: string; major: string; accreditation: string; gpa: string; thesis: string; award: string };
+    certifications: { title: string; status: string };
+    techStack: { title: string; status: string; tags: string[] };
+    status: { title: string; active: string; text: string };
+  };
+  projects: {
+    title: string;
+    clickPrompt: string;
+    openViewer: string;
+    imagesLabel: string;
+    items: { id: string; name: string; realm: string; org: string; description: string; stack: string[]; images: string[] }[];
+  };
+  experience: {
+    title: string;
+    subtitle: string;
+    items: { role: string; company: string; duration: string; details: string }[];
+  };
+  contact: { title: string; description: string; button: string };
+  footer: { builtWith: string; connect: string; tagline: string; badges: string[] };
+}
+
 export default async function Page({
   params,
 }: {
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
+  const dict: Dict = (await import(`@/dictionaries/${lang}.json`)).default;
 
   const quotes = [
     "WHEN CODING SUCKS, I WANT TO BE AN ANIMAL INSTEAD",
@@ -31,49 +59,12 @@ export default async function Page({
     "WHAT AN INCREDIBLE POWER -- THE ABILITY TO.. GROW UP"
   ];
 
-  const experience = [
-    {
-      role: "Chief Technology Officer (CTO) & Lead Fullstack Engineer",
-      company: "PT Rigo Inovasi Digital",
-      duration: "2026 — NOW",
-      details:
-        "Lead the technological vision and engineering architecture for a comprehensive omnichannel AI chatbot SaaS platform, centralizing customer interactions across WhatsApp, Telegram, and social commerce. Manage and mentor the technical division (including full-stack developer interns), establishing code quality standards, SDLC guidelines, and remote engineering operational efficiency.",
-    },
-    {
-      role: "Fullstack Web & Mobile Developer",
-      company: "Diskominfo Balikpapan",
-      duration: "2025",
-      details:
-        "Designed and developed Flutter-based web and mobile applications to enhance public services in communications and informatics for the citizens of Balikpapan. Implemented new features and resolved system bugs to ensure optimal performance, maintainability, and a seamless user experience.",
-    },
-    {
-      role: "Website Coordinator",
-      company: "UNITY UMN",
-      duration: "2025",
-      details:
-        "Spearheaded the development and maintenance of the UNITY UMN English competition website, ensuring content accuracy and optimal functionality. Coordinated with cross-functional teams to integrate organizational requirements into the system, such as event registration and content publication pipelines.",
-    },
-    {
-      role: "Laboratory Assistant",
-      company: "UMN Informatics",
-      duration: "2022 — 2026",
-      details:
-        "Instructed courses including Machine Learning, Algorithms & Data Structures, Web Programming, and Introduction to Internet Technology. Developed comprehensive examination materials utilized for official university assessments. Evaluated and mentored approximately 200+ students across various laboratory sessions.",
-    },
-    {
-      role: "Teaching Assistant",
-      company: "Boarding School Multimedia Training Program (UMN x LPDP)",
-      duration: "2023",
-      details:
-        "Selected by university faculty to instruct 25 boarding school students on building dynamic and responsive websites. Developed and managed daily course materials focused on modern Web Development principles.",
-    },
-    {
-      role: "Web Developer Intern",
-      company: "Department of Land and Spatial Planning, Balikpapan",
-      duration: "2021",
-      details:
-        "Completed a three-month internship focusing on web application maintenance and infrastructure. Utilized PHP, HTML, and SQL to support fundamental data operations and UI/UX design updates.",
-    },
+  const navLinks = [
+    { href: '#profile', label: dict.nav.profile },
+    { href: '#inventory', label: dict.nav.inventory },
+    { href: '#realms', label: dict.nav.realms },
+    { href: '#logs', label: dict.nav.logs },
+    { href: '#contact', label: dict.nav.contact },
   ];
 
   return (
@@ -85,17 +76,11 @@ export default async function Page({
             data-twitch
             className="font-mono uppercase tracking-widest text-xs font-bold border-2 border-black px-2 py-1 bg-white shadow-[4px_4px_0px_#0C0C0C] animate-flicker"
           >
-            {'DZAKY\'S CORNER'}
+            {"DZAKY'S CORNER"}
           </div>
 
           <nav className="hidden md:flex items-center gap-6">
-            {[
-              { href: '#profile', label: '[PROFILE]' },
-              { href: '#inventory', label: '[INVENTORY]' },
-              { href: '#realms', label: '[REALMS]' },
-              { href: '#logs', label: '[LOGS]' },
-              { href: '#contact', label: '[TRANSMIT]' },
-            ].map((link) => (
+            {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -133,33 +118,31 @@ export default async function Page({
             className="font-mono uppercase tracking-widest text-xs bg-[#0C0C0C] text-white inline-block px-3 py-2 border-2 border-white shadow-[4px_4px_0px_#2945FF] animate-stamp"
             style={{ animationDelay: '0.4s', animationFillMode: 'both' }}
           >
-            Fullstack Engineer & AI Builder
+            {dict.hero.title}
           </div>
           <p
             data-packet
             className="text-xl md:text-2xl font-serif leading-relaxed max-w-xl animate-drawer"
             style={{ animationDelay: '0.5s', animationFillMode: 'both' }}
           >
-            Recent Informatics graduate who loves building full-stack apps, playing around with AI/ML, and designing solid web architecture. Been leading teams, shipping features from scratch, and figuring out tech directions for a while now. This portofolio is a work in progress, but you can check out my highlighted work to check out my expertise.
+            {dict.hero.summary}
           </p>
         </div>
 
         <div className="space-y-8">
-          {/* Profile Picture Container */}
           <div
             className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-3 max-w-md mx-auto lg:mr-0 lg:ml-auto animate-eject pointer-events-auto"
             style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
           >
             <div className="w-full aspect-square bg-[#0C0C0C] overflow-hidden">
-                <img
-                  src="/images/profile-pic.jpg"
-                  alt="Dzaky Fatur Rahman"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+              <img
+                src="/images/profile-pic.jpg"
+                alt="Dzaky Fatur Rahman"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
 
-          {/* 3D Canvas */}
           <div
             className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-4 max-w-md mx-auto lg:mr-0 lg:ml-auto animate-boot"
             style={{ animationDelay: '0.45s', animationFillMode: 'both' }}
@@ -180,10 +163,10 @@ export default async function Page({
       >
         <div className="mb-10">
           <h2 className="text-4xl md:text-6xl font-serif font-bold tracking-tight">
-            SHORT PROFILE
+            {dict.inventory.title}
           </h2>
           <div className="font-mono uppercase tracking-widest text-xs mt-3">
-            {'/// EDUCATION & SPECIFICATIONS'}
+            {dict.inventory.subtitle}
           </div>
         </div>
 
@@ -196,22 +179,22 @@ export default async function Page({
           >
             <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none pointer-events-auto">
               <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
-                <span>EDUCATION RECORD</span>
-                <span>[OK]</span>
+                <span>{dict.inventory.education.title}</span>
+                <span>{dict.inventory.education.status}</span>
               </div>
               <h3 className="text-2xl md:text-3xl font-serif font-bold mb-2">
-                Universitas Multimedia Nusantara
+                {dict.inventory.education.school}
               </h3>
-              <p className="font-serif text-lg">Informatics major</p>
-              <p className="font-serif text-lg mt-1">Grade A accredited program</p>
+              <p className="font-serif text-lg">{dict.inventory.education.major}</p>
+              <p className="font-serif text-lg mt-1">{dict.inventory.education.accreditation}</p>
               <div className="mt-4 inline-block font-mono uppercase tracking-widest text-xs bg-[#FFD700] text-[#0C0C0C] px-3 py-2 border-2 border-black">
-                GPA: 3.71/4.00
+                {dict.inventory.education.gpa}
               </div>
               <p className="font-serif text-sm mt-3 italic">
-                Thesis: built an AI tutoring system with gamification that adapts to how you learn
+                {dict.inventory.education.thesis}
               </p>
               <p className="font-serif text-sm mt-1">
-                Award: Merit scholarship for ranking in the top 20% GPA of my batch
+                {dict.inventory.education.award}
               </p>
             </div>
           </AnimateOnScroll>
@@ -224,8 +207,8 @@ export default async function Page({
           >
             <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none pointer-events-auto">
               <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
-                <span>CERTIFICATIONS</span>
-                <span>[VERIFIED]</span>
+                <span>{dict.inventory.certifications.title}</span>
+                <span>{dict.inventory.certifications.status}</span>
               </div>
               <ul className="space-y-3 font-serif text-lg">
                 <li className="flex justify-between items-end border-b border-dashed border-black pb-2">
@@ -260,30 +243,11 @@ export default async function Page({
           >
             <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none pointer-events-auto">
               <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
-                <span>MY TECH STACKS</span>
-                <span>[LOADED]</span>
+                <span>{dict.inventory.techStack.title}</span>
+                <span>{dict.inventory.techStack.status}</span>
               </div>
               <div className="flex flex-wrap gap-2">
-                {[
-                  "Next.js 15",
-                  "React 19",
-                  "TypeScript",
-                  "JavaScript",
-                  "Tailwind CSS",
-                  "Bootstrap",
-                  "Figma",
-                  "Laravel",
-                  "Kotlin",
-                  "Node.js",
-                  "Express",
-                  "Python",
-                  "Java",
-                  "C/C++",
-                  "PostgreSQL",
-                  "Supabase",
-                  "RAG",
-                  "..AND MORE!"
-                ].map((tech) => (
+                {dict.inventory.techStack.tags.map((tech) => (
                   <span
                     key={tech}
                     className="relative font-mono uppercase tracking-widest text-[10px] border-2 border-black px-2 py-1 bg-[#F4F3ED] shadow-[2px_2px_0px_#0C0C0C] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] active:translate-y-[3px] active:shadow-[0px_0px_0px_#0C0C0C] transition-all duration-75 cursor-default select-none"
@@ -303,11 +267,11 @@ export default async function Page({
           >
             <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none pointer-events-auto">
               <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
-                <span>CURRENT BUSY-NESS</span>
-                <span className="text-[#2945FF]">[ACTIVE]</span>
+                <span>{dict.inventory.status.title}</span>
+                <span className="text-[#2945FF]">{dict.inventory.status.active}</span>
               </div>
               <p data-packet className="font-serif text-xl md:text-2xl">
-                Currently Lead Fullstack Engineer at PT Rigo Inovasi Digital. Open to working on new projects.
+                {dict.inventory.status.text}
               </p>
             </div>
           </AnimateOnScroll>
@@ -315,7 +279,13 @@ export default async function Page({
       </section>
 
       {/* 5. PROJECTS (THE REALMS) */}
-      <ProjectSection />
+      <ProjectSection
+        title={dict.projects.title}
+        clickPrompt={dict.projects.clickPrompt}
+        openViewer={dict.projects.openViewer}
+        imagesLabel={dict.projects.imagesLabel}
+        projects={dict.projects.items}
+      />
 
       {/* 6. EXPERIENCE */}
       <section
@@ -324,14 +294,14 @@ export default async function Page({
       >
         <div className="mb-10">
           <h2 className="text-4xl md:text-6xl font-serif font-bold tracking-tight">
-            EXPERIENCE
+            {dict.experience.title}
           </h2>
           <div className="font-mono uppercase tracking-widest text-xs mt-3">
-            {'/// CLICK ON EACH FOR DETAILS'}
+            {dict.experience.subtitle}
           </div>
         </div>
 
-        <ExperienceAccordion experiences={experience} />
+        <ExperienceAccordion experiences={dict.experience.items} />
       </section>
 
       {/* 7. CONTACT */}
@@ -341,19 +311,19 @@ export default async function Page({
       >
         <div className="max-w-4xl mx-auto text-center space-y-10">
           <h2 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tight animate-siren">
-            CONTACT
+            {dict.contact.title}
           </h2>
           <p
             data-packet
             className="font-serif text-xl md:text-2xl text-[#F4F3ED] max-w-2xl mx-auto leading-relaxed"
           >
-            Want to collaborate? Click on the button below or contact me on my socials, they are on the bottom right.
+            {dict.contact.description}
           </p>
           <a
             href="mailto:dzaky2636@gmail.com"
             className="inline-block bg-white text-[#0C0C0C] border-4 border-white font-mono uppercase tracking-widest text-lg md:text-xl px-12 py-6 shadow-[8px_8px_0px_#2945FF] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#2945FF] active:translate-x-[4px] active:translate-y-[4px] active:shadow-[0px_0px_0px_#2945FF] active:scale-[0.98] transition-all duration-75 rounded-none select-none pointer-events-auto"
           >
-            [ SEND EMAIL ]
+            {dict.contact.button}
           </a>
         </div>
       </section>
@@ -366,34 +336,34 @@ export default async function Page({
               data-twitch
               className="font-mono uppercase tracking-widest text-xs font-bold border-2 border-black px-2 py-1 bg-white shadow-[4px_4px_0px_#0C0C0C] inline-block"
             >
-              {'DZAKY\'S CORNER'}
+              {"DZAKY'S CORNER"}
             </div>
-            <p className="font-serif text-xl">Built With:</p>
+            <p className="font-serif text-xl">{dict.footer.builtWith}</p>
             <div className="flex gap-2">
               <div
                 className="bg-[#2945FF] text-white font-mono uppercase tracking-widest text-[10px] px-2 py-1 border-2 border-black animate-led-blink"
                 style={{ animationDelay: '0.1s', animationFillMode: 'both' }}
               >
-                NEXTJS
+                {dict.footer.badges[0]}
               </div>
               <div
                 className="bg-[#FFD700] text-[#0C0C0C] font-mono uppercase tracking-widest text-[10px] px-2 py-1 border-2 border-black animate-led-blink"
                 style={{ animationDelay: '0.2s', animationFillMode: 'both' }}
               >
-                A LOT OF ANIMATIONS
+                {dict.footer.badges[1]}
               </div>
               <div
                 className="bg-[#0C0C0C] text-white font-mono uppercase tracking-widest text-[10px] px-2 py-1 border-2 border-white animate-led-blink"
                 style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
               >
-                UHHH.. AND LOVE
+                {dict.footer.badges[2]}
               </div>
             </div>
           </div>
 
           <div className="space-y-4 md:text-right">
             <div className="font-mono uppercase tracking-widest text-xs">
-              [ CONNECT ]
+              {dict.footer.connect}
             </div>
             <div className="flex gap-3 md:justify-end">
               <a
@@ -437,7 +407,7 @@ export default async function Page({
 
         <div className="max-w-7xl mx-auto mt-10 pt-4 border-t-2 border-black flex flex-col sm:flex-row justify-between items-center gap-2 font-mono uppercase tracking-widest text-[10px]">
           <span> dzaky2636@gmail.com</span>
-          <span data-twitch>PORTOFOLIO V1</span>
+          <span data-twitch>{dict.footer.tagline}</span>
         </div>
 
         <div className="max-w-7xl mx-auto mt-8 flex justify-center">

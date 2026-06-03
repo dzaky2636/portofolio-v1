@@ -1,7 +1,129 @@
 {
-  "identity": {
-    "name": "Dzaky Fatur Rahman",
+  "nav": {
+    "profile": "[PROFILE]",
+    "inventory": "[INVENTORY]",
+    "realms": "[REALMS]",
+    "logs": "[LOGS]",
+    "contact": "[TRANSMIT]"
+  },
+  "hero": {
     "title": "Fullstack Engineer & AI Builder",
-    "summary": "Building omnichannel SaaS platforms, AI-powered systems, and civic web tools. I've led teams, shipped products end-to-end, and still love every bit of it."
+    "summary": "Recent Informatics graduate who loves building full-stack apps, playing around with AI/ML, and designing solid web architecture. Been leading teams, shipping features from scratch, and figuring out tech directions for a while now. This portofolio is a work in progress, but you can check out my highlighted work to check out my expertise."
+  },
+  "inventory": {
+    "title": "SHORT PROFILE",
+    "subtitle": "/// EDUCATION & SPECIFICATIONS",
+    "education": {
+      "title": "EDUCATION RECORD",
+      "status": "[OK]",
+      "school": "Universitas Multimedia Nusantara",
+      "major": "Informatics major",
+      "accreditation": "Grade A accredited program",
+      "gpa": "GPA: 3.71/4.00",
+      "thesis": "Thesis: built an AI tutoring system with gamification that adapts to how you learn",
+      "award": "Award: Merit scholarship for ranking in the top 20% GPA of my batch"
+    },
+    "certifications": {
+      "title": "CERTIFICATIONS",
+      "status": "[VERIFIED]"
+    },
+    "techStack": {
+      "title": "MY TECH STACKS",
+      "status": "[LOADED]",
+      "tags": ["Next.js 15", "React 19", "TypeScript", "JavaScript", "Tailwind CSS", "Bootstrap", "Figma", "Laravel", "Kotlin", "Node.js", "Express", "Python", "Java", "C/C++", "PostgreSQL", "Supabase", "RAG", "..AND MORE!"]
+    },
+    "status": {
+      "title": "CURRENT BUSY-NESS",
+      "active": "[ACTIVE]",
+      "text": "Currently Lead Fullstack Engineer at PT Rigo Inovasi Digital. Open to working on new projects."
+    }
+  },
+  "projects": {
+    "title": "SELECTED PROJECTS",
+    "clickPrompt": "CLICK ANY PROJECT TO OPEN IMAGE VIEWER",
+    "openViewer": "[ OPEN IMAGE_VIEWER.EXE ]",
+    "imagesLabel": "IMAGES",
+    "items": [
+      {
+        "id": "chatrigo",
+        "name": "CHATRIGO",
+        "realm": "SaaS & AI Orchestration",
+        "org": "PT RIGO INOVASI DIGITAL",
+        "description": "Built a multi-tenant B2B SaaS chatbot platform on Next.js 15 + Supabase that handles customer chats across WhatsApp and Telegram. Added an anti-hallucination AI pipeline using RAG, plus an AI Business Advisor that helps with sales strategy. Managed a small team (around 8~ interns) and kept the codebase clean.",
+        "stack": ["Next.js 15/16", "Prisma", "Supabase", "PostgreSQL (pgvector)"],
+        "images": ["/chatrigo-1.jpg", "/chatrigo-2.jpg"]
+      },
+      {
+        "id": "egov",
+        "name": "E-GOVERNMENT SYSTEMS",
+        "realm": "Civic Tech",
+        "org": "DISKOMINFO",
+        "description": "Made a digital E-Signature system for the local government — QR codes generation, queue processing, using official government API verification. Also built E-KGB, a salary & promotion management web app with dashboards and secure auth. Both running on Laravel + Tailwind. The mobile app was built with Flutter.",
+        "stack": ["Laravel", "Tailwind CSS", "Queue Processing", "Flutter"],
+        "images": ["/egov-1.jpg", "/egov-2.jpg"]
+      },
+      {
+        "id": "thesis",
+        "name": "INTELLIGENT TUTORING SYSTEM",
+        "realm": "Academic/AI",
+        "org": "UMN THESIS",
+        "description": "My undergrad thesis — an AI tutoring system that uses gamification (Octalysis framework) and autonomous agents to give real-time feedback and adapt to each student.",
+        "stack": ["Python", "AI Agents", "LLM Engineering"],
+        "images": ["/thesis-1.jpg", "/thesis-2.jpg"]
+      }
+    ]
+  },
+  "experience": {
+    "title": "EXPERIENCE",
+    "subtitle": "/// CLICK ON EACH FOR DETAILS",
+    "items": [
+      {
+        "role": "Chief Technology Officer (CTO) & Lead Fullstack Engineer",
+        "company": "PT Rigo Inovasi Digital",
+        "duration": "2026 — NOW",
+        "details": "Lead the technological vision and engineering architecture for a comprehensive omnichannel AI chatbot SaaS platform, centralizing customer interactions across WhatsApp, Telegram, and social commerce. Manage and mentor the technical division (including full-stack developer interns), establishing code quality standards, SDLC guidelines, and remote engineering operational efficiency."
+      },
+      {
+        "role": "Fullstack Web & Mobile Developer",
+        "company": "Diskominfo Balikpapan",
+        "duration": "2025",
+        "details": "Designed and developed Flutter-based web and mobile applications to enhance public services in communications and informatics for the citizens of Balikpapan. Implemented new features and resolved system bugs to ensure optimal performance, maintainability, and a seamless user experience."
+      },
+      {
+        "role": "Website Coordinator",
+        "company": "UNITY UMN",
+        "duration": "2025",
+        "details": "Spearheaded the development and maintenance of the UNITY UMN English competition website, ensuring content accuracy and optimal functionality. Coordinated with cross-functional teams to integrate organizational requirements into the system, such as event registration and content publication pipelines."
+      },
+      {
+        "role": "Laboratory Assistant",
+        "company": "UMN Informatics",
+        "duration": "2022 — 2026",
+        "details": "Instructed courses including Machine Learning, Algorithms & Data Structures, Web Programming, and Introduction to Internet Technology. Developed comprehensive examination materials utilized for official university assessments. Evaluated and mentored approximately 200+ students across various laboratory sessions."
+      },
+      {
+        "role": "Teaching Assistant",
+        "company": "Boarding School Multimedia Training Program (UMN x LPDP)",
+        "duration": "2023",
+        "details": "Selected by university faculty to instruct 25 boarding school students on building dynamic and responsive websites. Developed and managed daily course materials focused on modern Web Development principles."
+      },
+      {
+        "role": "Web Developer Intern",
+        "company": "Department of Land and Spatial Planning, Balikpapan",
+        "duration": "2021",
+        "details": "Completed a three-month internship focusing on web application maintenance and infrastructure. Utilized PHP, HTML, and SQL to support fundamental data operations and UI/UX design updates."
+      }
+    ]
+  },
+  "contact": {
+    "title": "CONTACT",
+    "description": "Want to collaborate? Click on the button below or contact me on my socials, they are on the bottom right.",
+    "button": "[ SEND EMAIL ]"
+  },
+  "footer": {
+    "builtWith": "Built With:",
+    "connect": "[ CONNECT ]",
+    "tagline": "PORTOFOLIO V1",
+    "badges": ["NEXTJS", "A LOT OF ANIMATIONS", "UHHH.. AND LOVE"]
   }
 }

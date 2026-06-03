@@ -4,7 +4,7 @@ import { useState, useCallback } from 'react';
 import ProjectModal, { ProjectData } from '@/components/ProjectModal';
 import AnimateOnScroll from '@/components/AnimateOnScroll';
 
-interface Project {
+export interface ProjectItem {
   id: string;
   name: string;
   realm: string;
@@ -14,44 +14,25 @@ interface Project {
   images: string[];
 }
 
-const projects: Project[] = [
-  {
-    id: 'chatrigo',
-    name: 'CHATRIGO',
-    realm: 'SaaS & AI Orchestration',
-    org: 'PT RIGO INOVASI DIGITAL',
-    description:
-      'Built a multi-tenant B2B SaaS chatbot platform on Next.js 15 + Supabase that handles customer chats across WhatsApp and Telegram. Added an anti-hallucination AI pipeline using RAG, plus an AI Business Advisor that helps with sales strategy. Managed a small team (around 8~ interns) and kept the codebase clean.',
-    stack: ['Next.js 15/16', 'Prisma', 'Supabase', 'PostgreSQL (pgvector)'],
-    images: ['/chatrigo-1.jpg', '/chatrigo-2.jpg'],
-  },
-  {
-    id: 'egov',
-    name: 'E-GOVERNMENT SYSTEMS',
-    realm: 'Civic Tech',
-    org: 'DISKOMINFO',
-    description:
-      'Made a digital E-Signature system for the local government — QR codes generation, queue processing, using official government API verification. Also built E-KGB, a salary & promotion management web app with dashboards and secure auth. Both running on Laravel + Tailwind. The mobile app was built with Flutter.',
-    stack: ['Laravel', 'Tailwind CSS', 'Queue Processing', 'Flutter'],
-    images: ['/egov-1.jpg', '/egov-2.jpg'],
-  },
-  {
-    id: 'thesis',
-    name: 'INTELLIGENT TUTORING SYSTEM',
-    realm: 'Academic/AI',
-    org: 'UMN THESIS',
-    description:
-      'My undergrad thesis — an AI tutoring system that uses gamification (Octalysis framework) and autonomous agents to give real-time feedback and adapt to each student.',
-    stack: ['Python', 'AI Agents', 'LLM Engineering'],
-    images: ['/thesis-1.jpg', '/thesis-2.jpg'],
-  },
-];
+interface ProjectSectionProps {
+  title: string;
+  clickPrompt: string;
+  openViewer: string;
+  imagesLabel: string;
+  projects: ProjectItem[];
+}
 
-export default function ProjectSection() {
+export default function ProjectSection({
+  title,
+  clickPrompt,
+  openViewer,
+  imagesLabel,
+  projects,
+}: ProjectSectionProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
 
-  const openModal = useCallback((project: Project) => {
+  const openModal = useCallback((project: ProjectItem) => {
     setSelectedProject({
       name: project.name,
       images: project.images.map((src, i) => ({
@@ -74,12 +55,12 @@ export default function ProjectSection() {
       >
         <div className="mb-12">
           <h2 className="text-4xl md:text-6xl font-serif font-bold tracking-tight">
-            SELECTED PROJECTS
+            {title}
           </h2>
           <div className="mt-4 inline-flex items-center gap-3 bg-white border-4 border-black shadow-[4px_4px_0px_#0C0C0C] px-4 py-3 max-w-full">
             <span className="inline-block w-3 h-3 bg-[#FFD700] border-2 border-black shadow-[1px_1px_0px_#0C0C0C]" />
             <span className="font-mono uppercase tracking-widest text-xs leading-tight">
-              CLICK ANY PROJECT TO OPEN IMAGE VIEWER
+              {clickPrompt}
             </span>
           </div>
         </div>
@@ -117,7 +98,7 @@ export default function ProjectSection() {
                       {project.org}
                     </div>
                     <div className="font-mono uppercase tracking-widest text-xs border-2 border-black px-3 py-2 bg-[#FFD700] text-[#0C0C0C] shadow-[2px_2px_0px_#0C0C0C] whitespace-nowrap group-hover:bg-[#2945FF] group-hover:text-white group-hover:border-[#2945FF] group-hover:shadow-[1px_1px_0px_#0C0C0C] group-hover:translate-x-[1px] group-hover:translate-y-[1px] transition-all duration-75">
-                      [ {project.images.length} IMAGES ]
+                      [ {project.images.length} {imagesLabel} ]
                     </div>
                   </div>
                 </div>
@@ -137,7 +118,7 @@ export default function ProjectSection() {
                 </div>
                 <div className="mt-6 pt-4 border-t-2 border-dashed border-black flex items-center justify-between">
                   <span className="font-mono uppercase tracking-widest text-xs text-[#2945FF]">
-                    [ OPEN IMAGE_VIEWER.EXE ]
+                    {openViewer}
                   </span>
                   <span className="font-mono uppercase tracking-widest text-xs">
                     [ -&gt; ]

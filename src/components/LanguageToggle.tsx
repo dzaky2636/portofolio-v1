@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 interface LanguageToggleProps {
   currentLang: string;
@@ -10,13 +11,9 @@ export default function LanguageToggle({ currentLang }: LanguageToggleProps) {
   const [isAnimating, setIsAnimating] = useState(false);
   const targetLang = currentLang === 'en' ? 'id' : 'en';
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (isAnimating) {
-      e.preventDefault();
-      return;
-    }
+  const handleClick = () => {
+    if (isAnimating) return;
     setIsAnimating(true);
-    // Let navigation happen after a brief animation beat
     setTimeout(() => {
       setIsAnimating(false);
     }, 200);
@@ -31,13 +28,13 @@ export default function LanguageToggle({ currentLang }: LanguageToggleProps) {
       <span className="px-3 py-1 font-mono uppercase tracking-widest text-xs bg-[#0C0C0C] text-white">
         {currentLang.toUpperCase()}
       </span>
-      <a
+      <Link
         href={`/${targetLang}`}
         onClick={handleClick}
         className="relative px-3 py-1 font-mono uppercase tracking-widest text-xs hover:bg-[#2945FF] hover:text-white transition-colors duration-75"
       >
         {targetLang.toUpperCase()}
-      </a>
+      </Link>
     </div>
   );
 }

@@ -1,7 +1,129 @@
 {
-  "identity": {
-    "name": "Dzaky Fatur Rahman",
-    "title": "Fullstack Engineer & Builder AI",
-    "summary": "Membangun platform SaaS omnichannel, sistem berbasis AI, dan infrastruktur web sipil. Pernah memimpin tim, mengembangkan produk dari awal sampai akhir, dan masih enjoy sampai sekarang."
+  "nav": {
+    "profile": "[PROFIL]",
+    "inventory": "[INVENTARIS]",
+    "realms": "[DUNIA]",
+    "logs": "[LOGS]",
+    "contact": "[KONTAK]"
+  },
+  "hero": {
+    "title": "Fullstack Engineer & AI Builder",
+    "summary": "Lulusan baru Informatika yang gemar membangun aplikasi full-stack, bermain-main dengan AI/ML, dan merancang arsitektur web yang solid. Sudah memimpin tim, mengembangkan fitur dari nol, dan menentukan arah teknologi sejak lama. Portofolio ini masih dalam pengerjaan, tapi kamu bisa lihat karya-karya terpilih untuk menilai keahlian saya."
+  },
+  "inventory": {
+    "title": "PROFIL SINGKAT",
+    "subtitle": "/// PENDIDIKAN & SERTIFIKASI",
+    "education": {
+      "title": "REKAMAN PENDIDIKAN",
+      "status": "[OK]",
+      "school": "Universitas Multimedia Nusantara",
+      "major": "Jurusan Informatika",
+      "accreditation": "Program terakreditasi Grade A",
+      "gpa": "IPK: 3.71/4.00",
+      "thesis": "Skripsi: membangun sistem tutoring AI dengan gamifikasi yang beradaptasi dengan cara belajar",
+      "award": "Penghargaan: Beasiswa merit untuk mahasiswa dengan 20% IPK tertinggi di angkatan"
+    },
+    "certifications": {
+      "title": "SERTIFIKASI",
+      "status": "[TERVERIFIKASI]"
+    },
+    "techStack": {
+      "title": "TECH STACK SAYA",
+      "status": "[LOADED]",
+      "tags": ["Next.js 15", "React 19", "TypeScript", "JavaScript", "Tailwind CSS", "Bootstrap", "Figma", "Laravel", "Kotlin", "Node.js", "Express", "Python", "Java", "C/C++", "PostgreSQL", "Supabase", "RAG", "..DAN LAINNYA!"]
+    },
+    "status": {
+      "title": "KESIBUKAN SAAT INI",
+      "active": "[AKTIF]",
+      "text": "Saat ini menjabat Lead Fullstack Engineer di PT Rigo Inovasi Digital. Terbuka untuk proyek baru."
+    }
+  },
+  "projects": {
+    "title": "PROYEK TERPILIH",
+    "clickPrompt": "KLIK PROYEK APA PUN UNTUK MEMBUKA IMAGE VIEWER",
+    "openViewer": "[ BUKA IMAGE_VIEWER.EXE ]",
+    "imagesLabel": "GAMBAR",
+    "items": [
+      {
+        "id": "chatrigo",
+        "name": "CHATRIGO",
+        "realm": "SaaS & Orkestrasi AI",
+        "org": "PT RIGO INOVASI DIGITAL",
+        "description": "Membangun platform chatbot SaaS B2B multi-tenant berbasis Next.js 15 + Supabase yang menangani percakapan pelanggan di WhatsApp dan Telegram. Menambahkan pipeline AI anti-halusinasi menggunakan RAG, serta AI Business Advisor yang membantu strategi penjualan. Memimpin tim kecil (sekitar 8~ intern) dan menjaga basis kode tetap rapi.",
+        "stack": ["Next.js 15/16", "Prisma", "Supabase", "PostgreSQL (pgvector)"],
+        "images": ["/chatrigo-1.jpg", "/chatrigo-2.jpg"]
+      },
+      {
+        "id": "egov",
+        "name": "E-GOVERNMENT SYSTEMS",
+        "realm": "Teknologi Sipil",
+        "org": "DISKOMINFO",
+        "description": "Membuat sistem Tanda Tangan Elektronik (E-Sign) untuk pemerintah daerah — pembuatan kode QR, pemrosesan antrian, menggunakan verifikasi API resmi pemerintah. Juga membangun E-KGB, aplikasi web manajemen gaji & promosi dengan dasbor dan otentikasi yang aman. Keduanya berjalan di Laravel + Tailwind. Aplikasi mobile dibuat dengan Flutter.",
+        "stack": ["Laravel", "Tailwind CSS", "Queue Processing", "Flutter"],
+        "images": ["/egov-1.jpg", "/egov-2.jpg"]
+      },
+      {
+        "id": "thesis",
+        "name": "INTELLIGENT TUTORING SYSTEM",
+        "realm": "Akademik/AI",
+        "org": "SKRIPSI UMN",
+        "description": "Skripsi S1 saya — sistem tutoring AI yang menggunakan gamifikasi (kerangka Octalysis) dan agen otonom untuk memberikan umpan balik waktu-nyata dan beradaptasi dengan setiap siswa.",
+        "stack": ["Python", "AI Agents", "LLM Engineering"],
+        "images": ["/thesis-1.jpg", "/thesis-2.jpg"]
+      }
+    ]
+  },
+  "experience": {
+    "title": "PENGALAMAN",
+    "subtitle": "/// KLIK MASING-MASING UNTUK MELIHAT DETAIL",
+    "items": [
+      {
+        "role": "Chief Technology Officer (CTO) & Lead Fullstack Engineer",
+        "company": "PT Rigo Inovasi Digital",
+        "duration": "2026 — SEKARANG",
+        "details": "Memimpin visi teknologi dan arsitektur engineering untuk platform SaaS chatbot AI omnichannel yang komprehensif, menyatukan interaksi pelanggan di WhatsApp, Telegram, dan social commerce. Mengelola dan membimbing divisi teknis (termasuk intern full-stack developer), menetapkan standar kualitas kode, pedoman SDLC, dan efisiensi operasional engineering jarak jauh."
+      },
+      {
+        "role": "Fullstack Web & Mobile Developer",
+        "company": "Diskominfo Balikpapan",
+        "duration": "2025",
+        "details": "Merancang dan mengembangkan aplikasi web dan mobile berbasis Flutter untuk meningkatkan layanan publik di bidang komunikasi dan informatika bagi warga Balikpapan. Mengimplementasikan fitur-fitur baru dan memperbaiki bug sistem untuk memastikan performa optimal, maintainability, dan pengalaman pengguna yang mulus."
+      },
+      {
+        "role": "Website Coordinator",
+        "company": "UNITY UMN",
+        "duration": "2025",
+        "details": "Memimpin pengembangan dan pemeliharaan website kompetisi Bahasa Inggris UNITY UMN, memastikan akurasi konten dan fungsionalitas optimal. Berkoordinasi dengan tim lintas-fungsi untuk mengintegrasikan kebutuhan organisasi ke dalam sistem, seperti registrasi acara dan alur publikasi konten."
+      },
+      {
+        "role": "Laboratory Assistant",
+        "company": "UMN Informatika",
+        "duration": "2022 — 2026",
+        "details": "Mengajar mata kuliah termasuk Machine Learning, Algoritma & Struktur Data, Pemrograman Web, dan Pengantar Teknologi Internet. Menyusun materi ujian komprehensif yang digunakan untuk penilaian resmi universitas. Mengevaluasi dan membimbing sekitar 200+ mahasiswa di berbagai sesi laboratorium."
+      },
+      {
+        "role": "Teaching Assistant",
+        "company": "Program Pelatihan Multimedia Sekolah Asrama (UMN x LPDP)",
+        "duration": "2023",
+        "details": "Dipilih oleh fakultas universitas untuk mengajar 25 siswa sekolah asrama dalam membangun website dinamis dan responsif. Mengembangkan dan mengelola materi kursus harian yang berfokus pada prinsip-prinsip Pengembangan Web modern."
+      },
+      {
+        "role": "Web Developer Intern",
+        "company": "Dinas Tata Ruang dan Pertanahan, Balikpapan",
+        "duration": "2021",
+        "details": "Menyelesaikan magang tiga bulan yang berfokus pada pemeliharaan aplikasi web dan infrastruktur. Menggunakan PHP, HTML, dan SQL untuk mendukung operasi data fundamental dan pembaruan desain UI/UX."
+      }
+    ]
+  },
+  "contact": {
+    "title": "KONTAK",
+    "description": "Mau berkolaborasi? Klik tombol di bawah ini atau hubungi saya melalui media sosial, tautannya ada di kanan bawah.",
+    "button": "[ KIRIM EMAIL ]"
+  },
+  "footer": {
+    "builtWith": "Dibangun Dengan:",
+    "connect": "[ TERHUBUNG ]",
+    "tagline": "PORTOFOLIO V1",
+    "badges": ["NEXTJS", "BANYAK ANIMASI", "UHHH.. DAN CINTA"]
   }
 }
