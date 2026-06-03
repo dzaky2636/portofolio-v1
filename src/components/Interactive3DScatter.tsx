@@ -277,6 +277,8 @@ function ConstellationLines({ shapePositions }: ConstellationProps) {
 }
 
 /* ─── Grid Floor ─── */
+const GRID_COLOR = '#9C9A8E';
+
 function GridFloor() {
   const gridRef = useRef<THREE.GridHelper>(null);
 
@@ -284,20 +286,20 @@ function GridFloor() {
     if (!gridRef.current) return;
     const mat = gridRef.current.material as THREE.LineBasicMaterial;
     mat.transparent = true;
-    mat.opacity = 0.008;
+    mat.opacity = 0.035;
   }, []);
 
   useFrame((state) => {
     if (!gridRef.current) return;
     const time = state.clock.getElapsedTime();
     const mat = gridRef.current.material as THREE.LineBasicMaterial;
-    mat.opacity = 0.008 + Math.sin(time * 0.3) * 0.004;
+    mat.opacity = 0.035 + Math.sin(time * 0.3) * 0.015;
   });
 
   return (
     <gridHelper
       ref={gridRef}
-      args={[60, 30, PALETTE.ink, PALETTE.ink]}
+      args={[60, 30, GRID_COLOR, GRID_COLOR]}
       position={[0, -12, -5]}
       rotation={[0, 0, 0]}
     />

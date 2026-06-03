@@ -133,20 +133,14 @@ export default async function Page({
             className="font-mono uppercase tracking-widest text-xs bg-[#0C0C0C] text-white inline-block px-3 py-2 border-2 border-white shadow-[4px_4px_0px_#2945FF] animate-stamp"
             style={{ animationDelay: '0.4s', animationFillMode: 'both' }}
           >
-            Chief Technology Officer (CTO) & Lead Fullstack Engineer
+            Fullstack Engineer & AI Builder
           </div>
           <p
             data-packet
             className="text-xl md:text-2xl font-serif leading-relaxed max-w-xl animate-drawer"
             style={{ animationDelay: '0.5s', animationFillMode: 'both' }}
           >
-            Highly motivated Informatics graduate with comprehensive experience in
-            full-stack development, Machine Learning (AI) integration, and web
-            architecture. Skilled in building dynamic, large-scale applications,
-            leading engineering teams, and directing technology strategy. Proficient
-            in both front-end and back-end environments, with a proven track record
-            of managing the end-to-end software development life cycle (SDLC). Poised
-            to deliver high-impact technological innovations in a professional setting.
+            Informatics grad who loves building full-stack apps, playing around with AI/ML, and designing solid web architecture. Been leading teams, shipping features from scratch, and figuring out tech directions for a while now. Cool if we work together.
           </p>
         </div>
 
@@ -208,16 +202,16 @@ export default async function Page({
               <h3 className="text-2xl md:text-3xl font-serif font-bold mb-2">
                 Universitas Multimedia Nusantara
               </h3>
-              <p className="font-serif text-lg">Bachelor of Computer Science in Informatics</p>
-              <p className="font-serif text-lg mt-1">Grade A Accredited Major</p>
+              <p className="font-serif text-lg">Informatics major — Computer Science track</p>
+              <p className="font-serif text-lg mt-1">Grade A accredited program</p>
               <div className="mt-4 inline-block font-mono uppercase tracking-widest text-xs bg-[#FFD700] text-[#0C0C0C] px-3 py-2 border-2 border-black">
                 GPA: 3.71/4.00
               </div>
               <p className="font-serif text-sm mt-3 italic">
-                Thesis: Octalysis-Based Gamification in Intelligent Tutoring Systems with AI Agents for Feedback and Adaptive Support.
+                Thesis: built an AI tutoring system with gamification that adapts to how you learn
               </p>
               <p className="font-serif text-sm mt-1">
-                Award: Merit-based scholarship for ranking in the top 20% highest GPA of the cohort.
+                Award: Merit scholarship for ranking in the top 20% GPA of my batch
               </p>
             </div>
           </AnimateOnScroll>
@@ -334,7 +328,7 @@ export default async function Page({
                 <span className="text-[#2945FF]">[ACTIVE]</span>
               </div>
               <p data-packet className="font-serif text-xl md:text-2xl">
-                Currently serving as Chief Technology Officer (CTO) & Lead Fullstack Engineer at PT Rigo Inovasi Digital. Alumni of Universitas Multimedia Nusantara (GPA 3.71/4.00).
+                Currently CTO & Lead Fullstack Engineer at PT Rigo Inovasi Digital. UMN Alumni (GPA 3.71/4.00).
               </p>
             </div>
           </AnimateOnScroll>
@@ -374,8 +368,7 @@ export default async function Page({
             data-packet
             className="font-serif text-xl md:text-2xl text-[#F4F3ED] max-w-2xl mx-auto leading-relaxed"
           >
-            Ready to architect scalable platforms, integrate AI systems, or
-            build secure civic infrastructure?
+            Want to build something cool together? Let's talk about it.
           </p>
           <a
             href="mailto:dzaky2636@gmail.com"
@@ -396,7 +389,7 @@ export default async function Page({
             >
               {'DZAKY\'S CORNER'}
             </div>
-            <p className="font-serif text-xl">This Website Was Made With:</p>
+            <p className="font-serif text-xl">Built With:</p>
             <div className="flex gap-2">
               <div
                 className="bg-[#2945FF] text-white font-mono uppercase tracking-widest text-[10px] px-2 py-1 border-2 border-black animate-led-blink"
