@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" shape-rendering="crispEdges">
+  <!-- Neon background for visibility on any tab color -->
+  <rect x="0" y="0" width="64" height="64" rx="4" fill="#2945FF"/>
+  <rect x="2" y="2" width="60" height="60" rx="3" fill="#0C0C0C"/>
+  <!-- Ears -->
+  <rect x="4" y="4" width="8" height="8" fill="#5c4433"/>
+  <rect x="12" y="8" width="8" height="8" fill="#6b4f35"/>
+  <rect x="52" y="4" width="8" height="8" fill="#5c4433"/>
+  <rect x="44" y="8" width="8" height="8" fill="#6b4f35"/>
+  <!-- Head top -->
+  <rect x="12" y="16" width="40" height="8" fill="#5c4433"/>
+  <rect x="8" y="24" width="48" height="8" fill="#4a3728"/>
+  <!-- Glowing red eyes -->
+  <rect x="16" y="32" width="6" height="6" fill="#ff3333"/>
+  <rect x="42" y="32" width="6" height="6" fill="#ff3333"/>
+  <!-- Face -->
+  <rect x="8" y="32" width="8" height="8" fill="#5c4433"/>
+  <rect x="22" y="32" width="20" height="8" fill="#6b4f35"/>
+  <rect x="48" y="32" width="8" height="8" fill="#5c4433"/>
+  <!-- Snout -->
+  <rect x="12" y="40" width="40" height="8" fill="#4a3728"/>
+  <rect x="16" y="48" width="32" height="8" fill="#3d2e20"/>
+  <!-- Nostrils -->
+  <rect x="20" y="50" width="6" height="4" fill="#1a120a"/>
+  <rect x="38" y="50" width="6" height="4" fill="#1a120a"/>
+  <!-- Tusks -->
+  <rect x="16" y="56" width="6" height="6" fill="#f5f0e0"/>
+  <rect x="42" y="56" width="6" height="6" fill="#f5f0e0"/>
+</svg>
