@@ -51,7 +51,7 @@
         "org": "PT RIGO INOVASI DIGITAL",
         "description": "Built a multi-tenant B2B SaaS chatbot platform on Next.js 15 + Supabase that handles customer chats across WhatsApp and Telegram. Added an anti-hallucination AI pipeline using RAG, plus an AI Business Advisor that helps with sales strategy. Managed a small team (around 8~ interns) and kept the codebase clean.",
         "stack": ["Next.js 15/16", "Prisma", "Supabase", "PostgreSQL (pgvector)"],
-        "images": ["/chatrigo-1.jpg", "/chatrigo-2.jpg"]
+        "images": ["/images/chatrigo/1.png", "/images/chatrigo/2.png", "/images/chatrigo/3.png", "/images/chatrigo/4.png", "/images/chatrigo/5.png", "/images/chatrigo/6.png", "/images/chatrigo/7.png", "/images/chatrigo/8.png", "/images/chatrigo/9.png"]
       },
       {
         "id": "egov",
@@ -60,7 +60,7 @@
         "org": "DISKOMINFO",
         "description": "Made a digital E-Signature system for the local government — QR codes generation, queue processing, using official government API verification. Also built E-KGB, a salary & promotion management web app with dashboards and secure auth. Both running on Laravel + Tailwind. The mobile app was built with Flutter.",
         "stack": ["Laravel", "Tailwind CSS", "Queue Processing", "Flutter"],
-        "images": ["/egov-1.jpg", "/egov-2.jpg"]
+        "images": ["/images/diskominfo/1.png", "/images/diskominfo/2.png", "/images/diskominfo/3.png", "/images/diskominfo/4.png", "/images/diskominfo/5.jpg", "/images/diskominfo/6.png", "/images/diskominfo/7.png", "/images/diskominfo/8.png", "/images/diskominfo/9.png", "/images/diskominfo/10.png"]
       },
       {
         "id": "thesis",
@@ -69,7 +69,7 @@
         "org": "UMN THESIS",
         "description": "My undergrad thesis — an AI tutoring system that uses gamification (Octalysis framework) and autonomous agents to give real-time feedback and adapt to each student.",
         "stack": ["Python", "AI Agents", "LLM Engineering"],
-        "images": ["/thesis-1.jpg", "/thesis-2.jpg"]
+        "images": ["/images/thesis/1.png", "/images/thesis/2.png", "/images/thesis/3.png", "/images/thesis/4.png", "/images/thesis/5.png", "/images/thesis/6.png", "/images/thesis/7.png", "/images/thesis/8.png", "/images/thesis/9.png", "/images/thesis/10.png", "/images/thesis/11.png"]
       }
     ]
   },

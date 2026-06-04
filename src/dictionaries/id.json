@@ -51,7 +51,7 @@
         "org": "PT RIGO INOVASI DIGITAL",
         "description": "Membangun platform chatbot SaaS B2B multi-tenant berbasis Next.js 15 + Supabase yang menangani percakapan pelanggan di WhatsApp dan Telegram. Menambahkan pipeline AI anti-halusinasi menggunakan RAG, serta AI Business Advisor yang membantu strategi penjualan. Memimpin tim kecil (sekitar 8~ intern) dan menjaga basis kode tetap rapi.",
         "stack": ["Next.js 15/16", "Prisma", "Supabase", "PostgreSQL (pgvector)"],
-        "images": ["/chatrigo-1.jpg", "/chatrigo-2.jpg"]
+        "images": ["/images/chatrigo/1.png", "/images/chatrigo/2.png", "/images/chatrigo/3.png", "/images/chatrigo/4.png", "/images/chatrigo/5.png", "/images/chatrigo/6.png", "/images/chatrigo/7.png", "/images/chatrigo/8.png", "/images/chatrigo/9.png"]
       },
       {
         "id": "egov",
@@ -60,7 +60,7 @@
         "org": "DISKOMINFO",
         "description": "Membuat sistem Tanda Tangan Elektronik (E-Sign) untuk pemerintah daerah — pembuatan kode QR, pemrosesan antrian, menggunakan verifikasi API resmi pemerintah. Juga membangun E-KGB, aplikasi web manajemen gaji & promosi dengan dasbor dan otentikasi yang aman. Keduanya berjalan di Laravel + Tailwind. Aplikasi mobile dibuat dengan Flutter.",
         "stack": ["Laravel", "Tailwind CSS", "Queue Processing", "Flutter"],
-        "images": ["/egov-1.jpg", "/egov-2.jpg"]
+        "images": ["/images/diskominfo/1.png", "/images/diskominfo/2.png", "/images/diskominfo/3.png", "/images/diskominfo/4.png", "/images/diskominfo/5.jpg", "/images/diskominfo/6.png", "/images/diskominfo/7.png", "/images/diskominfo/8.png", "/images/diskominfo/9.png", "/images/diskominfo/10.png"]
       },
       {
         "id": "thesis",
@@ -69,7 +69,7 @@
         "org": "SKRIPSI UMN",
         "description": "Skripsi S1 saya — sistem tutoring AI yang menggunakan gamifikasi (kerangka Octalysis) dan agen otonom untuk memberikan umpan balik waktu-nyata dan beradaptasi dengan setiap siswa.",
         "stack": ["Python", "AI Agents", "LLM Engineering"],
-        "images": ["/thesis-1.jpg", "/thesis-2.jpg"]
+        "images": ["/images/thesis/1.png", "/images/thesis/2.png", "/images/thesis/3.png", "/images/thesis/4.png", "/images/thesis/5.png", "/images/thesis/6.png", "/images/thesis/7.png", "/images/thesis/8.png", "/images/thesis/9.png", "/images/thesis/10.png", "/images/thesis/11.png"]
       }
     ]
   },
