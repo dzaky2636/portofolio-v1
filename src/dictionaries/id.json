@@ -1,9 +1,9 @@
 {
   "nav": {
-    "profile": "[PROFIL]",
-    "inventory": "[INVENTARIS]",
-    "realms": "[DUNIA]",
-    "logs": "[LOGS]",
+    "profile": "[ME]",
+    "inventory": "[PROFIL SINGKAT]",
+    "realms": "[PROYEK]",
+    "logs": "[PENGALAMAN]",
     "contact": "[KONTAK]"
   },
   "hero": {

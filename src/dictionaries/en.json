@@ -1,10 +1,10 @@
 {
   "nav": {
-    "profile": "[PROFILE]",
-    "inventory": "[INVENTORY]",
-    "realms": "[REALMS]",
-    "logs": "[LOGS]",
-    "contact": "[TRANSMIT]"
+    "profile": "[ME]",
+    "inventory": "[SHORT PROFILE]",
+    "realms": "[PROJECTS]",
+    "logs": "[EXPERIENCES]",
+    "contact": "[CONTACT]"
   },
   "hero": {
     "title": "Fullstack Engineer & AI Builder",
