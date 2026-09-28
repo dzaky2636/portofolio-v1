@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import InteractiveBackground from "@/components/InteractiveBackground";
 import Interactive3DScatter from "@/components/Interactive3DScatter";
 import EnvironmentalEffects from "@/components/EnvironmentalEffects";
+import ChatrigoWidget from "@/components/ChatrigoWidget";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -39,6 +40,7 @@ export default function RootLayout({
         <Interactive3DScatter />
         <EnvironmentalEffects />
         {children}
+        <ChatrigoWidget />
       </body>
     </html>
   );
