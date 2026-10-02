@@ -35,6 +35,10 @@ interface ProjectSectionProps {
   modalTitlePrefix: string;
   viewerEmpty: string;
   modalCloseAria: string;
+  modalMinimizeAria: string;
+  modalRestoreAria: string;
+  modalFullscreenAria: string;
+  modalExitFullscreenAria: string;
   modalPrevAria: string;
   modalNextAria: string;
   modalDialogAria: string;
@@ -214,6 +218,10 @@ export default function ProjectSection({
   modalTitlePrefix,
   viewerEmpty,
   modalCloseAria,
+  modalMinimizeAria,
+  modalRestoreAria,
+  modalFullscreenAria,
+  modalExitFullscreenAria,
   modalPrevAria,
   modalNextAria,
   modalDialogAria,
@@ -398,6 +406,10 @@ export default function ProjectSection({
         modalTitlePrefix={modalTitlePrefix}
         viewerEmpty={viewerEmpty}
         modalCloseAria={modalCloseAria}
+        modalMinimizeAria={modalMinimizeAria}
+        modalRestoreAria={modalRestoreAria}
+        modalFullscreenAria={modalFullscreenAria}
+        modalExitFullscreenAria={modalExitFullscreenAria}
         modalPrevAria={modalPrevAria}
         modalNextAria={modalNextAria}
         modalDialogAria={modalDialogAria}

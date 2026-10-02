@@ -63,6 +63,10 @@ export interface Dictionary {
     realmFilterPersonal: string;
     realmFilterEmpty: string;
     modalCloseAria: string;
+    modalMinimizeAria: string;
+    modalRestoreAria: string;
+    modalFullscreenAria: string;
+    modalExitFullscreenAria: string;
     modalPrevAria: string;
     modalNextAria: string;
     modalDialogAria: string;

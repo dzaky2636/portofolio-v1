@@ -251,6 +251,10 @@ export default async function Page({
         modalTitlePrefix={dict.projects.modalTitlePrefix}
         viewerEmpty={dict.projects.viewerEmpty}
         modalCloseAria={dict.projects.modalCloseAria}
+        modalMinimizeAria={dict.projects.modalMinimizeAria}
+        modalRestoreAria={dict.projects.modalRestoreAria}
+        modalFullscreenAria={dict.projects.modalFullscreenAria}
+        modalExitFullscreenAria={dict.projects.modalExitFullscreenAria}
         modalPrevAria={dict.projects.modalPrevAria}
         modalNextAria={dict.projects.modalNextAria}
         modalDialogAria={dict.projects.modalDialogAria}
