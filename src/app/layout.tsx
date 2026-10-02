@@ -1,18 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import InteractiveBackground from "@/components/InteractiveBackground";
-import Interactive3DScatter from "@/components/Interactive3DScatter";
+import WebGLRoot from "@/components/webgl/WebGLRoot";
 import EnvironmentalEffects from "@/components/EnvironmentalEffects";
 import ChatrigoWidget from "@/components/ChatrigoWidget";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
   subsets: ["latin"],
+  weight: ["400"],
+  style: ["normal", "italic"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
 });
 
@@ -33,11 +35,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${instrumentSerif.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col font-serif">
         <InteractiveBackground />
-        <Interactive3DScatter />
+        <WebGLRoot />
         <EnvironmentalEffects />
         {children}
         <ChatrigoWidget />

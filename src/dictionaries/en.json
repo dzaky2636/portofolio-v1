@@ -4,7 +4,9 @@
     "inventory": "[SHORT PROFILE]",
     "realms": "[PROJECTS]",
     "logs": "[EXPERIENCES]",
-    "contact": "[CONTACT]"
+    "contact": "[CONTACT]",
+    "menuOpen": "[ MENU ]",
+    "menuClose": "[ X ]"
   },
   "hero": {
     "title": "Fullstack Engineer & AI Builder",

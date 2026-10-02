@@ -4,7 +4,9 @@
     "inventory": "[PROFIL SINGKAT]",
     "realms": "[PROYEK]",
     "logs": "[PENGALAMAN]",
-    "contact": "[KONTAK]"
+    "contact": "[KONTAK]",
+    "menuOpen": "[ MENU ]",
+    "menuClose": "[ X ]"
   },
   "hero": {
     "title": "Fullstack Engineer & AI Builder",

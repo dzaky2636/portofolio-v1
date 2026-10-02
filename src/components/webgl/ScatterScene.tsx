@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useMemo, useRef, useEffect } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import { Float } from '@react-three/drei';
 import * as THREE from 'three';
 
@@ -653,33 +653,12 @@ function ParallaxCamera() {
   return null;
 }
 
-/* ─── Main Export ─── */
-export default function Interactive3DScatter() {
-  const camera = useMemo(
-    () => ({ position: [0, 0, 8] as [number, number, number], fov: 80 }),
-    []
-  );
-
-  const gl = useMemo(
-    () => ({ antialias: true, alpha: true }),
-    []
-  );
-
+/* ─── Scatter background (full viewport; mount inside WebGLRoot Canvas) ─── */
+export default function ScatterScene() {
   return (
-    <div className="fixed inset-0 z-0 overflow-hidden">
-      <Canvas
-        camera={camera}
-        gl={gl}
-        dpr={[1, 1.5]}
-        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-        onCreated={({ gl: renderer, scene }) => {
-          renderer.setClearColor(0x000000, 0);
-          scene.background = null;
-        }}
-      >
-        <ParallaxCamera />
-        <Scene />
-      </Canvas>
-    </div>
+    <>
+      <ParallaxCamera />
+      <Scene />
+    </>
   );
 }

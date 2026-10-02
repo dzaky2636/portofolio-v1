@@ -1,18 +1,13 @@
 'use client';
 
-import { Canvas } from '@react-three/fiber';
-import dynamic from 'next/dynamic';
-
-const RetroObject = dynamic(() => import('@/components/RetroObject'), {
-  ssr: false,
-});
+import { View, PerspectiveCamera } from '@react-three/drei';
+import RetroObject from '@/components/RetroObject';
 
 export default function RetroCanvas() {
   return (
-    <div className="aspect-video bg-[#F4F3ED]">
-      <Canvas camera={{ position: [0, 0, 4], fov: 50 }}>
-        <RetroObject />
-      </Canvas>
-    </div>
+    <View className="aspect-video bg-[#F4F3ED] w-full">
+      <PerspectiveCamera makeDefault position={[0, 0, 4]} fov={50} />
+      <RetroObject />
+    </View>
   );
 }

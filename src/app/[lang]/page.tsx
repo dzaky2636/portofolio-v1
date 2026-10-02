@@ -3,11 +3,19 @@ import ProjectSection from '@/components/ProjectSection';
 import ExperienceAccordion from '@/components/ExperienceAccordion';
 import AnimateOnScroll from '@/components/AnimateOnScroll';
 import GlitchText from '@/components/GlitchText';
-import LanguageToggle from '@/components/LanguageToggle';
+import SiteHeader from '@/components/SiteHeader';
 import { FaGithub, FaLinkedin, FaEnvelope, FaWhatsapp, FaInstagram } from 'react-icons/fa';
 
 interface Dict {
-  nav: { profile: string; inventory: string; realms: string; logs: string; contact: string };
+  nav: {
+    profile: string;
+    inventory: string;
+    realms: string;
+    logs: string;
+    contact: string;
+    menuOpen: string;
+    menuClose: string;
+  };
   hero: { title: string; summary: string };
   inventory: {
     title: string;
@@ -70,32 +78,12 @@ export default async function Page({
   return (
     <main className="relative z-10 min-h-screen text-[#0C0C0C] font-serif selection:bg-[#2945FF] selection:text-white pointer-events-none">
       {/* 1. HEADER */}
-      <header className="sticky top-0 z-50 bg-[#F4F3ED] border-b-4 border-black pointer-events-auto">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
-          <div
-            data-twitch
-            className="font-mono uppercase tracking-widest text-xs font-bold border-2 border-black px-2 py-1 bg-white shadow-[4px_4px_0px_#0C0C0C] animate-flicker"
-          >
-            {"DZAKY'S CORNER"}
-          </div>
-
-          <nav className="hidden md:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="relative font-mono uppercase tracking-widest text-xs hover:text-[#2945FF] transition-colors duration-75 hover-jam pointer-events-auto"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          <div className="pointer-events-auto">
-            <LanguageToggle currentLang={lang} />
-          </div>
-        </div>
-      </header>
+      <SiteHeader
+        navLinks={navLinks}
+        currentLang={lang}
+        menuOpen={dict.nav.menuOpen}
+        menuClose={dict.nav.menuClose}
+      />
 
       {/* 2. HERO */}
       <section
