@@ -6,7 +6,7 @@ import RetroObject from '@/components/RetroObject';
 export default function RetroCanvas() {
   return (
     <View className="aspect-video bg-[#F4F3ED] w-full">
-      <PerspectiveCamera makeDefault position={[0, 0, 4]} fov={50} />
+      <PerspectiveCamera position={[0, 0, 4]} fov={50} />
       <RetroObject />
     </View>
   );

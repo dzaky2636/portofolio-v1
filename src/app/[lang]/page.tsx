@@ -1,45 +1,12 @@
+import Image from 'next/image';
 import RetroCanvas from '@/components/RetroCanvas';
 import ProjectSection from '@/components/ProjectSection';
 import ExperienceAccordion from '@/components/ExperienceAccordion';
 import AnimateOnScroll from '@/components/AnimateOnScroll';
 import GlitchText from '@/components/GlitchText';
 import SiteHeader from '@/components/SiteHeader';
+import { getDictionary } from '@/lib/getDictionary';
 import { FaGithub, FaLinkedin, FaEnvelope, FaWhatsapp, FaInstagram } from 'react-icons/fa';
-
-interface Dict {
-  nav: {
-    profile: string;
-    inventory: string;
-    realms: string;
-    logs: string;
-    contact: string;
-    menuOpen: string;
-    menuClose: string;
-  };
-  hero: { title: string; summary: string };
-  inventory: {
-    title: string;
-    subtitle: string;
-    education: { title: string; status: string; school: string; major: string; accreditation: string; gpa: string; thesis: string; award: string };
-    certifications: { title: string; status: string };
-    techStack: { title: string; status: string; tags: string[] };
-    status: { title: string; active: string; text: string };
-  };
-  projects: {
-    title: string;
-    clickPrompt: string;
-    openViewer: string;
-    imagesLabel: string;
-    items: { id: string; name: string; realm: string; org: string; description: string; stack: string[]; images: string[] }[];
-  };
-  experience: {
-    title: string;
-    subtitle: string;
-    items: { role: string; company: string; duration: string; details: string }[];
-  };
-  contact: { title: string; description: string; button: string };
-  footer: { builtWith: string; connect: string; tagline: string; badges: string[] };
-}
 
 export default async function Page({
   params,
@@ -47,7 +14,7 @@ export default async function Page({
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
-  const dict: Dict = (await import(`@/dictionaries/${lang}.json`)).default;
+  const dict = await getDictionary(lang);
 
   const quotes = [
     "WHEN CODING SUCKS, I WANT TO BE AN ANIMAL INSTEAD",
@@ -122,11 +89,14 @@ export default async function Page({
             className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-3 max-w-md mx-auto lg:mr-0 lg:ml-auto animate-eject pointer-events-auto"
             style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
           >
-            <div className="w-full aspect-square bg-[#0C0C0C] overflow-hidden">
-              <img
+            <div className="relative w-full aspect-square bg-[#0C0C0C] overflow-hidden">
+              <Image
                 src="/images/profile-pic.jpg"
                 alt="Dzaky Fatur Rahman"
-                className="w-full h-full object-cover"
+                fill
+                priority
+                sizes="(max-width: 1024px) 90vw, 448px"
+                className="object-cover"
               />
             </div>
           </div>
@@ -199,26 +169,18 @@ export default async function Page({
                 <span>{dict.inventory.certifications.status}</span>
               </div>
               <ul className="space-y-3 font-serif text-lg">
-                <li className="flex justify-between items-end border-b border-dashed border-black pb-2">
-                  <span>TOEIC</span>
-                  <span className="font-mono text-xs uppercase">960/990</span>
-                </li>
-                <li className="flex justify-between items-end border-b border-dashed border-black pb-2">
-                  <span>Duolingo English Test</span>
-                  <span className="font-mono text-xs uppercase">145/160</span>
-                </li>
-                <li className="flex justify-between items-end border-b border-dashed border-black pb-2">
-                  <span>Huawei HCIA-AI</span>
-                  <span className="font-mono text-xs uppercase">[PASS]</span>
-                </li>
-                <li className="flex justify-between items-end border-b border-dashed border-black pb-2">
-                  <span>Laboratory Assistant Certification</span>
-                  <span className="font-mono text-xs uppercase">[PASS]</span>
-                </li>
-                <li className="flex justify-between items-end">
-                  <span>Data Science Fundamentals (DQLab)</span>
-                  <span className="font-mono text-xs uppercase">[PASS]</span>
-                </li>
+                {dict.inventory.certifications.items.map((item, index) => {
+                  const isLast = index === dict.inventory.certifications.items.length - 1;
+                  return (
+                    <li
+                      key={item.name}
+                      className={`flex justify-between items-end ${isLast ? '' : 'border-b border-dashed border-black pb-2'}`}
+                    >
+                      <span>{item.name}</span>
+                      <span className="font-mono text-xs uppercase">{item.score}</span>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </AnimateOnScroll>

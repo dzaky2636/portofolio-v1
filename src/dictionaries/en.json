@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "title": "Dzaky Fatur Rahman — Lead Fullstack Engineer & AI Integrator",
+    "description": "Portfolio of Dzaky Fatur Rahman: Architecting scalable omnichannel SaaS platforms, AI-integrated systems, and secure civic web infrastructure."
+  },
   "nav": {
     "profile": "[ME]",
     "inventory": "[SHORT PROFILE]",
@@ -27,7 +31,14 @@
     },
     "certifications": {
       "title": "CERTIFICATIONS",
-      "status": "[VERIFIED]"
+      "status": "[VERIFIED]",
+      "items": [
+        { "name": "TOEIC", "score": "960/990" },
+        { "name": "Duolingo English Test", "score": "145/160" },
+        { "name": "Huawei HCIA-AI", "score": "[PASS]" },
+        { "name": "Laboratory Assistant Certification", "score": "[PASS]" },
+        { "name": "Data Science Fundamentals (DQLab)", "score": "[PASS]" }
+      ]
     },
     "techStack": {
       "title": "MY TECH STACKS",

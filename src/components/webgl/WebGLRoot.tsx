@@ -34,13 +34,7 @@ function usePageVisible() {
 
 export default function WebGLRoot() {
   const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
-  const isMobile = useMediaQuery('(max-width: 767px)');
   const isVisible = usePageVisible();
-
-  const camera = useMemo(
-    () => ({ position: [0, 0, 8] as [number, number, number], fov: 80 }),
-    []
-  );
 
   const gl = useMemo(() => ({ antialias: true, alpha: true }), []);
 
@@ -51,7 +45,6 @@ export default function WebGLRoot() {
   return (
     <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
       <Canvas
-        camera={camera}
         gl={gl}
         dpr={[1, 1.25]}
         frameloop={isVisible ? 'always' : 'never'}
@@ -61,7 +54,7 @@ export default function WebGLRoot() {
           scene.background = null;
         }}
       >
-        {!isMobile && <ScatterScene />}
+        <ScatterScene />
         <View.Port />
       </Canvas>
     </div>

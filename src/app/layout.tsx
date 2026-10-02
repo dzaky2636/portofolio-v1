@@ -19,9 +19,6 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dzaky Fatur Rahman — Lead Fullstack Engineer & AI Integrator",
-  description:
-    "Portfolio of Dzaky Fatur Rahman: Architecting scalable omnichannel SaaS platforms, AI-integrated systems, and secure civic web infrastructure.",
   icons: {
     icon: "/boar.svg",
   },

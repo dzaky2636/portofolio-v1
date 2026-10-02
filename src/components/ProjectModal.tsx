@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+import Image from 'next/image';
 
 export interface ProjectImageData {
   src: string;
@@ -24,7 +25,6 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
   const [isPressedNext, setIsPressedNext] = useState(false);
   const [imageTransition, setImageTransition] = useState(false);
   const [modalFlicker, setModalFlicker] = useState(false);
-  const imgRef = useRef<HTMLImageElement>(null);
 
   const totalImages = project?.images.length ?? 0;
 
@@ -110,14 +110,20 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
         {/* Image Display Area */}
         <div className="relative bg-[#0C0C0C] flex items-center justify-center min-h-[300px] md:min-h-[450px] p-4 overflow-hidden">
           {currentImage ? (
-            <img
-              ref={imgRef}
-              src={currentImage.src}
-              alt={currentImage.alt}
-              className={`max-w-full max-h-[60vh] object-contain border-2 border-black ${
+            <div
+              className={`relative w-full h-[50vh] md:h-[60vh] max-h-[60vh] ${
                 imageTransition ? 'animate-memoryCorrupt' : ''
               }`}
-            />
+            >
+              <Image
+                key={currentImage.src}
+                src={currentImage.src}
+                alt={currentImage.alt}
+                fill
+                sizes="(max-width: 896px) 90vw, 896px"
+                className="object-contain border-2 border-black"
+              />
+            </div>
           ) : (
             <div className="font-mono uppercase tracking-widest text-xs text-white">
               [ NO_IMAGE_DATA ]

@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState, useMemo, useRef, useEffect } from 'react';
+import React, { useState, useMemo, useRef, useEffect, type RefObject } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Float } from '@react-three/drei';
+import { Float, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
 
 /* ─── Palette ─── */
@@ -601,13 +601,14 @@ function ScrollScene({ children }: { children: React.ReactNode }) {
 }
 
 /* ─── Camera Parallax Hook ─── */
-function ParallaxCamera() {
-  const { camera } = useThree();
+function ParallaxCamera({ scatterCamRef }: { scatterCamRef: RefObject<THREE.PerspectiveCamera | null> }) {
   const mouseRef = useRef({ x: 0, y: 0 });
   const scrollRef = useRef(0);
   const targetRef = useRef({ mx: 0, my: 0, scroll: 0 });
-
   useFrame((_, delta) => {
+    const scatterCamera = scatterCamRef.current;
+    if (!scatterCamera) return;
+
     const lerp = 1 - Math.exp(-delta * 3);
 
     targetRef.current.mx += (mouseRef.current.x - targetRef.current.mx) * lerp;
@@ -617,15 +618,15 @@ function ParallaxCamera() {
     const s = targetRef.current.scroll;
 
     /* Camera flies downward through the scene as user scrolls */
-    camera.position.x = targetRef.current.mx * 0.8;
-    camera.position.y = targetRef.current.my * 0.5 - s * 0.008;
-    camera.position.z = 8 + s * 0.003;
+    scatterCamera.position.x = targetRef.current.mx * 0.8;
+    scatterCamera.position.y = targetRef.current.my * 0.5 - s * 0.008;
+    scatterCamera.position.z = 8 + s * 0.003;
 
     /* Gentle orbit + dive tilt on scroll */
-    camera.rotation.y = s * 0.0004;
-    camera.rotation.x = s * 0.00012;
+    scatterCamera.rotation.y = s * 0.0004;
+    scatterCamera.rotation.x = s * 0.00012;
 
-    camera.lookAt(0, -s * 0.006, -5);
+    scatterCamera.lookAt(0, -s * 0.006, -5);
   });
 
   useEffect(() => {
@@ -653,12 +654,45 @@ function ParallaxCamera() {
   return null;
 }
 
+/** drei View.Port disables the default full-canvas render; draw scatter explicitly first. */
+function ScatterRenderPass({
+  scatterCamRef,
+}: {
+  scatterCamRef: RefObject<THREE.PerspectiveCamera | null>;
+}) {
+  const gl = useThree((s) => s.gl);
+  const scene = useThree((s) => s.scene);
+  const size = useThree((s) => s.size);
+
+  useFrame(() => {
+    const cam = scatterCamRef.current;
+    if (!cam) return;
+
+    cam.aspect = size.width / size.height;
+    cam.updateProjectionMatrix();
+
+    const prevAutoClear = gl.autoClear;
+    gl.autoClear = true;
+    gl.setScissorTest(false);
+    gl.setViewport(0, 0, size.width, size.height);
+    gl.clear(true, true);
+    gl.render(scene, cam);
+    gl.autoClear = prevAutoClear;
+  }, 0);
+
+  return null;
+}
+
 /* ─── Scatter background (full viewport; mount inside WebGLRoot Canvas) ─── */
 export default function ScatterScene() {
+  const scatterCamRef = useRef<THREE.PerspectiveCamera>(null);
+
   return (
     <>
-      <ParallaxCamera />
+      <PerspectiveCamera ref={scatterCamRef} position={[0, 0, 8]} fov={80} />
+      <ParallaxCamera scatterCamRef={scatterCamRef} />
       <Scene />
+      <ScatterRenderPass scatterCamRef={scatterCamRef} />
     </>
   );
 }
