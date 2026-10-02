@@ -85,6 +85,14 @@ export interface Dictionary {
   experience: {
     title: string;
     subtitle: string;
+    logViewer: {
+      windowTitle: string;
+      windowStatus: string;
+      detailTitle: string;
+      listLabel: string;
+      emptyHint: string;
+      lineAria: string;
+    };
     items: { role: string; company: string; duration: string; details: string }[];
   };
   contact: { title: string; description: string; button: string; emailCopied: string };

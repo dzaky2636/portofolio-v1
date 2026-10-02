@@ -342,7 +342,15 @@
   },
   "experience": {
     "title": "PENGALAMAN",
-    "subtitle": "/// KLIK MASING-MASING UNTUK MELIHAT DETAIL",
+    "subtitle": "/// PILIH BARIS UNTUK MEMERIKSA",
+    "logViewer": {
+      "windowTitle": "LOG_VIEWER.EXE",
+      "windowStatus": "BACA-SAJA",
+      "detailTitle": "INSPECT_OUTPUT",
+      "listLabel": "JEJAK_AUDIT",
+      "emptyHint": "PILIH BARIS LOG",
+      "lineAria": "{index}: {role}, {company}, {duration}"
+    },
     "items": [
       {
         "role": "Chief Technology Officer (CTO) & Lead Fullstack Engineer",

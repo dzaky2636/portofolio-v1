@@ -342,7 +342,15 @@
   },
   "experience": {
     "title": "EXPERIENCE",
-    "subtitle": "/// CLICK ON EACH FOR DETAILS",
+    "subtitle": "/// SELECT LINE TO INSPECT",
+    "logViewer": {
+      "windowTitle": "LOG_VIEWER.EXE",
+      "windowStatus": "READ-ONLY",
+      "detailTitle": "INSPECT_OUTPUT",
+      "listLabel": "AUDIT_TRAIL",
+      "emptyHint": "SELECT A LOG LINE",
+      "lineAria": "{index}: {role}, {company}, {duration}"
+    },
     "items": [
       {
         "role": "Chief Technology Officer (CTO) & Lead Fullstack Engineer",
