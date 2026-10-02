@@ -1,0 +1,4 @@
+#!/bin/sh
+# Strips Cursor agent co-author trailer if the IDE injects it.
+# Enable: git config core.hooksPath .githooks
+sed -i '/^Co-authored-by: Cursor <cursoragent@cursor.com>$/d' "$1"
