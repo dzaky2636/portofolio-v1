@@ -3,7 +3,7 @@
 import { useMemo, useSyncExternalStore } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { View } from '@react-three/drei';
-import ScatterScene from '@/components/webgl/ScatterScene';
+import OsWindowFieldScene from '@/components/webgl/OsWindowFieldScene';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 function subscribeVisibility(onChange: () => void) {
@@ -41,7 +41,7 @@ export default function WebGLRoot() {
           scene.background = null;
         }}
       >
-        <ScatterScene />
+        <OsWindowFieldScene />
         <View.Port />
       </Canvas>
     </div>
