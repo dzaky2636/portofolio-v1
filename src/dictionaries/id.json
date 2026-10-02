@@ -431,7 +431,7 @@
       "",
       "STACK_TRACE:",
       "  at Hero.render()",
-      "  at ScatterScene.overload(+0xC0FFEE)",
+      "  at OsWindowFieldScene.overload(+0xC0FFEE)",
       "  at Image_Viewer.exe (null pointer di slide 9)",
       "  at EN/ID.toggle() — locale quantum entangled",
       "",
