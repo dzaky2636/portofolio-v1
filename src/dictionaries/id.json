@@ -325,6 +325,7 @@
     "moreRealms": "[ + REALM_LAINNYA ({count}) ]",
     "lessRealms": "[ - SEDIKIT_REALM ]",
     "featuredLabel": "[ UNGGULAN ]",
+    "stackShowMore": "[ +{count} STACK ]",
     "realmFilterLabel": "FILTER_REALM",
     "realmFilterAll": "[ SEMUA ]",
     "realmFilterSaas": "[ SAAS ]",
