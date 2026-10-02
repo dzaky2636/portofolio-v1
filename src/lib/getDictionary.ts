@@ -12,6 +12,7 @@ export interface Dictionary {
     menuOpen: string;
     menuClose: string;
     skipToContent: string;
+    scrollBuffer: string;
   };
   hero: {
     title: string;
@@ -52,6 +53,7 @@ export interface Dictionary {
     modalTitlePrefix: string;
     moreRealms: string;
     lessRealms: string;
+    featuredLabel: string;
     modalCloseAria: string;
     modalPrevAria: string;
     modalNextAria: string;
@@ -73,13 +75,18 @@ export interface Dictionary {
     subtitle: string;
     items: { role: string; company: string; duration: string; details: string }[];
   };
-  contact: { title: string; description: string; button: string };
+  contact: { title: string; description: string; button: string; emailCopied: string };
   footer: {
     builtWith: string;
     connect: string;
     tagline: string;
     badges: string[];
     quotes: string[];
+  };
+  easterEgg: {
+    bsodTitle: string;
+    bsodReboot: string;
+    bsodLines: string[];
   };
 }
 

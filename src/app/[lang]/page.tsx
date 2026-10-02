@@ -9,6 +9,8 @@ import SkipToContent from '@/components/SkipToContent';
 import Window from '@/components/Window';
 import TechStackTags from '@/components/TechStackTags';
 import FooterSocial from '@/components/FooterSocial';
+import CopyEmailButton from '@/components/CopyEmailButton';
+import { CopyEmailProvider, PORTFOLIO_EMAIL } from '@/components/CopyEmailProvider';
 import { getDictionary } from '@/lib/getDictionary';
 
 export default async function Page({
@@ -28,16 +30,22 @@ export default async function Page({
   ];
 
   return (
-    <main className="relative z-10 min-h-screen text-[#0C0C0C] font-serif selection:bg-[#2945FF] selection:text-white pointer-events-none overflow-x-hidden">
+    <CopyEmailProvider copiedMessage={dict.contact.emailCopied}>
       <SkipToContent label={dict.nav.skipToContent} targetId="profile" />
-      {/* 1. HEADER */}
       <SiteHeader
         navLinks={navLinks}
         currentLang={lang}
         menuOpen={dict.nav.menuOpen}
         menuClose={dict.nav.menuClose}
+        scrollBufferLabel={dict.nav.scrollBuffer}
+        bsod={{
+          title: dict.easterEgg.bsodTitle,
+          rebootHint: dict.easterEgg.bsodReboot,
+          lines: dict.easterEgg.bsodLines,
+        }}
       />
 
+      <main className="relative z-10 min-h-screen text-[#0C0C0C] font-serif selection:bg-[#2945FF] selection:text-white pointer-events-none">
       {/* 2. HERO */}
       <section
         id="profile"
@@ -230,6 +238,7 @@ export default async function Page({
         modalNextAria={dict.projects.modalNextAria}
         modalDialogAria={dict.projects.modalDialogAria}
         screenshotAlt={dict.projects.screenshotAlt}
+        featuredLabel={dict.projects.featuredLabel}
         projects={dict.projects.items}
       />
 
@@ -265,12 +274,11 @@ export default async function Page({
           >
             {dict.contact.description}
           </p>
-          <a
-            href="mailto:dzaky2636@gmail.com"
+          <CopyEmailButton
             className="inline-block bg-white text-[#0C0C0C] border-4 border-white font-mono uppercase tracking-widest text-lg md:text-xl px-12 py-6 shadow-[8px_8px_0px_#2945FF] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#2945FF] active:translate-x-[4px] active:translate-y-[4px] active:shadow-[0px_0px_0px_#2945FF] active:scale-[0.98] transition-all duration-75 rounded-none select-none pointer-events-auto retro-focus"
           >
             {dict.contact.button}
-          </a>
+          </CopyEmailButton>
         </div>
       </section>
 
@@ -311,7 +319,12 @@ export default async function Page({
         </div>
 
         <div className="max-w-7xl mx-auto mt-10 pt-4 border-t-2 border-black flex flex-col sm:flex-row justify-between items-center gap-2 font-mono uppercase tracking-widest text-[10px]">
-          <span> dzaky2636@gmail.com</span>
+          <CopyEmailButton
+            className="hover:text-[#2945FF] hover:underline retro-focus pointer-events-auto"
+            aria-label={dict.contact.emailCopied}
+          >
+            {PORTFOLIO_EMAIL}
+          </CopyEmailButton>
           <span data-twitch>{dict.footer.tagline}</span>
         </div>
 
@@ -326,6 +339,7 @@ export default async function Page({
           </p>
         </div>
       </footer>
-    </main>
+      </main>
+    </CopyEmailProvider>
   );
 }

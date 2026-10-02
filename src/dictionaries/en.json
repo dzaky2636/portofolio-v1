@@ -11,7 +11,8 @@
     "contact": "[CONTACT]",
     "menuOpen": "[ MENU ]",
     "menuClose": "[ X ]",
-    "skipToContent": "[ SKIP TO CONTENT ]"
+    "skipToContent": "[ SKIP TO CONTENT ]",
+    "scrollBuffer": "SCROLL_BUFFER"
   },
   "hero": {
     "title": "Fullstack Engineer & AI Builder",
@@ -318,8 +319,9 @@
     "noImages": "[ NO_MEDIA ]",
     "viewerEmpty": "[ NO_IMAGE_DATA ]",
     "modalTitlePrefix": "Image_Viewer.exe",
-    "moreRealms": "[ + MORE_REALMS ]",
+    "moreRealms": "[ + MORE_REALMS ({count}) ]",
     "lessRealms": "[ - FEWER_REALMS ]",
+    "featuredLabel": "[ FEATURED ]",
     "modalCloseAria": "Close image viewer",
     "modalPrevAria": "Previous image",
     "modalNextAria": "Next image",
@@ -371,7 +373,8 @@
   "contact": {
     "title": "CONTACT",
     "description": "Want to collaborate? Click on the button below or contact me on my socials, they are on the bottom right.",
-    "button": "[ SEND EMAIL ]"
+    "button": "[ SEND EMAIL ]",
+    "emailCopied": "[ COPIED TO CLIPBOARD ]"
   },
   "footer": {
     "builtWith": "Built With:",
@@ -387,6 +390,25 @@
       "WHAT DO YOU CALL A 7 THAT HAS A FLU?",
       "I LOVE THE WORLD AND EVERYTHING IN IT",
       "IF EVERY PORKCHOP WERE PERFECT, WE WOULDN'T HAVE HOTDOGS"
+    ]
+  },
+  "easterEgg": {
+    "bsodTitle": "BSOD.exe — UNEXPECTED_HALT",
+    "bsodReboot": "PRESS [ ESC ] TO REBOOT",
+    "bsodLines": [
+      "STOP: 0x0000DEAD (PORTOFOLIO_KERNEL_PANIC)",
+      "",
+      "A problem has been detected and dzaky.corner has been shut down",
+      "to prevent damage to your browser tab.",
+      "",
+      "STACK_TRACE:",
+      "  at Hero.render()",
+      "  at ScatterScene.overload(+0xC0FFEE)",
+      "  at Image_Viewer.exe (null pointer at slide 9)",
+      "  at EN/ID.toggle() — locale quantum entangled",
+      "",
+      "If this is the first time you've seen this error,",
+      "triple-click was absolutely intentional."
     ]
   }
 }

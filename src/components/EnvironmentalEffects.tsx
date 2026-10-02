@@ -34,7 +34,8 @@ export default function EnvironmentalEffects() {
   // }, []);
 
   useEffect(() => {
-    // Random relay twitch on elements
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     const twitchInterval = setInterval(() => {
       const elements = document.querySelectorAll('[data-twitch]');
       if (elements.length === 0) return;

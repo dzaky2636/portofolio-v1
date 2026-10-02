@@ -2,7 +2,11 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import LanguageToggle from '@/components/LanguageToggle';
+import ScrollProgressBar from '@/components/ScrollProgressBar';
 import { useActiveSection } from '@/hooks/useActiveSection';
+import { usePrefersReducedMotion } from '@/hooks/useMediaQuery';
+import FakeBsod, { type FakeBsodContent } from '@/components/FakeBsod';
+import { playRetroClick } from '@/lib/retroClick';
 
 export interface NavLink {
   href: string;
@@ -14,6 +18,8 @@ interface SiteHeaderProps {
   currentLang: string;
   menuOpen: string;
   menuClose: string;
+  scrollBufferLabel: string;
+  bsod: FakeBsodContent;
 }
 
 function hrefToId(href: string) {
@@ -25,19 +31,40 @@ export default function SiteHeader({
   currentLang,
   menuOpen,
   menuClose,
+  scrollBufferLabel,
+  bsod,
 }: SiteHeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [bsodOpen, setBsodOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const mobilePanelRef = useRef<HTMLElement>(null);
+  const logoClickTimesRef = useRef<number[]>([]);
 
   const sectionIds = navLinks.map((link) => hrefToId(link.href));
   const activeSection = useActiveSection(sectionIds);
+  const reducedMotion = usePrefersReducedMotion();
 
   const closeMenu = useCallback(() => setIsOpen(false), []);
 
   const toggleMenu = useCallback(() => {
     setIsOpen((prev) => !prev);
   }, []);
+
+  const handleLogoClick = useCallback(() => {
+    playRetroClick();
+
+    const now = Date.now();
+    const recent = logoClickTimesRef.current.filter((t) => now - t < 2000);
+    recent.push(now);
+    logoClickTimesRef.current = recent;
+
+    if (recent.length >= 3) {
+      logoClickTimesRef.current = [];
+      setBsodOpen(true);
+    }
+  }, []);
+
+  const closeBsod = useCallback(() => setBsodOpen(false), []);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -95,14 +122,19 @@ export default function SiteHeader({
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-[#F4F3ED] border-b-4 border-black pointer-events-auto">
+    <header className="sticky top-0 z-[60] bg-[#F4F3ED] border-b-4 border-black pointer-events-auto shadow-[0_4px_0_#0C0C0C] isolate">
       <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
-        <div
-          data-twitch
-          className="font-mono uppercase tracking-widest text-xs font-bold border-2 border-black px-2 py-1 bg-white shadow-[4px_4px_0px_#0C0C0C] animate-flicker"
+        <button
+          type="button"
+          onClick={handleLogoClick}
+          {...(!reducedMotion ? { 'data-twitch': true } : {})}
+          className={`font-mono uppercase tracking-widest text-xs font-bold border-2 border-black px-2 py-1 bg-white shadow-[4px_4px_0px_#0C0C0C] cursor-pointer hover:border-[#2945FF] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[3px_3px_0px_#0C0C0C] transition-all duration-75 retro-focus ${
+            reducedMotion ? '' : 'animate-flicker'
+          }`}
+          aria-label={"Dzaky's Corner"}
         >
           {"DZAKY'S CORNER"}
-        </div>
+        </button>
 
         <nav className="hidden md:flex items-center gap-6" aria-label="Main">
           {navLinks.map((link) => {
@@ -161,6 +193,10 @@ export default function SiteHeader({
           })}
         </nav>
       )}
+
+      <ScrollProgressBar label={scrollBufferLabel} />
+
+      <FakeBsod open={bsodOpen} onClose={closeBsod} content={bsod} />
     </header>
   );
 }

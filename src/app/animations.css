@@ -341,4 +341,11 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+
+  header .animate-flicker,
+  header .animate-twitch {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

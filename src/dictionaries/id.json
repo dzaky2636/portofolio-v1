@@ -11,7 +11,8 @@
     "contact": "[KONTAK]",
     "menuOpen": "[ MENU ]",
     "menuClose": "[ X ]",
-    "skipToContent": "[ LANGSUNG KE KONTEN ]"
+    "skipToContent": "[ LANGSUNG KE KONTEN ]",
+    "scrollBuffer": "BUFFER_GULIR"
   },
   "hero": {
     "title": "Fullstack Engineer & AI Builder",
@@ -318,8 +319,9 @@
     "noImages": "[ TANPA_MEDIA ]",
     "viewerEmpty": "[ DATA_GAMBAR_KOSONG ]",
     "modalTitlePrefix": "Image_Viewer.exe",
-    "moreRealms": "[ + REALM_LAINNYA ]",
+    "moreRealms": "[ + REALM_LAINNYA ({count}) ]",
     "lessRealms": "[ - SEDIKIT_REALM ]",
+    "featuredLabel": "[ UNGGULAN ]",
     "modalCloseAria": "Tutup penampil gambar",
     "modalPrevAria": "Gambar sebelumnya",
     "modalNextAria": "Gambar berikutnya",
@@ -371,7 +373,8 @@
   "contact": {
     "title": "KONTAK",
     "description": "Mau berkolaborasi? Klik tombol di bawah ini atau hubungi saya melalui media sosial, tautannya ada di kanan bawah.",
-    "button": "[ KIRIM EMAIL ]"
+    "button": "[ KIRIM EMAIL ]",
+    "emailCopied": "[ TERSALIN KE CLIPBOARD ]"
   },
   "footer": {
     "builtWith": "Dibangun Dengan:",
@@ -387,6 +390,25 @@
       "WHAT DO YOU CALL A 7 THAT HAS A FLU?",
       "I LOVE THE WORLD AND EVERYTHING IN IT",
       "IF EVERY PORKCHOP WERE PERFECT, WE WOULDN'T HAVE HOTDOGS"
+    ]
+  },
+  "easterEgg": {
+    "bsodTitle": "BSOD.exe — UNEXPECTED_HALT",
+    "bsodReboot": "TEKAN [ ESC ] UNTUK BOOT ULANG",
+    "bsodLines": [
+      "STOP: 0x0000DEAD (PORTOFOLIO_KERNEL_PANIC)",
+      "",
+      "Masalah terdeteksi dan dzaky.corner dimatikan",
+      "untuk mencegah kerusakan pada tab browser kamu.",
+      "",
+      "STACK_TRACE:",
+      "  at Hero.render()",
+      "  at ScatterScene.overload(+0xC0FFEE)",
+      "  at Image_Viewer.exe (null pointer di slide 9)",
+      "  at EN/ID.toggle() — locale quantum entangled",
+      "",
+      "Kalau ini pertama kali kamu lihat error ini,",
+      "triple-click memang disengaja."
     ]
   }
 }

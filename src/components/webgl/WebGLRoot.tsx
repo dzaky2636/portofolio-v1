@@ -4,20 +4,7 @@ import { useMemo, useSyncExternalStore } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { View } from '@react-three/drei';
 import ScatterScene from '@/components/webgl/ScatterScene';
-
-function subscribeMediaQuery(query: string, onChange: () => void) {
-  const mq = window.matchMedia(query);
-  mq.addEventListener('change', onChange);
-  return () => mq.removeEventListener('change', onChange);
-}
-
-function useMediaQuery(query: string) {
-  return useSyncExternalStore(
-    (onChange) => subscribeMediaQuery(query, onChange),
-    () => window.matchMedia(query).matches,
-    () => false
-  );
-}
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 function subscribeVisibility(onChange: () => void) {
   document.addEventListener('visibilitychange', onChange);

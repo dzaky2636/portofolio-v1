@@ -32,6 +32,7 @@ interface ProjectSectionProps {
   modalNextAria: string;
   modalDialogAria: string;
   screenshotAlt: string;
+  featuredLabel: string;
   projects: ProjectItem[];
 }
 
@@ -40,16 +41,21 @@ function ProjectCard({
   imagesLabel,
   openViewer,
   noImages,
+  featuredLabel,
+  screenshotAlt,
   onOpen,
 }: {
   project: ProjectItem;
   imagesLabel: string;
   openViewer: string;
   noImages: string;
+  featuredLabel: string;
+  screenshotAlt: string;
   onOpen: (project: ProjectItem) => void;
 }) {
   const hasImages = project.images.length > 0;
   const previews = project.images.slice(0, 3);
+  const extraImageCount = Math.max(0, project.images.length - previews.length);
 
   const handleActivate = () => {
     if (!hasImages) return;
@@ -77,7 +83,14 @@ function ProjectCard({
     >
       <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6 border-b-2 border-black pb-4">
         <div>
-          <h3 className="text-3xl md:text-5xl font-serif font-bold">{project.name}</h3>
+          <div className="flex flex-wrap items-center gap-2">
+            <h3 className="text-3xl md:text-5xl font-serif font-bold">{project.name}</h3>
+            {project.featured && (
+              <span className="font-mono uppercase tracking-widest text-[10px] border-2 border-black px-2 py-1 bg-[#FFD700] text-[#0C0C0C] shadow-[2px_2px_0px_#0C0C0C]">
+                {featuredLabel}
+              </span>
+            )}
+          </div>
           <p className="font-mono uppercase tracking-widest text-xs mt-2 text-[#2945FF]">
             {project.realm}
           </p>
@@ -101,15 +114,30 @@ function ProjectCard({
       {previews.length > 0 && (
         <div className="flex gap-2 mb-6 border-2 border-black p-2 bg-[#0C0C0C]">
           {previews.map((src, i) => (
-            <div key={src} className="relative flex-1 aspect-video min-w-0 border-2 border-black overflow-hidden">
+            <div
+              key={`${project.id}-${src}`}
+              className="relative flex-1 aspect-video min-w-0 border-2 border-black overflow-hidden"
+            >
               <Image
                 src={src}
-                alt=""
+                alt={
+                  i === 0
+                    ? screenshotAlt.replace('{name}', project.name).replace('{index}', '1')
+                    : ''
+                }
                 fill
                 sizes="(max-width: 768px) 30vw, 200px"
                 className="object-cover"
                 aria-hidden={i > 0}
               />
+              {i === previews.length - 1 && extraImageCount > 0 && (
+                <div
+                  className="absolute inset-0 flex items-center justify-center bg-[#0C0C0C]/80 border-2 border-[#FFD700] font-mono uppercase tracking-widest text-xs text-white pointer-events-none"
+                  aria-hidden
+                >
+                  [ +{extraImageCount} ]
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -160,6 +188,7 @@ export default function ProjectSection({
   modalNextAria,
   modalDialogAria,
   screenshotAlt,
+  featuredLabel,
   projects,
 }: ProjectSectionProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -175,7 +204,13 @@ export default function ProjectSection({
     return { featured: featuredList, rest: restList };
   }, [projects]);
 
-  const visibleProjects = showAll || rest.length === 0 ? projects : featured;
+  const visibleProjects = useMemo(() => {
+    if (!showAll && rest.length > 0) return featured;
+    if (rest.length === 0) return projects;
+    const featuredIds = new Set(featured.map((p) => p.id));
+    const orderedRest = projects.filter((p) => !featuredIds.has(p.id));
+    return [...featured, ...orderedRest];
+  }, [showAll, rest.length, featured, projects]);
 
   const openModal = useCallback((project: ProjectItem) => {
     if (project.images.length === 0) return;
@@ -219,6 +254,8 @@ export default function ProjectSection({
                 imagesLabel={imagesLabel}
                 openViewer={openViewer}
                 noImages={noImages}
+                featuredLabel={featuredLabel}
+                screenshotAlt={screenshotAlt}
                 onOpen={openModal}
               />
             </AnimateOnScroll>
@@ -230,9 +267,10 @@ export default function ProjectSection({
             <button
               type="button"
               onClick={() => setShowAll((v) => !v)}
+              aria-expanded={showAll}
               className="font-mono uppercase tracking-widest text-xs border-4 border-black px-6 py-3 bg-white shadow-[8px_8px_0px_#0C0C0C] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] transition-all duration-75 retro-focus"
             >
-              {showAll ? lessRealms : moreRealms}
+              {showAll ? lessRealms : moreRealms.replace('{count}', String(rest.length))}
             </button>
           </div>
         )}
