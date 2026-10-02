@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import RetroCanvas from '@/components/RetroCanvas';
 import ProjectSection from '@/components/ProjectSection';
-import ExperienceAccordion from '@/components/ExperienceAccordion';
+import ExperienceLogViewer from '@/components/ExperienceLogViewer';
 import AnimateOnScroll from '@/components/AnimateOnScroll';
 import GlitchText from '@/components/GlitchText';
 import SiteHeader from '@/components/SiteHeader';
@@ -284,7 +284,10 @@ export default async function Page({
           </div>
         </div>
 
-        <ExperienceAccordion experiences={dict.experience.items} />
+        <ExperienceLogViewer
+          experiences={dict.experience.items}
+          labels={dict.experience.logViewer}
+        />
       </section>
 
       {/* 7. CONTACT */}
