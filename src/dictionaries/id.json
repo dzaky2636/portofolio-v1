@@ -54,13 +54,58 @@
         "images": ["/images/chatrigo/1.png", "/images/chatrigo/2.png", "/images/chatrigo/3.png", "/images/chatrigo/4.png", "/images/chatrigo/5.png", "/images/chatrigo/6.png", "/images/chatrigo/7.png", "/images/chatrigo/8.png", "/images/chatrigo/9.png"]
       },
       {
-        "id": "egov",
-        "name": "E-GOVERNMENT SYSTEMS",
+        "id": "chatrigo-mobile",
+        "name": "CHATRIGO MOBILE",
+        "realm": "SaaS & Mobile",
+        "org": "PT RIGO INOVASI DIGITAL",
+        "description": "Aplikasi mobile pendamping platform omnichannel Chatrigo — membantu tim mengikuti percakapan pelanggan dan alur kerja agen di mana saja, terhubung ke backend SaaS yang sama dengan produk web.",
+        "stack": ["Expo", "React Native", "TypeScript"],
+        "images": []
+      },
+      {
+        "id": "e-sign",
+        "name": "E-SIGN",
         "realm": "Teknologi Sipil",
         "org": "DISKOMINFO",
-        "description": "Membuat sistem Tanda Tangan Elektronik (E-Sign) untuk pemerintah daerah — pembuatan kode QR, pemrosesan antrian, menggunakan verifikasi API resmi pemerintah. Juga membangun E-KGB, aplikasi web manajemen gaji & promosi dengan dasbor dan otentikasi yang aman. Keduanya berjalan di Laravel + Tailwind. Aplikasi mobile dibuat dengan Flutter.",
-        "stack": ["Laravel", "Tailwind CSS", "Queue Processing", "Flutter"],
-        "images": ["/images/diskominfo/1.png", "/images/diskominfo/2.png", "/images/diskominfo/3.png", "/images/diskominfo/4.png", "/images/diskominfo/5.jpg", "/images/diskominfo/6.png", "/images/diskominfo/7.png", "/images/diskominfo/8.png", "/images/diskominfo/9.png", "/images/diskominfo/10.png"]
+        "description": "Sistem Tanda Tangan Elektronik untuk pemerintah daerah — pembuatan kode QR, pemrosesan antrian di background, dan verifikasi melalui API resmi pemerintah. Digunakan untuk mendukung alur penandatanganan di instansi kota termasuk sekolah.",
+        "stack": ["Laravel", "Tailwind CSS", "Queue Processing"],
+        "images": ["/images/diskominfo/1.png", "/images/diskominfo/2.png", "/images/diskominfo/3.png", "/images/diskominfo/4.png"]
+      },
+      {
+        "id": "e-kgb",
+        "name": "E-KGB",
+        "realm": "Teknologi Sipil",
+        "org": "DISKOMINFO",
+        "description": "Aplikasi web manajemen kepegawaian untuk proses gaji dan KGB — dasbor, akses berbasis peran, dan alur data pegawai pemerintah daerah.",
+        "stack": ["Laravel", "Tailwind CSS"],
+        "images": ["/images/diskominfo/5.jpg", "/images/diskominfo/6.png", "/images/diskominfo/7.png", "/images/diskominfo/8.png"]
+      },
+      {
+        "id": "e-manuntung",
+        "name": "E-MANUNTUNG",
+        "realm": "Teknologi Sipil",
+        "org": "DISKOMINFO",
+        "description": "Aplikasi layanan publik berbasis Flutter (web dan mobile) yang dibangun di Diskominfo Balikpapan untuk meningkatkan layanan komunikasi dan informatika bagi warga.",
+        "stack": ["Flutter"],
+        "images": ["/images/diskominfo/9.png", "/images/diskominfo/10.png"]
+      },
+      {
+        "id": "unity-2025",
+        "name": "UNITY 2025",
+        "realm": "Kampus / Acara",
+        "org": "UNITY UMN",
+        "description": "Memimpin pengembangan dan pemeliharaan website kompetisi Bahasa Inggris UNITY UMN (2025) — registrasi acara, akurasi konten, dan alur publikasi bersama tim lintas fungsi.",
+        "stack": ["Next.js", "TypeScript", "Tailwind CSS"],
+        "images": []
+      },
+      {
+        "id": "starlight-2024",
+        "name": "STARLIGHT 2024",
+        "realm": "Kampus / Acara",
+        "org": "STARLIGHT UMN",
+        "description": "Website acara dan kompetisi STARLIGHT UMN (2024) — alur registrasi, konten yang dipublikasikan, dan pemeliharaan situs program kampus.",
+        "stack": ["Next.js", "TypeScript", "Tailwind CSS"],
+        "images": []
       },
       {
         "id": "thesis",
@@ -70,6 +115,51 @@
         "description": "Skripsi S1 saya — sistem tutoring AI yang menggunakan gamifikasi (kerangka Octalysis) dan agen otonom untuk memberikan umpan balik waktu-nyata dan beradaptasi dengan setiap siswa.",
         "stack": ["Python", "AI Agents", "LLM Engineering"],
         "images": ["/images/thesis/1.png", "/images/thesis/2.png", "/images/thesis/3.png", "/images/thesis/4.png", "/images/thesis/5.png", "/images/thesis/6.png", "/images/thesis/7.png", "/images/thesis/8.png", "/images/thesis/9.png", "/images/thesis/10.png", "/images/thesis/11.png"]
+      },
+      {
+        "id": "aikopetshop",
+        "name": "AIKOPETSHOP",
+        "realm": "Akademik / Web",
+        "org": "UMN INFORMATIKA",
+        "description": "Proyek pemrograman web — toko hewan peliharaan dengan penelusuran produk dan alur checkout, sebagai latihan aplikasi web full-stack.",
+        "stack": ["Laravel", "PHP", "Tailwind CSS"],
+        "images": []
+      },
+      {
+        "id": "pemrograman-web-forums",
+        "name": "PEMROGRAMAN WEB FORUMS",
+        "realm": "Akademik / Web",
+        "org": "UMN INFORMATIKA",
+        "description": "Aplikasi web bergaya forum dari mata kuliah Pemrograman Web — thread diskusi, posting, dan pola autentikasi khas tugas forum.",
+        "stack": ["Laravel", "PHP", "MySQL"],
+        "images": []
+      },
+      {
+        "id": "meowtask",
+        "name": "MEOWTASK",
+        "realm": "Akademik / Web",
+        "org": "UMN INFORMATIKA",
+        "description": "Aplikasi web tugas dan produktivitas sebagai proyek lab/kuliah informatika — mengelola to-do dan melacak penyelesaian dengan antarmuka CRUD sederhana.",
+        "stack": ["JavaScript", "Node.js", "Express"],
+        "images": []
+      },
+      {
+        "id": "uquizz",
+        "name": "UQUIZZ",
+        "realm": "Akademik / Web",
+        "org": "UMN INFORMATIKA",
+        "description": "Aplikasi web kuis dan penilaian — set soal, percobaan siswa, dan penilaian untuk latihan bergaya kelas.",
+        "stack": ["JavaScript", "HTML", "CSS"],
+        "images": []
+      },
+      {
+        "id": "portofolio-website",
+        "name": "PORTOFOLIO WEBSITE",
+        "realm": "Personal / Frontend",
+        "org": "PORTOFOLIO V1",
+        "description": "Portofolio ini — tata letak naratif satu halaman dengan routing EN/ID, UI Corporate Weirdcore, modal image viewer proyek, dan kanvas hero Three.js low-poly.",
+        "stack": ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "@react-three/fiber"],
+        "images": []
       }
     ]
   },

@@ -39,20 +39,80 @@ When generating UI components, use ONLY the following verified data. **Do NOT in
 ### Project 1: Chatrigo (SaaS & AI Orchestration)
 * **Role:** Lead Fullstack Engineer at PT Rigo Inovasi Digital
 * **Stack:** Next.js 15/16, Prisma, Supabase, PostgreSQL (pgvector)
-* **Details:** Led the engineering architecture for a multi-tenant B2B omnichannel AI chatbot platform centralizing interactions across WhatsApp and Telegram. Engineered an anti-hallucination AI orchestrator featuring RAG and an AI Business Advisor. Managed and mentored the technical division, establishing code quality standards.
-* **Images:** (To be mapped in JSON array: `['/chatrigo-1.jpg', '/chatrigo-2.jpg']`)
+* **Details:** Multi-tenant B2B omnichannel AI chatbot platform (WhatsApp, Telegram). Anti-hallucination AI with RAG and AI Business Advisor. Led technical division and code quality standards.
+* **Images:** `/images/chatrigo/*` in `en.json` / `id.json`
 
-### Project 2: Balikpapan E-Government Systems (Civic Tech)
+### Project 2: Chatrigo Mobile (SaaS & Mobile)
+* **Role:** Lead Fullstack Engineer at PT Rigo Inovasi Digital
+* **Stack:** Expo, React Native, TypeScript
+* **Details:** Mobile companion for the Chatrigo omnichannel SaaS — agent and conversation workflows on the go, same backend as web.
+* **Images:** (empty in JSON until `/images/chatrigo-mobile/` added)
+
+### Project 3: E-Sign (Civic Tech)
 * **Role:** Fullstack Web & Mobile Developer at Diskominfo Balikpapan
-* **Stack:** Laravel, Tailwind CSS, Queue Processing, Flutter
-* **Details:** Developed enterprise-grade municipal systems to enhance public services. Built an automated E-Signature platform (E-Sign) with background queue processing deployed across city schools. Developed a secure personnel management dashboard (E-KGB).
-* **Images:** (To be mapped in JSON array: `['/egov-1.jpg', '/egov-2.jpg']`)
+* **Stack:** Laravel, Tailwind CSS, Queue Processing
+* **Details:** Municipal E-Signature — QR generation, queue processing, government API verification; deployed for signing workflows including city schools.
+* **Images:** `/images/diskominfo/1.png`–`4.png`
 
-### Project 3: Intelligent Tutoring System (Academic/AI)
+### Project 4: E-KGB (Civic Tech)
+* **Role:** Fullstack Web & Mobile Developer at Diskominfo Balikpapan
+* **Stack:** Laravel, Tailwind CSS
+* **Details:** Personnel salary and promotion (KGB) management — dashboards and secure auth.
+* **Images:** `/images/diskominfo/5.jpg`–`8.png`
+
+### Project 5: E-Manuntung (Civic Tech)
+* **Role:** Fullstack Web & Mobile Developer at Diskominfo Balikpapan
+* **Stack:** Flutter
+* **Details:** Flutter web/mobile public-service app for Diskominfo Balikpapan citizen services.
+* **Images:** `/images/diskominfo/9.png`, `10.png`
+
+### Project 6: UNITY 2025 (Campus / Events)
+* **Role:** Website Coordinator at UNITY UMN
+* **Stack:** Next.js, TypeScript, Tailwind CSS
+* **Details:** UNITY UMN English competition website (2025) — registration, content, publication pipelines.
+* **Images:** (empty in JSON until added)
+
+### Project 7: Starlight 2024 (Campus / Events)
+* **Role:** Campus web (STARLIGHT UMN)
+* **Stack:** Next.js, TypeScript, Tailwind CSS
+* **Details:** STARLIGHT UMN event/competition website (2024).
+* **Images:** (empty in JSON until added)
+
+### Project 8: Intelligent Tutoring System (Academic/AI)
 * **Role:** Informatics Graduate (GPA 3.71/4.00) at Universitas Multimedia Nusantara
 * **Stack:** Python, AI Agents, LLM Engineering
-* **Details:** Undergraduate thesis engineering an adaptive tutoring system utilizing Octalysis-based gamification and autonomous AI agents for real-time feedback and adaptive support. Mentored 200+ students as a Laboratory Assistant.
-* **Images:** (To be mapped in JSON array: `['/thesis-1.jpg', '/thesis-2.jpg']`)
+* **Details:** Undergraduate thesis — Octalysis gamification and autonomous AI agents for adaptive tutoring and real-time feedback.
+* **Images:** `/images/thesis/*`
+
+### Project 9: AikoPetshop (Academic / Web)
+* **Role:** UMN Informatics coursework
+* **Stack:** Laravel, PHP, Tailwind CSS
+* **Details:** Pet shop web storefront (course project).
+* **Images:** (empty in JSON until added)
+
+### Project 10: Pemrograman Web Forums (Academic / Web)
+* **Role:** UMN Informatics — Web Programming context
+* **Stack:** Laravel, PHP, MySQL
+* **Details:** Forum/discussion web app (course deliverable).
+* **Images:** (empty in JSON until added)
+
+### Project 11: MeowTask (Academic / Web)
+* **Role:** UMN Informatics lab/course project
+* **Stack:** JavaScript, Node.js, Express
+* **Details:** Task/productivity web app with CRUD workflows.
+* **Images:** (empty in JSON until added)
+
+### Project 12: UQuizz (Academic / Web)
+* **Role:** UMN Informatics coursework
+* **Stack:** JavaScript, HTML, CSS
+* **Details:** Quiz/assessment web application.
+* **Images:** (empty in JSON until added)
+
+### Project 13: Portfolio Website (Personal / Frontend)
+* **Role:** Personal project (this repository)
+* **Stack:** Next.js 16, React 19, TypeScript, Tailwind CSS, @react-three/fiber
+* **Details:** Corporate Weirdcore single-page portfolio with EN/ID i18n and Image_Viewer.exe modal.
+* **Images:** (empty in JSON until added)
 
 ### Certifications & Specs
 * **Language:** TOEIC (960/990), Duolingo English Test (145/160)

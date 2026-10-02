@@ -54,13 +54,58 @@
         "images": ["/images/chatrigo/1.png", "/images/chatrigo/2.png", "/images/chatrigo/3.png", "/images/chatrigo/4.png", "/images/chatrigo/5.png", "/images/chatrigo/6.png", "/images/chatrigo/7.png", "/images/chatrigo/8.png", "/images/chatrigo/9.png"]
       },
       {
-        "id": "egov",
-        "name": "E-GOVERNMENT SYSTEMS",
+        "id": "chatrigo-mobile",
+        "name": "CHATRIGO MOBILE",
+        "realm": "SaaS & Mobile",
+        "org": "PT RIGO INOVASI DIGITAL",
+        "description": "Companion mobile app for the Chatrigo omnichannel platform — lets teams stay on top of customer conversations and agent workflows on the go, connected to the same SaaS backend as the web product.",
+        "stack": ["Expo", "React Native", "TypeScript"],
+        "images": []
+      },
+      {
+        "id": "e-sign",
+        "name": "E-SIGN",
         "realm": "Civic Tech",
         "org": "DISKOMINFO",
-        "description": "Made a digital E-Signature system for the local government — QR codes generation, queue processing, using official government API verification. Also built E-KGB, a salary & promotion management web app with dashboards and secure auth. Both running on Laravel + Tailwind. The mobile app was built with Flutter.",
-        "stack": ["Laravel", "Tailwind CSS", "Queue Processing", "Flutter"],
-        "images": ["/images/diskominfo/1.png", "/images/diskominfo/2.png", "/images/diskominfo/3.png", "/images/diskominfo/4.png", "/images/diskominfo/5.jpg", "/images/diskominfo/6.png", "/images/diskominfo/7.png", "/images/diskominfo/8.png", "/images/diskominfo/9.png", "/images/diskominfo/10.png"]
+        "description": "Digital E-Signature system for the local government — QR code generation, background queue processing, and verification through official government APIs. Deployed to support signing workflows across municipal sites including city schools.",
+        "stack": ["Laravel", "Tailwind CSS", "Queue Processing"],
+        "images": ["/images/diskominfo/1.png", "/images/diskominfo/2.png", "/images/diskominfo/3.png", "/images/diskominfo/4.png"]
+      },
+      {
+        "id": "e-kgb",
+        "name": "E-KGB",
+        "realm": "Civic Tech",
+        "org": "DISKOMINFO",
+        "description": "Secure personnel management web app for salary and promotion (KGB) processes — dashboards, role-based access, and workflows for municipal staff data.",
+        "stack": ["Laravel", "Tailwind CSS"],
+        "images": ["/images/diskominfo/5.jpg", "/images/diskominfo/6.png", "/images/diskominfo/7.png", "/images/diskominfo/8.png"]
+      },
+      {
+        "id": "e-manuntung",
+        "name": "E-MANUNTUNG",
+        "realm": "Civic Tech",
+        "org": "DISKOMINFO",
+        "description": "Flutter-based web and mobile public-service application built at Diskominfo Balikpapan to improve communications and informatics services for citizens.",
+        "stack": ["Flutter"],
+        "images": ["/images/diskominfo/9.png", "/images/diskominfo/10.png"]
+      },
+      {
+        "id": "unity-2025",
+        "name": "UNITY 2025",
+        "realm": "Campus / Events",
+        "org": "UNITY UMN",
+        "description": "Led development and maintenance of the UNITY UMN English competition website (2025) — event registration, content accuracy, and publication pipelines coordinated with cross-functional teams.",
+        "stack": ["Next.js", "TypeScript", "Tailwind CSS"],
+        "images": []
+      },
+      {
+        "id": "starlight-2024",
+        "name": "STARLIGHT 2024",
+        "realm": "Campus / Events",
+        "org": "STARLIGHT UMN",
+        "description": "Event and competition website for STARLIGHT UMN (2024) — registration flows, published content, and site upkeep for the campus program.",
+        "stack": ["Next.js", "TypeScript", "Tailwind CSS"],
+        "images": []
       },
       {
         "id": "thesis",
@@ -70,6 +115,51 @@
         "description": "My undergrad thesis — an AI tutoring system that uses gamification (Octalysis framework) and autonomous agents to give real-time feedback and adapt to each student.",
         "stack": ["Python", "AI Agents", "LLM Engineering"],
         "images": ["/images/thesis/1.png", "/images/thesis/2.png", "/images/thesis/3.png", "/images/thesis/4.png", "/images/thesis/5.png", "/images/thesis/6.png", "/images/thesis/7.png", "/images/thesis/8.png", "/images/thesis/9.png", "/images/thesis/10.png", "/images/thesis/11.png"]
+      },
+      {
+        "id": "aikopetshop",
+        "name": "AIKOPETSHOP",
+        "realm": "Academic / Web",
+        "org": "UMN INFORMATICS",
+        "description": "Web programming project — a pet shop storefront with product browsing and checkout-style flows, built as a full-stack web application exercise.",
+        "stack": ["Laravel", "PHP", "Tailwind CSS"],
+        "images": []
+      },
+      {
+        "id": "pemrograman-web-forums",
+        "name": "PEMROGRAMAN WEB FORUMS",
+        "realm": "Academic / Web",
+        "org": "UMN INFORMATICS",
+        "description": "Forum-style web app from the Web Programming track — discussion threads, posts, and auth patterns typical of a course forum deliverable.",
+        "stack": ["Laravel", "PHP", "MySQL"],
+        "images": []
+      },
+      {
+        "id": "meowtask",
+        "name": "MEOWTASK",
+        "realm": "Academic / Web",
+        "org": "UMN INFORMATICS",
+        "description": "Task and productivity web app built as an informatics lab/course project — manage to-dos and track completion in a simple CRUD interface.",
+        "stack": ["JavaScript", "Node.js", "Express"],
+        "images": []
+      },
+      {
+        "id": "uquizz",
+        "name": "UQUIZZ",
+        "realm": "Academic / Web",
+        "org": "UMN INFORMATICS",
+        "description": "Quiz and assessment web application — question sets, student attempts, and scoring for classroom-style drills.",
+        "stack": ["JavaScript", "HTML", "CSS"],
+        "images": []
+      },
+      {
+        "id": "portofolio-website",
+        "name": "PORTOFOLIO WEBSITE",
+        "realm": "Personal / Frontend",
+        "org": "PORTOFOLIO V1",
+        "description": "This portfolio — single-page narrative layout with EN/ID routing, Corporate Weirdcore UI, project image viewer modal, and a low-poly Three.js hero canvas.",
+        "stack": ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "@react-three/fiber"],
+        "images": []
       }
     ]
   },
