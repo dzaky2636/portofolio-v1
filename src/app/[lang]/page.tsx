@@ -54,6 +54,7 @@ export default async function Page({
         menuOpen={dict.nav.menuOpen}
         menuClose={dict.nav.menuClose}
         scrollBufferLabel={dict.nav.scrollBuffer}
+        systemClockTz={dict.nav.systemClockTz}
         bsod={{
           title: dict.easterEgg.bsodTitle,
           rebootHint: dict.easterEgg.bsodReboot,
@@ -255,6 +256,13 @@ export default async function Page({
         modalDialogAria={dict.projects.modalDialogAria}
         screenshotAlt={dict.projects.screenshotAlt}
         featuredLabel={dict.projects.featuredLabel}
+        realmFilterLabel={dict.projects.realmFilterLabel}
+        realmFilterAll={dict.projects.realmFilterAll}
+        realmFilterSaas={dict.projects.realmFilterSaas}
+        realmFilterCivic={dict.projects.realmFilterCivic}
+        realmFilterAcademic={dict.projects.realmFilterAcademic}
+        realmFilterPersonal={dict.projects.realmFilterPersonal}
+        realmFilterEmpty={dict.projects.realmFilterEmpty}
         projects={dict.projects.items}
       />
 

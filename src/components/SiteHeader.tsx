@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import HeaderSystemClock from '@/components/HeaderSystemClock';
 import LanguageToggle from '@/components/LanguageToggle';
 import ScrollProgressBar from '@/components/ScrollProgressBar';
 import { useActiveSection } from '@/hooks/useActiveSection';
@@ -19,6 +20,7 @@ interface SiteHeaderProps {
   menuOpen: string;
   menuClose: string;
   scrollBufferLabel: string;
+  systemClockTz: string;
   bsod: FakeBsodContent;
 }
 
@@ -32,6 +34,7 @@ export default function SiteHeader({
   menuOpen,
   menuClose,
   scrollBufferLabel,
+  systemClockTz,
   bsod,
 }: SiteHeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -146,13 +149,14 @@ export default function SiteHeader({
                 className={linkClass(link.href)}
                 aria-current={isActive ? 'location' : undefined}
               >
-                {isActive ? `[ * ] ${link.label}` : link.label}
+                {link.label}
               </a>
             );
           })}
         </nav>
 
         <div className="flex items-center gap-2 pointer-events-auto">
+          <HeaderSystemClock timezoneLabel={systemClockTz} />
           <LanguageToggle currentLang={currentLang} />
           <button
             ref={menuButtonRef}
@@ -187,7 +191,7 @@ export default function SiteHeader({
                 }`}
                 aria-current={isActive ? 'location' : undefined}
               >
-                {isActive ? `[ * ] ${link.label}` : link.label}
+                {link.label}
               </a>
             );
           })}

@@ -12,7 +12,8 @@
     "menuOpen": "[ MENU ]",
     "menuClose": "[ X ]",
     "skipToContent": "[ LANGSUNG KE KONTEN ]",
-    "scrollBuffer": "BUFFER_GULIR"
+    "scrollBuffer": "BUFFER_GULIR",
+    "systemClockTz": "TZ: WIB"
   },
   "hero": {
     "title": "Fullstack Engineer & AI Builder",
@@ -322,6 +323,13 @@
     "moreRealms": "[ + REALM_LAINNYA ({count}) ]",
     "lessRealms": "[ - SEDIKIT_REALM ]",
     "featuredLabel": "[ UNGGULAN ]",
+    "realmFilterLabel": "FILTER_REALM",
+    "realmFilterAll": "[ SEMUA ]",
+    "realmFilterSaas": "[ SAAS ]",
+    "realmFilterCivic": "[ SIPIL ]",
+    "realmFilterAcademic": "[ AKADEMIK ]",
+    "realmFilterPersonal": "[ PERSONAL ]",
+    "realmFilterEmpty": "[ TIDAK ADA REALM DI FILTER INI ]",
     "modalCloseAria": "Tutup penampil gambar",
     "modalPrevAria": "Gambar sebelumnya",
     "modalNextAria": "Gambar berikutnya",

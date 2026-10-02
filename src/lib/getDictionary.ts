@@ -13,6 +13,7 @@ export interface Dictionary {
     menuClose: string;
     skipToContent: string;
     scrollBuffer: string;
+    systemClockTz: string;
   };
   hero: {
     title: string;
@@ -54,6 +55,13 @@ export interface Dictionary {
     moreRealms: string;
     lessRealms: string;
     featuredLabel: string;
+    realmFilterLabel: string;
+    realmFilterAll: string;
+    realmFilterSaas: string;
+    realmFilterCivic: string;
+    realmFilterAcademic: string;
+    realmFilterPersonal: string;
+    realmFilterEmpty: string;
     modalCloseAria: string;
     modalPrevAria: string;
     modalNextAria: string;
