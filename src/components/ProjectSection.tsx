@@ -5,6 +5,13 @@ import Image from 'next/image';
 import ProjectModal, { ProjectData } from '@/components/ProjectModal';
 import AnimateOnScroll from '@/components/AnimateOnScroll';
 import { windowPress } from '@/components/Window';
+import {
+  getProjectRealmCategory,
+  REALM_CATEGORY_ORDER,
+  type RealmCategory,
+} from '@/lib/projectRealmCategory';
+
+export type RealmFilterId = 'all' | RealmCategory;
 
 export interface ProjectItem {
   id: string;
@@ -33,8 +40,31 @@ interface ProjectSectionProps {
   modalDialogAria: string;
   screenshotAlt: string;
   featuredLabel: string;
+  realmFilterLabel: string;
+  realmFilterAll: string;
+  realmFilterSaas: string;
+  realmFilterCivic: string;
+  realmFilterAcademic: string;
+  realmFilterPersonal: string;
+  realmFilterEmpty: string;
   projects: ProjectItem[];
 }
+
+const REALM_FILTER_LABEL: Record<
+  RealmCategory,
+  keyof Pick<
+    ProjectSectionProps,
+    | 'realmFilterSaas'
+    | 'realmFilterCivic'
+    | 'realmFilterAcademic'
+    | 'realmFilterPersonal'
+  >
+> = {
+  saas: 'realmFilterSaas',
+  civic: 'realmFilterCivic',
+  academic: 'realmFilterAcademic',
+  personal: 'realmFilterPersonal',
+};
 
 function ProjectCard({
   project,
@@ -189,28 +219,67 @@ export default function ProjectSection({
   modalDialogAria,
   screenshotAlt,
   featuredLabel,
+  realmFilterLabel,
+  realmFilterAll,
+  realmFilterSaas,
+  realmFilterCivic,
+  realmFilterAcademic,
+  realmFilterPersonal,
+  realmFilterEmpty,
   projects,
 }: ProjectSectionProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
   const [showAll, setShowAll] = useState(false);
+  const [realmFilter, setRealmFilter] = useState<RealmFilterId>('all');
 
-  const { featured, rest } = useMemo(() => {
-    const featuredList = projects.filter((p) => p.featured === true);
-    if (featuredList.length === 0) {
-      return { featured: projects, rest: [] as ProjectItem[] };
+  const realmFilterLabels = {
+    realmFilterSaas,
+    realmFilterCivic,
+    realmFilterAcademic,
+    realmFilterPersonal,
+  };
+
+  const availableRealmFilters = useMemo(() => {
+    const counts = new Map<RealmCategory, number>();
+    for (const project of projects) {
+      const category = getProjectRealmCategory(project.realm);
+      if (!category) continue;
+      counts.set(category, (counts.get(category) ?? 0) + 1);
     }
-    const restList = projects.filter((p) => p.featured !== true);
-    return { featured: featuredList, rest: restList };
+    return REALM_CATEGORY_ORDER.filter((id) => (counts.get(id) ?? 0) > 0);
   }, [projects]);
 
+  const filteredPool = useMemo(() => {
+    if (realmFilter === 'all') return projects;
+    return projects.filter(
+      (p) => getProjectRealmCategory(p.realm) === realmFilter
+    );
+  }, [projects, realmFilter]);
+
+  const { featured, rest } = useMemo(() => {
+    const featuredList = filteredPool.filter((p) => p.featured === true);
+    if (featuredList.length === 0) {
+      return { featured: filteredPool, rest: [] as ProjectItem[] };
+    }
+    const restList = filteredPool.filter((p) => p.featured !== true);
+    return { featured: featuredList, rest: restList };
+  }, [filteredPool]);
+
   const visibleProjects = useMemo(() => {
+    if (realmFilter !== 'all') {
+      const featuredIds = new Set(featured.map((p) => p.id));
+      const orderedRest = filteredPool.filter((p) => !featuredIds.has(p.id));
+      return [...featured, ...orderedRest];
+    }
     if (!showAll && rest.length > 0) return featured;
-    if (rest.length === 0) return projects;
+    if (rest.length === 0) return filteredPool;
     const featuredIds = new Set(featured.map((p) => p.id));
-    const orderedRest = projects.filter((p) => !featuredIds.has(p.id));
+    const orderedRest = filteredPool.filter((p) => !featuredIds.has(p.id));
     return [...featured, ...orderedRest];
-  }, [showAll, rest.length, featured, projects]);
+  }, [realmFilter, showAll, rest.length, featured, filteredPool]);
+
+  const showExpandRealms = realmFilter === 'all' && rest.length > 0;
 
   const openModal = useCallback((project: ProjectItem) => {
     if (project.images.length === 0) return;
@@ -246,7 +315,53 @@ export default function ProjectSection({
           </div>
         </div>
 
+        <div className="mb-10 pointer-events-auto">
+          <p className="font-mono uppercase tracking-widest text-[10px] text-[#2945FF] mb-3">
+            {realmFilterLabel}
+          </p>
+          <div
+            className="flex flex-wrap gap-2"
+            role="tablist"
+            aria-label={realmFilterLabel}
+          >
+            <button
+              type="button"
+              role="tab"
+              aria-selected={realmFilter === 'all'}
+              onClick={() => setRealmFilter('all')}
+              className={`font-mono uppercase tracking-widest text-xs border-4 border-black px-4 py-2 shadow-[4px_4px_0px_#0C0C0C] transition-all duration-75 retro-focus ${
+                realmFilter === 'all'
+                  ? 'bg-[#2945FF] text-white shadow-[2px_2px_0px_#0C0C0C] translate-x-[2px] translate-y-[2px]'
+                  : 'bg-white hover:border-[#2945FF]'
+              }`}
+            >
+              {realmFilterAll}
+            </button>
+            {availableRealmFilters.map((id) => (
+              <button
+                key={id}
+                type="button"
+                role="tab"
+                aria-selected={realmFilter === id}
+                onClick={() => setRealmFilter(id)}
+                className={`font-mono uppercase tracking-widest text-xs border-4 border-black px-4 py-2 shadow-[4px_4px_0px_#0C0C0C] transition-all duration-75 retro-focus ${
+                  realmFilter === id
+                    ? 'bg-[#2945FF] text-white shadow-[2px_2px_0px_#0C0C0C] translate-x-[2px] translate-y-[2px]'
+                    : 'bg-white hover:border-[#2945FF]'
+                }`}
+              >
+                {realmFilterLabels[REALM_FILTER_LABEL[id]]}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="space-y-10">
+          {visibleProjects.length === 0 && (
+            <p className="font-mono uppercase tracking-widest text-sm border-4 border-black bg-white px-6 py-8 shadow-[6px_6px_0px_#0C0C0C] pointer-events-auto">
+              {realmFilterEmpty}
+            </p>
+          )}
           {visibleProjects.map((project, idx) => (
             <AnimateOnScroll key={project.id} animation="animate-drawer" delay={`${idx * 0.15}s`}>
               <ProjectCard
@@ -262,7 +377,7 @@ export default function ProjectSection({
           ))}
         </div>
 
-        {rest.length > 0 && (
+        {showExpandRealms && (
           <div className="mt-10 flex justify-center pointer-events-auto">
             <button
               type="button"

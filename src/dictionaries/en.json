@@ -12,7 +12,8 @@
     "menuOpen": "[ MENU ]",
     "menuClose": "[ X ]",
     "skipToContent": "[ SKIP TO CONTENT ]",
-    "scrollBuffer": "SCROLL_BUFFER"
+    "scrollBuffer": "SCROLL_BUFFER",
+    "systemClockTz": "TZ: WIB"
   },
   "hero": {
     "title": "Fullstack Engineer & AI Builder",
@@ -322,6 +323,13 @@
     "moreRealms": "[ + MORE_REALMS ({count}) ]",
     "lessRealms": "[ - FEWER_REALMS ]",
     "featuredLabel": "[ FEATURED ]",
+    "realmFilterLabel": "FILTER_REALM",
+    "realmFilterAll": "[ ALL ]",
+    "realmFilterSaas": "[ SAAS ]",
+    "realmFilterCivic": "[ CIVIC ]",
+    "realmFilterAcademic": "[ ACADEMIC ]",
+    "realmFilterPersonal": "[ PERSONAL ]",
+    "realmFilterEmpty": "[ NO_REALMS_IN_THIS_FILTER ]",
     "modalCloseAria": "Close image viewer",
     "modalPrevAria": "Previous image",
     "modalNextAria": "Next image",
