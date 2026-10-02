@@ -261,6 +261,7 @@ export default async function Page({
         modalDialogAria={dict.projects.modalDialogAria}
         screenshotAlt={dict.projects.screenshotAlt}
         featuredLabel={dict.projects.featuredLabel}
+        stackShowMore={dict.projects.stackShowMore}
         realmFilterLabel={dict.projects.realmFilterLabel}
         realmFilterAll={dict.projects.realmFilterAll}
         realmFilterSaas={dict.projects.realmFilterSaas}

@@ -57,6 +57,7 @@ export interface Dictionary {
     moreRealms: string;
     lessRealms: string;
     featuredLabel: string;
+    stackShowMore: string;
     realmFilterLabel: string;
     realmFilterAll: string;
     realmFilterSaas: string;

@@ -325,6 +325,7 @@
     "moreRealms": "[ + MORE_REALMS ({count}) ]",
     "lessRealms": "[ - FEWER_REALMS ]",
     "featuredLabel": "[ FEATURED ]",
+    "stackShowMore": "[ +{count} STACK ]",
     "realmFilterLabel": "FILTER_REALM",
     "realmFilterAll": "[ ALL ]",
     "realmFilterSaas": "[ SAAS ]",
