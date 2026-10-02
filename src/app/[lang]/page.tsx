@@ -10,8 +10,11 @@ import Window from '@/components/Window';
 import TechStackTags from '@/components/TechStackTags';
 import FooterSocial from '@/components/FooterSocial';
 import CopyEmailButton from '@/components/CopyEmailButton';
+import BootSequenceOverlay from '@/components/BootSequenceOverlay';
+import KonamiCheatListener from '@/components/KonamiCheatListener';
 import { CopyEmailProvider, PORTFOLIO_EMAIL } from '@/components/CopyEmailProvider';
 import { getDictionary } from '@/lib/getDictionary';
+import { konamiQuoteIndex } from '@/lib/konamiQuoteIndex';
 
 export default async function Page({
   params,
@@ -29,8 +32,21 @@ export default async function Page({
     { href: '#contact', label: dict.nav.contact },
   ];
 
+  const konamiQuote =
+    dict.footer.quotes[konamiQuoteIndex(lang, dict.footer.quotes.length)] ??
+    dict.footer.quotes[0];
+
   return (
     <CopyEmailProvider copiedMessage={dict.contact.emailCopied}>
+      <BootSequenceOverlay lines={dict.boot.lines} />
+      <KonamiCheatListener
+        content={{
+          title: dict.easterEgg.konamiTitle,
+          subtitle: dict.easterEgg.konamiSubtitle,
+          dismissHint: dict.easterEgg.konamiDismiss,
+          quote: konamiQuote,
+        }}
+      />
       <SkipToContent label={dict.nav.skipToContent} targetId="profile" />
       <SiteHeader
         navLinks={navLinks}

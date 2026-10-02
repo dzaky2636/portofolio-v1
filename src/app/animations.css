@@ -58,6 +58,10 @@
   animation: mechanicalIris 0.2s steps(4, end) forwards;
 }
 
+.animate-iris-out {
+  animation: mechanicalIrisOut 0.2s steps(4, end) forwards;
+}
+
 .animate-tear {
   animation: crtTear 0.15s steps(2, end);
 }
@@ -218,6 +222,14 @@
   50%  { clip-path: inset(20% 20% 20% 20%); }
   75%  { clip-path: inset(5% 5% 5% 5%); }
   100% { clip-path: inset(0% 0% 0% 0%); }
+}
+
+@keyframes mechanicalIrisOut {
+  0%   { clip-path: inset(0% 0% 0% 0%); opacity: 1; }
+  25%  { clip-path: inset(5% 5% 5% 5%); }
+  50%  { clip-path: inset(20% 20% 20% 20%); }
+  75%  { clip-path: inset(40% 40% 40% 40%); }
+  100% { clip-path: inset(50% 50% 50% 50%); opacity: 0; }
 }
 
 /* CRT Tear (canvas) */

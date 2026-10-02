@@ -76,6 +76,7 @@ export interface Dictionary {
     items: { role: string; company: string; duration: string; details: string }[];
   };
   contact: { title: string; description: string; button: string; emailCopied: string };
+  boot: { lines: string[] };
   footer: {
     builtWith: string;
     connect: string;
@@ -87,6 +88,9 @@ export interface Dictionary {
     bsodTitle: string;
     bsodReboot: string;
     bsodLines: string[];
+    konamiTitle: string;
+    konamiSubtitle: string;
+    konamiDismiss: string;
   };
 }
 

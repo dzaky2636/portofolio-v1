@@ -370,6 +370,14 @@
       }
     ]
   },
+  "boot": {
+    "lines": [
+      "INITIALIZING DZAKY'S CORNER...",
+      "LOADING NAVIGATION_MODULE... [OK]",
+      "MOUNTING SCATTER_SCENE... [OK]",
+      "SYSTEM READY."
+    ]
+  },
   "contact": {
     "title": "CONTACT",
     "description": "Want to collaborate? Click on the button below or contact me on my socials, they are on the bottom right.",
@@ -409,6 +417,9 @@
       "",
       "If this is the first time you've seen this error,",
       "triple-click was absolutely intentional."
-    ]
+    ],
+    "konamiTitle": "ACHIEVEMENT_UNLOCKED.exe",
+    "konamiSubtitle": "CHEAT_CODE_ACCEPTED",
+    "konamiDismiss": "PRESS [ ESC ] TO CLOSE"
   }
 }

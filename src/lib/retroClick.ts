@@ -1,14 +1,4 @@
-let audioContext: AudioContext | null = null;
-
-function getAudioContext() {
-  if (!audioContext) {
-    audioContext = new AudioContext();
-  }
-  if (audioContext.state === 'suspended') {
-    void audioContext.resume();
-  }
-  return audioContext;
-}
+import { getAudioContext } from '@/lib/retroAudio';
 
 /** Short square-wave click for UI easter eggs (call from user gesture). */
 export function playRetroClick() {

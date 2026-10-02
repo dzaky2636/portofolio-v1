@@ -44,6 +44,28 @@ main button:focus-visible {
   background-size: 4px 4px;
 }
 
+html.boot-lock {
+  background-color: #2945ff;
+}
+
+html.boot-lock body {
+  overflow: hidden;
+  background-color: #2945ff;
+}
+
+html.boot-lock body > *:not([data-boot-overlay]):not([data-system-overlay]) {
+  visibility: hidden !important;
+}
+
+html.boot-lock body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: #2945ff;
+  pointer-events: auto;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .skip-to-content {
     transition: none;

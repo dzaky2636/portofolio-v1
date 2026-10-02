@@ -4,6 +4,7 @@ import InteractiveBackground from "@/components/InteractiveBackground";
 import WebGLRoot from "@/components/webgl/WebGLRoot";
 import EnvironmentalEffects from "@/components/EnvironmentalEffects";
 import ChatrigoWidget from "@/components/ChatrigoWidget";
+import BootLockScript from "@/components/BootLockScript";
 import "./globals.css";
 
 const instrumentSerif = Instrument_Serif({
@@ -32,9 +33,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${instrumentSerif.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-serif">
+        <BootLockScript />
         <InteractiveBackground />
         <WebGLRoot />
         <EnvironmentalEffects />

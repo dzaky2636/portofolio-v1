@@ -370,6 +370,14 @@
       }
     ]
   },
+  "boot": {
+    "lines": [
+      "MENGINISIALISASI DZAKY'S CORNER...",
+      "MEMUAT NAVIGATION_MODULE... [OK]",
+      "MOUNT SCATTER_SCENE... [OK]",
+      "SISTEM SIAP."
+    ]
+  },
   "contact": {
     "title": "KONTAK",
     "description": "Mau berkolaborasi? Klik tombol di bawah ini atau hubungi saya melalui media sosial, tautannya ada di kanan bawah.",
@@ -409,6 +417,9 @@
       "",
       "Kalau ini pertama kali kamu lihat error ini,",
       "triple-click memang disengaja."
-    ]
+    ],
+    "konamiTitle": "ACHIEVEMENT_UNLOCKED.exe",
+    "konamiSubtitle": "CHEAT_CODE_DITERIMA",
+    "konamiDismiss": "TEKAN [ ESC ] UNTUK TUTUP"
   }
 }
