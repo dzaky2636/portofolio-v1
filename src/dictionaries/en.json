@@ -21,7 +21,9 @@
     "renderViewTitle": "RENDER_VIEW.exe",
     "renderViewStatus": "[ACTIVE]",
     "profileFrameTitle": "SUBJECT_PHOTO.exe",
-    "profileFrameStatus": "[LOADED]"
+    "profileFrameStatus": "[LOADED]",
+    "profileToggleToBoar": "Show voxel boar avatar",
+    "profileToggleToPhoto": "Show profile photo"
   },
   "inventory": {
     "title": "SHORT PROFILE",

@@ -10,6 +10,8 @@ interface WindowProps {
   className?: string;
   bodyClassName?: string;
   interactive?: boolean;
+  /** Transparent shell/body so fixed Canvas View content shows through (hero 3D). */
+  viewportHole?: boolean;
   /** Highlights status text (e.g. inventory “active” pill). */
   statusAccent?: boolean;
 }
@@ -21,17 +23,26 @@ export default function Window({
   className = '',
   bodyClassName = 'p-6',
   interactive = true,
+  viewportHole = false,
   statusAccent = false,
 }: WindowProps) {
+  const shellClass = viewportHole
+    ? 'bg-transparent border-4 border-black shadow-[8px_8px_0px_#0C0C0C] rounded-none pointer-events-auto'
+    : interactive
+      ? windowPress
+      : 'bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] rounded-none pointer-events-auto';
+
+  const bodyClass = viewportHole
+    ? `${bodyClassName} bg-transparent`
+    : bodyClassName;
+
   return (
-    <div
-      className={`${interactive ? windowPress : 'bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] rounded-none pointer-events-auto'} ${className}`}
-    >
+    <div className={`${shellClass} ${className}`}>
       <div className="font-mono uppercase tracking-widest text-xs border-b-4 border-black bg-[#F4F3ED] px-4 py-2 flex justify-between gap-2">
         <span className="truncate">{title}</span>
         <span className={`shrink-0 ${statusAccent ? 'text-[#2945FF]' : ''}`}>{status}</span>
       </div>
-      <div className={bodyClassName}>{children}</div>
+      <div className={bodyClass}>{children}</div>
     </div>
   );
 }

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import RetroCanvas from '@/components/RetroCanvas';
 import ProjectSection from '@/components/ProjectSection';
 import ExperienceLogViewer from '@/components/ExperienceLogViewer';
@@ -10,6 +9,7 @@ import Window from '@/components/Window';
 import TechStackTags from '@/components/TechStackTags';
 import FooterSocial from '@/components/FooterSocial';
 import CopyEmailButton from '@/components/CopyEmailButton';
+import ProfilePictureToggle from '@/components/ProfilePictureToggle';
 import BootSequenceOverlay from '@/components/BootSequenceOverlay';
 import KonamiCheatListener from '@/components/KonamiCheatListener';
 import { CopyEmailProvider, PORTFOLIO_EMAIL } from '@/components/CopyEmailProvider';
@@ -104,16 +104,15 @@ export default async function Page({
             <Window
               title={dict.hero.profileFrameTitle}
               status={dict.hero.profileFrameStatus}
-              bodyClassName="p-3"
+              viewportHole
+              interactive={false}
+              bodyClassName="p-0 overflow-hidden"
             >
-              <div className="group relative w-full aspect-square bg-[#0C0C0C] overflow-hidden border-2 border-black">
-                <Image
-                  src="/images/profile-pic.jpg"
+              <div className="border-2 border-black">
+                <ProfilePictureToggle
                   alt="Dzaky Fatur Rahman"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 90vw, 448px"
-                  className="object-cover grayscale contrast-125 transition-none group-hover:grayscale-0 group-hover:contrast-100"
+                  toggleToBoarAria={dict.hero.profileToggleToBoar}
+                  toggleToPhotoAria={dict.hero.profileToggleToPhoto}
                 />
               </div>
             </Window>
@@ -126,7 +125,9 @@ export default async function Page({
             <Window
               title={dict.hero.renderViewTitle}
               status={dict.hero.renderViewStatus}
-              bodyClassName="p-4"
+              viewportHole
+              interactive={false}
+              bodyClassName="p-0 overflow-hidden"
             >
               <RetroCanvas />
             </Window>

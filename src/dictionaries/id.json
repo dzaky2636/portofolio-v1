@@ -21,7 +21,9 @@
     "renderViewTitle": "RENDER_VIEW.exe",
     "renderViewStatus": "[AKTIF]",
     "profileFrameTitle": "SUBJECT_PHOTO.exe",
-    "profileFrameStatus": "[TERLOAD]"
+    "profileFrameStatus": "[TERLOAD]",
+    "profileToggleToBoar": "Tampilkan avatar babi voxel",
+    "profileToggleToPhoto": "Tampilkan foto profil"
   },
   "inventory": {
     "title": "PROFIL SINGKAT",
