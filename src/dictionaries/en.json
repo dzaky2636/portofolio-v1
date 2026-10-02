@@ -10,11 +10,16 @@
     "logs": "[EXPERIENCES]",
     "contact": "[CONTACT]",
     "menuOpen": "[ MENU ]",
-    "menuClose": "[ X ]"
+    "menuClose": "[ X ]",
+    "skipToContent": "[ SKIP TO CONTENT ]"
   },
   "hero": {
     "title": "Fullstack Engineer & AI Builder",
-    "summary": "Recent Informatics graduate who loves building full-stack apps, playing around with AI/ML, and designing solid web architecture. Been leading teams, shipping features from scratch, and figuring out tech directions for a while now. This portofolio is a work in progress, but you can check out my highlighted work to check out my expertise."
+    "summary": "Recent Informatics graduate who loves building full-stack apps, playing around with AI/ML, and designing solid web architecture. Been leading teams, shipping features from scratch, and figuring out tech directions for a while now. This portofolio is a work in progress, but you can check out my highlighted work to check out my expertise.",
+    "renderViewTitle": "RENDER_VIEW.exe",
+    "renderViewStatus": "[ACTIVE]",
+    "profileFrameTitle": "SUBJECT_PHOTO.exe",
+    "profileFrameStatus": "[LOADED]"
   },
   "inventory": {
     "title": "SHORT PROFILE",
@@ -33,17 +38,52 @@
       "title": "CERTIFICATIONS",
       "status": "[VERIFIED]",
       "items": [
-        { "name": "TOEIC", "score": "960/990" },
-        { "name": "Duolingo English Test", "score": "145/160" },
-        { "name": "Huawei HCIA-AI", "score": "[PASS]" },
-        { "name": "Laboratory Assistant Certification", "score": "[PASS]" },
-        { "name": "Data Science Fundamentals (DQLab)", "score": "[PASS]" }
+        {
+          "name": "TOEIC",
+          "score": "960/990"
+        },
+        {
+          "name": "Duolingo English Test",
+          "score": "145/160"
+        },
+        {
+          "name": "Huawei HCIA-AI",
+          "score": "[PASS]"
+        },
+        {
+          "name": "Laboratory Assistant Certification",
+          "score": "[PASS]"
+        },
+        {
+          "name": "Data Science Fundamentals (DQLab)",
+          "score": "[PASS]"
+        }
       ]
     },
     "techStack": {
       "title": "MY TECH STACKS",
       "status": "[LOADED]",
-      "tags": ["Next.js 15", "React 19", "TypeScript", "JavaScript", "Tailwind CSS", "Bootstrap", "Figma", "Laravel", "Kotlin", "Node.js", "Express", "Python", "Java", "C/C++", "PostgreSQL", "Supabase", "RAG", "..AND MORE!"]
+      "tags": [
+        "Next.js 15",
+        "React 19",
+        "TypeScript",
+        "JavaScript",
+        "Tailwind CSS",
+        "Bootstrap",
+        "Figma",
+        "Laravel",
+        "Kotlin",
+        "Node.js",
+        "Express",
+        "Python",
+        "Java",
+        "C/C++",
+        "PostgreSQL",
+        "Supabase",
+        "RAG",
+        "..AND MORE!"
+      ],
+      "showMore": "[ +{count} MORE ]"
     },
     "status": {
       "title": "CURRENT BUSY-NESS",
@@ -53,7 +93,7 @@
   },
   "projects": {
     "title": "SELECTED PROJECTS",
-    "clickPrompt": "CLICK ANY PROJECT TO OPEN IMAGE VIEWER",
+    "clickPrompt": "CLICK A PROJECT WITH MEDIA TO OPEN IMAGE_VIEWER",
     "openViewer": "[ OPEN IMAGE_VIEWER.EXE ]",
     "imagesLabel": "IMAGES",
     "items": [
@@ -63,8 +103,24 @@
         "realm": "SaaS & AI Orchestration",
         "org": "PT RIGO INOVASI DIGITAL",
         "description": "Built a multi-tenant B2B SaaS chatbot platform on Next.js 15 + Supabase that handles customer chats across WhatsApp and Telegram. Added an anti-hallucination AI pipeline using RAG, plus an AI Business Advisor that helps with sales strategy. Managed a small team (around 8~ interns) and kept the codebase clean.",
-        "stack": ["Next.js 15/16", "Prisma", "Supabase", "PostgreSQL (pgvector)"],
-        "images": ["/images/chatrigo/1.png", "/images/chatrigo/2.png", "/images/chatrigo/3.png", "/images/chatrigo/4.png", "/images/chatrigo/5.png", "/images/chatrigo/6.png", "/images/chatrigo/7.png", "/images/chatrigo/8.png", "/images/chatrigo/9.png"]
+        "stack": [
+          "Next.js 15/16",
+          "Prisma",
+          "Supabase",
+          "PostgreSQL (pgvector)"
+        ],
+        "images": [
+          "/images/chatrigo/1.png",
+          "/images/chatrigo/2.png",
+          "/images/chatrigo/3.png",
+          "/images/chatrigo/4.png",
+          "/images/chatrigo/5.png",
+          "/images/chatrigo/6.png",
+          "/images/chatrigo/7.png",
+          "/images/chatrigo/8.png",
+          "/images/chatrigo/9.png"
+        ],
+        "featured": true
       },
       {
         "id": "chatrigo-mobile",
@@ -72,8 +128,13 @@
         "realm": "SaaS & Mobile",
         "org": "PT RIGO INOVASI DIGITAL",
         "description": "Companion mobile app for the Chatrigo omnichannel platform — lets teams stay on top of customer conversations and agent workflows on the go, connected to the same SaaS backend as the web product.",
-        "stack": ["Expo", "React Native", "TypeScript"],
-        "images": []
+        "stack": [
+          "Expo",
+          "React Native",
+          "TypeScript"
+        ],
+        "images": [],
+        "featured": false
       },
       {
         "id": "e-sign",
@@ -81,8 +142,18 @@
         "realm": "Civic Tech",
         "org": "DISKOMINFO",
         "description": "Digital E-Signature system for the local government — QR code generation, background queue processing, and verification through official government APIs. Deployed to support signing workflows across municipal sites including city schools.",
-        "stack": ["Laravel", "Tailwind CSS", "Queue Processing"],
-        "images": ["/images/diskominfo/1.png", "/images/diskominfo/2.png", "/images/diskominfo/3.png", "/images/diskominfo/4.png"]
+        "stack": [
+          "Laravel",
+          "Tailwind CSS",
+          "Queue Processing"
+        ],
+        "images": [
+          "/images/diskominfo/1.png",
+          "/images/diskominfo/2.png",
+          "/images/diskominfo/3.png",
+          "/images/diskominfo/4.png"
+        ],
+        "featured": true
       },
       {
         "id": "e-kgb",
@@ -90,8 +161,17 @@
         "realm": "Civic Tech",
         "org": "DISKOMINFO",
         "description": "Secure personnel management web app for salary and promotion (KGB) processes — dashboards, role-based access, and workflows for municipal staff data.",
-        "stack": ["Laravel", "Tailwind CSS"],
-        "images": ["/images/diskominfo/5.jpg", "/images/diskominfo/6.png", "/images/diskominfo/7.png", "/images/diskominfo/8.png"]
+        "stack": [
+          "Laravel",
+          "Tailwind CSS"
+        ],
+        "images": [
+          "/images/diskominfo/5.jpg",
+          "/images/diskominfo/6.png",
+          "/images/diskominfo/7.png",
+          "/images/diskominfo/8.png"
+        ],
+        "featured": true
       },
       {
         "id": "e-manuntung",
@@ -99,8 +179,14 @@
         "realm": "Civic Tech",
         "org": "DISKOMINFO",
         "description": "Flutter-based web and mobile public-service application built at Diskominfo Balikpapan to improve communications and informatics services for citizens.",
-        "stack": ["Flutter"],
-        "images": ["/images/diskominfo/9.png", "/images/diskominfo/10.png"]
+        "stack": [
+          "Flutter"
+        ],
+        "images": [
+          "/images/diskominfo/9.png",
+          "/images/diskominfo/10.png"
+        ],
+        "featured": true
       },
       {
         "id": "unity-2025",
@@ -108,8 +194,13 @@
         "realm": "Campus / Events",
         "org": "UNITY UMN",
         "description": "Led development and maintenance of the UNITY UMN English competition website (2025) — event registration, content accuracy, and publication pipelines coordinated with cross-functional teams.",
-        "stack": ["Next.js", "TypeScript", "Tailwind CSS"],
-        "images": []
+        "stack": [
+          "Next.js",
+          "TypeScript",
+          "Tailwind CSS"
+        ],
+        "images": [],
+        "featured": false
       },
       {
         "id": "starlight-2024",
@@ -117,8 +208,13 @@
         "realm": "Campus / Events",
         "org": "STARLIGHT UMN",
         "description": "Event and competition website for STARLIGHT UMN (2024) — registration flows, published content, and site upkeep for the campus program.",
-        "stack": ["Next.js", "TypeScript", "Tailwind CSS"],
-        "images": []
+        "stack": [
+          "Next.js",
+          "TypeScript",
+          "Tailwind CSS"
+        ],
+        "images": [],
+        "featured": false
       },
       {
         "id": "thesis",
@@ -126,8 +222,25 @@
         "realm": "Academic/AI",
         "org": "UMN THESIS",
         "description": "My undergrad thesis — an AI tutoring system that uses gamification (Octalysis framework) and autonomous agents to give real-time feedback and adapt to each student.",
-        "stack": ["Python", "AI Agents", "LLM Engineering"],
-        "images": ["/images/thesis/1.png", "/images/thesis/2.png", "/images/thesis/3.png", "/images/thesis/4.png", "/images/thesis/5.png", "/images/thesis/6.png", "/images/thesis/7.png", "/images/thesis/8.png", "/images/thesis/9.png", "/images/thesis/10.png", "/images/thesis/11.png"]
+        "stack": [
+          "Python",
+          "AI Agents",
+          "LLM Engineering"
+        ],
+        "images": [
+          "/images/thesis/1.png",
+          "/images/thesis/2.png",
+          "/images/thesis/3.png",
+          "/images/thesis/4.png",
+          "/images/thesis/5.png",
+          "/images/thesis/6.png",
+          "/images/thesis/7.png",
+          "/images/thesis/8.png",
+          "/images/thesis/9.png",
+          "/images/thesis/10.png",
+          "/images/thesis/11.png"
+        ],
+        "featured": true
       },
       {
         "id": "aikopetshop",
@@ -135,8 +248,13 @@
         "realm": "Academic / Web",
         "org": "UMN INFORMATICS",
         "description": "Web programming project — a pet shop storefront with product browsing and checkout-style flows, built as a full-stack web application exercise.",
-        "stack": ["Laravel", "PHP", "Tailwind CSS"],
-        "images": []
+        "stack": [
+          "Laravel",
+          "PHP",
+          "Tailwind CSS"
+        ],
+        "images": [],
+        "featured": false
       },
       {
         "id": "pemrograman-web-forums",
@@ -144,8 +262,13 @@
         "realm": "Academic / Web",
         "org": "UMN INFORMATICS",
         "description": "Forum-style web app from the Web Programming track — discussion threads, posts, and auth patterns typical of a course forum deliverable.",
-        "stack": ["Laravel", "PHP", "MySQL"],
-        "images": []
+        "stack": [
+          "Laravel",
+          "PHP",
+          "MySQL"
+        ],
+        "images": [],
+        "featured": false
       },
       {
         "id": "meowtask",
@@ -153,8 +276,13 @@
         "realm": "Academic / Web",
         "org": "UMN INFORMATICS",
         "description": "Task and productivity web app built as an informatics lab/course project — manage to-dos and track completion in a simple CRUD interface.",
-        "stack": ["JavaScript", "Node.js", "Express"],
-        "images": []
+        "stack": [
+          "JavaScript",
+          "Node.js",
+          "Express"
+        ],
+        "images": [],
+        "featured": false
       },
       {
         "id": "uquizz",
@@ -162,8 +290,13 @@
         "realm": "Academic / Web",
         "org": "UMN INFORMATICS",
         "description": "Quiz and assessment web application — question sets, student attempts, and scoring for classroom-style drills.",
-        "stack": ["JavaScript", "HTML", "CSS"],
-        "images": []
+        "stack": [
+          "JavaScript",
+          "HTML",
+          "CSS"
+        ],
+        "images": [],
+        "featured": false
       },
       {
         "id": "portofolio-website",
@@ -171,10 +304,27 @@
         "realm": "Personal / Frontend",
         "org": "PORTOFOLIO V1",
         "description": "This portfolio — single-page narrative layout with EN/ID routing, Corporate Weirdcore UI, project image viewer modal, and a low-poly Three.js hero canvas.",
-        "stack": ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "@react-three/fiber"],
-        "images": []
+        "stack": [
+          "Next.js 16",
+          "React 19",
+          "TypeScript",
+          "Tailwind CSS",
+          "@react-three/fiber"
+        ],
+        "images": [],
+        "featured": false
       }
-    ]
+    ],
+    "noImages": "[ NO_MEDIA ]",
+    "viewerEmpty": "[ NO_IMAGE_DATA ]",
+    "modalTitlePrefix": "Image_Viewer.exe",
+    "moreRealms": "[ + MORE_REALMS ]",
+    "lessRealms": "[ - FEWER_REALMS ]",
+    "modalCloseAria": "Close image viewer",
+    "modalPrevAria": "Previous image",
+    "modalNextAria": "Next image",
+    "modalDialogAria": "Image viewer — {name}",
+    "screenshotAlt": "{name} — screenshot {index}"
   },
   "experience": {
     "title": "EXPERIENCE",
@@ -227,6 +377,16 @@
     "builtWith": "Built With:",
     "connect": "[ CONNECT ]",
     "tagline": "PORTOFOLIO V1",
-    "badges": ["NEXTJS", "A LOT OF ANIMATIONS", "UHHH.. AND LOVE"]
+    "badges": [
+      "NEXTJS",
+      "A LOT OF ANIMATIONS",
+      "UHHH.. AND LOVE"
+    ],
+    "quotes": [
+      "WHEN CODING SUCKS, I WANT TO BE AN ANIMAL INSTEAD",
+      "WHAT DO YOU CALL A 7 THAT HAS A FLU?",
+      "I LOVE THE WORLD AND EVERYTHING IN IT",
+      "IF EVERY PORKCHOP WERE PERFECT, WE WOULDN'T HAVE HOTDOGS"
+    ]
   }
 }

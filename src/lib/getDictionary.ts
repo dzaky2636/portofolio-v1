@@ -11,8 +11,16 @@ export interface Dictionary {
     contact: string;
     menuOpen: string;
     menuClose: string;
+    skipToContent: string;
   };
-  hero: { title: string; summary: string };
+  hero: {
+    title: string;
+    summary: string;
+    renderViewTitle: string;
+    renderViewStatus: string;
+    profileFrameTitle: string;
+    profileFrameStatus: string;
+  };
   inventory: {
     title: string;
     subtitle: string;
@@ -31,7 +39,7 @@ export interface Dictionary {
       status: string;
       items: { name: string; score: string }[];
     };
-    techStack: { title: string; status: string; tags: string[] };
+    techStack: { title: string; status: string; tags: string[]; showMore: string };
     status: { title: string; active: string; text: string };
   };
   projects: {
@@ -39,6 +47,16 @@ export interface Dictionary {
     clickPrompt: string;
     openViewer: string;
     imagesLabel: string;
+    noImages: string;
+    viewerEmpty: string;
+    modalTitlePrefix: string;
+    moreRealms: string;
+    lessRealms: string;
+    modalCloseAria: string;
+    modalPrevAria: string;
+    modalNextAria: string;
+    modalDialogAria: string;
+    screenshotAlt: string;
     items: {
       id: string;
       name: string;
@@ -47,6 +65,7 @@ export interface Dictionary {
       description: string;
       stack: string[];
       images: string[];
+      featured?: boolean;
     }[];
   };
   experience: {
@@ -55,7 +74,13 @@ export interface Dictionary {
     items: { role: string; company: string; duration: string; details: string }[];
   };
   contact: { title: string; description: string; button: string };
-  footer: { builtWith: string; connect: string; tagline: string; badges: string[] };
+  footer: {
+    builtWith: string;
+    connect: string;
+    tagline: string;
+    badges: string[];
+    quotes: string[];
+  };
 }
 
 export function isLocale(lang: string): lang is Locale {

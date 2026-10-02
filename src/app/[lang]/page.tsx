@@ -5,8 +5,11 @@ import ExperienceAccordion from '@/components/ExperienceAccordion';
 import AnimateOnScroll from '@/components/AnimateOnScroll';
 import GlitchText from '@/components/GlitchText';
 import SiteHeader from '@/components/SiteHeader';
+import SkipToContent from '@/components/SkipToContent';
+import Window from '@/components/Window';
+import TechStackTags from '@/components/TechStackTags';
+import FooterSocial from '@/components/FooterSocial';
 import { getDictionary } from '@/lib/getDictionary';
-import { FaGithub, FaLinkedin, FaEnvelope, FaWhatsapp, FaInstagram } from 'react-icons/fa';
 
 export default async function Page({
   params,
@@ -15,24 +18,6 @@ export default async function Page({
 }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
-
-  const quotes = [
-    "WHEN CODING SUCKS, I WANT TO BE AN ANIMAL INSTEAD",
-    "youtu.be/iik25wqIuFo?si=InD3NtRqOl4Y8sMr",
-    ".-.- - . -... .-.- .-.. ..-- -... .-.. ..--",
-    "WHAT DO YOU CALL A 7 THAT HAS A FLU?",
-    "I HAVE TWO MICROSOFT OUTLOOKS AND NEITHER ONE OF THOSE ARE WORKING",
-    "WHAT IS THIS? ..DIORITE?",
-    "BUFFALO BUFFALO BUFFALO BUFFALO BUFFALO BUFFALO BUFFALO BUFFALO",
-    "SCIENCE COMPELS US TO EXPLODE THE SUN",
-    "WE MAY NOT HAVE MUCH IN COMMON, YOU AND I. STILL, I CONSIDER YOU AS A FRIEND",
-    "THIS SONG IS NEW TO ME, BUT I AM HONORED TO BE PART OF IT",
-    "OF ALL THE LIFE FORMS THAT WILL PERISH IN THE ONCOMING DEATH OF THE UNIVERSE, WE WILL MISS THE ANGLERFISH THE LEAST",
-    "I LOVE THE WORLD AND EVERYTHING IN IT",
-    "IF EVERY PORKCHOP WERE PERFECT, WE WOULDN'T HAVE HOTDOGS",
-    "I JUST TURNED ALL MY FINGERS INTO CATS!",
-    "WHAT AN INCREDIBLE POWER -- THE ABILITY TO.. GROW UP"
-  ];
 
   const navLinks = [
     { href: '#profile', label: dict.nav.profile },
@@ -43,7 +28,8 @@ export default async function Page({
   ];
 
   return (
-    <main className="relative z-10 min-h-screen text-[#0C0C0C] font-serif selection:bg-[#2945FF] selection:text-white pointer-events-none">
+    <main className="relative z-10 min-h-screen text-[#0C0C0C] font-serif selection:bg-[#2945FF] selection:text-white pointer-events-none overflow-x-hidden">
+      <SkipToContent label={dict.nav.skipToContent} targetId="profile" />
       {/* 1. HEADER */}
       <SiteHeader
         navLinks={navLinks}
@@ -55,10 +41,11 @@ export default async function Page({
       {/* 2. HERO */}
       <section
         id="profile"
-        className="max-w-7xl mx-auto px-4 py-16 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+        tabIndex={-1}
+        className="max-w-7xl mx-auto px-4 py-16 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center overflow-x-hidden outline-none"
       >
         <div className="space-y-8">
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif font-bold leading-[0.85] tracking-tight">
+          <h1 className="text-6xl md:text-8xl lg:text-8xl font-serif font-bold leading-[0.85] tracking-tight">
             <span className="block animate-hydraulic" style={{ animationDelay: '0.05s', animationFillMode: 'both' }}>
               DZAKY
             </span>
@@ -86,30 +73,38 @@ export default async function Page({
 
         <div className="space-y-8">
           <div
-            className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-3 max-w-md mx-auto lg:mr-0 lg:ml-auto animate-eject pointer-events-auto"
+            className="max-w-md mx-auto lg:mr-0 lg:ml-auto animate-eject"
             style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
           >
-            <div className="relative w-full aspect-square bg-[#0C0C0C] overflow-hidden">
-              <Image
-                src="/images/profile-pic.jpg"
-                alt="Dzaky Fatur Rahman"
-                fill
-                priority
-                sizes="(max-width: 1024px) 90vw, 448px"
-                className="object-cover"
-              />
-            </div>
+            <Window
+              title={dict.hero.profileFrameTitle}
+              status={dict.hero.profileFrameStatus}
+              bodyClassName="p-3"
+            >
+              <div className="group relative w-full aspect-square bg-[#0C0C0C] overflow-hidden border-2 border-black">
+                <Image
+                  src="/images/profile-pic.jpg"
+                  alt="Dzaky Fatur Rahman"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 90vw, 448px"
+                  className="object-cover grayscale contrast-125 transition-none group-hover:grayscale-0 group-hover:contrast-100"
+                />
+              </div>
+            </Window>
           </div>
 
           <div
-            className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-4 max-w-md mx-auto lg:mr-0 lg:ml-auto animate-boot"
+            className="max-w-md mx-auto lg:mr-0 lg:ml-auto animate-boot"
             style={{ animationDelay: '0.45s', animationFillMode: 'both' }}
           >
-            <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-3 flex justify-between">
-              <span>RENDER_VIEW.exe</span>
-              <span>[ACTIVE]</span>
-            </div>
-            <RetroCanvas />
+            <Window
+              title={dict.hero.renderViewTitle}
+              status={dict.hero.renderViewStatus}
+              bodyClassName="p-4"
+            >
+              <RetroCanvas />
+            </Window>
           </div>
         </div>
       </section>
@@ -133,13 +128,12 @@ export default async function Page({
           <AnimateOnScroll
             animation="animate-rack-in"
             delay="0.05s"
-            className="lg:col-span-5"
+            className="lg:col-span-4"
           >
-            <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none pointer-events-auto">
-              <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
-                <span>{dict.inventory.education.title}</span>
-                <span>{dict.inventory.education.status}</span>
-              </div>
+            <Window
+              title={dict.inventory.education.title}
+              status={dict.inventory.education.status}
+            >
               <h3 className="text-2xl md:text-3xl font-serif font-bold mb-2">
                 {dict.inventory.education.school}
               </h3>
@@ -154,20 +148,19 @@ export default async function Page({
               <p className="font-serif text-sm mt-1">
                 {dict.inventory.education.award}
               </p>
-            </div>
+            </Window>
           </AnimateOnScroll>
 
           {/* Certifications */}
           <AnimateOnScroll
             animation="animate-rack-in"
             delay="0.15s"
-            className="lg:col-span-4"
+            className="lg:col-span-5"
           >
-            <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none pointer-events-auto">
-              <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
-                <span>{dict.inventory.certifications.title}</span>
-                <span>{dict.inventory.certifications.status}</span>
-              </div>
+            <Window
+              title={dict.inventory.certifications.title}
+              status={dict.inventory.certifications.status}
+            >
               <ul className="space-y-3 font-serif text-lg">
                 {dict.inventory.certifications.items.map((item, index) => {
                   const isLast = index === dict.inventory.certifications.items.length - 1;
@@ -182,7 +175,7 @@ export default async function Page({
                   );
                 })}
               </ul>
-            </div>
+            </Window>
           </AnimateOnScroll>
 
           {/* Tech Stack */}
@@ -191,22 +184,15 @@ export default async function Page({
             delay="0.25s"
             className="lg:col-span-3"
           >
-            <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none pointer-events-auto">
-              <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
-                <span>{dict.inventory.techStack.title}</span>
-                <span>{dict.inventory.techStack.status}</span>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {dict.inventory.techStack.tags.map((tech) => (
-                  <span
-                    key={tech}
-                    className="relative font-mono uppercase tracking-widest text-[10px] border-2 border-black px-2 py-1 bg-[#F4F3ED] shadow-[2px_2px_0px_#0C0C0C] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] active:translate-y-[3px] active:shadow-[0px_0px_0px_#0C0C0C] transition-all duration-75 cursor-default select-none"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
+            <Window
+              title={dict.inventory.techStack.title}
+              status={dict.inventory.techStack.status}
+            >
+              <TechStackTags
+                tags={dict.inventory.techStack.tags}
+                showMoreLabel={dict.inventory.techStack.showMore}
+              />
+            </Window>
           </AnimateOnScroll>
 
           {/* Status */}
@@ -215,15 +201,15 @@ export default async function Page({
             delay="0.35s"
             className="lg:col-span-12"
           >
-            <div className="bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] p-6 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#0C0C0C] hover:border-[#2945FF] hover:scale-y-[0.98] active:scale-y-[0.96] transition-all duration-75 rounded-none pointer-events-auto">
-              <div className="font-mono uppercase tracking-widest text-xs border-b-2 border-black pb-2 mb-4 flex justify-between">
-                <span>{dict.inventory.status.title}</span>
-                <span className="text-[#2945FF]">{dict.inventory.status.active}</span>
-              </div>
+            <Window
+              title={dict.inventory.status.title}
+              status={dict.inventory.status.active}
+              statusAccent
+            >
               <p data-packet className="font-serif text-xl md:text-2xl">
                 {dict.inventory.status.text}
               </p>
-            </div>
+            </Window>
           </AnimateOnScroll>
         </div>
       </section>
@@ -234,6 +220,16 @@ export default async function Page({
         clickPrompt={dict.projects.clickPrompt}
         openViewer={dict.projects.openViewer}
         imagesLabel={dict.projects.imagesLabel}
+        noImages={dict.projects.noImages}
+        moreRealms={dict.projects.moreRealms}
+        lessRealms={dict.projects.lessRealms}
+        modalTitlePrefix={dict.projects.modalTitlePrefix}
+        viewerEmpty={dict.projects.viewerEmpty}
+        modalCloseAria={dict.projects.modalCloseAria}
+        modalPrevAria={dict.projects.modalPrevAria}
+        modalNextAria={dict.projects.modalNextAria}
+        modalDialogAria={dict.projects.modalDialogAria}
+        screenshotAlt={dict.projects.screenshotAlt}
         projects={dict.projects.items}
       />
 
@@ -271,7 +267,7 @@ export default async function Page({
           </p>
           <a
             href="mailto:dzaky2636@gmail.com"
-            className="inline-block bg-white text-[#0C0C0C] border-4 border-white font-mono uppercase tracking-widest text-lg md:text-xl px-12 py-6 shadow-[8px_8px_0px_#2945FF] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#2945FF] active:translate-x-[4px] active:translate-y-[4px] active:shadow-[0px_0px_0px_#2945FF] active:scale-[0.98] transition-all duration-75 rounded-none select-none pointer-events-auto"
+            className="inline-block bg-white text-[#0C0C0C] border-4 border-white font-mono uppercase tracking-widest text-lg md:text-xl px-12 py-6 shadow-[8px_8px_0px_#2945FF] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#2945FF] active:translate-x-[4px] active:translate-y-[4px] active:shadow-[0px_0px_0px_#2945FF] active:scale-[0.98] transition-all duration-75 rounded-none select-none pointer-events-auto retro-focus"
           >
             {dict.contact.button}
           </a>
@@ -311,48 +307,7 @@ export default async function Page({
             </div>
           </div>
 
-          <div className="space-y-4 md:text-right">
-            <div className="font-mono uppercase tracking-widest text-xs">
-              {dict.footer.connect}
-            </div>
-            <div className="flex gap-3 md:justify-end">
-              <a
-                href="https://github.com/dzaky2636"
-                aria-label="GitHub"
-                className="bg-white border-2 border-black shadow-[4px_4px_0px_#0C0C0C] p-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] hover:border-[#2945FF] hover:text-[#2945FF] transition-all duration-75 pointer-events-auto"
-              >
-                <FaGithub className="w-5 h-5" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/dzakyfaturr/"
-                aria-label="LinkedIn"
-                className="bg-white border-2 border-black shadow-[4px_4px_0px_#0C0C0C] p-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] hover:border-[#2945FF] hover:text-[#2945FF] transition-all duration-75 pointer-events-auto"
-              >
-                <FaLinkedin className="w-5 h-5" />
-              </a>
-              <a
-                href="mailto:dzaky2636@gmail.com"
-                aria-label="Email"
-                className="bg-white border-2 border-black shadow-[4px_4px_0px_#0C0C0C] p-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] hover:border-[#2945FF] hover:text-[#2945FF] transition-all duration-75 pointer-events-auto"
-              >
-                <FaEnvelope className="w-5 h-5" />
-              </a>
-              <a
-                href="https://wa.me/6281377752644"
-                aria-label="WhatsApp"
-                className="bg-white border-2 border-black shadow-[4px_4px_0px_#0C0C0C] p-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] hover:border-[#2945FF] hover:text-[#2945FF] transition-all duration-75 pointer-events-auto"
-              >
-                <FaWhatsapp className="w-5 h-5" />
-              </a>
-              <a
-                href="https://instagram.com/dzakyfaturr"
-                aria-label="Instagram"
-                className="bg-white border-2 border-black shadow-[4px_4px_0px_#0C0C0C] p-2 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] hover:border-[#2945FF] hover:text-[#2945FF] transition-all duration-75 pointer-events-auto"
-              >
-                <FaInstagram className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
+          <FooterSocial connectLabel={dict.footer.connect} />
         </div>
 
         <div className="max-w-7xl mx-auto mt-10 pt-4 border-t-2 border-black flex flex-col sm:flex-row justify-between items-center gap-2 font-mono uppercase tracking-widest text-[10px]">
@@ -363,8 +318,8 @@ export default async function Page({
         <div className="max-w-7xl mx-auto mt-8 flex justify-center">
           <p className="font-mono uppercase tracking-widest text-xs border-2 border-dashed border-black p-3 text-center">
             <GlitchText
-              text={quotes[0]}
-              texts={quotes}
+              text={dict.footer.quotes[0]}
+              texts={dict.footer.quotes}
               trigger="interval"
               intervalMs={5000}
             />

@@ -39,7 +39,7 @@ export default function LanguageToggle({ currentLang }: LanguageToggleProps) {
       <Link
         href={`/${targetLang}${hash}`}
         onClick={handleClick}
-        className="relative px-3 py-1 font-mono uppercase tracking-widest text-xs hover:bg-[#2945FF] hover:text-white transition-colors duration-75"
+        className="relative px-3 py-1 font-mono uppercase tracking-widest text-xs hover:bg-[#2945FF] hover:text-white transition-colors duration-75 retro-focus"
       >
         {targetLang.toUpperCase()}
       </Link>

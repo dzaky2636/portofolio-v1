@@ -6,3 +6,46 @@
   --font-mono: var(--font-jetbrains-mono), ui-monospace, "Courier New", monospace;
   --font-sans: var(--font-instrument-serif), ui-serif, Georgia, serif;
 }
+
+.skip-to-content {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #f4f3ed;
+  background: #0c0c0c;
+  border: 2px solid #0c0c0c;
+  box-shadow: 4px 4px 0 #2945ff;
+  transform: translateY(-200%);
+  transition: transform 75ms steps(2, end);
+}
+
+.skip-to-content:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid #2945ff;
+  outline-offset: 2px;
+}
+
+.retro-focus:focus-visible,
+main a:focus-visible,
+main button:focus-visible {
+  outline: 2px solid #2945ff;
+  outline-offset: 2px;
+}
+
+.modal-halftone-backdrop {
+  background-color: rgba(0, 0, 0, 0.88);
+  background-image: radial-gradient(circle, #0c0c0c 1px, transparent 1px);
+  background-size: 4px 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skip-to-content {
+    transition: none;
+  }
+}

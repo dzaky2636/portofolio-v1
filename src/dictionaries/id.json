@@ -10,11 +10,16 @@
     "logs": "[PENGALAMAN]",
     "contact": "[KONTAK]",
     "menuOpen": "[ MENU ]",
-    "menuClose": "[ X ]"
+    "menuClose": "[ X ]",
+    "skipToContent": "[ LANGSUNG KE KONTEN ]"
   },
   "hero": {
     "title": "Fullstack Engineer & AI Builder",
-    "summary": "Lulusan baru Informatika yang gemar membangun aplikasi full-stack, bermain-main dengan AI/ML, dan merancang arsitektur web yang solid. Sudah memimpin tim, mengembangkan fitur dari nol, dan menentukan arah teknologi sejak lama. Portofolio ini masih dalam pengerjaan, tapi kamu bisa lihat karya-karya terpilih untuk menilai keahlian saya."
+    "summary": "Lulusan baru Informatika yang gemar membangun aplikasi full-stack, bermain-main dengan AI/ML, dan merancang arsitektur web yang solid. Sudah memimpin tim, mengembangkan fitur dari nol, dan menentukan arah teknologi sejak lama. Portofolio ini masih dalam pengerjaan, tapi kamu bisa lihat karya-karya terpilih untuk menilai keahlian saya.",
+    "renderViewTitle": "RENDER_VIEW.exe",
+    "renderViewStatus": "[AKTIF]",
+    "profileFrameTitle": "SUBJECT_PHOTO.exe",
+    "profileFrameStatus": "[TERLOAD]"
   },
   "inventory": {
     "title": "PROFIL SINGKAT",
@@ -33,17 +38,52 @@
       "title": "SERTIFIKASI",
       "status": "[TERVERIFIKASI]",
       "items": [
-        { "name": "TOEIC", "score": "960/990" },
-        { "name": "Duolingo English Test", "score": "145/160" },
-        { "name": "Huawei HCIA-AI", "score": "[LULUS]" },
-        { "name": "Sertifikasi Asisten Laboratorium", "score": "[LULUS]" },
-        { "name": "Data Science Fundamentals (DQLab)", "score": "[LULUS]" }
+        {
+          "name": "TOEIC",
+          "score": "960/990"
+        },
+        {
+          "name": "Duolingo English Test",
+          "score": "145/160"
+        },
+        {
+          "name": "Huawei HCIA-AI",
+          "score": "[LULUS]"
+        },
+        {
+          "name": "Sertifikasi Asisten Laboratorium",
+          "score": "[LULUS]"
+        },
+        {
+          "name": "Data Science Fundamentals (DQLab)",
+          "score": "[LULUS]"
+        }
       ]
     },
     "techStack": {
       "title": "TECH STACK SAYA",
       "status": "[LOADED]",
-      "tags": ["Next.js 15", "React 19", "TypeScript", "JavaScript", "Tailwind CSS", "Bootstrap", "Figma", "Laravel", "Kotlin", "Node.js", "Express", "Python", "Java", "C/C++", "PostgreSQL", "Supabase", "RAG", "..DAN LAINNYA!"]
+      "tags": [
+        "Next.js 15",
+        "React 19",
+        "TypeScript",
+        "JavaScript",
+        "Tailwind CSS",
+        "Bootstrap",
+        "Figma",
+        "Laravel",
+        "Kotlin",
+        "Node.js",
+        "Express",
+        "Python",
+        "Java",
+        "C/C++",
+        "PostgreSQL",
+        "Supabase",
+        "RAG",
+        "..DAN LAINNYA!"
+      ],
+      "showMore": "[ +{count} LAINNYA ]"
     },
     "status": {
       "title": "KESIBUKAN SAAT INI",
@@ -53,7 +93,7 @@
   },
   "projects": {
     "title": "PROYEK TERPILIH",
-    "clickPrompt": "KLIK PROYEK APA PUN UNTUK MEMBUKA IMAGE VIEWER",
+    "clickPrompt": "KLIK PROYEK BER-MEDIA UNTUK MEMBUKA IMAGE_VIEWER",
     "openViewer": "[ BUKA IMAGE_VIEWER.EXE ]",
     "imagesLabel": "GAMBAR",
     "items": [
@@ -63,8 +103,24 @@
         "realm": "SaaS & Orkestrasi AI",
         "org": "PT RIGO INOVASI DIGITAL",
         "description": "Membangun platform chatbot SaaS B2B multi-tenant berbasis Next.js 15 + Supabase yang menangani percakapan pelanggan di WhatsApp dan Telegram. Menambahkan pipeline AI anti-halusinasi menggunakan RAG, serta AI Business Advisor yang membantu strategi penjualan. Memimpin tim kecil (sekitar 8~ intern) dan menjaga basis kode tetap rapi.",
-        "stack": ["Next.js 15/16", "Prisma", "Supabase", "PostgreSQL (pgvector)"],
-        "images": ["/images/chatrigo/1.png", "/images/chatrigo/2.png", "/images/chatrigo/3.png", "/images/chatrigo/4.png", "/images/chatrigo/5.png", "/images/chatrigo/6.png", "/images/chatrigo/7.png", "/images/chatrigo/8.png", "/images/chatrigo/9.png"]
+        "stack": [
+          "Next.js 15/16",
+          "Prisma",
+          "Supabase",
+          "PostgreSQL (pgvector)"
+        ],
+        "images": [
+          "/images/chatrigo/1.png",
+          "/images/chatrigo/2.png",
+          "/images/chatrigo/3.png",
+          "/images/chatrigo/4.png",
+          "/images/chatrigo/5.png",
+          "/images/chatrigo/6.png",
+          "/images/chatrigo/7.png",
+          "/images/chatrigo/8.png",
+          "/images/chatrigo/9.png"
+        ],
+        "featured": true
       },
       {
         "id": "chatrigo-mobile",
@@ -72,8 +128,13 @@
         "realm": "SaaS & Mobile",
         "org": "PT RIGO INOVASI DIGITAL",
         "description": "Aplikasi mobile pendamping platform omnichannel Chatrigo — membantu tim mengikuti percakapan pelanggan dan alur kerja agen di mana saja, terhubung ke backend SaaS yang sama dengan produk web.",
-        "stack": ["Expo", "React Native", "TypeScript"],
-        "images": []
+        "stack": [
+          "Expo",
+          "React Native",
+          "TypeScript"
+        ],
+        "images": [],
+        "featured": false
       },
       {
         "id": "e-sign",
@@ -81,8 +142,18 @@
         "realm": "Teknologi Sipil",
         "org": "DISKOMINFO",
         "description": "Sistem Tanda Tangan Elektronik untuk pemerintah daerah — pembuatan kode QR, pemrosesan antrian di background, dan verifikasi melalui API resmi pemerintah. Digunakan untuk mendukung alur penandatanganan di instansi kota termasuk sekolah.",
-        "stack": ["Laravel", "Tailwind CSS", "Queue Processing"],
-        "images": ["/images/diskominfo/1.png", "/images/diskominfo/2.png", "/images/diskominfo/3.png", "/images/diskominfo/4.png"]
+        "stack": [
+          "Laravel",
+          "Tailwind CSS",
+          "Queue Processing"
+        ],
+        "images": [
+          "/images/diskominfo/1.png",
+          "/images/diskominfo/2.png",
+          "/images/diskominfo/3.png",
+          "/images/diskominfo/4.png"
+        ],
+        "featured": true
       },
       {
         "id": "e-kgb",
@@ -90,8 +161,17 @@
         "realm": "Teknologi Sipil",
         "org": "DISKOMINFO",
         "description": "Aplikasi web manajemen kepegawaian untuk proses gaji dan KGB — dasbor, akses berbasis peran, dan alur data pegawai pemerintah daerah.",
-        "stack": ["Laravel", "Tailwind CSS"],
-        "images": ["/images/diskominfo/5.jpg", "/images/diskominfo/6.png", "/images/diskominfo/7.png", "/images/diskominfo/8.png"]
+        "stack": [
+          "Laravel",
+          "Tailwind CSS"
+        ],
+        "images": [
+          "/images/diskominfo/5.jpg",
+          "/images/diskominfo/6.png",
+          "/images/diskominfo/7.png",
+          "/images/diskominfo/8.png"
+        ],
+        "featured": true
       },
       {
         "id": "e-manuntung",
@@ -99,8 +179,14 @@
         "realm": "Teknologi Sipil",
         "org": "DISKOMINFO",
         "description": "Aplikasi layanan publik berbasis Flutter (web dan mobile) yang dibangun di Diskominfo Balikpapan untuk meningkatkan layanan komunikasi dan informatika bagi warga.",
-        "stack": ["Flutter"],
-        "images": ["/images/diskominfo/9.png", "/images/diskominfo/10.png"]
+        "stack": [
+          "Flutter"
+        ],
+        "images": [
+          "/images/diskominfo/9.png",
+          "/images/diskominfo/10.png"
+        ],
+        "featured": true
       },
       {
         "id": "unity-2025",
@@ -108,8 +194,13 @@
         "realm": "Kampus / Acara",
         "org": "UNITY UMN",
         "description": "Memimpin pengembangan dan pemeliharaan website kompetisi Bahasa Inggris UNITY UMN (2025) — registrasi acara, akurasi konten, dan alur publikasi bersama tim lintas fungsi.",
-        "stack": ["Next.js", "TypeScript", "Tailwind CSS"],
-        "images": []
+        "stack": [
+          "Next.js",
+          "TypeScript",
+          "Tailwind CSS"
+        ],
+        "images": [],
+        "featured": false
       },
       {
         "id": "starlight-2024",
@@ -117,8 +208,13 @@
         "realm": "Kampus / Acara",
         "org": "STARLIGHT UMN",
         "description": "Website acara dan kompetisi STARLIGHT UMN (2024) — alur registrasi, konten yang dipublikasikan, dan pemeliharaan situs program kampus.",
-        "stack": ["Next.js", "TypeScript", "Tailwind CSS"],
-        "images": []
+        "stack": [
+          "Next.js",
+          "TypeScript",
+          "Tailwind CSS"
+        ],
+        "images": [],
+        "featured": false
       },
       {
         "id": "thesis",
@@ -126,8 +222,25 @@
         "realm": "Akademik/AI",
         "org": "SKRIPSI UMN",
         "description": "Skripsi S1 saya — sistem tutoring AI yang menggunakan gamifikasi (kerangka Octalysis) dan agen otonom untuk memberikan umpan balik waktu-nyata dan beradaptasi dengan setiap siswa.",
-        "stack": ["Python", "AI Agents", "LLM Engineering"],
-        "images": ["/images/thesis/1.png", "/images/thesis/2.png", "/images/thesis/3.png", "/images/thesis/4.png", "/images/thesis/5.png", "/images/thesis/6.png", "/images/thesis/7.png", "/images/thesis/8.png", "/images/thesis/9.png", "/images/thesis/10.png", "/images/thesis/11.png"]
+        "stack": [
+          "Python",
+          "AI Agents",
+          "LLM Engineering"
+        ],
+        "images": [
+          "/images/thesis/1.png",
+          "/images/thesis/2.png",
+          "/images/thesis/3.png",
+          "/images/thesis/4.png",
+          "/images/thesis/5.png",
+          "/images/thesis/6.png",
+          "/images/thesis/7.png",
+          "/images/thesis/8.png",
+          "/images/thesis/9.png",
+          "/images/thesis/10.png",
+          "/images/thesis/11.png"
+        ],
+        "featured": true
       },
       {
         "id": "aikopetshop",
@@ -135,8 +248,13 @@
         "realm": "Akademik / Web",
         "org": "UMN INFORMATIKA",
         "description": "Proyek pemrograman web — toko hewan peliharaan dengan penelusuran produk dan alur checkout, sebagai latihan aplikasi web full-stack.",
-        "stack": ["Laravel", "PHP", "Tailwind CSS"],
-        "images": []
+        "stack": [
+          "Laravel",
+          "PHP",
+          "Tailwind CSS"
+        ],
+        "images": [],
+        "featured": false
       },
       {
         "id": "pemrograman-web-forums",
@@ -144,8 +262,13 @@
         "realm": "Akademik / Web",
         "org": "UMN INFORMATIKA",
         "description": "Aplikasi web bergaya forum dari mata kuliah Pemrograman Web — thread diskusi, posting, dan pola autentikasi khas tugas forum.",
-        "stack": ["Laravel", "PHP", "MySQL"],
-        "images": []
+        "stack": [
+          "Laravel",
+          "PHP",
+          "MySQL"
+        ],
+        "images": [],
+        "featured": false
       },
       {
         "id": "meowtask",
@@ -153,8 +276,13 @@
         "realm": "Akademik / Web",
         "org": "UMN INFORMATIKA",
         "description": "Aplikasi web tugas dan produktivitas sebagai proyek lab/kuliah informatika — mengelola to-do dan melacak penyelesaian dengan antarmuka CRUD sederhana.",
-        "stack": ["JavaScript", "Node.js", "Express"],
-        "images": []
+        "stack": [
+          "JavaScript",
+          "Node.js",
+          "Express"
+        ],
+        "images": [],
+        "featured": false
       },
       {
         "id": "uquizz",
@@ -162,8 +290,13 @@
         "realm": "Akademik / Web",
         "org": "UMN INFORMATIKA",
         "description": "Aplikasi web kuis dan penilaian — set soal, percobaan siswa, dan penilaian untuk latihan bergaya kelas.",
-        "stack": ["JavaScript", "HTML", "CSS"],
-        "images": []
+        "stack": [
+          "JavaScript",
+          "HTML",
+          "CSS"
+        ],
+        "images": [],
+        "featured": false
       },
       {
         "id": "portofolio-website",
@@ -171,10 +304,27 @@
         "realm": "Personal / Frontend",
         "org": "PORTOFOLIO V1",
         "description": "Portofolio ini — tata letak naratif satu halaman dengan routing EN/ID, UI Corporate Weirdcore, modal image viewer proyek, dan kanvas hero Three.js low-poly.",
-        "stack": ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "@react-three/fiber"],
-        "images": []
+        "stack": [
+          "Next.js 16",
+          "React 19",
+          "TypeScript",
+          "Tailwind CSS",
+          "@react-three/fiber"
+        ],
+        "images": [],
+        "featured": false
       }
-    ]
+    ],
+    "noImages": "[ TANPA_MEDIA ]",
+    "viewerEmpty": "[ DATA_GAMBAR_KOSONG ]",
+    "modalTitlePrefix": "Image_Viewer.exe",
+    "moreRealms": "[ + REALM_LAINNYA ]",
+    "lessRealms": "[ - SEDIKIT_REALM ]",
+    "modalCloseAria": "Tutup penampil gambar",
+    "modalPrevAria": "Gambar sebelumnya",
+    "modalNextAria": "Gambar berikutnya",
+    "modalDialogAria": "Penampil gambar — {name}",
+    "screenshotAlt": "{name} — tangkapan layar {index}"
   },
   "experience": {
     "title": "PENGALAMAN",
@@ -227,6 +377,16 @@
     "builtWith": "Dibangun Dengan:",
     "connect": "[ TERHUBUNG ]",
     "tagline": "PORTOFOLIO V1",
-    "badges": ["NEXTJS", "BANYAK ANIMASI", "UHHH.. DAN CINTA"]
+    "badges": [
+      "NEXTJS",
+      "BANYAK ANIMASI",
+      "UHHH.. DAN CINTA"
+    ],
+    "quotes": [
+      "WHEN CODING SUCKS, I WANT TO BE AN ANIMAL INSTEAD",
+      "WHAT DO YOU CALL A 7 THAT HAS A FLU?",
+      "I LOVE THE WORLD AND EVERYTHING IN IT",
+      "IF EVERY PORKCHOP WERE PERFECT, WE WOULDN'T HAVE HOTDOGS"
+    ]
   }
 }

@@ -17,9 +17,25 @@ interface ProjectModalProps {
   project: ProjectData | null;
   isOpen: boolean;
   onClose: () => void;
+  modalTitlePrefix: string;
+  viewerEmpty: string;
+  modalCloseAria: string;
+  modalPrevAria: string;
+  modalNextAria: string;
+  modalDialogAria: string;
 }
 
-export default function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
+export default function ProjectModal({
+  project,
+  isOpen,
+  onClose,
+  modalTitlePrefix,
+  viewerEmpty,
+  modalCloseAria,
+  modalPrevAria,
+  modalNextAria,
+  modalDialogAria,
+}: ProjectModalProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isPressedPrev, setIsPressedPrev] = useState(false);
   const [isPressedNext, setIsPressedNext] = useState(false);
@@ -74,19 +90,20 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
     };
   }, [isOpen]);
 
-  if (!isOpen || !project) return null;
+  if (!isOpen || !project || totalImages === 0) return null;
 
   const currentImage = project.images[currentImageIndex];
+  const dialogLabel = modalDialogAria.replace('{name}', project.name);
 
   return (
     <div
-      className={`fixed inset-0 z-[100] flex items-center justify-center bg-black/90 pointer-events-auto ${
+      className={`fixed inset-0 z-[100] flex items-center justify-center modal-halftone-backdrop pointer-events-auto ${
         modalFlicker ? 'animate-flicker' : ''
       }`}
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      aria-label={`Image Viewer - ${project.name}`}
+      aria-label={dialogLabel}
     >
       {/* Modal Window */}
       <div
@@ -96,12 +113,12 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
         {/* Title Bar */}
         <div className="flex items-center justify-between border-b-4 border-black bg-[#F4F3ED] px-4 py-3">
           <div className="font-mono uppercase tracking-widest text-xs font-bold">
-            Image_Viewer.exe - [{project.name}]
+            {modalTitlePrefix} - [{project.name}]
           </div>
           <button
             onClick={onClose}
-            className="font-mono uppercase tracking-widest text-xs border-2 border-black px-2 py-1 bg-white shadow-[2px_2px_0px_#0C0C0C] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_#0C0C0C] transition-all duration-75"
-            aria-label="Close modal"
+            className="font-mono uppercase tracking-widest text-xs border-2 border-black px-2 py-1 bg-white shadow-[2px_2px_0px_#0C0C0C] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_#0C0C0C] transition-all duration-75 retro-focus"
+            aria-label={modalCloseAria}
           >
             [ X ]
           </button>
@@ -126,7 +143,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             </div>
           ) : (
             <div className="font-mono uppercase tracking-widest text-xs text-white">
-              [ NO_IMAGE_DATA ]
+              {viewerEmpty}
             </div>
           )}
 
@@ -145,12 +162,12 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             onMouseLeave={() => setIsPressedPrev(false)}
             onTouchStart={() => setIsPressedPrev(true)}
             onTouchEnd={() => setIsPressedPrev(false)}
-            className={`font-mono uppercase tracking-widest text-sm border-2 border-black px-4 py-2 bg-[#F4F3ED] shadow-[4px_4px_0px_#0C0C0C] select-none transition-all duration-75 ${
+            className={`font-mono uppercase tracking-widest text-sm border-2 border-black px-4 py-2 bg-[#F4F3ED] shadow-[4px_4px_0px_#0C0C0C] select-none transition-all duration-75 retro-focus ${
               isPressedPrev
                 ? 'translate-x-[4px] translate-y-[4px] shadow-[0px_0px_0px_#0C0C0C] scale-95'
                 : 'hover:border-[#2945FF]'
             }`}
-            aria-label="Previous image"
+            aria-label={modalPrevAria}
           >
             [ &lt; ]
           </button>
@@ -166,12 +183,12 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             onMouseLeave={() => setIsPressedNext(false)}
             onTouchStart={() => setIsPressedNext(true)}
             onTouchEnd={() => setIsPressedNext(false)}
-            className={`font-mono uppercase tracking-widest text-sm border-2 border-black px-4 py-2 bg-[#F4F3ED] shadow-[4px_4px_0px_#0C0C0C] select-none transition-all duration-75 ${
+            className={`font-mono uppercase tracking-widest text-sm border-2 border-black px-4 py-2 bg-[#F4F3ED] shadow-[4px_4px_0px_#0C0C0C] select-none transition-all duration-75 retro-focus ${
               isPressedNext
                 ? 'translate-x-[4px] translate-y-[4px] shadow-[0px_0px_0px_#0C0C0C] scale-95'
                 : 'hover:border-[#2945FF]'
             }`}
-            aria-label="Next image"
+            aria-label={modalNextAria}
           >
             [ &gt; ]
           </button>
