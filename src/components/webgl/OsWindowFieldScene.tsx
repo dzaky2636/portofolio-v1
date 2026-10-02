@@ -12,7 +12,6 @@ import {
   generateDecorativeWindows,
   getWindowWorldPosition,
 } from '@/components/webgl/osWindowLayout';
-import { WEBGL_PALETTE } from '@/components/webgl/palette';
 import {
   getActiveSection,
   subscribeActiveSection,
@@ -105,25 +104,6 @@ function ParallaxCamera({
   return null;
 }
 
-function FaintFloorGrid() {
-  const gridRef = useRef<THREE.GridHelper>(null);
-
-  useEffect(() => {
-    if (!gridRef.current) return;
-    const mat = gridRef.current.material as THREE.LineBasicMaterial;
-    mat.transparent = true;
-    mat.opacity = 0.03;
-  }, []);
-
-  return (
-    <gridHelper
-      ref={gridRef}
-      args={[56, 28, WEBGL_PALETTE.grid, WEBGL_PALETTE.grid]}
-      position={[0, -7, -18]}
-    />
-  );
-}
-
 function WindowField({ compact }: { compact: boolean }) {
   const activeSection = useSyncExternalStore(
     subscribeActiveSection,
@@ -135,7 +115,6 @@ function WindowField({ compact }: { compact: boolean }) {
 
   return (
     <>
-      <FaintFloorGrid />
       {decorative.map((win) => (
         <OsWindowFrame
           key={win.id}

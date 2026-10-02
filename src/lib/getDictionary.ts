@@ -22,6 +22,8 @@ export interface Dictionary {
     renderViewStatus: string;
     profileFrameTitle: string;
     profileFrameStatus: string;
+    profileToggleToBoar: string;
+    profileToggleToPhoto: string;
   };
   inventory: {
     title: string;

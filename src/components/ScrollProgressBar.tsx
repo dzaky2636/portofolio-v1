@@ -2,7 +2,8 @@
 
 import { useEffect, useMemo, useState } from 'react';
 
-const BLOCKS = 24;
+/** Enough glyphs to span the flex track at mono 10px (clipped, not counted for progress). */
+const TRACK_GLYPHS = 128;
 
 interface ScrollProgressBarProps {
   label: string;
@@ -27,10 +28,8 @@ export default function ScrollProgressBar({ label }: ScrollProgressBarProps) {
     };
   }, []);
 
-  const blockMeter = useMemo(() => {
-    const filled = Math.round((progress / 100) * BLOCKS);
-    return `${'█'.repeat(filled)}${'░'.repeat(BLOCKS - filled)}`;
-  }, [progress]);
+  const trackEmpty = useMemo(() => '░'.repeat(TRACK_GLYPHS), []);
+  const trackFilled = useMemo(() => '█'.repeat(TRACK_GLYPHS), []);
 
   return (
     <div
@@ -43,10 +42,22 @@ export default function ScrollProgressBar({ label }: ScrollProgressBarProps) {
     >
       <div className="max-w-7xl mx-auto px-4 py-1 flex items-center gap-2 font-mono uppercase tracking-widest text-[10px] leading-none">
         <span className="shrink-0 text-[#FFD700]">{label}</span>
-        <span className="hidden sm:inline flex-1 overflow-hidden whitespace-nowrap opacity-90" aria-hidden>
-          {blockMeter}
-        </span>
-        <span className="tabular-nums shrink-0 ml-auto">{progress}%</span>
+        <div className="relative flex-1 min-w-0 h-[1em] overflow-hidden">
+          <span
+            className="absolute inset-0 whitespace-nowrap opacity-40 select-none pointer-events-none"
+            aria-hidden
+          >
+            {trackEmpty}
+          </span>
+          <span
+            className="absolute inset-0 overflow-hidden whitespace-nowrap"
+            style={{ clipPath: `inset(0 ${100 - progress}% 0 0)` }}
+            aria-hidden
+          >
+            {trackFilled}
+          </span>
+        </div>
+        <span className="tabular-nums shrink-0">{progress}%</span>
       </div>
     </div>
   );
