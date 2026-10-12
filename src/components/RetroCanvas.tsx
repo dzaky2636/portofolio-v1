@@ -1,18 +1,28 @@
 'use client';
 
-import { View, PerspectiveCamera } from '@react-three/drei';
-import RetroObject from '@/components/RetroObject';
+import { View, PerspectiveCamera, OrbitControls } from '@react-three/drei';
+import RenderViewScene from '@/components/webgl/RenderViewScene';
 import ViewSceneBackground from '@/components/webgl/ViewSceneBackground';
 
 export default function RetroCanvas() {
   return (
     <View
-      className="aspect-video box-border w-full min-h-[12rem] block border-[10px] border-[#F4F3ED] bg-transparent"
+      className="aspect-video box-border w-full min-h-[12rem] block border-[10px] border-[#F4F3ED] bg-transparent touch-none cursor-grab active:cursor-grabbing pointer-events-auto"
     >
       <ViewSceneBackground />
-      <PerspectiveCamera position={[0, 0, 4.6]} fov={42} near={0.1} far={50} />
-      <group scale={0.82}>
-        <RetroObject />
+      <PerspectiveCamera position={[0.15, 0.35, 4.4]} fov={40} near={0.1} far={50} />
+      <OrbitControls
+        target={[0, 0.05, 0]}
+        enablePan={false}
+        minDistance={3.2}
+        maxDistance={6.5}
+        minPolarAngle={0.35}
+        maxPolarAngle={1.45}
+        rotateSpeed={0.65}
+        enableDamping={false}
+      />
+      <group scale={0.95}>
+        <RenderViewScene />
       </group>
     </View>
   );
