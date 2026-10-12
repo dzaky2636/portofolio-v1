@@ -38,6 +38,11 @@
   opacity: 0;
 }
 
+.animate-project-load {
+  animation: projectLoad 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  opacity: 0;
+}
+
 .animate-led-blink {
   animation: ledBlink 0.15s steps(2, end) forwards;
 }
@@ -179,6 +184,15 @@
   0%   { transform: translateY(40px); opacity: 0; }
   60%  { transform: translateY(-6px); }
   80%  { transform: translateY(2px); }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Project list load — short travel so stacked cards stay in their slots */
+@keyframes projectLoad {
+  0%   { transform: translateY(16px); opacity: 0; }
+  40%  { opacity: 1; }
+  70%  { transform: translateY(-3px); }
+  85%  { transform: translateY(1px); }
   100% { transform: translateY(0); opacity: 1; }
 }
 

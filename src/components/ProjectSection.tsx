@@ -73,6 +73,13 @@ const REALM_FILTER_LABEL: Record<
 };
 
 const STACK_VISIBLE_COUNT = 5;
+const PROJECT_LOAD_STAGGER_STEP = 0.08;
+const PROJECT_LOAD_STAGGER_CAP = 4;
+
+function projectLoadDelay(localIndex: number) {
+  const step = Math.min(Math.max(localIndex, 0), PROJECT_LOAD_STAGGER_CAP);
+  return `${step * PROJECT_LOAD_STAGGER_STEP}s`;
+}
 
 function ProjectCard({
   project,
@@ -311,6 +318,12 @@ export default function ProjectSection({
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
   const [showAll, setShowAll] = useState(false);
   const [realmFilter, setRealmFilter] = useState<RealmFilterId>('all');
+  const prevRealmFilter = useRef(realmFilter);
+  const filterJustChanged = prevRealmFilter.current !== realmFilter;
+
+  useEffect(() => {
+    prevRealmFilter.current = realmFilter;
+  }, [realmFilter]);
 
   const realmFilterLabels = {
     realmFilterSaas,
@@ -441,20 +454,33 @@ export default function ProjectSection({
               {realmFilterEmpty}
             </p>
           )}
-          {visibleProjects.map((project, idx) => (
-            <AnimateOnScroll key={project.id} animation="animate-drawer" delay={`${idx * 0.15}s`}>
-              <ProjectCard
-                project={project}
-                imagesLabel={imagesLabel}
-                openViewer={openViewer}
-                noImages={noImages}
-                featuredLabel={featuredLabel}
-                stackShowMore={stackShowMore}
-                screenshotAlt={screenshotAlt}
-                onOpen={openModal}
-              />
-            </AnimateOnScroll>
-          ))}
+          {visibleProjects.map((project, idx) => {
+            const expandedRest =
+              realmFilter === 'all' &&
+              showAll &&
+              !filterJustChanged &&
+              idx >= featured.length;
+            const localIndex = expandedRest ? idx - featured.length : idx;
+            return (
+              <AnimateOnScroll
+                key={`${realmFilter}-${project.id}`}
+                animation="animate-project-load"
+                delay={projectLoadDelay(localIndex)}
+                threshold={0.08}
+              >
+                <ProjectCard
+                  project={project}
+                  imagesLabel={imagesLabel}
+                  openViewer={openViewer}
+                  noImages={noImages}
+                  featuredLabel={featuredLabel}
+                  stackShowMore={stackShowMore}
+                  screenshotAlt={screenshotAlt}
+                  onOpen={openModal}
+                />
+              </AnimateOnScroll>
+            );
+          })}
         </div>
 
         {showExpandRealms && (

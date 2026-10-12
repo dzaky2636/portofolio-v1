@@ -48,7 +48,7 @@ export default function AnimateOnScroll({
     <div
       ref={ref}
       className={`${className} ${isVisible ? animation : 'opacity-0'}`}
-      style={isVisible ? { animationDelay: delay, animationFillMode: 'forwards' } : undefined}
+      style={isVisible ? { animationDelay: delay, animationFillMode: 'both' } : undefined}
     >
       {children}
     </div>
