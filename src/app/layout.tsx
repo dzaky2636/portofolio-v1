@@ -3,7 +3,6 @@ import { Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import InteractiveBackground from "@/components/InteractiveBackground";
 import WebGLRoot from "@/components/webgl/WebGLRoot";
 import EnvironmentalEffects from "@/components/EnvironmentalEffects";
-import ChatrigoWidget from "@/components/ChatrigoWidget";
 import BootLockScript from "@/components/BootLockScript";
 import "./globals.css";
 
@@ -42,7 +41,6 @@ export default function RootLayout({
         <WebGLRoot />
         <EnvironmentalEffects />
         {children}
-        <ChatrigoWidget />
       </body>
     </html>
   );
