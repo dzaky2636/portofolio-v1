@@ -305,25 +305,6 @@
         "featured": false
       },
       {
-        "id": "meowtask",
-        "name": "MEOWTASK",
-        "realm": "Akademik / Web",
-        "org": "UMN INFORMATIKA",
-        "description": "Aplikasi web tugas dan produktivitas sebagai proyek lab/kuliah informatika — mengelola to-do dan melacak penyelesaian dengan antarmuka CRUD sederhana.",
-        "stack": [
-          "JavaScript",
-          "Node.js",
-          "Express"
-        ],
-        "images": [
-          "/images/meowtask/meowtask1.jpg",
-          "/images/meowtask/meowtask2.jpg",
-          "/images/meowtask/meowtask3.jpg",
-          "/images/meowtask/meowtask4.jpg"
-        ],
-        "featured": false
-      },
-      {
         "id": "uquizz",
         "name": "UQUIZZ",
         "realm": "Akademik / Web",
@@ -342,6 +323,25 @@
           "/images/uquizz/uquizz5.png",
           "/images/uquizz/uquizz6.png",
           "/images/uquizz/uquizz7.png"
+        ],
+        "featured": false
+      },
+      {
+        "id": "meowtask",
+        "name": "MEOWTASK",
+        "realm": "Akademik / Web",
+        "org": "UMN INFORMATIKA",
+        "description": "Aplikasi web tugas dan produktivitas sebagai proyek lab/kuliah informatika — mengelola to-do dan melacak penyelesaian dengan antarmuka CRUD sederhana.",
+        "stack": [
+          "JavaScript",
+          "Node.js",
+          "Express"
+        ],
+        "images": [
+          "/images/meowtask/meowtask1.jpg",
+          "/images/meowtask/meowtask2.jpg",
+          "/images/meowtask/meowtask3.jpg",
+          "/images/meowtask/meowtask4.jpg"
         ],
         "featured": false
       },

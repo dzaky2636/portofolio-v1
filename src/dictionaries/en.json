@@ -305,25 +305,6 @@
         "featured": false
       },
       {
-        "id": "meowtask",
-        "name": "MEOWTASK",
-        "realm": "Academic / Web",
-        "org": "UMN INFORMATICS",
-        "description": "Task and productivity web app built as an informatics lab/course project — manage to-dos and track completion in a simple CRUD interface.",
-        "stack": [
-          "JavaScript",
-          "Node.js",
-          "Express"
-        ],
-        "images": [
-          "/images/meowtask/meowtask1.jpg",
-          "/images/meowtask/meowtask2.jpg",
-          "/images/meowtask/meowtask3.jpg",
-          "/images/meowtask/meowtask4.jpg"
-        ],
-        "featured": false
-      },
-      {
         "id": "uquizz",
         "name": "UQUIZZ",
         "realm": "Academic / Web",
@@ -342,6 +323,25 @@
           "/images/uquizz/uquizz5.png",
           "/images/uquizz/uquizz6.png",
           "/images/uquizz/uquizz7.png"
+        ],
+        "featured": false
+      },
+      {
+        "id": "meowtask",
+        "name": "MEOWTASK",
+        "realm": "Academic / Web",
+        "org": "UMN INFORMATICS",
+        "description": "Task and productivity web app built as an informatics lab/course project — manage to-dos and track completion in a simple CRUD interface.",
+        "stack": [
+          "JavaScript",
+          "Node.js",
+          "Express"
+        ],
+        "images": [
+          "/images/meowtask/meowtask1.jpg",
+          "/images/meowtask/meowtask2.jpg",
+          "/images/meowtask/meowtask3.jpg",
+          "/images/meowtask/meowtask4.jpg"
         ],
         "featured": false
       },
