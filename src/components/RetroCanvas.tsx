@@ -10,12 +10,12 @@ export default function RetroCanvas() {
       className="aspect-video box-border w-full min-h-[12rem] block border-[10px] border-[#F4F3ED] bg-transparent touch-none cursor-grab active:cursor-grabbing pointer-events-auto"
     >
       <ViewSceneBackground />
-      <PerspectiveCamera position={[0.15, 0.35, 4.4]} fov={40} near={0.1} far={50} />
+      <PerspectiveCamera position={[0.12, 0.3, 3.3]} fov={38} near={0.1} far={50} />
       <OrbitControls
-        target={[0, 0.05, 0]}
+        target={[0, 0.08, 0]}
         enablePan={false}
-        minDistance={3.2}
-        maxDistance={6.5}
+        minDistance={2.4}
+        maxDistance={5.5}
         minPolarAngle={0.35}
         maxPolarAngle={1.45}
         rotateSpeed={0.65}
