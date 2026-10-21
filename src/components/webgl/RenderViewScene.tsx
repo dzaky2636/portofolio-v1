@@ -12,6 +12,7 @@ const MODEL_PATH = '/models/computer-screen/computerScreen.obj';
 const SCREEN_MATERIAL = 'metal';
 const GRID_Y = -0.72;
 const TARGET_WIDTH = 2.15;
+const MODEL_YAW = Math.PI + Math.PI / 4;
 
 function materialColor(name: string) {
   return name === SCREEN_MATERIAL ? WEBGL_PALETTE.blue : WEBGL_PALETTE.paper;
@@ -57,7 +58,7 @@ function ComputerScreen() {
   }, [source]);
 
   return (
-    <group position={position} scale={scale}>
+    <group position={position} rotation={[0, -MODEL_YAW, 0]} scale={scale}>
       <primitive object={object} />
     </group>
   );
