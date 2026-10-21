@@ -119,10 +119,7 @@
           "/images/chatrigo/3.png",
           "/images/chatrigo/4.png",
           "/images/chatrigo/5.png",
-          "/images/chatrigo/6.png",
-          "/images/chatrigo/7.png",
-          "/images/chatrigo/8.png",
-          "/images/chatrigo/9.png"
+          "/images/chatrigo/6.png"
         ],
         "featured": true
       },
@@ -137,7 +134,11 @@
           "React Native",
           "TypeScript"
         ],
-        "images": [],
+        "images": [
+          "/images/chatrigo-mobile/1.png",
+          "/images/chatrigo-mobile/2.png",
+          "/images/chatrigo-mobile/3.png"
+        ],
         "featured": false
       },
       {
@@ -152,10 +153,12 @@
           "Queue Processing"
         ],
         "images": [
-          "/images/diskominfo/1.png",
-          "/images/diskominfo/2.png",
-          "/images/diskominfo/3.png",
-          "/images/diskominfo/4.png"
+          "/images/e-sign/1.png",
+          "/images/e-sign/2.png",
+          "/images/e-sign/3.png",
+          "/images/e-sign/4.png",
+          "/images/e-sign/5.png",
+          "/images/e-sign/6.png"
         ],
         "featured": true
       },
@@ -170,10 +173,8 @@
           "Tailwind CSS"
         ],
         "images": [
-          "/images/diskominfo/5.jpg",
-          "/images/diskominfo/6.png",
-          "/images/diskominfo/7.png",
-          "/images/diskominfo/8.png"
+          "/images/e-kgb/1.png",
+          "/images/e-kgb/2.png"
         ],
         "featured": true
       },
@@ -187,8 +188,8 @@
           "Flutter"
         ],
         "images": [
-          "/images/diskominfo/9.png",
-          "/images/diskominfo/10.png"
+          "/images/e-manuntung/1.jpg",
+          "/images/e-manuntung/2.png"
         ],
         "featured": true
       },
@@ -203,7 +204,14 @@
           "TypeScript",
           "Tailwind CSS"
         ],
-        "images": [],
+        "images": [
+          "/images/unity/unity1.png",
+          "/images/unity/unity2.png",
+          "/images/unity/unity3.png",
+          "/images/unity/unity4.png",
+          "/images/unity/unity5.png",
+          "/images/unity/unity6.png"
+        ],
         "featured": false
       },
       {
@@ -217,7 +225,14 @@
           "TypeScript",
           "Tailwind CSS"
         ],
-        "images": [],
+        "images": [
+          "/images/starlight/starlight1.png",
+          "/images/starlight/starlight2.png",
+          "/images/starlight/starlight3.png",
+          "/images/starlight/starlight4.png",
+          "/images/starlight/starlight5.png",
+          "/images/starlight/starlight6.png"
+        ],
         "featured": false
       },
       {
@@ -232,17 +247,17 @@
           "LLM Engineering"
         ],
         "images": [
-          "/images/thesis/1.png",
-          "/images/thesis/2.png",
-          "/images/thesis/3.png",
-          "/images/thesis/4.png",
-          "/images/thesis/5.png",
-          "/images/thesis/6.png",
-          "/images/thesis/7.png",
-          "/images/thesis/8.png",
-          "/images/thesis/9.png",
-          "/images/thesis/10.png",
-          "/images/thesis/11.png"
+          "/images/its/1.png",
+          "/images/its/2.png",
+          "/images/its/3.png",
+          "/images/its/4.png",
+          "/images/its/5.png",
+          "/images/its/6.png",
+          "/images/its/7.png",
+          "/images/its/8.png",
+          "/images/its/9.png",
+          "/images/its/10.png",
+          "/images/its/11.png"
         ],
         "featured": true
       },
@@ -257,7 +272,20 @@
           "PHP",
           "Tailwind CSS"
         ],
-        "images": [],
+        "images": [
+          "/images/aiko_petshop/aiko1.png",
+          "/images/aiko_petshop/aiko2.png",
+          "/images/aiko_petshop/aiko3.png",
+          "/images/aiko_petshop/aiko4.png",
+          "/images/aiko_petshop/aiko5.png",
+          "/images/aiko_petshop/aiko6.png",
+          "/images/aiko_petshop/aiko7.png",
+          "/images/aiko_petshop/aiko8.png",
+          "/images/aiko_petshop/aiko9.png",
+          "/images/aiko_petshop/aiko10.png",
+          "/images/aiko_petshop/aiko11.png",
+          "/images/aiko_petshop/aiko12.png"
+        ],
         "featured": false
       },
       {
@@ -271,7 +299,9 @@
           "PHP",
           "MySQL"
         ],
-        "images": [],
+        "images": [
+          "/images/astratech/astra1.png"
+        ],
         "featured": false
       },
       {
@@ -285,7 +315,12 @@
           "Node.js",
           "Express"
         ],
-        "images": [],
+        "images": [
+          "/images/meowtask/meowtask1.jpg",
+          "/images/meowtask/meowtask2.jpg",
+          "/images/meowtask/meowtask3.jpg",
+          "/images/meowtask/meowtask4.jpg"
+        ],
         "featured": false
       },
       {
@@ -299,7 +334,15 @@
           "HTML",
           "CSS"
         ],
-        "images": [],
+        "images": [
+          "/images/uquizz/uquizz1.png",
+          "/images/uquizz/uquizz2.png",
+          "/images/uquizz/uquizz3.png",
+          "/images/uquizz/uquizz4.png",
+          "/images/uquizz/uquizz5.png",
+          "/images/uquizz/uquizz6.png",
+          "/images/uquizz/uquizz7.png"
+        ],
         "featured": false
       },
       {

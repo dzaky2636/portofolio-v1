@@ -46,67 +46,67 @@ When generating UI components, use ONLY the following verified data. **Do NOT in
 * **Role:** Lead Fullstack Engineer at PT Rigo Inovasi Digital
 * **Stack:** Expo, React Native, TypeScript
 * **Details:** Mobile companion for the Chatrigo omnichannel SaaS — agent and conversation workflows on the go, same backend as web.
-* **Images:** (empty in JSON until `/images/chatrigo-mobile/` added)
+* **Images:** `/images/chatrigo-mobile/1.png`–`3.png`
 
 ### Project 3: E-Sign (Civic Tech)
 * **Role:** Fullstack Web & Mobile Developer at Diskominfo Balikpapan
 * **Stack:** Laravel, Tailwind CSS, Queue Processing
 * **Details:** Municipal E-Signature — QR generation, queue processing, government API verification; deployed for signing workflows including city schools.
-* **Images:** `/images/diskominfo/1.png`–`4.png`
+* **Images:** `/images/e-sign/1.png`–`6.png`
 
 ### Project 4: E-KGB (Civic Tech)
 * **Role:** Fullstack Web & Mobile Developer at Diskominfo Balikpapan
 * **Stack:** Laravel, Tailwind CSS
 * **Details:** Personnel salary and promotion (KGB) management — dashboards and secure auth.
-* **Images:** `/images/diskominfo/5.jpg`–`8.png`
+* **Images:** `/images/e-kgb/1.png`–`2.png`
 
 ### Project 5: E-Manuntung (Civic Tech)
 * **Role:** Fullstack Web & Mobile Developer at Diskominfo Balikpapan
 * **Stack:** Flutter
 * **Details:** Flutter web/mobile public-service app for Diskominfo Balikpapan citizen services.
-* **Images:** `/images/diskominfo/9.png`, `10.png`
+* **Images:** `/images/e-manuntung/1.jpg`, `2.png`
 
 ### Project 6: UNITY 2025 (Campus / Events)
 * **Role:** Website Coordinator at UNITY UMN
 * **Stack:** Next.js, TypeScript, Tailwind CSS
 * **Details:** UNITY UMN English competition website (2025) — registration, content, publication pipelines.
-* **Images:** (empty in JSON until added)
+* **Images:** `/images/unity/unity1.png`–`6.png`
 
 ### Project 7: Starlight 2024 (Campus / Events)
 * **Role:** Campus web (STARLIGHT UMN)
 * **Stack:** Next.js, TypeScript, Tailwind CSS
 * **Details:** STARLIGHT UMN event/competition website (2024).
-* **Images:** (empty in JSON until added)
+* **Images:** `/images/starlight/starlight1.png`–`6.png`
 
 ### Project 8: Intelligent Tutoring System (Academic/AI)
 * **Role:** Informatics Graduate (GPA 3.71/4.00) at Universitas Multimedia Nusantara
 * **Stack:** Python, AI Agents, LLM Engineering
 * **Details:** Undergraduate thesis — Octalysis gamification and autonomous AI agents for adaptive tutoring and real-time feedback.
-* **Images:** `/images/thesis/*`
+* **Images:** `/images/its/*` (Starcoder)
 
 ### Project 9: AikoPetshop (Academic / Web)
 * **Role:** UMN Informatics coursework
 * **Stack:** Laravel, PHP, Tailwind CSS
 * **Details:** Pet shop web storefront (course project).
-* **Images:** (empty in JSON until added)
+* **Images:** `/images/aiko_petshop/aiko1.png`–`12.png`
 
 ### Project 10: Pemrograman Web Forums (Academic / Web)
 * **Role:** UMN Informatics — Web Programming context
 * **Stack:** Laravel, PHP, MySQL
 * **Details:** Forum/discussion web app (course deliverable).
-* **Images:** (empty in JSON until added)
+* **Images:** `/images/astratech/astra1.png`
 
 ### Project 11: MeowTask (Academic / Web)
 * **Role:** UMN Informatics lab/course project
 * **Stack:** JavaScript, Node.js, Express
 * **Details:** Task/productivity web app with CRUD workflows.
-* **Images:** (empty in JSON until added)
+* **Images:** `/images/meowtask/meowtask1.jpg`–`4.jpg`
 
 ### Project 12: UQuizz (Academic / Web)
 * **Role:** UMN Informatics coursework
 * **Stack:** JavaScript, HTML, CSS
 * **Details:** Quiz/assessment web application.
-* **Images:** (empty in JSON until added)
+* **Images:** `/images/uquizz/uquizz1.png`–`7.png`
 
 ### Project 13: Portfolio Website (Personal / Frontend)
 * **Role:** Personal project (this repository)
