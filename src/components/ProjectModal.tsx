@@ -175,7 +175,7 @@ export default function ProjectModal({
       className={`bg-white border-4 border-black shadow-[8px_8px_0px_#0C0C0C] flex flex-col ${
         isMaximized
           ? 'fixed inset-2 md:inset-4 z-[201] max-w-none min-h-0'
-          : 'relative w-[90vw] max-w-4xl animate-iris'
+          : 'relative w-[90vw] max-w-6xl animate-iris'
       }`}
       onClick={(e) => e.stopPropagation()}
     >
@@ -228,7 +228,7 @@ export default function ProjectModal({
               className={`relative w-full ${
                 isMaximized
                   ? 'h-full min-h-[40vh]'
-                  : 'h-[50vh] md:h-[60vh] max-h-[60vh]'
+                  : 'h-[55vh] md:h-[70vh] max-h-[70vh]'
               } ${imageTransition ? 'animate-memoryCorrupt' : ''}`}
             >
               <Image
@@ -236,7 +236,7 @@ export default function ProjectModal({
                 src={currentImage.src}
                 alt={currentImage.alt}
                 fill
-                sizes="(max-width: 896px) 90vw, 896px"
+                unoptimized
                 className="object-contain border-2 border-black"
               />
             </div>
