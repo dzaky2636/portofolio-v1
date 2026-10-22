@@ -102,6 +102,25 @@
     "imagesLabel": "GAMBAR",
     "items": [
       {
+        "id": "replygo",
+        "name": "REPLYGO",
+        "realm": "SaaS & AI Commerce",
+        "org": "PT RIGO INOVASI DIGITAL",
+        "description": "ReplyGo mengubah satu link di bio jadi mini website jualan: profil bisnis, katalog produk, dan asisten AI yang membantu followers menemukan produk serta menjawab pertanyaan sebelum checkout. Cocok untuk kreator, affiliate, dan seller UMKM — lengkap dengan checkout, cek ongkir, dynamic QR code, dan invoice berlogo.",
+        "stack": [
+          "Astro",
+          "AI Assistant",
+          "Cloudflare Pages"
+        ],
+        "images": [
+          "/images/replygo/1.png",
+          "/images/replygo/2.png",
+          "/images/replygo/3.png",
+          "/images/replygo/4.png"
+        ],
+        "featured": true
+      },
+      {
         "id": "chatrigo",
         "name": "CHATRIGO",
         "realm": "SaaS & Orkestrasi AI",
@@ -114,6 +133,8 @@
           "PostgreSQL (pgvector)"
         ],
         "images": [
+          "/images/chatrigo/front.png",
+          "/images/chatrigo/0.png",
           "/images/chatrigo/1.png",
           "/images/chatrigo/2.png",
           "/images/chatrigo/3.png",

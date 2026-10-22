@@ -102,6 +102,25 @@
     "imagesLabel": "IMAGES",
     "items": [
       {
+        "id": "replygo",
+        "name": "REPLYGO",
+        "realm": "SaaS & AI Commerce",
+        "org": "PT RIGO INOVASI DIGITAL",
+        "description": "ReplyGo turns a single bio link into a mini storefront: business profile, product catalog, and an AI assistant that helps followers find products and get answers before checkout. Built for creators, affiliates, and small sellers — with checkout, shipping checks, dynamic QR codes, and branded invoices in one place.",
+        "stack": [
+          "Astro",
+          "AI Assistant",
+          "Cloudflare Pages"
+        ],
+        "images": [
+          "/images/replygo/1.png",
+          "/images/replygo/2.png",
+          "/images/replygo/3.png",
+          "/images/replygo/4.png"
+        ],
+        "featured": true
+      },
+      {
         "id": "chatrigo",
         "name": "CHATRIGO",
         "realm": "SaaS & AI Orchestration",
@@ -114,6 +133,8 @@
           "PostgreSQL (pgvector)"
         ],
         "images": [
+          "/images/chatrigo/front.png",
+          "/images/chatrigo/0.png",
           "/images/chatrigo/1.png",
           "/images/chatrigo/2.png",
           "/images/chatrigo/3.png",
