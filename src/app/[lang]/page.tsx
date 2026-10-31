@@ -72,52 +72,48 @@ export default async function Page({
       <section
         id="profile"
         tabIndex={-1}
-        className="max-w-7xl mx-auto px-4 pt-10 pb-16 lg:pt-12 lg:pb-24 overflow-x-hidden outline-none"
+        className="max-w-7xl mx-auto px-4 py-16 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center overflow-x-hidden outline-none"
       >
-        <h1 className="relative w-fit text-[29vw] md:text-[20vw] xl:text-[16.5rem] font-serif font-bold leading-[0.85] tracking-tight">
-          <span aria-hidden="true" data-boar-perch className="absolute inset-x-0 top-[0.08em] h-0" />
-          <span className="block md:inline-block animate-hydraulic" style={{ animationDelay: '0.05s', animationFillMode: 'both' }}>
-            DZAKY
-          </span>{' '}
-          <span className="block md:inline-block animate-hydraulic" style={{ animationDelay: '0.15s', animationFillMode: 'both' }}>
-            FATUR
-          </span>
-          <span className="block animate-hydraulic" style={{ animationDelay: '0.25s', animationFillMode: 'both' }}>
-            RAHMAN
-          </span>
-        </h1>
-
-        <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-10 items-start">
-          <div className="lg:col-span-7 lg:col-start-1 lg:row-start-1 space-y-6">
-            <div className="flex flex-wrap items-center gap-4">
-              <div
-                data-boar-perch
-                className="font-mono uppercase tracking-widest text-xs bg-[#0C0C0C] text-white inline-block px-3 py-2 border-2 border-white shadow-[4px_4px_0px_#2945FF] animate-stamp"
-                style={{ animationDelay: '0.4s', animationFillMode: 'both' }}
-              >
-                {dict.hero.title}
-              </div>
-              <a
-                href={dict.hero.cvFile}
-                download
-                data-boar-react="cv"
-                className="inline-block bg-[#FFD700] text-[#0C0C0C] border-4 border-black font-mono uppercase tracking-widest text-xs px-4 py-2 shadow-[4px_4px_0px_#0C0C0C] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#0C0C0C] hover:border-[#2945FF] transition-all duration-75 rounded-none select-none pointer-events-auto retro-focus animate-stamp"
-                style={{ animationDelay: '0.6s', animationFillMode: 'backwards' }}
-              >
-                {dict.hero.cvLabel}
-              </a>
-            </div>
-            <p
-              data-packet
-              className="text-lg md:text-xl font-serif leading-relaxed max-w-xl animate-drawer"
-              style={{ animationDelay: '0.5s', animationFillMode: 'both' }}
-            >
-              {dict.hero.summary}
-            </p>
-          </div>
-
+        <div className="space-y-8">
+          <h1 className="text-6xl md:text-8xl lg:text-8xl font-serif font-bold leading-[0.85] tracking-tight">
+            <span className="block animate-hydraulic" style={{ animationDelay: '0.05s', animationFillMode: 'both' }}>
+              DZAKY
+            </span>
+            <span className="block animate-hydraulic" style={{ animationDelay: '0.15s', animationFillMode: 'both' }}>
+              FATUR
+            </span>
+            <span className="block animate-hydraulic" style={{ animationDelay: '0.25s', animationFillMode: 'both' }}>
+              RAHMAN
+            </span>
+          </h1>
           <div
-            className="relative z-20 w-full max-w-md mx-auto lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:row-span-2 lg:mr-0 lg:ml-auto lg:-mt-[calc(17vw+4rem)] xl:-mt-[18rem] animate-eject"
+            data-boar-perch
+            className="font-mono uppercase tracking-widest text-xs bg-[#0C0C0C] text-white inline-block px-3 py-2 border-2 border-white shadow-[4px_4px_0px_#2945FF] animate-stamp"
+            style={{ animationDelay: '0.4s', animationFillMode: 'both' }}
+          >
+            {dict.hero.title}
+          </div>
+          <p
+            data-packet
+            className="text-xl md:text-2xl font-serif leading-relaxed max-w-xl animate-drawer"
+            style={{ animationDelay: '0.5s', animationFillMode: 'both' }}
+          >
+            {dict.hero.summary}
+          </p>
+          <a
+            href={dict.hero.cvFile}
+            download
+            data-boar-react="cv"
+            className="inline-block bg-[#FFD700] text-[#0C0C0C] border-4 border-black font-mono uppercase tracking-widest text-sm px-6 py-3 shadow-[6px_6px_0px_#0C0C0C] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_#0C0C0C] hover:border-[#2945FF] transition-all duration-75 rounded-none select-none pointer-events-auto retro-focus animate-stamp"
+            style={{ animationDelay: '0.6s', animationFillMode: 'backwards' }}
+          >
+            {dict.hero.cvLabel}
+          </a>
+        </div>
+
+        <div className="space-y-8">
+          <div
+            className="max-w-md mx-auto lg:mr-0 lg:ml-auto animate-eject"
             style={{ animationDelay: '0.3s', animationFillMode: 'both' }}
           >
             <Window
@@ -138,7 +134,7 @@ export default async function Page({
           </div>
 
           <div
-            className="w-full max-w-md mx-auto lg:mx-0 lg:col-span-7 lg:col-start-1 lg:row-start-2 animate-boot"
+            className="max-w-md mx-auto lg:mr-0 lg:ml-auto animate-boot"
             style={{ animationDelay: '0.45s', animationFillMode: 'both' }}
           >
             <Window
