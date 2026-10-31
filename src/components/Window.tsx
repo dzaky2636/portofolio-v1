@@ -37,8 +37,17 @@ export default function Window({
     : bodyClassName;
 
   return (
-    <div data-boar-perch className={`${shellClass} ${className}`}>
-      <div className="font-mono uppercase tracking-widest text-xs border-b-4 border-black bg-[#F4F3ED] px-4 py-2 flex flex-wrap justify-between gap-x-2">
+    <div
+      data-boar-perch
+      data-draggable-window={viewportHole ? undefined : true}
+      className={`${shellClass} ${className}`}
+    >
+      <div
+        data-window-bar={viewportHole ? undefined : true}
+        className={`font-mono uppercase tracking-widest text-xs border-b-4 border-black bg-[#F4F3ED] px-4 py-2 flex flex-wrap justify-between gap-x-2 ${
+          viewportHole ? '' : 'lg:cursor-grab lg:active:cursor-grabbing lg:select-none'
+        }`}
+      >
         <span className="min-w-0 break-words">{title}</span>
         <span className={`shrink-0 ${statusAccent ? 'text-[#2945FF]' : ''}`}>{status}</span>
       </div>

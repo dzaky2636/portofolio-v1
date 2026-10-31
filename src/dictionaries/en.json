@@ -556,6 +556,9 @@
     ],
     "skipHint": "[ TAP OR PRESS ANY KEY TO SKIP ]"
   },
+  "windowManager": {
+    "reset": "[ RESET_WINDOWS ]"
+  },
   "mascot": {
     "click": [
       "OINK.",

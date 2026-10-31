@@ -122,6 +122,7 @@ export interface Dictionary {
   };
   contact: { title: string; description: string; button: string; emailCopied: string };
   boot: { lines: string[]; skipHint: string };
+  windowManager: { reset: string };
   mascot: {
     click: string[];
     rage: string;

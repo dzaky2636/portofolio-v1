@@ -6,6 +6,7 @@ import GlitchText from '@/components/GlitchText';
 import SiteHeader from '@/components/SiteHeader';
 import SkipToContent from '@/components/SkipToContent';
 import Window from '@/components/Window';
+import WindowDragManager from '@/components/WindowDragManager';
 import TechStackTags from '@/components/TechStackTags';
 import FooterSocial from '@/components/FooterSocial';
 import CopyEmailButton from '@/components/CopyEmailButton';
@@ -42,6 +43,7 @@ export default async function Page({
     <CopyEmailProvider copiedMessage={dict.contact.emailCopied}>
       <BootSequenceOverlay lines={dict.boot.lines} skipHint={dict.boot.skipHint} />
       <BoarMascot content={dict.mascot} />
+      <WindowDragManager resetLabel={dict.windowManager.reset} />
       <KonamiCheatListener
         content={{
           title: dict.easterEgg.konamiTitle,

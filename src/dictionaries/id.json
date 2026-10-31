@@ -556,6 +556,9 @@
     ],
     "skipHint": "[ KETUK ATAU TEKAN TOMBOL UNTUK LEWATI ]"
   },
+  "windowManager": {
+    "reset": "[ RESET_JENDELA ]"
+  },
   "mascot": {
     "click": [
       "OINK.",
