@@ -33,6 +33,7 @@
     "proof": {
       "title": "BUKTI_KERJA.EXE",
       "status": "[TERVERIFIKASI]",
+      "dragHint": "[ GESER SAYA ]",
       "items": [
         {
           "value": "278",

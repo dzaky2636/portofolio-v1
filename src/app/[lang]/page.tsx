@@ -174,6 +174,7 @@ export default async function Page({
             <Window
               title={dict.inventory.proof.title}
               status={dict.inventory.proof.status}
+              dragHint={dict.inventory.proof.dragHint}
               interactive={false}
               statusAccent
               bodyClassName="p-0"

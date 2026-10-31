@@ -33,6 +33,7 @@
     "proof": {
       "title": "PROOF_OF_WORK.EXE",
       "status": "[VERIFIED]",
+      "dragHint": "[ DRAG ME ]",
       "items": [
         {
           "value": "278",

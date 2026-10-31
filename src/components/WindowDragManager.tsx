@@ -98,6 +98,9 @@ export default function WindowDragManager({ resetLabel }: { resetLabel: string }
         offsetsRef.current.set(shell, { x, y });
         shell.style.transform = `translate(${x}px, ${y}px)`;
         setHasMoved(true);
+        document.querySelectorAll<HTMLElement>('[data-drag-hint]').forEach((hint) => {
+          hint.style.display = 'none';
+        });
       };
 
       const handleUp = () => {

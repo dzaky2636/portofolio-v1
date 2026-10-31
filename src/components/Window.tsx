@@ -14,6 +14,8 @@ interface WindowProps {
   viewportHole?: boolean;
   /** Highlights status text (e.g. inventory “active” pill). */
   statusAccent?: boolean;
+  /** Label beside the title; WindowDragManager hides it after the first drag. */
+  dragHint?: string;
 }
 
 export default function Window({
@@ -25,6 +27,7 @@ export default function Window({
   interactive = true,
   viewportHole = false,
   statusAccent = false,
+  dragHint,
 }: WindowProps) {
   const shellClass = viewportHole
     ? 'bg-transparent border-4 border-black shadow-[8px_8px_0px_#0C0C0C] rounded-none pointer-events-auto'
@@ -48,7 +51,17 @@ export default function Window({
           viewportHole ? '' : 'lg:cursor-grab lg:active:cursor-grabbing lg:select-none'
         }`}
       >
-        <span className="min-w-0 break-words">{title}</span>
+        <span className="min-w-0 break-words">
+          {title}
+          {dragHint && (
+            <span
+              data-drag-hint
+              className="ml-3 hidden lg:[@media(pointer:fine)]:inline-block bg-[#FFD700] border-2 border-black px-1.5 text-[10px] leading-4"
+            >
+              {dragHint}
+            </span>
+          )}
+        </span>
         <span className={`shrink-0 ${statusAccent ? 'text-[#2945FF]' : ''}`}>{status}</span>
       </div>
       <div className={bodyClass}>{children}</div>

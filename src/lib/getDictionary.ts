@@ -33,6 +33,7 @@ export interface Dictionary {
     proof: {
       title: string;
       status: string;
+      dragHint: string;
       items: { value: string; label: string; detail: string }[];
     };
     siteStatus: {
