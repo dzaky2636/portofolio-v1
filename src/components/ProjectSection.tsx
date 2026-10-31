@@ -23,6 +23,9 @@ export interface ProjectItem {
   stack: string[];
   images: string[];
   featured?: boolean;
+  liveUrl?: string;
+  sourceUrl?: string;
+  metrics?: string[];
 }
 
 interface ProjectSectionProps {
@@ -53,6 +56,8 @@ interface ProjectSectionProps {
   realmFilterAcademic: string;
   realmFilterPersonal: string;
   realmFilterEmpty: string;
+  liveLabel: string;
+  sourceLabel: string;
   projects: ProjectItem[];
 }
 
@@ -89,6 +94,8 @@ function ProjectCard({
   featuredLabel,
   stackShowMore,
   screenshotAlt,
+  liveLabel,
+  sourceLabel,
   onOpen,
 }: {
   project: ProjectItem;
@@ -98,8 +105,12 @@ function ProjectCard({
   featuredLabel: string;
   stackShowMore: string;
   screenshotAlt: string;
+  liveLabel: string;
+  sourceLabel: string;
   onOpen: (project: ProjectItem) => void;
 }) {
+  const externalHref = project.liveUrl ?? project.sourceUrl;
+  const externalLabel = project.liveUrl ? liveLabel : sourceLabel;
   const hasImages = project.images.length > 0;
   const thumbSrc = project.images[0];
   const previews = project.images.slice(0, 3);
@@ -157,7 +168,7 @@ function ProjectCard({
       tabIndex={hasImages ? 0 : undefined}
       aria-disabled={!hasImages}
       onKeyDown={(e) => {
-        if (!hasImages) return;
+        if (!hasImages || e.target !== e.currentTarget) return;
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           onOpen(project);
@@ -203,6 +214,14 @@ function ProjectCard({
             >
               {hasImages ? `[ ${project.images.length} ${imagesLabel} ]` : noImages}
             </span>
+            {project.metrics?.map((metric) => (
+              <span
+                key={metric}
+                className="font-mono uppercase tracking-widest text-[10px] border-2 border-black px-2 py-0.5 bg-[#0C0C0C] text-white shadow-[2px_2px_0px_#2945FF]"
+              >
+                {metric}
+              </span>
+            ))}
           </div>
 
           <p className="mt-2 font-serif text-base md:text-lg leading-snug line-clamp-2">
@@ -268,7 +287,7 @@ function ProjectCard({
         </div>
       )}
 
-      <div className="mt-3 pt-3 border-t-2 border-dashed border-black flex items-center justify-between">
+      <div className="mt-3 pt-3 border-t-2 border-dashed border-black flex flex-wrap items-center justify-between gap-2">
         <span
           className={`font-mono uppercase tracking-widest text-xs ${
             hasImages ? 'text-[#2945FF]' : 'text-[#0C0C0C]'
@@ -276,9 +295,22 @@ function ProjectCard({
         >
           {hasImages ? openViewer : noImages}
         </span>
-        {hasImages && (
-          <span className="font-mono uppercase tracking-widest text-xs">[ -&gt; ]</span>
-        )}
+        <div className="flex items-center gap-3">
+          {externalHref && (
+            <a
+              href={externalHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="font-mono uppercase tracking-widest text-[10px] md:text-xs border-2 border-black px-2 py-1 bg-[#2945FF] text-white shadow-[2px_2px_0px_#0C0C0C] hover:bg-[#FFD700] hover:text-[#0C0C0C] retro-focus"
+            >
+              {externalLabel}
+            </a>
+          )}
+          {hasImages && (
+            <span className="font-mono uppercase tracking-widest text-xs">[ -&gt; ]</span>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -312,6 +344,8 @@ export default function ProjectSection({
   realmFilterAcademic,
   realmFilterPersonal,
   realmFilterEmpty,
+  liveLabel,
+  sourceLabel,
   projects,
 }: ProjectSectionProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -476,6 +510,8 @@ export default function ProjectSection({
                   featuredLabel={featuredLabel}
                   stackShowMore={stackShowMore}
                   screenshotAlt={screenshotAlt}
+                  liveLabel={liveLabel}
+                  sourceLabel={sourceLabel}
                   onOpen={openModal}
                 />
               </AnimateOnScroll>

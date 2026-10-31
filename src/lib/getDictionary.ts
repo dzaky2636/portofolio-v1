@@ -24,10 +24,17 @@ export interface Dictionary {
     profileFrameStatus: string;
     profileToggleToBoar: string;
     profileToggleToPhoto: string;
+    cvLabel: string;
+    cvFile: string;
   };
   inventory: {
     title: string;
     subtitle: string;
+    proof: {
+      title: string;
+      status: string;
+      items: { value: string; label: string; detail: string }[];
+    };
     education: {
       title: string;
       status: string;
@@ -74,6 +81,8 @@ export interface Dictionary {
     modalNextAria: string;
     modalDialogAria: string;
     screenshotAlt: string;
+    liveLabel: string;
+    sourceLabel: string;
     items: {
       id: string;
       name: string;
@@ -83,6 +92,9 @@ export interface Dictionary {
       stack: string[];
       images: string[];
       featured?: boolean;
+      liveUrl?: string;
+      sourceUrl?: string;
+      metrics?: string[];
     }[];
   };
   experience: {

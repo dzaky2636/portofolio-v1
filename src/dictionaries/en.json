@@ -23,11 +23,49 @@
     "profileFrameTitle": "SUBJECT_PHOTO.exe",
     "profileFrameStatus": "[LOADED]",
     "profileToggleToBoar": "Show voxel boar avatar",
-    "profileToggleToPhoto": "Show profile photo"
+    "profileToggleToPhoto": "Show profile photo",
+    "cvLabel": "[ DOWNLOAD CV ]",
+    "cvFile": "/cv/DzakyFaturRahman_CV.pdf"
   },
   "inventory": {
     "title": "SHORT PROFILE",
     "subtitle": "/// EDUCATION & SPECIFICATIONS",
+    "proof": {
+      "title": "PROOF_OF_WORK.EXE",
+      "status": "[VERIFIED]",
+      "items": [
+        {
+          "value": "278",
+          "label": "Schools on E-Sign",
+          "detail": "198 SD, 80 SMP"
+        },
+        {
+          "value": "3",
+          "label": "City systems still live",
+          "detail": "Balikpapan"
+        },
+        {
+          "value": "5",
+          "label": "Chat channels unified",
+          "detail": "WhatsApp, Instagram, Telegram, LINE, web chat"
+        },
+        {
+          "value": "8",
+          "label": "Interns led",
+          "detail": "4 directly managed"
+        },
+        {
+          "value": "200+",
+          "label": "Students mentored",
+          "detail": "UMN laboratory sessions"
+        },
+        {
+          "value": "3+",
+          "label": "Years teaching",
+          "detail": "ML, Algorithms, Web Programming"
+        }
+      ]
+    },
     "education": {
       "title": "EDUCATION RECORD",
       "status": "[OK]",
@@ -134,7 +172,8 @@
           "/images/replygo/3.png",
           "/images/replygo/4.png"
         ],
-        "featured": true
+        "featured": true,
+        "liveUrl": "https://www.replygo.id"
       },
       {
         "id": "chatrigo",
@@ -162,7 +201,12 @@
           "/images/chatrigo/5.png",
           "/images/chatrigo/6.png"
         ],
-        "featured": true
+        "featured": true,
+        "liveUrl": "https://www.chatrigo.id",
+        "metrics": [
+          "5 channels",
+          "10 business users"
+        ]
       },
       {
         "id": "chatrigo-mobile",
@@ -201,7 +245,11 @@
           "/images/e-sign/5.png",
           "/images/e-sign/6.png"
         ],
-        "featured": true
+        "featured": true,
+        "liveUrl": "https://edocument.balikpapan.go.id/",
+        "metrics": [
+          "278 schools"
+        ]
       },
       {
         "id": "e-kgb",
@@ -217,7 +265,8 @@
           "/images/e-kgb/1.png",
           "/images/e-kgb/2.png"
         ],
-        "featured": true
+        "featured": true,
+        "liveUrl": "https://kgb.balikpapan.go.id/"
       },
       {
         "id": "e-manuntung",
@@ -300,7 +349,8 @@
           "/images/its/10.png",
           "/images/its/11.png"
         ],
-        "featured": true
+        "featured": true,
+        "sourceUrl": "https://github.com/dzaky2636/adaptive-gamified-its"
       },
       {
         "id": "aikopetshop",
@@ -425,7 +475,9 @@
     "modalPrevAria": "Previous image",
     "modalNextAria": "Next image",
     "modalDialogAria": "Image viewer — {name}",
-    "screenshotAlt": "{name} — screenshot {index}"
+    "screenshotAlt": "{name} — screenshot {index}",
+    "liveLabel": "[ VISIT_LIVE_SITE ]",
+    "sourceLabel": "[ VIEW_SOURCE ]"
   },
   "experience": {
     "title": "EXPERIENCE",
@@ -487,7 +539,7 @@
   },
   "contact": {
     "title": "CONTACT",
-    "description": "Want to collaborate? Click on the button below or contact me on my socials, they are on the bottom right.",
+    "description": "Want to collaborate? Copy my email, download my CV, or reach me on the socials in the footer.",
     "button": "[ COPY EMAIL ]",
     "emailCopied": "[ COPIED TO CLIPBOARD ]"
   },

@@ -94,6 +94,14 @@ export default async function Page({
           >
             {dict.hero.summary}
           </p>
+          <a
+            href={dict.hero.cvFile}
+            download
+            className="inline-block bg-[#FFD700] text-[#0C0C0C] border-4 border-black font-mono uppercase tracking-widest text-sm px-6 py-3 shadow-[6px_6px_0px_#0C0C0C] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_#0C0C0C] hover:border-[#2945FF] transition-all duration-75 rounded-none select-none pointer-events-auto retro-focus animate-stamp"
+            style={{ animationDelay: '0.6s', animationFillMode: 'backwards' }}
+          >
+            {dict.hero.cvLabel}
+          </a>
         </div>
 
         <div className="space-y-8">
@@ -150,6 +158,37 @@ export default async function Page({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
+          {/* Proof numbers */}
+          <AnimateOnScroll
+            animation="animate-rack-in"
+            delay="0s"
+            className="md:col-span-2 lg:col-span-12"
+          >
+            <Window
+              title={dict.inventory.proof.title}
+              status={dict.inventory.proof.status}
+              interactive={false}
+              statusAccent
+              bodyClassName="p-0"
+            >
+              <dl className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-1 bg-[#0C0C0C]">
+                {dict.inventory.proof.items.map((item) => (
+                  <div key={item.label} className="flex flex-col bg-white p-4 md:p-5">
+                    <dt className="order-2 mt-2 font-mono uppercase tracking-widest text-[10px] leading-snug">
+                      {item.label}
+                    </dt>
+                    <dd className="order-1 font-serif font-bold text-5xl md:text-6xl leading-none tracking-tight">
+                      {item.value}
+                    </dd>
+                    <dd className="order-3 mt-1 font-serif text-sm leading-snug">
+                      {item.detail}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </Window>
+          </AnimateOnScroll>
+
           {/* Education */}
           <AnimateOnScroll
             animation="animate-rack-in"
@@ -269,6 +308,8 @@ export default async function Page({
         realmFilterAcademic={dict.projects.realmFilterAcademic}
         realmFilterPersonal={dict.projects.realmFilterPersonal}
         realmFilterEmpty={dict.projects.realmFilterEmpty}
+        liveLabel={dict.projects.liveLabel}
+        sourceLabel={dict.projects.sourceLabel}
         projects={dict.projects.items}
       />
 
@@ -307,11 +348,20 @@ export default async function Page({
           >
             {dict.contact.description}
           </p>
-          <CopyEmailButton
-            className="inline-block bg-white text-[#0C0C0C] border-4 border-white font-mono uppercase tracking-widest text-lg md:text-xl px-12 py-6 shadow-[8px_8px_0px_#2945FF] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#2945FF] active:translate-x-[4px] active:translate-y-[4px] active:shadow-[0px_0px_0px_#2945FF] active:scale-[0.98] transition-all duration-75 rounded-none select-none pointer-events-auto retro-focus"
-          >
-            {dict.contact.button}
-          </CopyEmailButton>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
+            <CopyEmailButton
+              className="inline-block bg-white text-[#0C0C0C] border-4 border-white font-mono uppercase tracking-widest text-lg md:text-xl px-12 py-6 shadow-[8px_8px_0px_#2945FF] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#2945FF] active:translate-x-[4px] active:translate-y-[4px] active:shadow-[0px_0px_0px_#2945FF] active:scale-[0.98] transition-all duration-75 rounded-none select-none pointer-events-auto retro-focus"
+            >
+              {dict.contact.button}
+            </CopyEmailButton>
+            <a
+              href={dict.hero.cvFile}
+              download
+              className="inline-block bg-[#FFD700] text-[#0C0C0C] border-4 border-[#FFD700] font-mono uppercase tracking-widest text-lg md:text-xl px-12 py-6 shadow-[8px_8px_0px_#2945FF] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#2945FF] active:translate-x-[4px] active:translate-y-[4px] active:shadow-[0px_0px_0px_#2945FF] active:scale-[0.98] transition-all duration-75 rounded-none select-none pointer-events-auto retro-focus"
+            >
+              {dict.hero.cvLabel}
+            </a>
+          </div>
         </div>
       </section>
 
