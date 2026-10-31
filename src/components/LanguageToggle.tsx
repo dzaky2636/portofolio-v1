@@ -29,7 +29,7 @@ export default function LanguageToggle({ currentLang }: LanguageToggleProps) {
 
   return (
     <div
-      className={`flex items-center border-2 border-black bg-white overflow-hidden pointer-events-auto ${
+      className={`flex shrink-0 items-center border-2 border-black bg-white overflow-hidden pointer-events-auto ${
         isAnimating ? 'animate-twitch' : ''
       }`}
     >

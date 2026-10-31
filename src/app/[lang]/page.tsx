@@ -38,7 +38,7 @@ export default async function Page({
 
   return (
     <CopyEmailProvider copiedMessage={dict.contact.emailCopied}>
-      <BootSequenceOverlay lines={dict.boot.lines} />
+      <BootSequenceOverlay lines={dict.boot.lines} skipHint={dict.boot.skipHint} />
       <KonamiCheatListener
         content={{
           title: dict.easterEgg.konamiTitle,

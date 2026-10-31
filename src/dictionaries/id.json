@@ -535,7 +535,8 @@
       "MEMUAT NAVIGATION_MODULE... [OK]",
       "MOUNT SCATTER_SCENE... [OK]",
       "SISTEM SIAP."
-    ]
+    ],
+    "skipHint": "[ KETUK ATAU TEKAN TOMBOL UNTUK LEWATI ]"
   },
   "contact": {
     "title": "KONTAK",

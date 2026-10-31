@@ -38,8 +38,8 @@ export default function Window({
 
   return (
     <div className={`${shellClass} ${className}`}>
-      <div className="font-mono uppercase tracking-widest text-xs border-b-4 border-black bg-[#F4F3ED] px-4 py-2 flex justify-between gap-2">
-        <span className="truncate">{title}</span>
+      <div className="font-mono uppercase tracking-widest text-xs border-b-4 border-black bg-[#F4F3ED] px-4 py-2 flex flex-wrap justify-between gap-x-2">
+        <span className="min-w-0 break-words">{title}</span>
         <span className={`shrink-0 ${statusAccent ? 'text-[#2945FF]' : ''}`}>{status}</span>
       </div>
       <div className={bodyClass}>{children}</div>

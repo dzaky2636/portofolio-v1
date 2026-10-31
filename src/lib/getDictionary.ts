@@ -111,7 +111,7 @@ export interface Dictionary {
     items: { role: string; company: string; duration: string; details: string }[];
   };
   contact: { title: string; description: string; button: string; emailCopied: string };
-  boot: { lines: string[] };
+  boot: { lines: string[]; skipHint: string };
   footer: {
     builtWith: string;
     connect: string;

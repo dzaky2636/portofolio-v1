@@ -10,8 +10,8 @@ import {
 } from '@/lib/bootSession';
 import { usePrefersReducedMotion } from '@/hooks/useMediaQuery';
 
-const BOOT_TARGET_MS = 4500;
-const STEP_MS = 750;
+const BOOT_TARGET_MS = 1500;
+const STEP_MS = 250;
 const EXIT_MS = 300;
 
 function holdAfterMs(lineCount: number) {
@@ -21,9 +21,10 @@ function holdAfterMs(lineCount: number) {
 
 interface BootSequenceOverlayProps {
   lines: string[];
+  skipHint: string;
 }
 
-export default function BootSequenceOverlay({ lines }: BootSequenceOverlayProps) {
+export default function BootSequenceOverlay({ lines, skipHint }: BootSequenceOverlayProps) {
   const reducedMotion = usePrefersReducedMotion();
   const [active, setActive] = useState(false);
   const [exiting, setExiting] = useState(false);
@@ -58,25 +59,43 @@ export default function BootSequenceOverlay({ lines }: BootSequenceOverlayProps)
   }, [active]);
 
   useEffect(() => {
-    if (!active || lines.length === 0) return;
+    if (!active || exiting || lines.length === 0) return;
 
     if (lineIndex < lines.length - 1) {
       const t = window.setTimeout(() => setLineIndex((i) => i + 1), STEP_MS);
       return () => window.clearTimeout(t);
     }
 
-    const t = window.setTimeout(() => {
-      setExiting(true);
-      window.setTimeout(() => {
-        markBootSessionComplete();
-        clearBootLock();
-        setActive(false);
-        document.body.style.overflow = '';
-      }, EXIT_MS);
-    }, holdAfterMs(lines.length));
+    const t = window.setTimeout(() => setExiting(true), holdAfterMs(lines.length));
 
     return () => window.clearTimeout(t);
-  }, [active, lineIndex, lines.length]);
+  }, [active, exiting, lineIndex, lines.length]);
+
+  useEffect(() => {
+    if (!active || exiting) return;
+
+    const skip = () => setExiting(true);
+    window.addEventListener('keydown', skip);
+    window.addEventListener('pointerdown', skip);
+
+    return () => {
+      window.removeEventListener('keydown', skip);
+      window.removeEventListener('pointerdown', skip);
+    };
+  }, [active, exiting]);
+
+  useEffect(() => {
+    if (!active || !exiting) return;
+
+    const t = window.setTimeout(() => {
+      markBootSessionComplete();
+      clearBootLock();
+      setActive(false);
+      document.body.style.overflow = '';
+    }, EXIT_MS);
+
+    return () => window.clearTimeout(t);
+  }, [active, exiting]);
 
   if (!portalReady || !active) return null;
 
@@ -109,6 +128,7 @@ export default function BootSequenceOverlay({ lines }: BootSequenceOverlayProps)
               {line}
             </p>
           ))}
+          <p className="mt-4 text-[10px] opacity-70">{skipHint}</p>
         </div>
       </div>
     </div>

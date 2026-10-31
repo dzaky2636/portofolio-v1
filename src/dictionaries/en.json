@@ -535,7 +535,8 @@
       "LOADING NAVIGATION_MODULE... [OK]",
       "MOUNTING SCATTER_SCENE... [OK]",
       "SYSTEM READY."
-    ]
+    ],
+    "skipHint": "[ TAP OR PRESS ANY KEY TO SKIP ]"
   },
   "contact": {
     "title": "CONTACT",

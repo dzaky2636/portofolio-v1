@@ -81,6 +81,16 @@ const STACK_VISIBLE_COUNT = 5;
 const PROJECT_LOAD_STAGGER_STEP = 0.08;
 const PROJECT_LOAD_STAGGER_CAP = 4;
 
+function realmFilterClass(selected: boolean) {
+  const base =
+    'font-mono uppercase tracking-widest text-[10px] md:text-xs border-2 md:border-4 border-black px-2 md:px-4 py-1 md:py-2 transition-all duration-75 retro-focus';
+  return `${base} ${
+    selected
+      ? 'bg-[#2945FF] text-white shadow-[1px_1px_0px_#0C0C0C] md:shadow-[2px_2px_0px_#0C0C0C] translate-x-[1px] translate-y-[1px] md:translate-x-[2px] md:translate-y-[2px]'
+      : 'bg-white shadow-[2px_2px_0px_#0C0C0C] md:shadow-[4px_4px_0px_#0C0C0C] hover:border-[#2945FF]'
+  }`;
+}
+
 function projectLoadDelay(localIndex: number) {
   const step = Math.min(Math.max(localIndex, 0), PROJECT_LOAD_STAGGER_CAP);
   return `${step * PROJECT_LOAD_STAGGER_STEP}s`;
@@ -175,14 +185,14 @@ function ProjectCard({
         }
       }}
     >
-      <div className="flex gap-3 md:gap-4">
+      <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
         {thumbSrc && (
-          <div className="relative w-28 md:w-36 aspect-video shrink-0 border-2 border-black overflow-hidden bg-[#0C0C0C]">
+          <div className="relative w-full sm:w-28 md:w-36 aspect-video shrink-0 self-start border-2 border-black overflow-hidden bg-[#0C0C0C]">
             <Image
               src={thumbSrc}
               alt={screenshotAlt.replace('{name}', project.name).replace('{index}', '1')}
               fill
-              sizes="(max-width: 768px) 112px, 144px"
+              sizes="(max-width: 640px) 100vw, 144px"
               className="object-cover"
             />
           </div>
@@ -455,11 +465,7 @@ export default function ProjectSection({
               role="tab"
               aria-selected={realmFilter === 'all'}
               onClick={() => setRealmFilter('all')}
-              className={`font-mono uppercase tracking-widest text-xs border-4 border-black px-4 py-2 shadow-[4px_4px_0px_#0C0C0C] transition-all duration-75 retro-focus ${
-                realmFilter === 'all'
-                  ? 'bg-[#2945FF] text-white shadow-[2px_2px_0px_#0C0C0C] translate-x-[2px] translate-y-[2px]'
-                  : 'bg-white hover:border-[#2945FF]'
-              }`}
+              className={realmFilterClass(realmFilter === 'all')}
             >
               {realmFilterAll}
             </button>
@@ -470,11 +476,7 @@ export default function ProjectSection({
                 role="tab"
                 aria-selected={realmFilter === id}
                 onClick={() => setRealmFilter(id)}
-                className={`font-mono uppercase tracking-widest text-xs border-4 border-black px-4 py-2 shadow-[4px_4px_0px_#0C0C0C] transition-all duration-75 retro-focus ${
-                  realmFilter === id
-                    ? 'bg-[#2945FF] text-white shadow-[2px_2px_0px_#0C0C0C] translate-x-[2px] translate-y-[2px]'
-                    : 'bg-white hover:border-[#2945FF]'
-                }`}
+                className={realmFilterClass(realmFilter === id)}
               >
                 {realmFilterLabels[REALM_FILTER_LABEL[id]]}
               </button>

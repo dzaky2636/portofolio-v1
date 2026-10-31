@@ -131,15 +131,16 @@ export default function SiteHeader({
           type="button"
           onClick={handleLogoClick}
           {...(!reducedMotion ? { 'data-twitch': true } : {})}
-          className={`font-mono uppercase tracking-widest text-xs font-bold border-2 border-black px-2 py-1 bg-white shadow-[4px_4px_0px_#0C0C0C] cursor-pointer hover:border-[#2945FF] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[3px_3px_0px_#0C0C0C] transition-all duration-75 retro-focus ${
+          className={`whitespace-nowrap font-mono uppercase tracking-widest text-xs font-bold border-2 border-black px-2 py-1 bg-white shadow-[4px_4px_0px_#0C0C0C] cursor-pointer hover:border-[#2945FF] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[3px_3px_0px_#0C0C0C] transition-all duration-75 retro-focus ${
             reducedMotion ? '' : 'animate-flicker'
           }`}
           aria-label={"Dzaky's Corner"}
         >
-          {"DZAKY'S CORNER"}
+          {"DZAKY'S"}
+          <span className="max-[359px]:hidden"> CORNER</span>
         </button>
 
-        <nav className="hidden md:flex items-center gap-6" aria-label="Main">
+        <nav className="hidden lg:flex items-center gap-6" aria-label="Main">
           {navLinks.map((link) => {
             const isActive = activeSection === hrefToId(link.href);
             return (
@@ -161,7 +162,7 @@ export default function SiteHeader({
           <button
             ref={menuButtonRef}
             type="button"
-            className="md:hidden font-mono uppercase tracking-widest text-xs border-2 border-black px-2 py-1 bg-white shadow-[4px_4px_0px_#0C0C0C] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#0C0C0C] active:translate-x-[4px] active:translate-y-[4px] active:shadow-[0px_0px_0px_#0C0C0C] transition-all duration-75 retro-focus"
+            className="lg:hidden whitespace-nowrap font-mono uppercase tracking-widest text-xs border-2 border-black px-2 py-1 bg-white shadow-[4px_4px_0px_#0C0C0C] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#0C0C0C] active:translate-x-[4px] active:translate-y-[4px] active:shadow-[0px_0px_0px_#0C0C0C] transition-all duration-75 retro-focus"
             onClick={toggleMenu}
             aria-expanded={isOpen}
             aria-controls="mobile-nav-panel"
@@ -176,7 +177,7 @@ export default function SiteHeader({
         <nav
           ref={mobilePanelRef}
           id="mobile-nav-panel"
-          className="md:hidden border-t-4 border-black bg-white shadow-[8px_8px_0px_#0C0C0C] mx-4 mb-4 animate-iris"
+          className="lg:hidden border-t-4 border-black bg-white shadow-[8px_8px_0px_#0C0C0C] mx-4 mb-4 animate-iris"
           aria-label="Main mobile"
         >
           {navLinks.map((link, index) => {

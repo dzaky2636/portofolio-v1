@@ -153,7 +153,7 @@ export default function ExperienceLogViewer({
 
           <div className="lg:col-span-7 border-t-4 lg:border-t-0 lg:border-l-4 border-black bg-white flex flex-col min-h-[200px]">
             <div
-              className="font-mono uppercase tracking-widest text-xs border-b-4 border-black bg-[#F4F3ED] px-4 py-2 flex justify-between gap-2"
+              className="font-mono uppercase tracking-widest text-xs border-b-4 border-black bg-[#F4F3ED] px-4 py-2 flex flex-wrap justify-between gap-x-2"
             >
               <span>{labels.detailTitle}</span>
               {selected?.duration && (
