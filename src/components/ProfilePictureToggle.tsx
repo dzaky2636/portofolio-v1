@@ -42,6 +42,7 @@ export default function ProfilePictureToggle({
         onClick={toggle}
         aria-pressed={showBoar}
         aria-label={showBoar ? toggleToPhotoAria : toggleToBoarAria}
+        data-boar-react="cousin"
         className={`absolute inset-0 z-10 border-0 p-0 cursor-pointer pointer-events-auto retro-focus bg-transparent ${
           showBoar ? '' : 'group'
         }`}

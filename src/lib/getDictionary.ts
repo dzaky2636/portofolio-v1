@@ -122,6 +122,11 @@ export interface Dictionary {
   };
   contact: { title: string; description: string; button: string; emailCopied: string };
   boot: { lines: string[]; skipHint: string };
+  mascot: {
+    click: string[];
+    rage: string;
+    reactions: { email: string; cv: string; live: string; cousin: string };
+  };
   footer: {
     builtWith: string;
     connect: string;

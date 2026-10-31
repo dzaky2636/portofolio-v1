@@ -11,6 +11,7 @@ import FooterSocial from '@/components/FooterSocial';
 import CopyEmailButton from '@/components/CopyEmailButton';
 import ProfilePictureToggle from '@/components/ProfilePictureToggle';
 import StatusPanel from '@/components/StatusPanel';
+import BoarMascot from '@/components/BoarMascot';
 import BootSequenceOverlay from '@/components/BootSequenceOverlay';
 import KonamiCheatListener from '@/components/KonamiCheatListener';
 import { CopyEmailProvider, PORTFOLIO_EMAIL } from '@/components/CopyEmailProvider';
@@ -40,6 +41,7 @@ export default async function Page({
   return (
     <CopyEmailProvider copiedMessage={dict.contact.emailCopied}>
       <BootSequenceOverlay lines={dict.boot.lines} skipHint={dict.boot.skipHint} />
+      <BoarMascot content={dict.mascot} />
       <KonamiCheatListener
         content={{
           title: dict.easterEgg.konamiTitle,
@@ -83,6 +85,7 @@ export default async function Page({
             </span>
           </h1>
           <div
+            data-boar-perch
             className="font-mono uppercase tracking-widest text-xs bg-[#0C0C0C] text-white inline-block px-3 py-2 border-2 border-white shadow-[4px_4px_0px_#2945FF] animate-stamp"
             style={{ animationDelay: '0.4s', animationFillMode: 'both' }}
           >
@@ -98,6 +101,7 @@ export default async function Page({
           <a
             href={dict.hero.cvFile}
             download
+            data-boar-react="cv"
             className="inline-block bg-[#FFD700] text-[#0C0C0C] border-4 border-black font-mono uppercase tracking-widest text-sm px-6 py-3 shadow-[6px_6px_0px_#0C0C0C] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_#0C0C0C] hover:border-[#2945FF] transition-all duration-75 rounded-none select-none pointer-events-auto retro-focus animate-stamp"
             style={{ animationDelay: '0.6s', animationFillMode: 'backwards' }}
           >
@@ -367,6 +371,7 @@ export default async function Page({
             <a
               href={dict.hero.cvFile}
               download
+              data-boar-react="cv"
               className="inline-block bg-[#FFD700] text-[#0C0C0C] border-4 border-[#FFD700] font-mono uppercase tracking-widest text-lg md:text-xl px-12 py-6 shadow-[8px_8px_0px_#2945FF] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[6px_6px_0px_#2945FF] active:translate-x-[4px] active:translate-y-[4px] active:shadow-[0px_0px_0px_#2945FF] active:scale-[0.98] transition-all duration-75 rounded-none select-none pointer-events-auto retro-focus"
             >
               {dict.hero.cvLabel}

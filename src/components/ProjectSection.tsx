@@ -160,6 +160,7 @@ function ProjectCard({
 
   return (
     <div
+      data-boar-perch
       onClick={handleActivate}
       onPointerEnter={() => {
         if (!reducedMotion) setStripHover(true);
@@ -311,6 +312,7 @@ function ProjectCard({
               href={externalHref}
               target="_blank"
               rel="noopener noreferrer"
+              data-boar-react="live"
               onClick={(e) => e.stopPropagation()}
               className="font-mono uppercase tracking-widest text-[10px] md:text-xs border-2 border-black px-2 py-1 bg-[#2945FF] text-white shadow-[2px_2px_0px_#0C0C0C] hover:bg-[#FFD700] hover:text-[#0C0C0C] retro-focus"
             >

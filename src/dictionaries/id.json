@@ -556,6 +556,22 @@
     ],
     "skipHint": "[ KETUK ATAU TEKAN TOMBOL UNTUK LEWATI ]"
   },
+  "mascot": {
+    "click": [
+      "OINK.",
+      "OINK OINK.",
+      "TIDAK ADA BUG. SUDAH SAYA MAKAN.",
+      "TOLONG JANGAN COLEK SAYA.",
+      "REKRUT DZAKY. SAYA BUTUH CAMILAN."
+    ],
+    "rage": "RAGE_MODE.EXE",
+    "reactions": {
+      "email": "EMAIL TERSALIN. PILIHAN BAGUS.",
+      "cv": "CV DIDAPAT. BACA SAMPAI HABIS.",
+      "live": "SITUS ASLI. LIHAT SAJA.",
+      "cousin": "ITU SEPUPU SAYA."
+    }
+  },
   "contact": {
     "title": "KONTAK",
     "description": "Mau berkolaborasi? Salin email saya, unduh CV, atau hubungi saya lewat media sosial di footer.",

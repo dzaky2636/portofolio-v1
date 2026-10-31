@@ -16,7 +16,7 @@ export default function CopyEmailButton({
   const copyEmail = useCopyEmail();
 
   return (
-    <button type={type} className={className} onClick={copyEmail} {...props}>
+    <button type={type} className={className} onClick={copyEmail} data-boar-react="email" {...props}>
       {children}
     </button>
   );

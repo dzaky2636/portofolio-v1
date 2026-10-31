@@ -556,6 +556,22 @@
     ],
     "skipHint": "[ TAP OR PRESS ANY KEY TO SKIP ]"
   },
+  "mascot": {
+    "click": [
+      "OINK.",
+      "OINK OINK.",
+      "NO BUGS HERE. I ATE THEM.",
+      "PLEASE STOP POKING ME.",
+      "HIRE DZAKY. I NEED SNACKS."
+    ],
+    "rage": "RAGE_MODE.EXE",
+    "reactions": {
+      "email": "EMAIL COPIED. GOOD INSTINCTS.",
+      "cv": "CV ACQUIRED. READ IT ALL.",
+      "live": "REAL SITE. GO LOOK.",
+      "cousin": "THAT'S MY COUSIN."
+    }
+  },
   "contact": {
     "title": "CONTACT",
     "description": "Want to collaborate? Copy my email, download my CV, or reach me on the socials in the footer.",
