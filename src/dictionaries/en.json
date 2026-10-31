@@ -16,8 +16,8 @@
     "systemClockTz": "TZ: WIB"
   },
   "hero": {
-    "title": "Fullstack Engineer & AI Builder",
-    "summary": "Recent Informatics graduate who loves building full-stack apps, playing around with AI/ML, and designing solid web architecture. Been leading teams, shipping features from scratch, and figuring out tech directions for a while now. This portofolio is a work in progress, but you can check out my highlighted work to check out my expertise.",
+    "title": "Lead Fullstack Engineer",
+    "summary": "Fullstack engineer shipping production web systems end to end, from interface and API to database and deployment. Currently Lead Fullstack Engineer at PT Rigo Inovasi Digital, building Chatrigo and ReplyGo with a focus on AI orchestration, RAG, and platform integrations. Also shipped three e-government systems still live in Balikpapan and taught at university level for more than three years.",
     "renderViewTitle": "RENDER_VIEW.exe",
     "renderViewStatus": "[ACTIVE]",
     "profileFrameTitle": "SUBJECT_PHOTO.exe",
