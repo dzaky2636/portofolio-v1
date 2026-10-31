@@ -66,6 +66,16 @@
         }
       ]
     },
+    "siteStatus": {
+      "title": "STATUS.EXE",
+      "checking": "[PINGING...]",
+      "summary": "[{online}/{total} ONLINE]",
+      "online": "[ONLINE]",
+      "degraded": "[DEGRADED]",
+      "offline": "[NO_SIGNAL]",
+      "lastPing": "LAST_PING",
+      "unavailable": "[ STATUS_FEED_UNAVAILABLE ]"
+    },
     "education": {
       "title": "EDUCATION RECORD",
       "status": "[OK]",

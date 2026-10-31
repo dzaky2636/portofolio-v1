@@ -66,6 +66,16 @@
         }
       ]
     },
+    "siteStatus": {
+      "title": "STATUS.EXE",
+      "checking": "[MENGECEK...]",
+      "summary": "[{online}/{total} ONLINE]",
+      "online": "[ONLINE]",
+      "degraded": "[TERGANGGU]",
+      "offline": "[TANPA_SINYAL]",
+      "lastPing": "PING_TERAKHIR",
+      "unavailable": "[ FEED_STATUS_TIDAK_TERSEDIA ]"
+    },
     "education": {
       "title": "REKAMAN PENDIDIKAN",
       "status": "[OK]",

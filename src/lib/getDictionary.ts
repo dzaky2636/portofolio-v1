@@ -35,6 +35,16 @@ export interface Dictionary {
       status: string;
       items: { value: string; label: string; detail: string }[];
     };
+    siteStatus: {
+      title: string;
+      checking: string;
+      summary: string;
+      online: string;
+      degraded: string;
+      offline: string;
+      lastPing: string;
+      unavailable: string;
+    };
     education: {
       title: string;
       status: string;

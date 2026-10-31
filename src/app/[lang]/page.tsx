@@ -10,6 +10,7 @@ import TechStackTags from '@/components/TechStackTags';
 import FooterSocial from '@/components/FooterSocial';
 import CopyEmailButton from '@/components/CopyEmailButton';
 import ProfilePictureToggle from '@/components/ProfilePictureToggle';
+import StatusPanel from '@/components/StatusPanel';
 import BootSequenceOverlay from '@/components/BootSequenceOverlay';
 import KonamiCheatListener from '@/components/KonamiCheatListener';
 import { CopyEmailProvider, PORTFOLIO_EMAIL } from '@/components/CopyEmailProvider';
@@ -187,6 +188,15 @@ export default async function Page({
                 ))}
               </dl>
             </Window>
+          </AnimateOnScroll>
+
+          {/* Live site status */}
+          <AnimateOnScroll
+            animation="animate-rack-in"
+            delay="0.02s"
+            className="md:col-span-2 lg:col-span-12"
+          >
+            <StatusPanel labels={dict.inventory.siteStatus} />
           </AnimateOnScroll>
 
           {/* Education */}
