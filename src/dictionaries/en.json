@@ -68,23 +68,34 @@
       "title": "MY TECH STACKS",
       "status": "[LOADED]",
       "tags": [
-        "Next.js 15",
-        "React 19",
         "TypeScript",
-        "JavaScript",
-        "Tailwind CSS",
-        "Bootstrap",
-        "Figma",
+        "Rust",
+        "Next.js",
+        "React",
+        "NestJS",
+        "Axum",
+        "PostgreSQL",
+        "Redis",
+        "Temporal",
+        "Python",
+        "Go",
+        "PHP",
         "Laravel",
-        "Kotlin",
+        "Flutter",
+        "RAG",
+        "pgvector",
+        "Prisma",
+        "Supabase",
+        "Tailwind CSS",
+        "Docker",
+        "JavaScript",
         "Node.js",
         "Express",
-        "Python",
+        "Bootstrap",
+        "Figma",
+        "Kotlin",
         "Java",
         "C/C++",
-        "PostgreSQL",
-        "Supabase",
-        "RAG",
         "..AND MORE!"
       ],
       "showMore": "[ +{count} MORE ]"
@@ -106,11 +117,16 @@
         "name": "REPLYGO",
         "realm": "SaaS & AI Commerce",
         "org": "PT RIGO INOVASI DIGITAL",
-        "description": "ReplyGo turns a single bio link into a mini storefront: business profile, product catalog, and an AI assistant that helps followers find products and get answers before checkout. Built for creators, affiliates, and small sellers — with checkout, shipping checks, dynamic QR codes, and branded invoices in one place.",
+        "description": "ReplyGo turns a single bio link into a mini storefront for creators, affiliates, and small sellers: business profile, product catalog, Xendit QRIS checkout, shipping checks, dynamic QR codes, and branded invoices, plus an AI assistant that helps followers find products and get answers before checkout.",
         "stack": [
-          "Astro",
-          "AI Assistant",
-          "Cloudflare Pages"
+          "Rust",
+          "Axum",
+          "SeaORM",
+          "PostgreSQL (pgvector)",
+          "React",
+          "TypeScript",
+          "Xendit",
+          "OpenRouter"
         ],
         "images": [
           "/images/replygo/1.png",
@@ -125,12 +141,16 @@
         "name": "CHATRIGO",
         "realm": "SaaS & AI Orchestration",
         "org": "PT RIGO INOVASI DIGITAL",
-        "description": "Built a multi-tenant B2B SaaS chatbot platform on Next.js 15 + Supabase that handles customer chats across WhatsApp and Telegram. Added an anti-hallucination AI pipeline using RAG, plus an AI Business Advisor that helps with sales strategy. Managed a small team (around 8~ interns) and kept the codebase clean.",
+        "description": "Multi-tenant B2B omnichannel chatbot SaaS unifying WhatsApp, Instagram, Telegram, LINE, and web chat into per-tenant workspaces, with Xendit QRIS billing, conversation summaries, and tenant RBAC. Designed the RAG orchestration layer and an AI sales agent with evidence-bound product recommendations, scoping every query by tenant. Led architecture and code review for a team of 8 interns.",
         "stack": [
-          "Next.js 15/16",
+          "NestJS/Fastify",
+          "Next.js 16",
           "Prisma",
-          "Supabase",
-          "PostgreSQL (pgvector)"
+          "PostgreSQL",
+          "Redis",
+          "Temporal",
+          "RAG",
+          "Xendit"
         ],
         "images": [
           "/images/chatrigo/front.png",
@@ -167,7 +187,7 @@
         "name": "E-SIGN",
         "realm": "Civic Tech",
         "org": "DISKOMINFO",
-        "description": "Digital E-Signature system for the local government — QR code generation, background queue processing, and verification through official government APIs. Deployed to support signing workflows across municipal sites including city schools.",
+        "description": "Digital signature and document verification platform for the city government: QR-code stamping, queued background PDF processing, and verification against official government APIs. Deployed for school document signing across Balikpapan's 278 primary and junior-secondary schools (198 SD, 80 SMP).",
         "stack": [
           "Laravel",
           "Tailwind CSS",
@@ -188,7 +208,7 @@
         "name": "E-KGB",
         "realm": "Civic Tech",
         "org": "DISKOMINFO",
-        "description": "Secure personnel management web app for salary and promotion (KGB) processes — dashboards, role-based access, and workflows for municipal staff data.",
+        "description": "Personnel management web app for municipal staff, covering periodic salary review and promotion (KGB) requests with role-based dashboards, process automation, and authenticated access control.",
         "stack": [
           "Laravel",
           "Tailwind CSS"
@@ -368,9 +388,9 @@
       },
       {
         "id": "portofolio-website",
-        "name": "PORTOFOLIO WEBSITE",
+        "name": "PORTFOLIO WEBSITE",
         "realm": "Personal / Frontend",
-        "org": "PORTOFOLIO V1",
+        "org": "PORTFOLIO V1",
         "description": "This portfolio — single-page narrative layout with EN/ID routing, Corporate Weirdcore UI, project image viewer modal, and a low-poly Three.js hero canvas.",
         "stack": [
           "Next.js 16",
@@ -420,28 +440,28 @@
     },
     "items": [
       {
-        "role": "Chief Technology Officer (CTO) & Lead Fullstack Engineer",
+        "role": "Lead Fullstack Engineer",
         "company": "PT Rigo Inovasi Digital",
         "duration": "2026 — NOW",
-        "details": "Lead the technological vision and engineering architecture for a comprehensive omnichannel AI chatbot SaaS platform, centralizing customer interactions across WhatsApp, Telegram, and social commerce. Manage and mentor the technical division (including full-stack developer interns), establishing code quality standards, SDLC guidelines, and remote engineering operational efficiency."
+        "details": "Lead architecture, code review, and SDLC standards for a team of 8 interns, 4 of them directly managed. Architected Chatrigo, a multi-tenant omnichannel chatbot platform unifying WhatsApp, Instagram, Telegram, LINE, and web chat, used by 10 business users across client organizations. Built ReplyGo, a link-in-bio storefront with a Rust/Axum backend and an AI assistant. Designed the RAG orchestration layer that grounds responses in each tenant's knowledge base and scopes every query by tenant."
       },
       {
-        "role": "Fullstack Web & Mobile Developer",
+        "role": "Fullstack Developer Intern",
         "company": "Diskominfo Balikpapan",
         "duration": "2025",
-        "details": "Designed and developed Flutter-based web and mobile applications to enhance public services in communications and informatics for the citizens of Balikpapan. Implemented new features and resolved system bugs to ensure optimal performance, maintainability, and a seamless user experience."
+        "details": "Shipped three municipal systems into production during a five-month internship; all remain live today. Built an e-signature platform (Laravel) deployed for school document signing across Balikpapan's 278 primary and junior-secondary schools, a personnel management application for salary review and promotion (KGB) requests, and a Flutter web and mobile public-service application (E-Manuntung)."
       },
       {
-        "role": "Website Coordinator",
+        "role": "Website Lead",
         "company": "UNITY UMN",
         "duration": "2025",
-        "details": "Spearheaded the development and maintenance of the UNITY UMN English competition website, ensuring content accuracy and optimal functionality. Coordinated with cross-functional teams to integrate organizational requirements into the system, such as event registration and content publication pipelines."
+        "details": "Built and maintained the UNITY UMN English competition site in parallel with the Diskominfo internship; owned event registration and content-publishing flows."
       },
       {
-        "role": "Laboratory Assistant",
-        "company": "UMN Informatics",
-        "duration": "2022 — 2026",
-        "details": "Instructed courses including Machine Learning, Algorithms & Data Structures, Web Programming, and Introduction to Internet Technology. Developed comprehensive examination materials utilized for official university assessments. Evaluated and mentored approximately 200+ students across various laboratory sessions."
+        "role": "Laboratory Teaching Assistant",
+        "company": "Universitas Multimedia Nusantara",
+        "duration": "2022 — 2025",
+        "details": "Taught Machine Learning, Algorithms & Data Structures, Web Programming, Mobile Application Programming, and Introduction to Internet Technology. Mentored and evaluated 200+ students across laboratory sessions and authored exam materials used for official university assessment."
       },
       {
         "role": "Teaching Assistant",
@@ -453,7 +473,7 @@
         "role": "Web Developer Intern",
         "company": "Department of Land and Spatial Planning, Balikpapan",
         "duration": "2021",
-        "details": "Completed a three-month internship focusing on web application maintenance and infrastructure. Utilized PHP, HTML, and SQL to support fundamental data operations and UI/UX design updates."
+        "details": "Three-month internship supporting internal web tooling: PHP, HTML, and SQL data operations and UI/UX updates."
       }
     ]
   },
@@ -468,13 +488,13 @@
   "contact": {
     "title": "CONTACT",
     "description": "Want to collaborate? Click on the button below or contact me on my socials, they are on the bottom right.",
-    "button": "[ SEND EMAIL ]",
+    "button": "[ COPY EMAIL ]",
     "emailCopied": "[ COPIED TO CLIPBOARD ]"
   },
   "footer": {
     "builtWith": "Built With:",
     "connect": "[ CONNECT ]",
-    "tagline": "PORTOFOLIO V1",
+    "tagline": "PORTFOLIO V1",
     "badges": [
       "NEXTJS",
       "A LOT OF ANIMATIONS",
@@ -491,7 +511,7 @@
     "bsodTitle": "BSOD.exe — UNEXPECTED_HALT",
     "bsodReboot": "PRESS [ ESC ] TO REBOOT",
     "bsodLines": [
-      "STOP: 0x0000DEAD (PORTOFOLIO_KERNEL_PANIC)",
+      "STOP: 0x0000DEAD (PORTFOLIO_KERNEL_PANIC)",
       "",
       "A problem has been detected and dzaky.corner has been shut down",
       "to prevent damage to your browser tab.",

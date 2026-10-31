@@ -68,23 +68,34 @@
       "title": "TECH STACK SAYA",
       "status": "[LOADED]",
       "tags": [
-        "Next.js 15",
-        "React 19",
         "TypeScript",
-        "JavaScript",
-        "Tailwind CSS",
-        "Bootstrap",
-        "Figma",
+        "Rust",
+        "Next.js",
+        "React",
+        "NestJS",
+        "Axum",
+        "PostgreSQL",
+        "Redis",
+        "Temporal",
+        "Python",
+        "Go",
+        "PHP",
         "Laravel",
-        "Kotlin",
+        "Flutter",
+        "RAG",
+        "pgvector",
+        "Prisma",
+        "Supabase",
+        "Tailwind CSS",
+        "Docker",
+        "JavaScript",
         "Node.js",
         "Express",
-        "Python",
+        "Bootstrap",
+        "Figma",
+        "Kotlin",
         "Java",
         "C/C++",
-        "PostgreSQL",
-        "Supabase",
-        "RAG",
         "..DAN LAINNYA!"
       ],
       "showMore": "[ +{count} LAINNYA ]"
@@ -106,11 +117,16 @@
         "name": "REPLYGO",
         "realm": "SaaS & AI Commerce",
         "org": "PT RIGO INOVASI DIGITAL",
-        "description": "ReplyGo mengubah satu link di bio jadi mini website jualan: profil bisnis, katalog produk, dan asisten AI yang membantu followers menemukan produk serta menjawab pertanyaan sebelum checkout. Cocok untuk kreator, affiliate, dan seller UMKM — lengkap dengan checkout, cek ongkir, dynamic QR code, dan invoice berlogo.",
+        "description": "ReplyGo mengubah satu link di bio jadi mini storefront untuk kreator, afiliator, dan penjual kecil: profil bisnis, katalog produk, checkout QRIS via Xendit, pengecekan ongkir, QR code dinamis, dan invoice berlabel, dengan asisten AI yang membantu pengikut menemukan produk dan menjawab pertanyaan sebelum checkout.",
         "stack": [
-          "Astro",
-          "AI Assistant",
-          "Cloudflare Pages"
+          "Rust",
+          "Axum",
+          "SeaORM",
+          "PostgreSQL (pgvector)",
+          "React",
+          "TypeScript",
+          "Xendit",
+          "OpenRouter"
         ],
         "images": [
           "/images/replygo/1.png",
@@ -125,12 +141,16 @@
         "name": "CHATRIGO",
         "realm": "SaaS & Orkestrasi AI",
         "org": "PT RIGO INOVASI DIGITAL",
-        "description": "Membangun platform chatbot SaaS B2B multi-tenant berbasis Next.js 15 + Supabase yang menangani percakapan pelanggan di WhatsApp dan Telegram. Menambahkan pipeline AI anti-halusinasi menggunakan RAG, serta AI Business Advisor yang membantu strategi penjualan. Memimpin tim kecil (sekitar 8~ intern) dan menjaga basis kode tetap rapi.",
+        "description": "SaaS chatbot B2B omnichannel multi-tenant yang menyatukan WhatsApp, Instagram, Telegram, LINE, dan web chat ke dalam workspace per tenant, dengan billing QRIS Xendit, ringkasan chat, dan RBAC per tenant. Merancang lapisan orkestrasi RAG dan AI sales agent dengan rekomendasi produk berbasis bukti, dengan seluruh query dibatasi per tenant. Memegang arsitektur dan code review untuk tim berisi 8 intern.",
         "stack": [
-          "Next.js 15/16",
+          "NestJS/Fastify",
+          "Next.js 16",
           "Prisma",
-          "Supabase",
-          "PostgreSQL (pgvector)"
+          "PostgreSQL",
+          "Redis",
+          "Temporal",
+          "RAG",
+          "Xendit"
         ],
         "images": [
           "/images/chatrigo/front.png",
@@ -167,7 +187,7 @@
         "name": "E-SIGN",
         "realm": "Teknologi Sipil",
         "org": "DISKOMINFO",
-        "description": "Sistem Tanda Tangan Elektronik untuk pemerintah daerah — pembuatan kode QR, pemrosesan antrian di background, dan verifikasi melalui API resmi pemerintah. Digunakan untuk mendukung alur penandatanganan di instansi kota termasuk sekolah.",
+        "description": "Platform tanda tangan digital dan verifikasi dokumen untuk pemerintah kota: stempel QR code, pemrosesan PDF asinkron berbasis queue, dan verifikasi melalui API resmi pemerintah. Digunakan untuk penandatanganan dokumen di 278 sekolah dasar dan menengah pertama di Balikpapan (198 SD, 80 SMP).",
         "stack": [
           "Laravel",
           "Tailwind CSS",
@@ -188,7 +208,7 @@
         "name": "E-KGB",
         "realm": "Teknologi Sipil",
         "org": "DISKOMINFO",
-        "description": "Aplikasi web manajemen kepegawaian untuk proses gaji dan KGB — dasbor, akses berbasis peran, dan alur data pegawai pemerintah daerah.",
+        "description": "Aplikasi web manajemen kepegawaian untuk pegawai pemerintah kota, mencakup pengajuan Kenaikan Gaji Berkala (KGB) dan promosi, dengan dashboard berbasis role, otomasi proses, dan kontrol akses terautentikasi.",
         "stack": [
           "Laravel",
           "Tailwind CSS"
@@ -420,28 +440,28 @@
     },
     "items": [
       {
-        "role": "Chief Technology Officer (CTO) & Lead Fullstack Engineer",
+        "role": "Lead Fullstack Engineer",
         "company": "PT Rigo Inovasi Digital",
         "duration": "2026 — SEKARANG",
-        "details": "Memimpin visi teknologi dan arsitektur engineering untuk platform SaaS chatbot AI omnichannel yang komprehensif, menyatukan interaksi pelanggan di WhatsApp, Telegram, dan social commerce. Mengelola dan membimbing divisi teknis (termasuk intern full-stack developer), menetapkan standar kualitas kode, pedoman SDLC, dan efisiensi operasional engineering jarak jauh."
+        "details": "Memegang arsitektur, code review, dan standar SDLC untuk tim berisi 8 intern, 4 di antaranya dibimbing langsung. Merancang Chatrigo, platform chatbot omnichannel multi-tenant yang menyatukan WhatsApp, Instagram, Telegram, LINE, dan web chat, digunakan oleh 10 pengguna bisnis dari organisasi klien. Membangun ReplyGo, storefront link-in-bio dengan backend Rust/Axum dan asisten AI. Merancang lapisan orkestrasi RAG agar respons berlandaskan knowledge base tiap tenant, dengan seluruh query dibatasi per tenant."
       },
       {
-        "role": "Fullstack Web & Mobile Developer",
+        "role": "Fullstack Developer Intern",
         "company": "Diskominfo Balikpapan",
         "duration": "2025",
-        "details": "Merancang dan mengembangkan aplikasi web dan mobile berbasis Flutter untuk meningkatkan layanan publik di bidang komunikasi dan informatika bagi warga Balikpapan. Mengimplementasikan fitur-fitur baru dan memperbaiki bug sistem untuk memastikan performa optimal, maintainability, dan pengalaman pengguna yang mulus."
+        "details": "Merilis tiga sistem pemerintah daerah ke produksi dalam program magang lima bulan; semuanya masih berjalan hingga sekarang. Membangun platform tanda tangan elektronik (Laravel) untuk penandatanganan dokumen di 278 sekolah dasar dan menengah pertama di Balikpapan, aplikasi manajemen kepegawaian untuk pengajuan Kenaikan Gaji Berkala (KGB), dan aplikasi layanan publik Flutter untuk web dan mobile (E-Manuntung)."
       },
       {
-        "role": "Website Coordinator",
+        "role": "Website Lead",
         "company": "UNITY UMN",
         "duration": "2025",
-        "details": "Memimpin pengembangan dan pemeliharaan website kompetisi Bahasa Inggris UNITY UMN, memastikan akurasi konten dan fungsionalitas optimal. Berkoordinasi dengan tim lintas-fungsi untuk mengintegrasikan kebutuhan organisasi ke dalam sistem, seperti registrasi acara dan alur publikasi konten."
+        "details": "Membangun dan memelihara situs kompetisi bahasa Inggris UNITY UMN; memegang alur registrasi acara dan publikasi konten."
       },
       {
-        "role": "Laboratory Assistant",
-        "company": "UMN Informatika",
-        "duration": "2022 — 2026",
-        "details": "Mengajar mata kuliah termasuk Machine Learning, Algoritma & Struktur Data, Pemrograman Web, dan Pengantar Teknologi Internet. Menyusun materi ujian komprehensif yang digunakan untuk penilaian resmi universitas. Mengevaluasi dan membimbing sekitar 200+ mahasiswa di berbagai sesi laboratorium."
+        "role": "Asisten Pengajar Laboratorium",
+        "company": "Universitas Multimedia Nusantara",
+        "duration": "2022 — 2025",
+        "details": "Mengajar mata kuliah Machine Learning, Algoritma & Struktur Data, Web Programming, Mobile Application Programming, dan Pengantar Teknologi Internet. Membimbing dan mengevaluasi 200+ mahasiswa dalam sesi laboratorium serta menyusun materi ujian yang digunakan untuk asesmen resmi universitas."
       },
       {
         "role": "Teaching Assistant",
@@ -451,9 +471,9 @@
       },
       {
         "role": "Web Developer Intern",
-        "company": "Dinas Tata Ruang dan Pertanahan, Balikpapan",
+        "company": "Dinas Pertanahan dan Tata Ruang, Balikpapan",
         "duration": "2021",
-        "details": "Menyelesaikan magang tiga bulan yang berfokus pada pemeliharaan aplikasi web dan infrastruktur. Menggunakan PHP, HTML, dan SQL untuk mendukung operasi data fundamental dan pembaruan desain UI/UX."
+        "details": "Magang tiga bulan pada tooling web internal: operasi data PHP, HTML, dan SQL serta pembaruan UI/UX."
       }
     ]
   },
@@ -468,7 +488,7 @@
   "contact": {
     "title": "KONTAK",
     "description": "Mau berkolaborasi? Klik tombol di bawah ini atau hubungi saya melalui media sosial, tautannya ada di kanan bawah.",
-    "button": "[ KIRIM EMAIL ]",
+    "button": "[ SALIN EMAIL ]",
     "emailCopied": "[ TERSALIN KE CLIPBOARD ]"
   },
   "footer": {
