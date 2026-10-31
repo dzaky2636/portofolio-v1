@@ -372,7 +372,57 @@
         "liveUrl": "https://edocument.balikpapan.go.id/",
         "metrics": [
           "278 schools"
-        ]
+        ],
+        "caseStudy": {
+          "problem": "City documents, including school documents, needed digital signatures that can be verified, and signing them one at a time does not scale.",
+          "role": "Fullstack Developer Intern at Diskominfo Balikpapan. I built this Laravel platform during a five-month internship.",
+          "flow": [
+            {
+              "label": "REQUEST",
+              "detail": "Staff submit a single PDF or a ZIP batch."
+            },
+            {
+              "label": "QUEUE",
+              "detail": "Background workers process the PDFs."
+            },
+            {
+              "label": "SIGN",
+              "detail": "Each document gets a certified signature and QR stamp."
+            },
+            {
+              "label": "VERIFY",
+              "detail": "Validity is checked against official government APIs."
+            },
+            {
+              "label": "RESULT",
+              "detail": "Signer, certificate, and timestamp shown as valid."
+            }
+          ],
+          "decisions": [
+            {
+              "title": "PDF work in background queues",
+              "detail": "Queue workers handle PDF processing, so a batch does not hold up the web request."
+            },
+            {
+              "title": "Batch requests",
+              "detail": "One request can carry many files, and status is tracked per file."
+            },
+            {
+              "title": "Official verification",
+              "detail": "Results come from official government APIs and show certificate status plus a BSSN timestamp authority."
+            },
+            {
+              "title": "QR placement by text tag",
+              "detail": "A tag inside the document sets the QR coordinates, so nobody positions it by hand on every file."
+            }
+          ],
+          "outcome": [
+            "Live at edocument.balikpapan.go.id",
+            "278 schools",
+            "198 SD, 80 SMP",
+            "Built in a 5-month internship"
+          ]
+        }
       },
       {
         "id": "e-kgb",
@@ -389,7 +439,53 @@
           "/images/e-kgb/2.png"
         ],
         "featured": true,
-        "liveUrl": "https://kgb.balikpapan.go.id/"
+        "liveUrl": "https://kgb.balikpapan.go.id/",
+        "caseStudy": {
+          "problem": "Municipal staff are due a periodic salary review (KGB) every two years. HR needs to see who is due across city departments and act in time.",
+          "role": "Fullstack Developer Intern at Diskominfo Balikpapan. I built this Laravel and Tailwind CSS application during the same internship.",
+          "flow": [
+            {
+              "label": "MASTER_DATA",
+              "detail": "Employees, ranks, positions, grades, and departments."
+            },
+            {
+              "label": "NEXT_DATE",
+              "detail": "The next KGB date is tracked per employee."
+            },
+            {
+              "label": "STATUS",
+              "detail": "Marks each case as due or not yet due, with days left."
+            },
+            {
+              "label": "ACTION",
+              "detail": "Staff process KGB and promotion requests."
+            }
+          ],
+          "decisions": [
+            {
+              "title": "Status from dates",
+              "detail": "The list shows each next review date, its status, and the days left, so due cases stand out."
+            },
+            {
+              "title": "Filters by department",
+              "detail": "SKPD and status filters let staff narrow a citywide list down to the cases they own."
+            },
+            {
+              "title": "One set of master data",
+              "detail": "Employees, positions, grades, and departments sit in shared master data behind both workflows."
+            },
+            {
+              "title": "Role-based access",
+              "detail": "Authenticated access and role-based dashboards protect municipal staff data."
+            }
+          ],
+          "outcome": [
+            "Live at kgb.balikpapan.go.id",
+            "KGB and promotion workflows",
+            "Role-based dashboards",
+            "Laravel and Tailwind CSS"
+          ]
+        }
       },
       {
         "id": "e-manuntung",
@@ -453,11 +549,15 @@
         "name": "INTELLIGENT TUTORING SYSTEM",
         "realm": "Academic/AI",
         "org": "UMN THESIS",
-        "description": "My undergrad thesis — an AI tutoring system that uses gamification (Octalysis framework) and autonomous agents to give real-time feedback and adapt to each student.",
+        "description": "My undergrad thesis — Starcoder, a game-like tutoring system that combines Octalysis-based gamification with an adaptive AI tutor for real-time feedback.",
         "stack": [
-          "Python",
-          "AI Agents",
-          "LLM Engineering"
+          "Next.js 15",
+          "TypeScript",
+          "Supabase",
+          "Prisma",
+          "Gemini",
+          "Judge0",
+          "Framer Motion"
         ],
         "images": [
           "/images/its/1.png",
@@ -473,7 +573,57 @@
           "/images/its/11.png"
         ],
         "featured": true,
-        "sourceUrl": "https://github.com/dzaky2636/adaptive-gamified-its"
+        "sourceUrl": "https://github.com/dzaky2636/adaptive-gamified-its",
+        "caseStudy": {
+          "problem": "Learning to code alone makes it hard to stay motivated and hard to get help at the right moment. My thesis combined Octalysis-based gamification with an AI tutor for feedback and adaptive support.",
+          "role": "Undergraduate thesis at Universitas Multimedia Nusantara. I designed and built Starcoder, the web app behind it.",
+          "flow": [
+            {
+              "label": "STAR_CHART",
+              "detail": "Missions laid out by week on a mission map."
+            },
+            {
+              "label": "BRIEFING",
+              "detail": "Learning material inside each mission."
+            },
+            {
+              "label": "QUIZ",
+              "detail": "Knowledge check with feedback from the AI tutor."
+            },
+            {
+              "label": "CODE_CHALLENGE",
+              "detail": "Student code runs through Judge0."
+            },
+            {
+              "label": "REWARDS",
+              "detail": "XP, streaks, medals, and the leaderboard."
+            }
+          ],
+          "decisions": [
+            {
+              "title": "A tutor that withholds the answer",
+              "detail": "M.E.C.H.A. is instructed never to give the full solution. It guides with hints and open questions."
+            },
+            {
+              "title": "Feedback from live progress",
+              "detail": "Each Gemini request carries the current step, failed attempts, time spent, last error, difficulty, and key concepts."
+            },
+            {
+              "title": "Game first, not a dressed-up LMS",
+              "detail": "Diegetic UI, story dialogue, and heavy animation make it feel like a sci-fi game."
+            },
+            {
+              "title": "Gamification on Octalysis",
+              "detail": "XP, daily streaks, daily challenges, medals, a cosmetics shop, and leaderboards."
+            }
+          ],
+          "outcome": [
+            "Undergraduate thesis",
+            "Source on GitHub",
+            "Gemini AI tutor",
+            "Judge0 code execution"
+          ]
+        }
       },
       {
         "id": "aikopetshop",

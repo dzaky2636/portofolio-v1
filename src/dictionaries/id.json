@@ -372,7 +372,57 @@
         "liveUrl": "https://edocument.balikpapan.go.id/",
         "metrics": [
           "278 sekolah"
-        ]
+        ],
+        "caseStudy": {
+          "problem": "Dokumen kota, termasuk dokumen sekolah, membutuhkan tanda tangan digital yang bisa diverifikasi, dan menandatanganinya satu per satu tidak bisa mengikuti jumlahnya.",
+          "role": "Fullstack Developer Intern di Diskominfo Balikpapan. Saya membangun platform Laravel ini selama magang lima bulan.",
+          "flow": [
+            {
+              "label": "REQUEST",
+              "detail": "Staf mengirim satu PDF atau satu batch ZIP."
+            },
+            {
+              "label": "ANTREAN",
+              "detail": "Worker latar memproses PDF."
+            },
+            {
+              "label": "TANDA_TANGAN",
+              "detail": "Tiap dokumen mendapat tanda tangan tersertifikasi dan stempel QR."
+            },
+            {
+              "label": "VERIFIKASI",
+              "detail": "Keabsahan dicek melalui API resmi pemerintah."
+            },
+            {
+              "label": "HASIL",
+              "detail": "Penandatangan, sertifikat, dan waktu tampil sebagai valid."
+            }
+          ],
+          "decisions": [
+            {
+              "title": "Proses PDF di antrean latar",
+              "detail": "Worker queue menangani pemrosesan PDF, sehingga satu batch tidak menahan request web."
+            },
+            {
+              "title": "Request batch",
+              "detail": "Satu request bisa membawa banyak file, dan status dilacak per file."
+            },
+            {
+              "title": "Verifikasi resmi",
+              "detail": "Hasil berasal dari API resmi pemerintah dan menampilkan status sertifikat serta timestamp authority BSSN."
+            },
+            {
+              "title": "Penempatan QR lewat tag teks",
+              "detail": "Tag di dalam dokumen menentukan koordinat QR, sehingga tidak perlu diposisikan manual di tiap file."
+            }
+          ],
+          "outcome": [
+            "Live di edocument.balikpapan.go.id",
+            "278 sekolah",
+            "198 SD, 80 SMP",
+            "Dibangun dalam magang 5 bulan"
+          ]
+        }
       },
       {
         "id": "e-kgb",
@@ -389,7 +439,53 @@
           "/images/e-kgb/2.png"
         ],
         "featured": true,
-        "liveUrl": "https://kgb.balikpapan.go.id/"
+        "liveUrl": "https://kgb.balikpapan.go.id/",
+        "caseStudy": {
+          "problem": "Pegawai pemerintah kota menerima Kenaikan Gaji Berkala (KGB) setiap dua tahun. Bagian kepegawaian perlu melihat siapa yang jatuh tempo di seluruh SKPD dan menindaklanjutinya tepat waktu.",
+          "role": "Fullstack Developer Intern di Diskominfo Balikpapan. Saya membangun aplikasi Laravel dan Tailwind CSS ini dalam magang yang sama.",
+          "flow": [
+            {
+              "label": "DATA_MASTER",
+              "detail": "Pegawai, eselon, jabatan, golongan, dan SKPD."
+            },
+            {
+              "label": "TANGGAL_BERIKUT",
+              "detail": "Tanggal KGB berikutnya dilacak per pegawai."
+            },
+            {
+              "label": "STATUS",
+              "detail": "Menandai kasus harus diurus atau belum waktunya, dengan sisa hari."
+            },
+            {
+              "label": "TINDAKAN",
+              "detail": "Staf memproses pengajuan KGB dan kenaikan pangkat."
+            }
+          ],
+          "decisions": [
+            {
+              "title": "Status dari tanggal",
+              "detail": "Daftar menampilkan tanggal KGB berikutnya, status, dan sisa hari, sehingga kasus jatuh tempo mudah terlihat."
+            },
+            {
+              "title": "Filter per SKPD",
+              "detail": "Filter SKPD dan status mempersempit daftar seluruh kota menjadi kasus yang ditangani staf."
+            },
+            {
+              "title": "Satu data master",
+              "detail": "Pegawai, jabatan, golongan, dan SKPD berada di data master bersama untuk kedua alur kerja."
+            },
+            {
+              "title": "Akses berbasis peran",
+              "detail": "Akses terautentikasi dan dashboard berbasis peran melindungi data pegawai pemerintah kota."
+            }
+          ],
+          "outcome": [
+            "Live di kgb.balikpapan.go.id",
+            "Alur KGB dan kenaikan pangkat",
+            "Dashboard berbasis peran",
+            "Laravel dan Tailwind CSS"
+          ]
+        }
       },
       {
         "id": "e-manuntung",
@@ -453,11 +549,15 @@
         "name": "INTELLIGENT TUTORING SYSTEM",
         "realm": "Akademik/AI",
         "org": "SKRIPSI UMN",
-        "description": "Skripsi S1 saya — sistem tutoring AI yang menggunakan gamifikasi (kerangka Octalysis) dan agen otonom untuk memberikan umpan balik waktu-nyata dan beradaptasi dengan setiap siswa.",
+        "description": "Skripsi S1 saya — Starcoder, sistem tutoring bergaya game yang memadukan gamifikasi berbasis Octalysis dengan tutor AI adaptif untuk umpan balik waktu-nyata.",
         "stack": [
-          "Python",
-          "AI Agents",
-          "LLM Engineering"
+          "Next.js 15",
+          "TypeScript",
+          "Supabase",
+          "Prisma",
+          "Gemini",
+          "Judge0",
+          "Framer Motion"
         ],
         "images": [
           "/images/its/1.png",
@@ -473,7 +573,57 @@
           "/images/its/11.png"
         ],
         "featured": true,
-        "sourceUrl": "https://github.com/dzaky2636/adaptive-gamified-its"
+        "sourceUrl": "https://github.com/dzaky2636/adaptive-gamified-its",
+        "caseStudy": {
+          "problem": "Belajar coding sendirian membuat motivasi sulit dijaga dan bantuan sulit didapat di saat yang tepat. Skripsi saya memadukan gamifikasi berbasis Octalysis dengan tutor AI untuk umpan balik dan dukungan adaptif.",
+          "role": "Skripsi S1 di Universitas Multimedia Nusantara. Saya merancang dan membangun Starcoder, aplikasi web di baliknya.",
+          "flow": [
+            {
+              "label": "PETA_BINTANG",
+              "detail": "Misi disusun per minggu pada peta misi."
+            },
+            {
+              "label": "BRIEFING",
+              "detail": "Materi belajar di dalam tiap misi."
+            },
+            {
+              "label": "KUIS",
+              "detail": "Uji pemahaman dengan umpan balik dari tutor AI."
+            },
+            {
+              "label": "TANTANGAN_KODE",
+              "detail": "Kode mahasiswa dijalankan lewat Judge0."
+            },
+            {
+              "label": "HADIAH",
+              "detail": "XP, streak, medali, dan leaderboard."
+            }
+          ],
+          "decisions": [
+            {
+              "title": "Tutor yang menahan jawaban",
+              "detail": "M.E.C.H.A. diinstruksikan untuk tidak pernah memberi solusi lengkap. Ia membimbing lewat petunjuk dan pertanyaan terbuka."
+            },
+            {
+              "title": "Umpan balik dari progres langsung",
+              "detail": "Setiap request Gemini membawa langkah saat ini, jumlah percobaan gagal, waktu, error terakhir, tingkat kesulitan, dan konsep utama."
+            },
+            {
+              "title": "Game dulu, bukan LMS yang didandani",
+              "detail": "UI diegetik, dialog cerita, dan animasi intens membuatnya terasa seperti game sci-fi."
+            },
+            {
+              "title": "Gamifikasi berbasis Octalysis",
+              "detail": "XP, streak harian, tantangan harian, medali, toko kosmetik, dan leaderboard."
+            }
+          ],
+          "outcome": [
+            "Skripsi S1",
+            "Kode di GitHub",
+            "Tutor AI Gemini",
+            "Eksekusi kode Judge0"
+          ]
+        }
       },
       {
         "id": "aikopetshop",
