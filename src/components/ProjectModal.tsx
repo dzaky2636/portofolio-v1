@@ -287,7 +287,8 @@ export default function ProjectModal({
                 src={currentImage.src}
                 alt={currentImage.alt}
                 fill
-                unoptimized
+                sizes="90vw"
+                loading="eager"
                 className="object-contain border-2 border-black"
               />
             </div>

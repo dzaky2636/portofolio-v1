@@ -4,6 +4,7 @@ import InteractiveBackground from "@/components/InteractiveBackground";
 import WebGLRoot from "@/components/webgl/WebGLRoot";
 import EnvironmentalEffects from "@/components/EnvironmentalEffects";
 import BootLockScript from "@/components/BootLockScript";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const instrumentSerif = Instrument_Serif({
@@ -19,7 +20,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.dzakyfatur.my.id"),
+  metadataBase: new URL(SITE_URL),
   icons: {
     icon: "/boar.svg",
   },

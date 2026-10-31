@@ -18,6 +18,7 @@ import KonamiCheatListener from '@/components/KonamiCheatListener';
 import { CopyEmailProvider, PORTFOLIO_EMAIL } from '@/components/CopyEmailProvider';
 import { getDictionary } from '@/lib/getDictionary';
 import { konamiQuoteIndex } from '@/lib/konamiQuoteIndex';
+import { SITE_URL } from '@/lib/site';
 
 export default async function Page({
   params,
@@ -39,8 +40,26 @@ export default async function Page({
     dict.footer.quotes[konamiQuoteIndex(lang, dict.footer.quotes.length)] ??
     dict.footer.quotes[0];
 
+  const personJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Dzaky Fatur Rahman',
+    url: `${SITE_URL}/${lang}`,
+    image: `${SITE_URL}/images/profile-pic.jpg`,
+    jobTitle: dict.hero.title,
+    worksFor: { '@type': 'Organization', name: 'PT Rigo Inovasi Digital' },
+    alumniOf: { '@type': 'CollegeOrUniversity', name: 'Universitas Multimedia Nusantara' },
+    sameAs: ['https://github.com/dzaky2636', 'https://www.linkedin.com/in/dzakyfaturr/'],
+  };
+
   return (
     <CopyEmailProvider copiedMessage={dict.contact.emailCopied}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(personJsonLd).replace(/</g, '\\u003c'),
+        }}
+      />
       <BootSequenceOverlay lines={dict.boot.lines} skipHint={dict.boot.skipHint} />
       <BoarMascot content={dict.mascot} />
       <WindowDragManager resetLabel={dict.windowManager.reset} />
