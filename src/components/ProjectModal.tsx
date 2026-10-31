@@ -3,6 +3,8 @@
 import { useState, useCallback, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Image from 'next/image';
+import CaseStudyView from '@/components/CaseStudyView';
+import type { CaseStudy, CaseStudyLabels } from '@/lib/caseStudy';
 
 export interface ProjectImageData {
   src: string;
@@ -12,12 +14,17 @@ export interface ProjectImageData {
 export interface ProjectData {
   name: string;
   images: ProjectImageData[];
+  caseStudy?: CaseStudy;
 }
+
+export type ProjectView = 'screens' | 'case';
 
 interface ProjectModalProps {
   project: ProjectData | null;
   isOpen: boolean;
+  initialView: ProjectView;
   onClose: () => void;
+  caseStudyLabels: CaseStudyLabels;
   modalTitlePrefix: string;
   viewerEmpty: string;
   modalCloseAria: string;
@@ -33,10 +40,18 @@ interface ProjectModalProps {
 const windowControlClass =
   'font-mono uppercase tracking-widest text-xs border-2 border-black px-2 py-1 bg-white shadow-[2px_2px_0px_#0C0C0C] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[0px_0px_0px_#0C0C0C] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[0px_0px_0px_#0C0C0C] transition-all duration-75 retro-focus';
 
+function tabClass(selected: boolean) {
+  return `font-mono uppercase tracking-widest text-[10px] md:text-xs border-2 border-black px-3 py-1 retro-focus ${
+    selected ? 'bg-[#2945FF] text-white' : 'bg-white hover:border-[#2945FF]'
+  }`;
+}
+
 export default function ProjectModal({
   project,
   isOpen,
+  initialView,
   onClose,
+  caseStudyLabels,
   modalTitlePrefix,
   viewerEmpty,
   modalCloseAria,
@@ -56,6 +71,7 @@ export default function ProjectModal({
   const [minimized, setMinimized] = useState(false);
   const [isMaximized, setIsMaximized] = useState(false);
   const [portalReady, setPortalReady] = useState(false);
+  const [view, setView] = useState<ProjectView>('screens');
 
   const totalImages = project?.images.length ?? 0;
 
@@ -84,11 +100,11 @@ export default function ProjectModal({
     (e: KeyboardEvent) => {
       if (!isOpen) return;
       if (e.key === 'Escape') onClose();
-      if (minimized) return;
+      if (minimized || view === 'case') return;
       if (e.key === 'ArrowLeft') handlePrev();
       if (e.key === 'ArrowRight') handleNext();
     },
-    [isOpen, minimized, onClose, handlePrev, handleNext]
+    [isOpen, minimized, view, onClose, handlePrev, handleNext]
   );
 
   useEffect(() => {
@@ -101,12 +117,13 @@ export default function ProjectModal({
       setCurrentImageIndex(0);
       setMinimized(false);
       setIsMaximized(false);
+      setView(initialView);
       setModalFlicker(true);
       setTimeout(() => setModalFlicker(false), 300);
     } else {
       setMinimized(false);
     }
-  }, [isOpen]);
+  }, [isOpen, initialView]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -137,6 +154,7 @@ export default function ProjectModal({
 
   const currentImage = project.images[currentImageIndex];
   const dialogLabel = modalDialogAria.replace('{name}', project.name);
+  const showCaseStudy = view === 'case' && Boolean(project.caseStudy);
 
   if (minimized) {
     return createPortal(
@@ -218,6 +236,39 @@ export default function ProjectModal({
           </div>
         </div>
 
+        {project.caseStudy && (
+          <div
+            role="tablist"
+            aria-label={modalDialogAria.replace('{name}', project.name)}
+            className="flex shrink-0 flex-wrap gap-2 border-b-4 border-black bg-white px-4 py-2"
+          >
+            <button
+              type="button"
+              role="tab"
+              aria-selected={!showCaseStudy}
+              onClick={() => setView('screens')}
+              className={tabClass(!showCaseStudy)}
+            >
+              {caseStudyLabels.screensTab}
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={showCaseStudy}
+              onClick={() => setView('case')}
+              className={tabClass(showCaseStudy)}
+            >
+              {caseStudyLabels.caseTab}
+            </button>
+          </div>
+        )}
+
+        {showCaseStudy && project.caseStudy ? (
+          <div className={`overflow-y-auto bg-white ${isMaximized ? 'flex-1 min-h-0' : 'h-[75vh] md:h-[80vh]'}`}>
+            <CaseStudyView caseStudy={project.caseStudy} labels={caseStudyLabels} />
+          </div>
+        ) : (
+        <>
         <div
           className={`relative bg-[#0C0C0C] flex items-center justify-center p-4 overflow-hidden ${
             isMaximized ? 'flex-1 min-h-0' : 'min-h-[300px] md:min-h-[450px]'
@@ -290,6 +341,8 @@ export default function ProjectModal({
             [ &gt; ]
           </button>
         </div>
+        </>
+        )}
       </div>
   );
 

@@ -327,6 +327,7 @@ export default async function Page({
         realmFilterEmpty={dict.projects.realmFilterEmpty}
         liveLabel={dict.projects.liveLabel}
         sourceLabel={dict.projects.sourceLabel}
+        caseStudyLabels={dict.projects.caseStudyLabels}
         projects={dict.projects.items}
       />
 

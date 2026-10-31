@@ -2,10 +2,11 @@
 
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import ProjectModal, { ProjectData } from '@/components/ProjectModal';
+import ProjectModal, { ProjectData, type ProjectView } from '@/components/ProjectModal';
 import AnimateOnScroll from '@/components/AnimateOnScroll';
 import { windowPress } from '@/components/Window';
 import { usePrefersReducedMotion } from '@/hooks/useMediaQuery';
+import type { CaseStudy, CaseStudyLabels } from '@/lib/caseStudy';
 import {
   getProjectRealmCategory,
   REALM_CATEGORY_ORDER,
@@ -26,6 +27,7 @@ export interface ProjectItem {
   liveUrl?: string;
   sourceUrl?: string;
   metrics?: string[];
+  caseStudy?: CaseStudy;
 }
 
 interface ProjectSectionProps {
@@ -58,6 +60,7 @@ interface ProjectSectionProps {
   realmFilterEmpty: string;
   liveLabel: string;
   sourceLabel: string;
+  caseStudyLabels: CaseStudyLabels;
   projects: ProjectItem[];
 }
 
@@ -106,6 +109,7 @@ function ProjectCard({
   screenshotAlt,
   liveLabel,
   sourceLabel,
+  caseStudyOpenLabel,
   onOpen,
 }: {
   project: ProjectItem;
@@ -117,7 +121,8 @@ function ProjectCard({
   screenshotAlt: string;
   liveLabel: string;
   sourceLabel: string;
-  onOpen: (project: ProjectItem) => void;
+  caseStudyOpenLabel: string;
+  onOpen: (project: ProjectItem, view?: ProjectView) => void;
 }) {
   const externalHref = project.liveUrl ?? project.sourceUrl;
   const externalLabel = project.liveUrl ? liveLabel : sourceLabel;
@@ -306,7 +311,19 @@ function ProjectCard({
         >
           {hasImages ? openViewer : noImages}
         </span>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
+          {project.caseStudy && (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                onOpen(project, 'case');
+              }}
+              className="font-mono uppercase tracking-widest text-[10px] md:text-xs border-2 border-black px-2 py-1 bg-[#FFD700] text-[#0C0C0C] shadow-[2px_2px_0px_#0C0C0C] hover:bg-[#2945FF] hover:text-white retro-focus"
+            >
+              {caseStudyOpenLabel}
+            </button>
+          )}
           {externalHref && (
             <a
               href={externalHref}
@@ -358,10 +375,12 @@ export default function ProjectSection({
   realmFilterEmpty,
   liveLabel,
   sourceLabel,
+  caseStudyLabels,
   projects,
 }: ProjectSectionProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
+  const [initialView, setInitialView] = useState<ProjectView>('screens');
   const [showAll, setShowAll] = useState(false);
   const [realmFilter, setRealmFilter] = useState<RealmFilterId>('all');
   const prevRealmFilter = useRef(realmFilter);
@@ -419,10 +438,12 @@ export default function ProjectSection({
 
   const showExpandRealms = realmFilter === 'all' && rest.length > 0;
 
-  const openModal = useCallback((project: ProjectItem) => {
+  const openModal = useCallback((project: ProjectItem, view: ProjectView = 'screens') => {
     if (project.images.length === 0) return;
+    setInitialView(view);
     setSelectedProject({
       name: project.name,
+      caseStudy: project.caseStudy,
       images: project.images.map((src, i) => ({
         src,
         alt: screenshotAlt
@@ -516,6 +537,7 @@ export default function ProjectSection({
                   screenshotAlt={screenshotAlt}
                   liveLabel={liveLabel}
                   sourceLabel={sourceLabel}
+                  caseStudyOpenLabel={caseStudyLabels.open}
                   onOpen={openModal}
                 />
               </AnimateOnScroll>
@@ -540,7 +562,9 @@ export default function ProjectSection({
       <ProjectModal
         project={selectedProject}
         isOpen={isOpen}
+        initialView={initialView}
         onClose={closeModal}
+        caseStudyLabels={caseStudyLabels}
         modalTitlePrefix={modalTitlePrefix}
         viewerEmpty={viewerEmpty}
         modalCloseAria={modalCloseAria}

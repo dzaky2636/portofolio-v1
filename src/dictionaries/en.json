@@ -192,7 +192,61 @@
           "/images/replygo/4.png"
         ],
         "featured": true,
-        "liveUrl": "https://www.replygo.id"
+        "liveUrl": "https://www.replygo.id",
+        "caseStudy": {
+          "problem": "Creators, affiliates, and small sellers sell from one bio link. ReplyGo puts the catalog, checkout, shipping checks, and buyer questions behind that link.",
+          "role": "Built at PT Rigo Inovasi Digital as part of my Lead Fullstack Engineer role, across the Rust backend and React frontend.",
+          "flow": [
+            {
+              "label": "BIO_PAGE",
+              "detail": "Business profile, product catalog, and AI assistant."
+            },
+            {
+              "label": "AI_ASSISTANT",
+              "detail": "Answers buyers from the seller's knowledge base."
+            },
+            {
+              "label": "CHECKOUT",
+              "detail": "Xendit QRIS payment with shipping checks."
+            },
+            {
+              "label": "WEBHOOK_JOB",
+              "detail": "Payment events run as durable background jobs."
+            },
+            {
+              "label": "INVOICE",
+              "detail": "Branded PDF invoice generated for the order."
+            }
+          ],
+          "decisions": [
+            {
+              "title": "Tenant isolation in the schema",
+              "detail": "Tenant tables use composite foreign keys on organization_id, so PostgreSQL rejects links across organizations."
+            },
+            {
+              "title": "Durable jobs inside PostgreSQL",
+              "detail": "A shared workflow engine stores jobs in PostgreSQL with retries and idempotency keys. Delivery is at-least-once, so handlers are idempotent."
+            },
+            {
+              "title": "pgvector with tenant filters",
+              "detail": "Knowledge search uses HNSW with iterative scan, so tenant filters cannot truncate the candidate list."
+            },
+            {
+              "title": "Redis pub/sub for realtime",
+              "detail": "Pub/sub is the one path to sockets. A socket that falls behind is told to resync, and a busy organization does not wake every socket."
+            },
+            {
+              "title": "Modular monolith in Rust",
+              "detail": "Axum and SeaORM in one deployable, with a module per domain such as orders, billing, and knowledge."
+            }
+          ],
+          "outcome": [
+            "Live at replygo.id",
+            "Xendit QRIS checkout",
+            "AI assistant before checkout",
+            "Deployed on Railway"
+          ]
+        }
       },
       {
         "id": "chatrigo",
@@ -225,7 +279,57 @@
         "metrics": [
           "5 channels",
           "10 business users"
-        ]
+        ],
+        "caseStudy": {
+          "problem": "Businesses talk to customers on WhatsApp, Instagram, Telegram, LINE, and web chat, each in its own inbox. Chatrigo brings them into one workspace per tenant, with an AI agent that sells from the business's own data.",
+          "role": "Lead Fullstack Engineer at PT Rigo Inovasi Digital. I own architecture, code review, and SDLC standards for a team of 8 interns, 4 of them directly managed.",
+          "flow": [
+            {
+              "label": "CHANNELS",
+              "detail": "Customer messages arrive from five channels."
+            },
+            {
+              "label": "NESTJS_API",
+              "detail": "Verifies webhooks and routes each message to the right tenant."
+            },
+            {
+              "label": "AI_AGENT",
+              "detail": "Calls scoped tools for facts, or hands over to a human."
+            },
+            {
+              "label": "WORKSPACE",
+              "detail": "Staff see replies live through Socket.IO and Redis."
+            }
+          ],
+          "decisions": [
+            {
+              "title": "Tools instead of free-form answers",
+              "detail": "The agent works through four narrow tools: knowledge search, product search, business info, and human handover. Answers stay tied to retrieved data."
+            },
+            {
+              "title": "Guardrails around the model",
+              "detail": "Off-topic requests get declined, customers can ask for a human, and handover notes are stripped of secrets and prompt text."
+            },
+            {
+              "title": "Every query scoped by tenant",
+              "detail": "Knowledge chunks load per business profile, so one organization's data does not surface in another's workspace."
+            },
+            {
+              "title": "Temporal for billing",
+              "detail": "QRIS creation, expiry, and payment switching run as durable workflows, so timers and retries survive restarts."
+            },
+            {
+              "title": "Redis behind Socket.IO",
+              "detail": "A Redis adapter fans events out across instances, so staff get updates on any server."
+            }
+          ],
+          "outcome": [
+            "Live at chatrigo.id",
+            "5 channels per tenant",
+            "10 business users",
+            "Team of 8 interns"
+          ]
+        }
       },
       {
         "id": "chatrigo-mobile",
@@ -496,7 +600,17 @@
     "modalDialogAria": "Image viewer — {name}",
     "screenshotAlt": "{name} — screenshot {index}",
     "liveLabel": "[ VISIT_LIVE_SITE ]",
-    "sourceLabel": "[ VIEW_SOURCE ]"
+    "sourceLabel": "[ VIEW_SOURCE ]",
+    "caseStudyLabels": {
+      "screensTab": "[ SCREENSHOTS ]",
+      "caseTab": "[ ARCHITECTURE.EXE ]",
+      "open": "[ CASE_STUDY ]",
+      "problem": "PROBLEM",
+      "role": "MY_ROLE",
+      "flow": "SYSTEM_FLOW",
+      "decisions": "KEY_DECISIONS",
+      "outcome": "OUTCOME"
+    }
   },
   "experience": {
     "title": "EXPERIENCE",

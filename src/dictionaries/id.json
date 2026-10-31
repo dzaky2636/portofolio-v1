@@ -192,7 +192,61 @@
           "/images/replygo/4.png"
         ],
         "featured": true,
-        "liveUrl": "https://www.replygo.id"
+        "liveUrl": "https://www.replygo.id",
+        "caseStudy": {
+          "problem": "Kreator, afiliator, dan penjual kecil berjualan dari satu link bio. ReplyGo menaruh katalog, checkout, cek ongkir, dan pertanyaan pembeli di balik link itu.",
+          "role": "Dibangun di PT Rigo Inovasi Digital sebagai bagian dari peran Lead Fullstack Engineer saya, mencakup backend Rust dan frontend React.",
+          "flow": [
+            {
+              "label": "HALAMAN_BIO",
+              "detail": "Profil bisnis, katalog produk, dan asisten AI."
+            },
+            {
+              "label": "ASISTEN_AI",
+              "detail": "Menjawab pembeli dari knowledge base penjual."
+            },
+            {
+              "label": "CHECKOUT",
+              "detail": "Pembayaran QRIS Xendit dengan cek ongkir."
+            },
+            {
+              "label": "JOB_WEBHOOK",
+              "detail": "Event pembayaran berjalan sebagai job latar durable."
+            },
+            {
+              "label": "INVOICE",
+              "detail": "Invoice PDF berlabel dibuat untuk pesanan."
+            }
+          ],
+          "decisions": [
+            {
+              "title": "Isolasi tenant di skema",
+              "detail": "Tabel tenant memakai composite foreign key pada organization_id, sehingga PostgreSQL menolak relasi antar-organisasi."
+            },
+            {
+              "title": "Job durable di dalam PostgreSQL",
+              "detail": "Workflow engine bersama menyimpan job di PostgreSQL dengan retry dan idempotency key. Pengiriman bersifat at-least-once, jadi handler dibuat idempotent."
+            },
+            {
+              "title": "pgvector dengan filter tenant",
+              "detail": "Pencarian pengetahuan memakai HNSW dengan iterative scan, sehingga filter tenant tidak memotong daftar kandidat."
+            },
+            {
+              "title": "Redis pub/sub untuk realtime",
+              "detail": "Pub/sub menjadi satu-satunya jalur ke socket. Socket yang tertinggal diminta resync, dan organisasi yang sibuk tidak membangunkan semua socket."
+            },
+            {
+              "title": "Modular monolith di Rust",
+              "detail": "Axum dan SeaORM dalam satu deployable, dengan modul per domain seperti orders, billing, dan knowledge."
+            }
+          ],
+          "outcome": [
+            "Live di replygo.id",
+            "Checkout QRIS Xendit",
+            "Asisten AI sebelum checkout",
+            "Deploy di Railway"
+          ]
+        }
       },
       {
         "id": "chatrigo",
@@ -225,7 +279,57 @@
         "metrics": [
           "5 kanal",
           "10 pengguna bisnis"
-        ]
+        ],
+        "caseStudy": {
+          "problem": "Bisnis berkomunikasi dengan pelanggan lewat WhatsApp, Instagram, Telegram, LINE, dan web chat, masing-masing di inbox terpisah. Chatrigo menyatukannya ke dalam satu workspace per tenant, dengan agen AI yang berjualan dari data milik bisnis itu sendiri.",
+          "role": "Lead Fullstack Engineer di PT Rigo Inovasi Digital. Saya memegang arsitektur, code review, dan standar SDLC untuk tim berisi 8 intern, 4 di antaranya dibimbing langsung.",
+          "flow": [
+            {
+              "label": "KANAL",
+              "detail": "Pesan pelanggan masuk dari lima kanal."
+            },
+            {
+              "label": "NESTJS_API",
+              "detail": "Memverifikasi webhook dan meneruskan tiap pesan ke tenant yang tepat."
+            },
+            {
+              "label": "AGEN_AI",
+              "detail": "Memanggil tool terbatas untuk fakta, atau mengalihkan ke manusia."
+            },
+            {
+              "label": "WORKSPACE",
+              "detail": "Staf melihat balasan langsung lewat Socket.IO dan Redis."
+            }
+          ],
+          "decisions": [
+            {
+              "title": "Tool, bukan jawaban bebas",
+              "detail": "Agen bekerja lewat empat tool terbatas: pencarian pengetahuan, pencarian produk, info bisnis, dan pengalihan ke manusia. Jawaban tetap terikat pada data yang diambil."
+            },
+            {
+              "title": "Pagar pengaman di sekitar model",
+              "detail": "Permintaan di luar topik ditolak, pelanggan bisa meminta manusia, dan catatan pengalihan dibersihkan dari rahasia dan teks prompt."
+            },
+            {
+              "title": "Setiap query dibatasi per tenant",
+              "detail": "Potongan pengetahuan dimuat per profil bisnis, sehingga data satu organisasi tidak muncul di workspace organisasi lain."
+            },
+            {
+              "title": "Temporal untuk billing",
+              "detail": "Pembuatan QRIS, kedaluwarsa, dan pergantian pembayaran berjalan sebagai workflow durable, sehingga timer dan retry bertahan saat restart."
+            },
+            {
+              "title": "Redis di belakang Socket.IO",
+              "detail": "Adapter Redis menyebarkan event antar-instance, sehingga staf menerima pembaruan di server mana pun."
+            }
+          ],
+          "outcome": [
+            "Live di chatrigo.id",
+            "5 kanal per tenant",
+            "10 pengguna bisnis",
+            "Tim berisi 8 intern"
+          ]
+        }
       },
       {
         "id": "chatrigo-mobile",
@@ -496,7 +600,17 @@
     "modalDialogAria": "Penampil gambar — {name}",
     "screenshotAlt": "{name} — tangkapan layar {index}",
     "liveLabel": "[ BUKA_SITUS_LIVE ]",
-    "sourceLabel": "[ LIHAT_KODE ]"
+    "sourceLabel": "[ LIHAT_KODE ]",
+    "caseStudyLabels": {
+      "screensTab": "[ TANGKAPAN_LAYAR ]",
+      "caseTab": "[ ARCHITECTURE.EXE ]",
+      "open": "[ STUDI_KASUS ]",
+      "problem": "MASALAH",
+      "role": "PERAN_SAYA",
+      "flow": "ALUR_SISTEM",
+      "decisions": "KEPUTUSAN_UTAMA",
+      "outcome": "HASIL"
+    }
   },
   "experience": {
     "title": "PENGALAMAN",

@@ -1,3 +1,5 @@
+import type { CaseStudy, CaseStudyLabels } from "@/lib/caseStudy";
+
 export const locales = ["en", "id"] as const;
 export type Locale = (typeof locales)[number];
 
@@ -94,6 +96,7 @@ export interface Dictionary {
     screenshotAlt: string;
     liveLabel: string;
     sourceLabel: string;
+    caseStudyLabels: CaseStudyLabels;
     items: {
       id: string;
       name: string;
@@ -106,6 +109,7 @@ export interface Dictionary {
       liveUrl?: string;
       sourceUrl?: string;
       metrics?: string[];
+      caseStudy?: CaseStudy;
     }[];
   };
   experience: {
