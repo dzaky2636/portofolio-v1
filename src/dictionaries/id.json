@@ -71,7 +71,7 @@
       "status": "[OK]",
       "school": "Universitas Multimedia Nusantara",
       "major": "Jurusan Informatika",
-      "accreditation": "Program terakreditasi Grade A",
+      "accreditation": "Program Studi terakreditasi \"Unggul\"",
       "gpa": "IPK: 3.71/4.00",
       "thesis": "Skripsi: membangun sistem tutoring AI dengan gamifikasi yang beradaptasi dengan cara belajar",
       "award": "Penghargaan: Beasiswa merit untuk mahasiswa dengan 20% IPK tertinggi di angkatan"
@@ -91,6 +91,14 @@
         {
           "name": "Huawei HCIA-AI",
           "score": "[LULUS]"
+        },
+        {
+          "name": "Certiport IT Specialist: Software Development",
+          "score": "[PASS]"
+        },
+        {
+          "name": "Huawei ICT Competition 2024–2025 (Cloud Track)",
+          "score": "[FINAL NASIONAL]"
         },
         {
           "name": "Sertifikasi Asisten Laboratorium",

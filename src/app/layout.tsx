@@ -19,6 +19,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.dzakyfatur.my.id"),
   icons: {
     icon: "/boar.svg",
   },

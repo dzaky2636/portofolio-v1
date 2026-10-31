@@ -71,7 +71,7 @@
       "status": "[OK]",
       "school": "Universitas Multimedia Nusantara",
       "major": "Informatics major",
-      "accreditation": "Grade A accredited program",
+      "accreditation": "\"Excellent\"-accredited program",
       "gpa": "GPA: 3.71/4.00",
       "thesis": "Thesis: built an AI tutoring system with gamification that adapts to how you learn",
       "award": "Award: Merit scholarship for ranking in the top 20% GPA of my batch"
@@ -91,6 +91,14 @@
         {
           "name": "Huawei HCIA-AI",
           "score": "[PASS]"
+        },
+        {
+          "name": "Certiport IT Specialist: Software Development",
+          "score": "[PASS]"
+        },
+        {
+          "name": "Huawei ICT Competition 2024–2025 (Cloud Track)",
+          "score": "[NATIONAL FINAL]"
         },
         {
           "name": "Laboratory Assistant Certification",

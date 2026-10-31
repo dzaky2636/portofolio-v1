@@ -232,10 +232,10 @@ export default async function Page({
                   return (
                     <li
                       key={item.name}
-                      className={`flex justify-between items-end ${isLast ? '' : 'border-b border-dashed border-black pb-2'}`}
+                      className={`flex justify-between items-end gap-3 ${isLast ? '' : 'border-b border-dashed border-black pb-2'}`}
                     >
-                      <span>{item.name}</span>
-                      <span className="font-mono text-xs uppercase">{item.score}</span>
+                      <span className="min-w-0">{item.name}</span>
+                      <span className="shrink-0 font-mono text-xs uppercase">{item.score}</span>
                     </li>
                   );
                 })}

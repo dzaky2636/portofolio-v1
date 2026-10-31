@@ -20,6 +20,19 @@ export async function generateMetadata({
         id: '/id',
       },
     },
+    openGraph: {
+      title: dict.meta.title,
+      description: dict.meta.description,
+      url: `/${isLocale(lang) ? lang : 'en'}`,
+      siteName: "Dzaky's Corner",
+      locale: lang === 'id' ? 'id_ID' : 'en_US',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: dict.meta.title,
+      description: dict.meta.description,
+    },
   };
 }
 
