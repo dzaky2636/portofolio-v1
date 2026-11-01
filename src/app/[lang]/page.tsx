@@ -4,6 +4,7 @@ import ExperienceLogViewer from '@/components/ExperienceLogViewer';
 import AnimateOnScroll from '@/components/AnimateOnScroll';
 import GlitchText from '@/components/GlitchText';
 import SiteHeader from '@/components/SiteHeader';
+import TerminalOverlay from '@/components/TerminalOverlay';
 import SkipToContent from '@/components/SkipToContent';
 import Window from '@/components/Window';
 import WindowDragManager from '@/components/WindowDragManager';
@@ -19,6 +20,7 @@ import { CopyEmailProvider, PORTFOLIO_EMAIL } from '@/components/CopyEmailProvid
 import { getDictionary } from '@/lib/getDictionary';
 import { konamiQuoteIndex } from '@/lib/konamiQuoteIndex';
 import { SITE_URL } from '@/lib/site';
+import type { TerminalData } from '@/lib/terminalCommands';
 
 export default async function Page({
   params,
@@ -39,6 +41,29 @@ export default async function Page({
   const konamiQuote =
     dict.footer.quotes[konamiQuoteIndex(lang, dict.footer.quotes.length)] ??
     dict.footer.quotes[0];
+
+  const terminalData: TerminalData = {
+    labels: dict.terminal,
+    title: dict.hero.title,
+    summary: dict.hero.summary,
+    skills: dict.inventory.techStack.tags.slice(0, -1),
+    projects: dict.projects.items.map((project) => ({
+      id: project.id,
+      name: project.name,
+      realm: project.realm,
+      url: project.liveUrl ?? project.sourceUrl,
+    })),
+    experience: dict.experience.items.map(({ role, company, duration }) => ({
+      role,
+      company,
+      duration,
+    })),
+    contact: {
+      email: PORTFOLIO_EMAIL,
+      github: 'https://github.com/dzaky2636',
+      linkedin: 'https://www.linkedin.com/in/dzakyfaturr/',
+    },
+  };
 
   const personJsonLd = {
     '@context': 'https://schema.org',
@@ -63,6 +88,7 @@ export default async function Page({
       <BootSequenceOverlay lines={dict.boot.lines} skipHint={dict.boot.skipHint} />
       <BoarMascot content={dict.mascot} />
       <WindowDragManager resetLabel={dict.windowManager.reset} />
+      <TerminalOverlay data={terminalData} cvFile={dict.hero.cvFile} />
       <KonamiCheatListener
         content={{
           title: dict.easterEgg.konamiTitle,
@@ -446,6 +472,13 @@ export default async function Page({
           >
             {PORTFOLIO_EMAIL}
           </CopyEmailButton>
+          <button
+            type="button"
+            data-terminal-open
+            className="hover:text-[#2945FF] hover:underline retro-focus pointer-events-auto"
+          >
+            {dict.terminal.openButton}
+          </button>
           <span data-twitch>{dict.footer.tagline}</span>
         </div>
 

@@ -883,5 +883,81 @@
     "konamiTitle": "ACHIEVEMENT_UNLOCKED.exe",
     "konamiSubtitle": "CHEAT_CODE_ACCEPTED",
     "konamiDismiss": "PRESS [ ESC ] TO CLOSE"
+  },
+  "terminal": {
+    "title": "TERMINAL.EXE",
+    "closeAria": "Close terminal",
+    "openButton": "[ ~ TERMINAL ]",
+    "inputAria": "Terminal command",
+    "welcome": [
+      "DZAKY_OS V1.0",
+      "Type help to list commands. Try sudo hire dzaky."
+    ],
+    "help": [
+      {
+        "command": "help",
+        "description": "list commands"
+      },
+      {
+        "command": "whoami",
+        "description": "who I am"
+      },
+      {
+        "command": "projects",
+        "description": "list my projects"
+      },
+      {
+        "command": "open <project>",
+        "description": "open a project link"
+      },
+      {
+        "command": "skills",
+        "description": "list my tech stack"
+      },
+      {
+        "command": "experience",
+        "description": "list my roles"
+      },
+      {
+        "command": "status",
+        "description": "ping my live sites"
+      },
+      {
+        "command": "contact",
+        "description": "show how to reach me"
+      },
+      {
+        "command": "cv",
+        "description": "download my CV"
+      },
+      {
+        "command": "goto <section>",
+        "description": "jump to a section"
+      },
+      {
+        "command": "clear",
+        "description": "clear the screen"
+      },
+      {
+        "command": "exit",
+        "description": "close the terminal"
+      }
+    ],
+    "notFound": "command not found: {cmd}. type help.",
+    "noProject": "no project named {name}. type projects.",
+    "noLink": "{name} has no public link.",
+    "openUsage": "usage: open <project>",
+    "gotoUsage": "usage: goto <home|skills|projects|experience|contact>",
+    "opening": "opening {name}...",
+    "downloading": "downloading CV...",
+    "statusLoading": "pinging live sites...",
+    "statusFailed": "status feed unavailable.",
+    "hire": [
+      "[sudo] password for recruiter: ********",
+      "permission granted.",
+      "next step: type cv, or type contact."
+    ],
+    "remove": "nice try. permission denied.",
+    "boar": "OINK."
   }
 }

@@ -1,4 +1,5 @@
 import type { CaseStudy, CaseStudyLabels } from "@/lib/caseStudy";
+import type { TerminalLabels } from "@/lib/terminalCommands";
 
 export const locales = ["en", "id"] as const;
 export type Locale = (typeof locales)[number];
@@ -128,6 +129,7 @@ export interface Dictionary {
   contact: { title: string; description: string; button: string; emailCopied: string };
   boot: { lines: string[]; skipHint: string };
   windowManager: { reset: string };
+  terminal: TerminalLabels;
   mascot: {
     click: string[];
     rage: string;

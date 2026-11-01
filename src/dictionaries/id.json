@@ -883,5 +883,81 @@
     "konamiTitle": "ACHIEVEMENT_UNLOCKED.exe",
     "konamiSubtitle": "CHEAT_CODE_DITERIMA",
     "konamiDismiss": "TEKAN [ ESC ] UNTUK TUTUP"
+  },
+  "terminal": {
+    "title": "TERMINAL.EXE",
+    "closeAria": "Tutup terminal",
+    "openButton": "[ ~ TERMINAL ]",
+    "inputAria": "Perintah terminal",
+    "welcome": [
+      "DZAKY_OS V1.0",
+      "Ketik help untuk daftar perintah. Coba sudo hire dzaky."
+    ],
+    "help": [
+      {
+        "command": "help",
+        "description": "daftar perintah"
+      },
+      {
+        "command": "whoami",
+        "description": "siapa saya"
+      },
+      {
+        "command": "projects",
+        "description": "daftar proyek saya"
+      },
+      {
+        "command": "open <project>",
+        "description": "buka tautan proyek"
+      },
+      {
+        "command": "skills",
+        "description": "daftar tech stack saya"
+      },
+      {
+        "command": "experience",
+        "description": "daftar peran saya"
+      },
+      {
+        "command": "status",
+        "description": "ping situs live saya"
+      },
+      {
+        "command": "contact",
+        "description": "cara menghubungi saya"
+      },
+      {
+        "command": "cv",
+        "description": "unduh CV saya"
+      },
+      {
+        "command": "goto <section>",
+        "description": "lompat ke bagian"
+      },
+      {
+        "command": "clear",
+        "description": "bersihkan layar"
+      },
+      {
+        "command": "exit",
+        "description": "tutup terminal"
+      }
+    ],
+    "notFound": "perintah tidak ditemukan: {cmd}. ketik help.",
+    "noProject": "tidak ada proyek bernama {name}. ketik projects.",
+    "noLink": "{name} tidak punya tautan publik.",
+    "openUsage": "pemakaian: open <project>",
+    "gotoUsage": "pemakaian: goto <home|skills|projects|experience|contact>",
+    "opening": "membuka {name}...",
+    "downloading": "mengunduh CV...",
+    "statusLoading": "melakukan ping ke situs live...",
+    "statusFailed": "feed status tidak tersedia.",
+    "hire": [
+      "[sudo] password untuk rekruter: ********",
+      "izin diberikan.",
+      "langkah berikutnya: ketik cv, atau ketik contact."
+    ],
+    "remove": "usaha bagus. izin ditolak.",
+    "boar": "OINK."
   }
 }
