@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { WEBGL_PALETTE } from '@/components/webgl/palette';
 import { MAIN_SECTION_IDS, type MainSectionId } from '@/lib/sectionIds';
 
 export const OS_WINDOW_TITLES: Record<MainSectionId, string> = {
@@ -48,6 +49,20 @@ export function getWindowWorldPosition(sectionId: MainSectionId): THREE.Vector3 
   return new THREE.Vector3(position[0], position[1], position[2]);
 }
 
+/** Camera depth while each section fills the viewport, in MAIN_SECTION_IDS order. */
+export const SECTION_CAMERA_Z = [2, -7, -12, -16, -20] as const;
+
+/** Line and accent colors the field shifts to per section. */
+export const SECTION_COLORS: Record<MainSectionId, { edge: string; title: string }> = {
+  profile: { edge: WEBGL_PALETTE.ink, title: WEBGL_PALETTE.yellow },
+  inventory: { edge: WEBGL_PALETTE.blue, title: WEBGL_PALETTE.yellow },
+  realms: { edge: WEBGL_PALETTE.ink, title: WEBGL_PALETTE.blue },
+  logs: { edge: WEBGL_PALETTE.blue, title: WEBGL_PALETTE.blue },
+  contact: { edge: WEBGL_PALETTE.ink, title: WEBGL_PALETTE.yellow },
+};
+
+export type WindowBehavior = 'still' | 'flicker' | 'progress' | 'popup' | 'labelled';
+
 export interface DecorativeWindowSpec {
   id: string;
   title: string;
@@ -55,6 +70,8 @@ export interface DecorativeWindowSpec {
   rotation: [number, number, number];
   size: [number, number];
   accentTitle: boolean;
+  behavior: WindowBehavior;
+  phase: number;
 }
 
 const DECORATIVE_TITLES = [
@@ -100,14 +117,26 @@ function distToChapter(x: number, y: number, z: number): number {
   return min;
 }
 
-/** Procedural filler windows — dense field visible across the viewport. */
+const CORRIDOR_X = 3.4;
+const CORRIDOR_X_COMPACT = 1.2;
+const CORRIDOR_Y = 2.4;
+
+function pickBehavior(roll: number): WindowBehavior {
+  if (roll < 0.45) return 'still';
+  if (roll < 0.62) return 'flicker';
+  if (roll < 0.76) return 'progress';
+  if (roll < 0.88) return 'popup';
+  return 'labelled';
+}
+
+/** Procedural filler windows — a sparse field the camera flies through. */
 export function generateDecorativeWindows(compact: boolean): DecorativeWindowSpec[] {
   const rand = mulberry32(0x0c0c0c);
-  const target = compact ? 42 : 88;
+  const target = compact ? 36 : 72;
   const specs: DecorativeWindowSpec[] = [];
   const minChapterGap = compact ? 2.8 : 3.2;
 
-  const xSpan = compact ? 11 : 14;
+  const xSpan = compact ? 7 : 14;
   const ySpan = compact ? 8 : 10;
   const zNear = -6;
   const zFar = compact ? -32 : -38;
@@ -119,13 +148,16 @@ export function generateDecorativeWindows(compact: boolean): DecorativeWindowSpe
     attempts += 1;
     const layer = Math.floor(rand() * 5);
     const z =
-      zNear -
-      (layer / 4) * (zFar - zNear) -
+      zNear +
+      (layer / 4) * (zFar - zNear) +
       rand() * ((zFar - zNear) / 5);
     const x = (rand() - 0.5) * 2 * xSpan;
     const y = (rand() - 0.5) * 2 * ySpan;
 
     if (distToChapter(x, y, z) < minChapterGap) continue;
+    // Keeps the camera's flight path clear so no window fills the screen behind text.
+    const corridorX = compact ? CORRIDOR_X_COMPACT : CORRIDOR_X;
+    if (Math.abs(x) < corridorX && Math.abs(y - 1) < CORRIDOR_Y) continue;
 
     const w = 1.1 + rand() * (compact ? 1.6 : 2.2);
     const h = 0.75 + rand() * (compact ? 1.2 : 1.8);
@@ -141,7 +173,9 @@ export function generateDecorativeWindows(compact: boolean): DecorativeWindowSpe
         (rand() - 0.5) * 0.2,
       ],
       size: [w, h],
-      accentTitle: rand() > 0.88,
+      accentTitle: rand() > 0.8,
+      behavior: pickBehavior(rand()),
+      phase: rand() * 100,
     });
   }
 

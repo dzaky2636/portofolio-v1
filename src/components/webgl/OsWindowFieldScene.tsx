@@ -6,9 +6,12 @@ import { PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
 import { useSyncExternalStore } from 'react';
 import OsWindowFrame from '@/components/webgl/OsWindowFrame';
+import { fieldState } from '@/components/webgl/fieldState';
 import {
   OS_WINDOW_LAYOUT,
   OS_WINDOW_TITLES,
+  SECTION_CAMERA_Z,
+  SECTION_COLORS,
   generateDecorativeWindows,
   getWindowWorldPosition,
 } from '@/components/webgl/osWindowLayout';
@@ -18,6 +21,31 @@ import {
 } from '@/lib/activeSectionStore';
 import { MAIN_SECTION_IDS, type MainSectionId } from '@/lib/sectionIds';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
+
+/** Position along the sections: 0 at the first, 1 at the second, 1.5 halfway to the third. */
+function readSectionProgress() {
+  const anchor = window.scrollY + window.innerHeight * 0.3;
+  const tops = MAIN_SECTION_IDS.map((id) => {
+    const el = document.getElementById(id);
+    return el ? el.getBoundingClientRect().top + window.scrollY : 0;
+  });
+
+  for (let index = tops.length - 1; index > 0; index -= 1) {
+    if (anchor >= tops[index]) {
+      const next = tops[index + 1];
+      if (next === undefined) return index;
+      return index + (anchor - tops[index]) / (next - tops[index]);
+    }
+  }
+  return tops[1] > 0 ? Math.max(0, anchor / tops[1]) : 0;
+}
+
+function cameraZAt(progress: number) {
+  const index = Math.min(Math.floor(progress), SECTION_CAMERA_Z.length - 1);
+  const from = SECTION_CAMERA_Z[index];
+  const to = SECTION_CAMERA_Z[Math.min(index + 1, SECTION_CAMERA_Z.length - 1)];
+  return from + (to - from) * (progress - index);
+}
 
 function BackgroundRenderPass({
   backgroundCamRef,
@@ -55,33 +83,41 @@ function ParallaxCamera({
   activeSection: string;
 }) {
   const mouseRef = useRef({ x: 0, y: 0 });
-  const scrollRef = useRef(0);
-  const targetRef = useRef({ mx: 0, my: 0, scroll: 0 });
+  const progressRef = useRef(0);
+  const targetRef = useRef({ mx: 0, my: 0, progress: 0 });
+  const edgeColorRef = useRef(new THREE.Color());
+  const titleColorRef = useRef(new THREE.Color());
   const lookAtRef = useRef(new THREE.Vector3(0, 1.5, -12));
 
-  useFrame((_, delta) => {
+  useFrame((state, delta) => {
     const cam = backgroundCamRef.current;
     if (!cam) return;
 
     const lerp = 1 - Math.exp(-delta * 3);
     targetRef.current.mx += (mouseRef.current.x - targetRef.current.mx) * lerp;
     targetRef.current.my += (mouseRef.current.y - targetRef.current.my) * lerp;
-    targetRef.current.scroll += (scrollRef.current - targetRef.current.scroll) * lerp;
+    targetRef.current.progress += (progressRef.current - targetRef.current.progress) * lerp;
 
-    const s = targetRef.current.scroll;
-    const scrollT = Math.min(1, s / 5000);
+    const time = state.clock.elapsedTime;
+    const progress = targetRef.current.progress;
 
-    cam.position.x = targetRef.current.mx * 0.6;
-    cam.position.y = targetRef.current.my * 0.35 + 1;
-    cam.position.z = 8 + scrollT * 20;
+    cam.position.x = targetRef.current.mx * 0.6 + Math.sin(progress * 1.4) * 0.5;
+    cam.position.y = targetRef.current.my * 0.35 + 1 + Math.sin(time * 0.3) * 0.08;
+    cam.position.z = cameraZAt(progress);
+    fieldState.cameraZ = cam.position.z;
 
     const sectionId = MAIN_SECTION_IDS.includes(activeSection as MainSectionId)
       ? (activeSection as MainSectionId)
       : 'profile';
+    const colors = SECTION_COLORS[sectionId];
+    fieldState.edge.lerp(edgeColorRef.current.set(colors.edge), lerp);
+    fieldState.title.lerp(titleColorRef.current.set(colors.title), lerp);
+
     const focus = getWindowWorldPosition(sectionId);
     const desiredLook = new THREE.Vector3(focus.x * 0.35, focus.y * 0.5 + 1, focus.z + 6);
     lookAtRef.current.lerp(desiredLook, lerp);
     cam.lookAt(lookAtRef.current);
+    cam.rotateZ(Math.sin(progress * 1.4) * 0.025);
   });
 
   useEffect(() => {
@@ -90,14 +126,16 @@ function ParallaxCamera({
       mouseRef.current.y = -(e.clientY / window.innerHeight - 0.5) * 2;
     };
     const handleScroll = () => {
-      scrollRef.current = window.scrollY;
+      progressRef.current = readSectionProgress();
     };
     window.addEventListener('mousemove', handleMove);
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
     handleScroll();
     return () => {
       window.removeEventListener('mousemove', handleMove);
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
     };
   }, []);
 
@@ -122,6 +160,8 @@ function WindowField({ compact }: { compact: boolean }) {
           title={win.title}
           active={false}
           accentTitle={win.accentTitle}
+          behavior={win.behavior}
+          phase={win.phase}
           position={win.position}
           rotation={win.rotation}
           size={win.size}
@@ -158,7 +198,7 @@ export default function OsWindowFieldScene() {
 
   return (
     <>
-      <PerspectiveCamera ref={backgroundCamRef} position={[0, 1, 8]} fov={78} />
+      <PerspectiveCamera ref={backgroundCamRef} position={[0, 1, SECTION_CAMERA_Z[0]]} fov={78} />
       <ParallaxCamera backgroundCamRef={backgroundCamRef} activeSection={activeSection} />
       <WindowField compact={compact} />
       <BackgroundRenderPass backgroundCamRef={backgroundCamRef} />
