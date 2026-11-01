@@ -45,6 +45,8 @@ export interface TerminalSubwayLabels {
   controls: string;
   gameOver: string;
   quit: string;
+  musicOn: string;
+  musicOff: string;
   result: string;
 }
 

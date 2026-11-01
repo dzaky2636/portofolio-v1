@@ -51,6 +51,7 @@ let nextStepTime = 0;
 let step = 0;
 let loopCount = 0;
 let rate = 1;
+let muted = false;
 
 function midiToFrequency(midi: number) {
   return 440 * 2 ** ((midi - 69) / 12);
@@ -188,7 +189,7 @@ export function startSubwayMusic() {
 
   const ctx = getAudioContext();
   const output = ctx.createGain();
-  output.gain.setValueAtTime(MASTER_GAIN, ctx.currentTime);
+  output.gain.setValueAtTime(muted ? 0 : MASTER_GAIN, ctx.currentTime);
   output.connect(ctx.destination);
 
   master = output;
@@ -215,6 +216,11 @@ export function stopSubwayMusic() {
   window.setTimeout(() => output.disconnect(), 400);
 
   holdBackgroundMusic(false);
+}
+
+export function setSubwayMusicMuted(next: boolean) {
+  muted = next;
+  if (master) master.gain.setValueAtTime(muted ? 0 : MASTER_GAIN, getAudioContext().currentTime);
 }
 
 /** 1 plays at the written tempo; the game raises this as the run speeds up. */

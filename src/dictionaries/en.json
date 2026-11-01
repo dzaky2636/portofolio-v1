@@ -1044,9 +1044,11 @@
       "coins": "coins",
       "best": "best",
       "start": "Press an arrow key or WASD to run. Swipe on touch screens.",
-      "controls": "Left and right switch tracks. Up jumps. Down rolls. R restarts. Q quits.",
+      "controls": "Left and right switch tracks. Up jumps. Down rolls. M mutes music. R restarts. Q quits.",
       "gameOver": "Busted. R restarts, Q quits. Tap to restart on touch screens.",
       "quit": "[ Q ] QUIT",
+      "musicOn": "[ M ] MUSIC ON",
+      "musicOff": "[ M ] MUSIC OFF",
       "result": "subway run finished. score {score}, coins {coins}, best {best}."
     },
     "nonogram": {

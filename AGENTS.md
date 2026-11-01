@@ -10,7 +10,7 @@ Before issuing ANY command to ANY model in Kilo Code, the context window MUST be
 ### Agent Alpha: The Architects (Qwen3.7 Max | DeepSeek V4 Pro)
 **Role:** Deep reasoning, complex logic, and mathematical architecture.
 **Authorized Tasks:**
-* Generating the core Next.js 16 App Router architecture and `middleware.ts`.
+* Generating the core Next.js 16 App Router architecture and `proxy.ts`.
 * Writing the procedural math and geometry logic for the `@react-three/fiber` canvas to achieve the PS1-style low-poly look (wobble/snapping shaders).
 * Managing complex React state (`useState`, `useTransition`) for the `Image_Viewer.exe` Carousel Modal.
 **Prohibited Tasks:** Scaffolding basic Tailwind UI or writing long paragraphs of content.

@@ -22,13 +22,19 @@ import {
   subwayScore,
   type SubwayState,
 } from '@/lib/subwayGame';
-import { setSubwayMusicRate, startSubwayMusic, stopSubwayMusic } from '@/lib/subwayMusic';
+import {
+  setSubwayMusicMuted,
+  setSubwayMusicRate,
+  startSubwayMusic,
+  stopSubwayMusic,
+} from '@/lib/subwayMusic';
 import { drawSubway, SUBWAY_HEIGHT, SUBWAY_WIDTH } from '@/lib/subwayRender';
 import type { TerminalSubwayLabels } from '@/lib/terminalCommands';
 
 const MAX_STEP_SECONDS = 1 / 30;
 const SWIPE_MIN_PX = 20;
 const BEST_SCORE_KEY = 'dzaky-corner-subway-best';
+const MUSIC_MUTED_KEY = 'dzaky-corner-subway-muted';
 const MAX_MUSIC_SPEED_UP = 0.2;
 
 type SubwayAction = (state: SubwayState) => SubwayState;
@@ -84,6 +90,22 @@ function saveBest(score: number) {
   }
 }
 
+function readMuted() {
+  try {
+    return localStorage.getItem(MUSIC_MUTED_KEY) === 'on';
+  } catch {
+    return false;
+  }
+}
+
+function saveMuted(muted: boolean) {
+  try {
+    localStorage.setItem(MUSIC_MUTED_KEY, muted ? 'on' : 'off');
+  } catch {
+    /* the setting just won't survive a reload */
+  }
+}
+
 export default function TerminalSubway({
   labels,
   onExit,
@@ -96,10 +118,12 @@ export default function TerminalSubway({
   const stateRef = useRef<SubwayState>(createSubwayGame());
   const bestRef = useRef(0);
   const touchRef = useRef<{ x: number; y: number } | null>(null);
+  const mutedRef = useRef(false);
   const [score, setScore] = useState(0);
   const [coins, setCoins] = useState(0);
   const [best, setBest] = useState(0);
   const [status, setStatus] = useState<SubwayState['status']>('ready');
+  const [musicMuted, setMusicMuted] = useState(false);
 
   const render = useCallback((time: number) => {
     const ctx = canvasRef.current?.getContext('2d');
@@ -127,6 +151,14 @@ export default function TerminalSubway({
     onExit(subwayScore(stateRef.current), stateRef.current.coins, bestRef.current);
   }, [onExit, recordBest]);
 
+  const toggleMusic = useCallback(() => {
+    const next = !mutedRef.current;
+    mutedRef.current = next;
+    setMusicMuted(next);
+    saveMuted(next);
+    setSubwayMusicMuted(next);
+  }, []);
+
   const act = useCallback(
     (action: SubwayAction) => {
       const before = stateRef.current;
@@ -141,6 +173,9 @@ export default function TerminalSubway({
   useEffect(() => {
     bestRef.current = readBest();
     setBest(bestRef.current);
+    mutedRef.current = readMuted();
+    setMusicMuted(mutedRef.current);
+    setSubwayMusicMuted(mutedRef.current);
     rootRef.current?.focus();
     render(performance.now());
   }, [render]);
@@ -200,12 +235,16 @@ export default function TerminalSubway({
         event.preventDefault();
         event.stopPropagation();
         restart();
+      } else if (key === 'm') {
+        event.preventDefault();
+        event.stopPropagation();
+        toggleMusic();
       }
     };
 
     window.addEventListener('keydown', handleKeyDown, true);
     return () => window.removeEventListener('keydown', handleKeyDown, true);
-  }, [act, exit, restart]);
+  }, [act, exit, restart, toggleMusic]);
 
   const handleTouchStart = (event: TouchEvent<HTMLCanvasElement>) => {
     const touch = event.touches[0];
@@ -269,13 +308,27 @@ export default function TerminalSubway({
         />
       </div>
       <p className="w-full max-w-[640px] text-xs text-[#F4F3ED]">{message}</p>
-      <button
-        type="button"
-        onClick={exit}
-        className="border-2 border-[#F4F3ED] px-2 py-0.5 text-xs uppercase tracking-widest text-[#F4F3ED] hover:bg-[#2945FF] retro-focus"
-      >
-        {labels.quit}
-      </button>
+      <div className="flex flex-wrap justify-center gap-2">
+        <button
+          type="button"
+          aria-pressed={musicMuted}
+          onClick={() => {
+            toggleMusic();
+            // Keeps Space a jump instead of pressing this button again.
+            rootRef.current?.focus();
+          }}
+          className="border-2 border-[#F4F3ED] px-2 py-0.5 text-xs uppercase tracking-widest text-[#F4F3ED] hover:bg-[#2945FF] retro-focus"
+        >
+          {musicMuted ? labels.musicOff : labels.musicOn}
+        </button>
+        <button
+          type="button"
+          onClick={exit}
+          className="border-2 border-[#F4F3ED] px-2 py-0.5 text-xs uppercase tracking-widest text-[#F4F3ED] hover:bg-[#2945FF] retro-focus"
+        >
+          {labels.quit}
+        </button>
+      </div>
     </div>
   );
 }

@@ -1044,9 +1044,11 @@
       "coins": "koin",
       "best": "terbaik",
       "start": "Tekan panah atau WASD untuk lari. Geser di layar sentuh.",
-      "controls": "Kiri dan kanan pindah rel. Atas melompat. Bawah berguling. R mulai ulang. Q keluar.",
+      "controls": "Kiri dan kanan pindah rel. Atas melompat. Bawah berguling. M bisukan musik. R mulai ulang. Q keluar.",
       "gameOver": "Tertangkap. R mulai ulang, Q keluar. Ketuk untuk mulai ulang di layar sentuh.",
       "quit": "[ Q ] KELUAR",
+      "musicOn": "[ M ] MUSIK NYALA",
+      "musicOff": "[ M ] MUSIK MATI",
       "result": "lari subway selesai. skor {score}, koin {coins}, terbaik {best}."
     },
     "nonogram": {
