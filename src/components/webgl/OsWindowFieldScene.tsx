@@ -39,18 +39,24 @@ function smootherstep(value: number) {
   return t * t * t * (t * (t * 6 - 15) + 10);
 }
 
+/** Reading layout is the slow part, so tops are measured once and only redone when it changes. */
+function readSectionTops() {
+  return MAIN_SECTION_IDS.slice(1).flatMap((id) => {
+    const el = document.getElementById(id);
+    return el ? [el.getBoundingClientRect().top + window.scrollY] : [];
+  });
+}
+
 /**
  * Position along the sections: 0 at the first, 1 at the second. The camera travels over a fixed
  * scroll span at each boundary and holds still between them, so a section's height never changes
  * how fast it moves.
  */
-function readSectionProgress() {
+function sectionProgress(tops: number[]) {
   const viewport = window.innerHeight;
   const anchor = window.scrollY + viewport * 0.3;
-  return MAIN_SECTION_IDS.slice(1).reduce((progress, id) => {
-    const el = document.getElementById(id);
-    if (!el) return progress;
-    const start = el.getBoundingClientRect().top + window.scrollY - viewport * TRAVEL_LEAD_VIEWPORTS;
+  return tops.reduce((progress, top) => {
+    const start = top - viewport * TRAVEL_LEAD_VIEWPORTS;
     const span = viewport * (TRAVEL_LEAD_VIEWPORTS + TRAVEL_TRAIL_VIEWPORTS);
     return progress + smootherstep((anchor - start) / span);
   }, 0);
@@ -139,17 +145,25 @@ function ParallaxCamera({
       mouseRef.current.x = (e.clientX / window.innerWidth - 0.5) * 2;
       mouseRef.current.y = -(e.clientY / window.innerHeight - 0.5) * 2;
     };
+    let tops: number[] = [];
     const handleScroll = () => {
-      progressRef.current = readSectionProgress();
+      progressRef.current = sectionProgress(tops);
     };
+    const measure = () => {
+      tops = readSectionTops();
+      handleScroll();
+    };
+    const layoutObserver = new ResizeObserver(measure);
+    layoutObserver.observe(document.body);
     window.addEventListener('mousemove', handleMove);
     window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll);
-    handleScroll();
+    window.addEventListener('resize', measure);
+    measure();
     return () => {
       window.removeEventListener('mousemove', handleMove);
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
+      window.removeEventListener('resize', measure);
+      layoutObserver.disconnect();
     };
   }, []);
 

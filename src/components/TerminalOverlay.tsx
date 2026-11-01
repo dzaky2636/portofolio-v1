@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { trackAction } from '@/lib/actionTracking';
 import { feedPet, levelOf, moodOf, readPet, xpForNextLevel } from '@/lib/boarPet';
+import { setTerminalGameRunning } from '@/lib/terminalGameStore';
 import type { MinesweeperLevel } from '@/lib/minesweeper';
 import type { RandomSize } from '@/lib/nonogramSizes';
 import type { StatusReport } from '@/lib/siteStatus';
@@ -85,6 +86,10 @@ export default function TerminalOverlay({
 
   useEffect(() => {
     if (isOpen && !game) inputRef.current?.focus();
+  }, [game, isOpen]);
+
+  useEffect(() => {
+    setTerminalGameRunning(isOpen && game !== null);
   }, [game, isOpen]);
 
   useEffect(() => {

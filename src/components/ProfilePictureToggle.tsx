@@ -32,7 +32,8 @@ export default function ProfilePictureToggle({
 
   return (
     <div className="relative aspect-square w-full">
-      {show3D && <ProfileVoxelView />}
+      {/* Only mounted while visible: behind the photo it would still draw every voxel. */}
+      {show3D && showBoar && <ProfileVoxelView />}
 
       <button
         type="button"
