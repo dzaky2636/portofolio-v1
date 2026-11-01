@@ -21,6 +21,7 @@ export interface Dictionary {
   };
   hero: {
     title: string;
+    availability: string;
     summary: string;
     renderViewTitle: string;
     renderViewStatus: string;

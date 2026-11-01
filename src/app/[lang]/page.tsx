@@ -145,29 +145,46 @@ export default async function Page({
               RAHMAN
             </span>
           </h1>
-          <div
-            data-boar-perch
-            className="font-mono uppercase tracking-widest text-xs bg-[#0C0C0C] text-white inline-block px-3 py-2 border-2 border-white shadow-[4px_4px_0px_#2945FF] animate-stamp"
-            style={{ animationDelay: '0.4s', animationFillMode: 'both' }}
-          >
-            {dict.hero.title}
+          <div className="flex flex-wrap items-stretch gap-3">
+            <div
+              data-boar-perch
+              className="font-mono uppercase tracking-widest text-xs bg-[#0C0C0C] text-white inline-block px-3 py-2 border-2 border-white shadow-[4px_4px_0px_#2945FF] animate-stamp"
+              style={{ animationDelay: '0.4s', animationFillMode: 'both' }}
+            >
+              {dict.hero.title}
+            </div>
+            <div
+              className="flex items-center gap-2 font-mono uppercase tracking-widest text-xs bg-white text-[#0C0C0C] px-3 py-2 border-2 border-black shadow-[4px_4px_0px_#2945FF] animate-stamp"
+              style={{ animationDelay: '0.5s', animationFillMode: 'both' }}
+            >
+              <span aria-hidden="true" className="block h-2 w-2 bg-[#2945FF] animate-led-blink" />
+              {dict.hero.availability}
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-4">
+            <a
+              href={dict.hero.cvFile}
+              download
+              data-boar-react="cv"
+              className="inline-block bg-[#FFD700] text-[#0C0C0C] border-4 border-black font-mono uppercase tracking-widest text-sm px-6 py-3 shadow-[6px_6px_0px_#0C0C0C] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_#0C0C0C] hover:border-[#2945FF] transition-all duration-75 rounded-none select-none pointer-events-auto retro-focus animate-stamp"
+              style={{ animationDelay: '0.6s', animationFillMode: 'backwards' }}
+            >
+              {dict.hero.cvLabel}
+            </a>
+            <CopyEmailButton
+              className="inline-block bg-white text-[#0C0C0C] border-4 border-black font-mono uppercase tracking-widest text-sm px-6 py-3 shadow-[6px_6px_0px_#0C0C0C] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_#0C0C0C] hover:border-[#2945FF] transition-all duration-75 rounded-none select-none pointer-events-auto retro-focus animate-stamp"
+              style={{ animationDelay: '0.7s', animationFillMode: 'backwards' }}
+            >
+              {dict.contact.button}
+            </CopyEmailButton>
           </div>
           <p
             data-packet
             className="text-xl md:text-2xl font-serif leading-relaxed max-w-xl animate-drawer"
-            style={{ animationDelay: '0.5s', animationFillMode: 'both' }}
+            style={{ animationDelay: '0.75s', animationFillMode: 'both' }}
           >
             {dict.hero.summary}
           </p>
-          <a
-            href={dict.hero.cvFile}
-            download
-            data-boar-react="cv"
-            className="inline-block bg-[#FFD700] text-[#0C0C0C] border-4 border-black font-mono uppercase tracking-widest text-sm px-6 py-3 shadow-[6px_6px_0px_#0C0C0C] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_#0C0C0C] hover:border-[#2945FF] transition-all duration-75 rounded-none select-none pointer-events-auto retro-focus animate-stamp"
-            style={{ animationDelay: '0.6s', animationFillMode: 'backwards' }}
-          >
-            {dict.hero.cvLabel}
-          </a>
         </div>
 
         <div className="space-y-8">

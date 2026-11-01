@@ -17,6 +17,7 @@
   },
   "hero": {
     "title": "Lead Fullstack Engineer",
+    "availability": "OPEN TO NEW PROJECTS",
     "summary": "Fullstack engineer shipping production web systems end to end, from interface and API to database and deployment. Currently Lead Fullstack Engineer at PT Rigo Inovasi Digital, building Chatrigo and ReplyGo with a focus on AI orchestration, RAG, and platform integrations. Also shipped three e-government systems still live in Balikpapan and taught at university level for more than three years.",
     "renderViewTitle": "RENDER_VIEW.exe",
     "renderViewStatus": "[ACTIVE]",
