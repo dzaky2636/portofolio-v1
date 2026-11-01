@@ -832,6 +832,7 @@
     "snake": "SNAKE.EXE",
     "subway": "SUBWAY.EXE",
     "nonogram": "NONOGRAM.EXE",
+    "minesweeper": "MINESWEEPER.EXE",
     "crt": "CRT MODE",
     "music": "BACKGROUND MUSIC",
     "cv": "DOWNLOAD CV",
@@ -984,6 +985,10 @@
         "description": "play nonogram, or a random board"
       },
       {
+        "command": "minesweeper [level]",
+        "description": "sweep for mines: easy, medium or hard"
+      },
+      {
         "command": "crt",
         "description": "toggle CRT screen effect"
       },
@@ -1050,6 +1055,30 @@
       "musicOn": "[ M ] MUSIC ON",
       "musicOff": "[ M ] MUSIC OFF",
       "result": "subway run finished. score {score}, coins {coins}, best {best}."
+    },
+    "minesweeper": {
+      "aria": "Minesweeper board",
+      "mines": "mines",
+      "time": "time",
+      "best": "best",
+      "start": "Dig any cell to start. The first dig is always safe.",
+      "controls": "Arrows move, Space digs, F flags. Click to dig, right-click to flag. Dig a number to clear around it.",
+      "won": "Cleared in {time}s! R restarts, Z changes level.",
+      "lost": "Boom. R restarts, Q quits.",
+      "restart": "[ R ] RESTART",
+      "levelButton": "[ Z ] LEVEL: {level}",
+      "levels": { "easy": "EASY", "medium": "MEDIUM", "hard": "HARD" },
+      "tapDig": "[ T ] TAP: DIG",
+      "tapFlag": "[ T ] TAP: FLAG",
+      "quit": "[ Q ] QUIT",
+      "usage": "usage: minesweeper [easy|medium|hard]",
+      "result": "minesweeper finished. boards cleared: {n}.",
+      "cells": {
+        "hidden": "hidden",
+        "flag": "flagged",
+        "mine": "mine",
+        "open": "{n} mines nearby"
+      }
     },
     "nonogram": {
       "aria": "Nonogram board",

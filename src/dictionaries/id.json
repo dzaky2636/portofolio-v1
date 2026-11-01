@@ -832,6 +832,7 @@
     "snake": "SNAKE.EXE",
     "subway": "SUBWAY.EXE",
     "nonogram": "NONOGRAM.EXE",
+    "minesweeper": "MINESWEEPER.EXE",
     "crt": "MODE CRT",
     "music": "MUSIK LATAR",
     "cv": "UNDUH CV",
@@ -984,6 +985,10 @@
         "description": "main nonogram, atau papan acak"
       },
       {
+        "command": "minesweeper [level]",
+        "description": "cari ranjau: easy, medium, atau hard"
+      },
+      {
         "command": "crt",
         "description": "ubah efek layar CRT"
       },
@@ -1050,6 +1055,30 @@
       "musicOn": "[ M ] MUSIK NYALA",
       "musicOff": "[ M ] MUSIK MATI",
       "result": "lari subway selesai. skor {score}, koin {coins}, terbaik {best}."
+    },
+    "minesweeper": {
+      "aria": "Papan minesweeper",
+      "mines": "ranjau",
+      "time": "waktu",
+      "best": "terbaik",
+      "start": "Gali kotak mana saja untuk mulai. Galian pertama selalu aman.",
+      "controls": "Panah bergerak, Spasi menggali, F menandai. Klik untuk menggali, klik kanan untuk menandai. Gali angka untuk membuka sekitarnya.",
+      "won": "Bersih dalam {time} detik! R mulai ulang, Z ganti level.",
+      "lost": "Bum. R mulai ulang, Q keluar.",
+      "restart": "[ R ] ULANG",
+      "levelButton": "[ Z ] LEVEL: {level}",
+      "levels": { "easy": "MUDAH", "medium": "SEDANG", "hard": "SULIT" },
+      "tapDig": "[ T ] KETUK: GALI",
+      "tapFlag": "[ T ] KETUK: TANDAI",
+      "quit": "[ Q ] KELUAR",
+      "usage": "pemakaian: minesweeper [easy|medium|hard]",
+      "result": "minesweeper selesai. papan bersih: {n}.",
+      "cells": {
+        "hidden": "tertutup",
+        "flag": "ditandai",
+        "mine": "ranjau",
+        "open": "{n} ranjau di sekitar"
+      }
     },
     "nonogram": {
       "aria": "Papan nonogram",

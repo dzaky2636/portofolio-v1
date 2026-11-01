@@ -97,6 +97,25 @@ export function playSubwayCrash() {
   playSweep(220, 45, 0.45, 0.1);
 }
 
+/** A single cell ticks; a cascade rolls upward so a big opening feels like a reward. */
+export function playMinesweeperReveal(cells: number) {
+  if (cells > 1) playNotes([523, 659, 784], 0.05, 0.035, 0.05);
+  else playSweep(520, 700, 0.03, 0.05);
+}
+
+export function playMinesweeperFlag() {
+  playSweep(700, 900, 0.04, 0.05);
+}
+
+export function playMinesweeperUnflag() {
+  playSweep(500, 350, 0.04, 0.04);
+}
+
+export function playMinesweeperBoom() {
+  playNoise(0.35, 0.14);
+  playSweep(160, 40, 0.5, 0.12);
+}
+
 export function playNonogramFill() {
   playSweep(640, 420, 0.03, 0.05);
 }

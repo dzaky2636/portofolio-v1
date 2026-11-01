@@ -1,3 +1,7 @@
+import {
+  MINESWEEPER_LEVEL_ORDER,
+  type MinesweeperLevel,
+} from '@/lib/minesweeper';
 import type { NonogramCell, NonogramPuzzleId } from '@/lib/nonogram';
 import { RANDOM_SIZES, type RandomSize } from '@/lib/nonogramSizes';
 import type { MainSectionId } from '@/lib/sectionIds';
@@ -50,6 +54,26 @@ export interface TerminalSubwayLabels {
   result: string;
 }
 
+export interface TerminalMinesweeperLabels {
+  aria: string;
+  mines: string;
+  time: string;
+  best: string;
+  start: string;
+  controls: string;
+  won: string;
+  lost: string;
+  restart: string;
+  levelButton: string;
+  levels: Record<MinesweeperLevel, string>;
+  tapDig: string;
+  tapFlag: string;
+  quit: string;
+  usage: string;
+  result: string;
+  cells: { hidden: string; flag: string; mine: string; open: string };
+}
+
 export interface TerminalLabels {
   title: string;
   closeAria: string;
@@ -75,6 +99,7 @@ export interface TerminalLabels {
   snake: TerminalSnakeLabels;
   subway: TerminalSubwayLabels;
   nonogram: TerminalNonogramLabels;
+  minesweeper: TerminalMinesweeperLabels;
   petStats: { level: string; visits: string; pokes: string; feeds: string; mood: string };
   moods: { full: string; peckish: string; starving: string };
 }
@@ -106,6 +131,7 @@ export type TerminalAction =
   | { type: 'snake' }
   | { type: 'subway' }
   | { type: 'nonogram'; randomSize: RandomSize | null }
+  | { type: 'minesweeper'; level: MinesweeperLevel }
   | { type: 'petStats' }
   | { type: 'feed' }
   | { type: 'link'; url: string }
@@ -170,7 +196,9 @@ export function completeInput(input: string, data: TerminalData) {
       ? data.projects.map((project) => project.id)
       : first === 'goto'
         ? Object.keys(SECTION_ALIASES)
-        : [];
+        : first === 'minesweeper'
+          ? MINESWEEPER_LEVEL_ORDER
+          : [];
   const matches = candidates.filter((name) => name.startsWith(partial));
   return matches.length === 1 ? `${first} ${matches[0]}` : input;
 }
@@ -274,6 +302,12 @@ export function runCommand(input: string, data: TerminalData): TerminalResult {
         return { lines: [error(labels.nonogram.usage)], action: none };
       }
       return { lines: [], action: { type: 'nonogram', randomSize } };
+    }
+    case 'minesweeper':
+    case 'mines': {
+      const level = MINESWEEPER_LEVEL_ORDER.find((option) => option === argument.toLowerCase());
+      if (argument && !level) return { lines: [error(labels.minesweeper.usage)], action: none };
+      return { lines: [], action: { type: 'minesweeper', level: level ?? 'easy' } };
     }
     case 'clear':
       return { lines: [], action: { type: 'clear' } };

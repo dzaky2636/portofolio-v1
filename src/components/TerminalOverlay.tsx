@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { feedPet, levelOf, moodOf, readPet, xpForNextLevel } from '@/lib/boarPet';
+import type { MinesweeperLevel } from '@/lib/minesweeper';
 import type { RandomSize } from '@/lib/nonogramSizes';
 import type { StatusReport } from '@/lib/siteStatus';
 import {
@@ -16,6 +17,9 @@ import {
 const TerminalSnake = dynamic(() => import('@/components/TerminalSnake'), { ssr: false });
 const TerminalSubway = dynamic(() => import('@/components/TerminalSubway'), { ssr: false });
 const TerminalNonogram = dynamic(() => import('@/components/TerminalNonogram'), { ssr: false });
+const TerminalMinesweeper = dynamic(() => import('@/components/TerminalMinesweeper'), {
+  ssr: false,
+});
 
 const LINE_STYLE: Record<TerminalLine['kind'], string> = {
   output: 'text-[#F4F3ED]',
@@ -46,8 +50,11 @@ export default function TerminalOverlay({
     data.labels.welcome.map((text, id) => ({ id, text, kind: 'accent' }))
   );
   const [value, setValue] = useState('');
-  const [game, setGame] = useState<'snake' | 'subway' | 'nonogram' | null>(null);
+  const [game, setGame] = useState<'snake' | 'subway' | 'nonogram' | 'minesweeper' | null>(
+    null
+  );
   const [nonogramRandomSize, setNonogramRandomSize] = useState<RandomSize | null>(null);
+  const [minesweeperLevel, setMinesweeperLevel] = useState<MinesweeperLevel>('easy');
   const inputRef = useRef<HTMLInputElement>(null);
   const logRef = useRef<HTMLDivElement>(null);
   const nextIdRef = useRef(data.labels.welcome.length);
@@ -172,6 +179,10 @@ export default function TerminalOverlay({
           setNonogramRandomSize(action.randomSize);
           setGame('nonogram');
           break;
+        case 'minesweeper':
+          setMinesweeperLevel(action.level);
+          setGame('minesweeper');
+          break;
         case 'petStats': {
           const pet = readPet();
           const { petStats, moods } = data.labels;
@@ -247,7 +258,7 @@ export default function TerminalOverlay({
     }
   };
 
-  const handleNonogramExit = (message: string) => {
+  const handleMessageExit = (message: string) => {
     setGame(null);
     print([{ text: message, kind: 'accent' }]);
   };
@@ -308,7 +319,14 @@ export default function TerminalOverlay({
         <TerminalNonogram
           labels={data.labels.nonogram}
           startRandomSize={nonogramRandomSize}
-          onExit={handleNonogramExit}
+          onExit={handleMessageExit}
+        />
+      )}
+      {game === 'minesweeper' && (
+        <TerminalMinesweeper
+          labels={data.labels.minesweeper}
+          startLevel={minesweeperLevel}
+          onExit={handleMessageExit}
         />
       )}
       {!game && (
