@@ -821,6 +821,21 @@
     ],
     "skipHint": "[ KETUK ATAU TEKAN TOMBOL UNTUK LEWATI ]"
   },
+  "taskbar": {
+    "start": "MULAI",
+    "menuAria": "Menu mulai",
+    "brand": "DZAKY_OS",
+    "programs": "PROGRAM",
+    "goTo": "BUKA",
+    "system": "SISTEM",
+    "terminal": "TERMINAL.EXE",
+    "snake": "SNAKE.EXE",
+    "subway": "SUBWAY.EXE",
+    "nonogram": "NONOGRAM.EXE",
+    "crt": "MODE CRT",
+    "cv": "UNDUH CV",
+    "boar": "STATISTIK BABI HUTAN"
+  },
   "windowManager": {
     "reset": "[ RESET_JENDELA ]"
   },

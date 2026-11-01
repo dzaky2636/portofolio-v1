@@ -159,7 +159,7 @@ export default function ProjectModal({
   if (minimized) {
     return createPortal(
       <div
-        className="fixed bottom-4 right-4 z-[200] flex items-stretch max-w-[min(90vw,20rem)] border-4 border-black bg-white shadow-[8px_8px_0px_#0C0C0C] pointer-events-auto animate-iris"
+        className="flex min-w-0 max-w-64 items-stretch border-2 border-black bg-white pointer-events-auto"
         role="dialog"
         aria-modal="false"
         aria-label={dialogLabel}
@@ -167,7 +167,7 @@ export default function ProjectModal({
         <button
           type="button"
           onClick={handleRestore}
-          className="flex-1 min-w-0 flex items-center justify-between gap-2 border-r-4 border-black bg-[#F4F3ED] px-3 py-2 font-mono uppercase tracking-widest text-[10px] md:text-xs hover:bg-[#2945FF] hover:text-white transition-colors duration-75 retro-focus"
+          className="flex-1 min-w-0 flex items-center justify-between gap-2 border-r-2 border-black bg-[#F4F3ED] px-2 py-1 font-mono uppercase tracking-widest text-[10px] md:text-xs hover:bg-[#2945FF] hover:text-white transition-colors duration-75 retro-focus"
           aria-label={modalRestoreAria}
         >
           <span className="truncate font-bold">
@@ -184,7 +184,7 @@ export default function ProjectModal({
           [ X ]
         </button>
       </div>,
-      document.body
+      document.getElementById('taskbar-tasks') ?? document.body
     );
   }
 

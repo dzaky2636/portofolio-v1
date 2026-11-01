@@ -4,6 +4,7 @@ import ExperienceLogViewer from '@/components/ExperienceLogViewer';
 import AnimateOnScroll from '@/components/AnimateOnScroll';
 import GlitchText from '@/components/GlitchText';
 import SiteHeader from '@/components/SiteHeader';
+import Taskbar from '@/components/Taskbar';
 import TerminalOverlay from '@/components/TerminalOverlay';
 import SkipToContent from '@/components/SkipToContent';
 import Window from '@/components/Window';
@@ -91,6 +92,12 @@ export default async function Page({
       <WindowDragManager resetLabel={dict.windowManager.reset} />
       <TerminalOverlay data={terminalData} cvFile={dict.hero.cvFile} />
       <CrtController />
+      <Taskbar
+        labels={dict.taskbar}
+        navLinks={navLinks}
+        cvFile={dict.hero.cvFile}
+        timezoneLabel={dict.nav.systemClockTz}
+      />
       <KonamiCheatListener
         content={{
           title: dict.easterEgg.konamiTitle,
@@ -108,7 +115,6 @@ export default async function Page({
         menuOpen={dict.nav.menuOpen}
         menuClose={dict.nav.menuClose}
         scrollBufferLabel={dict.nav.scrollBuffer}
-        systemClockTz={dict.nav.systemClockTz}
         bsod={{
           title: dict.easterEgg.bsodTitle,
           rebootHint: dict.easterEgg.bsodReboot,
@@ -434,7 +440,7 @@ export default async function Page({
       </section>
 
       {/* 8. FOOTER */}
-      <footer className="border-t-4 border-black bg-[#F4F3ED] py-12 lg:py-16 px-4">
+      <footer className="border-t-4 border-black bg-[#F4F3ED] pt-12 pb-24 lg:pt-16 lg:pb-28 px-4">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-10">
           <div className="space-y-4">
             <div

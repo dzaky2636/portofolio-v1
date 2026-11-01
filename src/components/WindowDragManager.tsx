@@ -141,7 +141,7 @@ export default function WindowDragManager({ resetLabel }: { resetLabel: string }
     <button
       type="button"
       onClick={resetAll}
-      className="fixed bottom-4 right-4 z-[55] bg-[#FFD700] text-[#0C0C0C] border-4 border-black px-4 py-2 font-mono uppercase tracking-widest text-xs shadow-[4px_4px_0px_#0C0C0C] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#0C0C0C] hover:border-[#2945FF] transition-all duration-75 retro-focus"
+      className="fixed bottom-14 right-4 z-[55] bg-[#FFD700] text-[#0C0C0C] border-4 border-black px-4 py-2 font-mono uppercase tracking-widest text-xs shadow-[4px_4px_0px_#0C0C0C] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_#0C0C0C] hover:border-[#2945FF] transition-all duration-75 retro-focus"
     >
       {resetLabel}
     </button>

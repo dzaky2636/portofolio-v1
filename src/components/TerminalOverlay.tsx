@@ -203,6 +203,22 @@ export default function TerminalOverlay({
     [close, cvFile, data.labels, loadStatus, print]
   );
 
+  useEffect(() => {
+    const handleRun = (event: Event) => {
+      if (!(event instanceof CustomEvent) || typeof event.detail !== 'string') return;
+      const command = event.detail;
+      open();
+      setGame(null);
+      print([{ text: `$ ${command}`, kind: 'output' }]);
+      const result = runCommand(command, data);
+      print(result.lines);
+      applyAction(result.action);
+    };
+
+    window.addEventListener('terminal:run', handleRun);
+    return () => window.removeEventListener('terminal:run', handleRun);
+  }, [applyAction, data, open, print]);
+
   const handleInputKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       event.preventDefault();

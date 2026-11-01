@@ -1,3 +1,4 @@
+import type { TaskbarLabels } from "@/components/Taskbar";
 import type { CaseStudy, CaseStudyLabels } from "@/lib/caseStudy";
 import type { TerminalLabels } from "@/lib/terminalCommands";
 
@@ -129,6 +130,7 @@ export interface Dictionary {
   contact: { title: string; description: string; button: string; emailCopied: string };
   boot: { lines: string[]; skipHint: string };
   windowManager: { reset: string };
+  taskbar: TaskbarLabels;
   crt: { label: string; aria: string };
   terminal: TerminalLabels;
   mascot: {

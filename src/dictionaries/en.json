@@ -821,6 +821,21 @@
     ],
     "skipHint": "[ TAP OR PRESS ANY KEY TO SKIP ]"
   },
+  "taskbar": {
+    "start": "START",
+    "menuAria": "Start menu",
+    "brand": "DZAKY_OS",
+    "programs": "PROGRAMS",
+    "goTo": "GO TO",
+    "system": "SYSTEM",
+    "terminal": "TERMINAL.EXE",
+    "snake": "SNAKE.EXE",
+    "subway": "SUBWAY.EXE",
+    "nonogram": "NONOGRAM.EXE",
+    "crt": "CRT MODE",
+    "cv": "DOWNLOAD CV",
+    "boar": "BOAR STATS"
+  },
   "windowManager": {
     "reset": "[ RESET_WINDOWS ]"
   },

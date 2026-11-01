@@ -55,7 +55,7 @@ export function CopyEmailProvider({
         <div
           role="status"
           aria-live="polite"
-          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[200] pointer-events-none max-w-[calc(100vw-2rem)]"
+          className="fixed bottom-14 left-1/2 -translate-x-1/2 z-[200] pointer-events-none max-w-[calc(100vw-2rem)]"
         >
           <div
             className="bg-white text-[#0C0C0C] border-4 border-black shadow-[10px_10px_0px_#0C0C0C] px-8 py-5 font-mono uppercase tracking-widest text-sm md:text-base animate-iris"

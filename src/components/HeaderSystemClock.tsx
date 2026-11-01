@@ -30,7 +30,7 @@ export default function HeaderSystemClock({ timezoneLabel }: HeaderSystemClockPr
 
   return (
     <div
-      className="hidden sm:flex items-center gap-2 border-2 border-black bg-white shadow-[2px_2px_0px_#0C0C0C] px-2 py-1 font-mono uppercase tracking-widest text-[10px] md:text-xs select-none"
+      className="flex shrink-0 items-center gap-2 border-2 border-black bg-white shadow-[2px_2px_0px_#0C0C0C] px-2 py-1 font-mono uppercase tracking-widest text-[10px] md:text-xs select-none"
       aria-hidden="true"
     >
       <time className="tabular-nums" suppressHydrationWarning>
