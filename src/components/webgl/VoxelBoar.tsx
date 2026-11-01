@@ -7,7 +7,7 @@ import { BOAR_VOXELS, voxelToWorld } from '@/components/webgl/boarVoxelData';
 import { usePrefersReducedMotion } from '@/hooks/useMediaQuery';
 import { WEBGL_PALETTE } from '@/components/webgl/palette';
 
-const BOX = 0.075;
+const BOX = 0.34;
 
 export default function VoxelBoar() {
   const groupRef = useRef<THREE.Group>(null);
