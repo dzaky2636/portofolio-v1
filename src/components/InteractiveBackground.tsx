@@ -32,6 +32,29 @@ export default function InteractiveBackground() {
         <rect width="100%" height="100%" filter="url(#weirdcore-noise)" />
       </svg>
 
+      <svg className="absolute inset-0 w-full h-full" aria-hidden="true">
+        <defs>
+          <pattern
+            id="weirdcore-drafting-grid"
+            x="10"
+            y="10"
+            width="200"
+            height="200"
+            patternUnits="userSpaceOnUse"
+          >
+            <path d="M100 0V200M0 100H200" stroke="#0C0C0C" strokeOpacity="0.07" fill="none" />
+            <path d="M200 0H0V200" stroke="#0C0C0C" strokeOpacity="0.14" fill="none" />
+            <path
+              d="M92 100H108M100 92V108M0 8V0H8M192 0H200M0 192V200"
+              stroke="#0C0C0C"
+              strokeOpacity="0.45"
+              fill="none"
+            />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#weirdcore-drafting-grid)" />
+      </svg>
+
       <div
         className="absolute inset-0"
         style={{

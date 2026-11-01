@@ -6,10 +6,20 @@ import * as THREE from 'three';
 import { fieldState } from '@/components/webgl/fieldState';
 import type { WindowBehavior } from '@/components/webgl/osWindowLayout';
 import { WEBGL_PALETTE } from '@/components/webgl/palette';
+import {
+  getContentUvScale,
+  getWindowContentTexture,
+  type WindowContent,
+} from '@/components/webgl/windowContent';
 
 const TITLE_BAR_HEIGHT = 0.22;
 const DEPTH = 0.06;
 const BORDER = 0.04;
+const CONTROL_SIZE = 0.13;
+const CONTROL_GAP = 0.04;
+const SCROLLBAR_WIDTH = 0.14;
+const SHADOW_OFFSET = 0.12;
+const SHADOW_OPACITY = 0.22;
 const FADE_NEAR_START = 1.5;
 const FADE_NEAR_END = 6;
 const FADE_FAR_START = 40;
@@ -41,6 +51,46 @@ function createTitleTexture(title: string, active: boolean): THREE.CanvasTexture
   return texture;
 }
 
+/** Title bar buttons, title rule and scrollbar as line pairs, drawn with the frame's edges. */
+function buildChromeSegments(bodyW: number, bodyH: number): number[] {
+  const z = DEPTH / 2 + 0.003;
+  const segments: number[] = [];
+  const line = (x0: number, y0: number, x1: number, y1: number) => {
+    segments.push(x0, y0, z, x1, y1, z);
+  };
+  const box = (x0: number, y0: number, x1: number, y1: number) => {
+    line(x0, y0, x1, y0);
+    line(x1, y0, x1, y1);
+    line(x1, y1, x0, y1);
+    line(x0, y1, x0, y0);
+  };
+
+  const right = bodyW / 2;
+  const left = -right;
+  const titleBottom = bodyH / 2 - TITLE_BAR_HEIGHT / 2;
+  const bodyBottom = -bodyH / 2 - TITLE_BAR_HEIGHT / 2;
+
+  line(left, titleBottom, right, titleBottom);
+
+  const controlY = bodyH / 2 - CONTROL_SIZE / 2;
+  for (let index = 0; index < 3; index += 1) {
+    const x1 = right - CONTROL_GAP - index * (CONTROL_SIZE + CONTROL_GAP);
+    const x0 = x1 - CONTROL_SIZE;
+    box(x0, controlY, x1, controlY + CONTROL_SIZE);
+    if (index === 0) {
+      line(x0, controlY, x1, controlY + CONTROL_SIZE);
+      line(x0, controlY + CONTROL_SIZE, x1, controlY);
+    }
+  }
+
+  const trackLeft = right - SCROLLBAR_WIDTH;
+  const thumbTop = titleBottom - bodyH * 0.12;
+  line(trackLeft, titleBottom, trackLeft, bodyBottom);
+  box(trackLeft, thumbTop - bodyH * 0.3, right, thumbTop);
+
+  return segments;
+}
+
 export type OsWindowFrameKind = 'chapter' | 'decorative';
 
 interface OsWindowFrameProps {
@@ -55,6 +105,7 @@ interface OsWindowFrameProps {
   accentTitle?: boolean;
   behavior?: WindowBehavior;
   phase?: number;
+  content?: WindowContent;
 }
 
 export default function OsWindowFrame({
@@ -68,6 +119,7 @@ export default function OsWindowFrame({
   accentTitle = false,
   behavior = 'still',
   phase = 0,
+  content = 'text',
 }: OsWindowFrameProps) {
   const isDecorative = kind === 'decorative';
   const hasTitleText = !isDecorative || behavior === 'labelled';
@@ -81,11 +133,27 @@ export default function OsWindowFrame({
   const bodyW = width * scaleMul;
   const bodyH = height * scaleMul;
 
-  const { shellGeo, titleGeo, bodyGeo, edgesGeo, titleTexture, progressGeo } = useMemo(() => {
+  const { shellGeo, titleGeo, bodyGeo, edgesGeo, titleTexture, progressGeo, shadowGeo } = useMemo(() => {
     const shell = new THREE.BoxGeometry(bodyW + BORDER * 2, bodyH + TITLE_BAR_HEIGHT + BORDER * 2, DEPTH);
     const titlePlane = new THREE.PlaneGeometry(bodyW, TITLE_BAR_HEIGHT);
     const bodyPlane = new THREE.PlaneGeometry(bodyW, bodyH);
-    const edges = new THREE.EdgesGeometry(shell, 1);
+    const [uScale, vScale] = getContentUvScale(bodyW, bodyH);
+    const uv = bodyPlane.attributes.uv;
+    for (let index = 0; index < uv.count; index += 1) {
+      // Anchored to the top-left corner, where the menu bar sits.
+      uv.setXY(index, uv.getX(index) * uScale, 1 - (1 - uv.getY(index)) * vScale);
+    }
+    const shellEdges = new THREE.EdgesGeometry(shell, 1);
+    const edges = new THREE.BufferGeometry();
+    edges.setAttribute(
+      'position',
+      new THREE.Float32BufferAttribute(
+        [...shellEdges.attributes.position.array, ...buildChromeSegments(bodyW, bodyH)],
+        3
+      )
+    );
+    shellEdges.dispose();
+    const shadow = new THREE.PlaneGeometry(bodyW + BORDER * 2, bodyH + TITLE_BAR_HEIGHT + BORDER * 2);
     const tex = hasTitleText ? createTitleTexture(title, active) : null;
     // Anchored at its left edge so scaling on X fills like a progress bar.
     const progress = new THREE.PlaneGeometry(bodyW * 0.8, 0.12);
@@ -97,6 +165,7 @@ export default function OsWindowFrame({
       edgesGeo: edges,
       titleTexture: tex,
       progressGeo: progress,
+      shadowGeo: shadow,
     };
   }, [bodyW, bodyH, title, active, hasTitleText]);
 
@@ -130,13 +199,14 @@ export default function OsWindowFrame({
       bodyGeo.dispose();
       edgesGeo.dispose();
       progressGeo.dispose();
+      shadowGeo.dispose();
       titleMat.dispose();
     };
-  }, [titleTexture, shellGeo, titleGeo, bodyGeo, edgesGeo, progressGeo, titleMat]);
+  }, [titleTexture, shellGeo, titleGeo, bodyGeo, edgesGeo, progressGeo, shadowGeo, titleMat]);
 
   const bodyMatRef = useRef(
     new THREE.MeshBasicMaterial({
-      color: '#FFFFFF',
+      map: getWindowContentTexture(content),
       transparent: true,
       opacity: 0.07,
       side: THREE.DoubleSide,
@@ -153,19 +223,20 @@ export default function OsWindowFrame({
 
   const titleRef = useRef<THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>>(null);
   const progressRef = useRef<THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>>(null);
+  const shadowRef = useRef<THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>>(null);
 
   const targetScale = active ? 1.06 : 1;
   const targetBodyOpacity = active
     ? compact
-      ? 0.14
-      : 0.18
+      ? 0.4
+      : 0.6
     : isDecorative
       ? compact
-        ? 0.06
-        : 0.08
+        ? 0.22
+        : 0.42
       : compact
-        ? 0.07
-        : 0.09;
+        ? 0.25
+        : 0.48;
   const decorativeEdgeOpacity = compact ? 0.18 : 0.3;
   const decorativeTitleOpacity = compact ? 0.45 : 0.78;
   const targetEdgeOpacity = active ? 0.58 : isDecorative ? decorativeEdgeOpacity : 0.38;
@@ -197,7 +268,8 @@ export default function OsWindowFrame({
     const blink =
       behavior === 'flicker' && Math.sin(time * 1.3) * Math.sin(time * 2.7) > 0.86 ? 2.6 : 1;
 
-    bodyMatRef.current.opacity = bodyOpacityRef.current * fade * blink;
+    bodyMatRef.current.opacity = Math.min(bodyOpacityRef.current * blink, 1) * fade;
+    if (shadowRef.current) shadowRef.current.material.opacity = SHADOW_OPACITY * fade;
     edgeMatRef.current.opacity = Math.min(edgeOpacityRef.current * blink, 1) * fade;
     const titleMaterial = titleRef.current?.material;
     if (titleMaterial) titleMaterial.opacity = (isDecorative ? decorativeTitleOpacity : 1) * fade;
@@ -218,6 +290,14 @@ export default function OsWindowFrame({
 
   return (
     <group ref={groupRef} position={position} rotation={rotation}>
+      <mesh ref={shadowRef} geometry={shadowGeo} position={[SHADOW_OFFSET, -SHADOW_OFFSET, -DEPTH]}>
+        <meshBasicMaterial
+          color={WEBGL_PALETTE.ink}
+          transparent
+          opacity={SHADOW_OPACITY}
+          side={THREE.DoubleSide}
+        />
+      </mesh>
       <mesh ref={titleRef} geometry={titleGeo} position={[0, titleY, zFront]} material={titleMat} />
       <mesh geometry={bodyGeo} position={[0, bodyY, zFront]} material={bodyMatRef.current} />
       <lineSegments geometry={edgesGeo} material={edgeMatRef.current} />

@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { WEBGL_PALETTE } from '@/components/webgl/palette';
+import type { WindowContent } from '@/components/webgl/windowContent';
 import { MAIN_SECTION_IDS, type MainSectionId } from '@/lib/sectionIds';
 
 export const OS_WINDOW_TITLES: Record<MainSectionId, string> = {
@@ -8,6 +9,14 @@ export const OS_WINDOW_TITLES: Record<MainSectionId, string> = {
   realms: 'REALMS.EXE',
   logs: 'LOG_VIEWER.EXE',
   contact: 'CONTACT.BAT',
+};
+
+export const OS_WINDOW_CONTENT: Record<MainSectionId, WindowContent> = {
+  profile: 'text',
+  inventory: 'table',
+  realms: 'folders',
+  logs: 'hex',
+  contact: 'dialog',
 };
 
 export interface OsWindowLayoutEntry {
@@ -72,32 +81,33 @@ export interface DecorativeWindowSpec {
   accentTitle: boolean;
   behavior: WindowBehavior;
   phase: number;
+  content: WindowContent;
 }
 
-const DECORATIVE_TITLES = [
-  'README.TXT',
-  'SYSWARN.LOG',
-  'NULL_PTR.DLL',
-  'CACHE.DAT',
-  'BOOT.INI',
-  'DRIVER.SYS',
-  'MEMDUMP.BIN',
-  'CLIPBRD.EXE',
-  'NOTEPAD.SYS',
-  'TASKMGR.COM',
-  'UNINST.EXE',
-  'SETUP.MSI',
-  'ERROR_404',
-  'PENDING.UP',
-  'QUEUE.DAT',
-  'AUTH.TOK',
-  'SCRNSAVE.SCR',
-  'DESKTOP.INI',
-  'FONTS.DAT',
-  'PRINT.SPL',
+const DECORATIVE_TITLES: { title: string; content: WindowContent }[] = [
+  { title: 'README.TXT', content: 'text' },
+  { title: 'SYSWARN.LOG', content: 'dialog' },
+  { title: 'NULL_PTR.DLL', content: 'hex' },
+  { title: 'CACHE.DAT', content: 'hex' },
+  { title: 'BOOT.INI', content: 'text' },
+  { title: 'DRIVER.SYS', content: 'table' },
+  { title: 'MEMDUMP.BIN', content: 'hex' },
+  { title: 'CLIPBRD.EXE', content: 'image' },
+  { title: 'NOTEPAD.SYS', content: 'text' },
+  { title: 'TASKMGR.COM', content: 'chart' },
+  { title: 'UNINST.EXE', content: 'dialog' },
+  { title: 'SETUP.MSI', content: 'folders' },
+  { title: 'ERROR_404', content: 'dialog' },
+  { title: 'PENDING.UP', content: 'chart' },
+  { title: 'QUEUE.DAT', content: 'table' },
+  { title: 'AUTH.TOK', content: 'hex' },
+  { title: 'SCRNSAVE.SCR', content: 'image' },
+  { title: 'DESKTOP.INI', content: 'folders' },
+  { title: 'FONTS.DAT', content: 'table' },
+  { title: 'PRINT.SPL', content: 'image' },
 ];
 
-function mulberry32(seed: number) {
+export function mulberry32(seed: number) {
   return () => {
     seed |= 0;
     seed = (seed + 0x6d2b79f5) | 0;
@@ -161,7 +171,7 @@ export function generateDecorativeWindows(compact: boolean): DecorativeWindowSpe
 
     const w = 1.1 + rand() * (compact ? 1.6 : 2.2);
     const h = 0.75 + rand() * (compact ? 1.2 : 1.8);
-    const title = DECORATIVE_TITLES[Math.floor(rand() * DECORATIVE_TITLES.length)];
+    const { title, content } = DECORATIVE_TITLES[Math.floor(rand() * DECORATIVE_TITLES.length)];
 
     specs.push({
       id: `decor-${specs.length}`,
@@ -176,6 +186,7 @@ export function generateDecorativeWindows(compact: boolean): DecorativeWindowSpe
       accentTitle: rand() > 0.8,
       behavior: pickBehavior(rand()),
       phase: rand() * 100,
+      content,
     });
   }
 

@@ -5,9 +5,11 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
 import { useSyncExternalStore } from 'react';
+import FieldRoom from '@/components/webgl/FieldRoom';
 import OsWindowFrame from '@/components/webgl/OsWindowFrame';
 import { fieldState } from '@/components/webgl/fieldState';
 import {
+  OS_WINDOW_CONTENT,
   OS_WINDOW_LAYOUT,
   OS_WINDOW_TITLES,
   SECTION_CAMERA_Z,
@@ -151,8 +153,21 @@ function WindowField({ compact }: { compact: boolean }) {
 
   const decorative = useMemo(() => generateDecorativeWindows(compact), [compact]);
 
+  const anchors = useMemo(
+    () =>
+      [...decorative, ...MAIN_SECTION_IDS.map((id) => OS_WINDOW_LAYOUT[id])].map(
+        ({ position: [x, y, z], size: [, height] }): [number, number, number] => [
+          x,
+          y - height * 0.45,
+          z,
+        ]
+      ),
+    [decorative]
+  );
+
   return (
     <>
+      <FieldRoom anchors={anchors} compact={compact} />
       {decorative.map((win) => (
         <OsWindowFrame
           key={win.id}
@@ -162,6 +177,7 @@ function WindowField({ compact }: { compact: boolean }) {
           accentTitle={win.accentTitle}
           behavior={win.behavior}
           phase={win.phase}
+          content={win.content}
           position={win.position}
           rotation={win.rotation}
           size={win.size}
@@ -175,6 +191,7 @@ function WindowField({ compact }: { compact: boolean }) {
             key={sectionId}
             kind="chapter"
             title={OS_WINDOW_TITLES[sectionId]}
+            content={OS_WINDOW_CONTENT[sectionId]}
             active={activeSection === sectionId}
             position={layout.position}
             rotation={layout.rotation}
