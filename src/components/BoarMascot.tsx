@@ -2,6 +2,17 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { usePrefersReducedMotion } from '@/hooks/useMediaQuery';
+import {
+  feedPet,
+  growthOf,
+  levelOf,
+  readPet,
+  recordPoke,
+  recordVisit,
+  xpForNextLevel,
+  type BoarPet,
+  type PetUpdate,
+} from '@/lib/boarPet';
 import { playRetroClick } from '@/lib/retroClick';
 import {
   BOAR_BODY,
@@ -24,6 +35,7 @@ const RAGE_WINDOW_MS = 3000;
 const LEG_SWAP_MS = 140;
 const PERCH_CHECK_MS = 800;
 const BUBBLE_MS = 2400;
+const PET_BUBBLE_MS = 4500;
 const HEADER_CLEARANCE = 110;
 const MIN_PERCH_WIDTH = 140;
 
@@ -33,6 +45,11 @@ export interface BoarMascotContent {
   click: string[];
   rage: string;
   reactions: Record<ReactionKey, string>;
+  statLine: string;
+  feedButton: string;
+  fed: string;
+  notHungry: string;
+  levelUp: string;
 }
 
 interface Hop {
@@ -42,6 +59,13 @@ interface Hop {
   startedAt: number;
   durationMs: number;
   height: number;
+}
+
+function formatStatLine(template: string, pet: BoarPet) {
+  return template
+    .replace('{level}', String(levelOf(pet.xp)))
+    .replace('{xp}', String(pet.xp))
+    .replace('{next}', String(xpForNextLevel(pet.xp)));
 }
 
 function SpritePixels({ pixels }: { pixels: SpritePixel[] }) {
@@ -80,7 +104,12 @@ export default function BoarMascot({ content }: { content: BoarMascotContent }) 
   const legsDownRef = useRef<SVGGElement>(null);
   const legsUpRef = useRef<SVGGElement>(null);
   const pokeRef = useRef<() => void>(() => {});
-  const [bubble, setBubble] = useState<{ text: string; alignRight: boolean } | null>(null);
+  const feedRef = useRef<() => void>(() => {});
+  const [bubble, setBubble] = useState<{
+    text: string;
+    alignRight: boolean;
+    stats: string | null;
+  } | null>(null);
 
   useEffect(() => {
     if (reducedMotion) return;
@@ -107,6 +136,7 @@ export default function BoarMascot({ content }: { content: BoarMascotContent }) 
     let clickIndex = 0;
     let clickTimes: number[] = [];
     let bubbleTimer = 0;
+    let growth = growthOf(recordVisit().pet.xp);
 
     const startHop = (target: HTMLElement, toX: number, height: number, durationMs: number) => {
       perch = target;
@@ -131,12 +161,33 @@ export default function BoarMascot({ content }: { content: BoarMascotContent }) 
       return rect.width > 0 && rect.top >= 70 && rect.top <= window.innerHeight;
     };
 
-    const say = (text: string) => {
+    const say = (text: string, stats: string | null = null) => {
       if (!perchInView()) dropIn();
       window.clearTimeout(bubbleTimer);
-      setBubble({ text, alignRight: x > window.innerWidth / 2 });
-      bubbleTimer = window.setTimeout(() => setBubble(null), BUBBLE_MS);
+      setBubble({ text, alignRight: x > window.innerWidth / 2, stats });
+      bubbleTimer = window.setTimeout(() => setBubble(null), stats ? PET_BUBBLE_MS : BUBBLE_MS);
     };
+
+    const showUpdate = (update: PetUpdate, text: string) => {
+      growth = growthOf(update.pet.xp);
+      const stats = formatStatLine(content.statLine, update.pet);
+      if (update.leveledUp) {
+        say(content.levelUp.replace('{level}', String(levelOf(update.pet.xp))), stats);
+      } else {
+        say(text, stats);
+      }
+    };
+
+    feedRef.current = () => {
+      playRetroClick();
+      const update = feedPet(Date.now());
+      showUpdate(update, update.fed ? content.fed : content.notHungry);
+    };
+
+    const handlePetChange = () => {
+      growth = growthOf(readPet().xp);
+    };
+    window.addEventListener('boar:changed', handlePetChange);
 
     const hopToAnother = () => {
       const target = pickRandom(visiblePerches().filter((el) => el !== perch));
@@ -152,6 +203,7 @@ export default function BoarMascot({ content }: { content: BoarMascotContent }) 
     pokeRef.current = () => {
       playRetroClick();
 
+      const update = recordPoke();
       const now = performance.now();
       clickTimes = [...clickTimes.filter((t) => now - t < RAGE_WINDOW_MS), now];
 
@@ -163,7 +215,7 @@ export default function BoarMascot({ content }: { content: BoarMascotContent }) 
         return;
       }
 
-      say(content.click[clickIndex % content.click.length]);
+      showUpdate(update, content.click[clickIndex % content.click.length]);
       clickIndex += 1;
       if (perch && !hop) startHop(perch, x, 26, 320);
     };
@@ -230,7 +282,7 @@ export default function BoarMascot({ content }: { content: BoarMascotContent }) 
 
       legsDown.style.display = legsAreDown ? '' : 'none';
       legsUp.style.display = legsAreDown ? 'none' : '';
-      flip.style.transform = `scaleX(${dir})`;
+      flip.style.transform = `scale(${dir * growth}, ${growth})`;
       root.style.transform = `translate3d(${Math.round(x)}px, ${Math.round(y)}px, 0)`;
     };
 
@@ -240,7 +292,9 @@ export default function BoarMascot({ content }: { content: BoarMascotContent }) 
       cancelAnimationFrame(raf);
       window.clearTimeout(bubbleTimer);
       document.removeEventListener('click', handleDocumentClick);
+      window.removeEventListener('boar:changed', handlePetChange);
       pokeRef.current = () => {};
+      feedRef.current = () => {};
     };
   }, [reducedMotion, content]);
 
@@ -254,13 +308,26 @@ export default function BoarMascot({ content }: { content: BoarMascotContent }) 
       style={{ width: WIDTH, height: HEIGHT, visibility: 'hidden' }}
     >
       {bubble && (
-        <p
+        <div
           className={`absolute bottom-full mb-2 w-max max-w-[150px] bg-white border-2 border-black shadow-[3px_3px_0px_#0C0C0C] px-2 py-1 font-mono uppercase tracking-widest text-[10px] leading-snug text-[#0C0C0C] ${
             bubble.alignRight ? 'right-0' : 'left-0'
           }`}
         >
-          {bubble.text}
-        </p>
+          <p>{bubble.text}</p>
+          {bubble.stats && (
+            <>
+              <p className="mt-1 text-[#2945FF]">{bubble.stats}</p>
+              <button
+                type="button"
+                tabIndex={-1}
+                onClick={() => feedRef.current()}
+                className="mt-1 border-2 border-black bg-[#FFD700] px-1 pointer-events-auto hover:bg-[#2945FF] hover:text-white"
+              >
+                {content.feedButton}
+              </button>
+            </>
+          )}
+        </div>
       )}
       <button
         type="button"
@@ -268,7 +335,7 @@ export default function BoarMascot({ content }: { content: BoarMascotContent }) 
         onPointerDown={() => pokeRef.current()}
         className="absolute -inset-1.5 p-1.5 bg-transparent border-0 cursor-pointer pointer-events-auto"
       >
-        <div ref={flipRef}>
+        <div ref={flipRef} className="origin-bottom">
           <svg
             viewBox={`0 0 ${SPRITE_WIDTH} ${SPRITE_HEIGHT}`}
             width={WIDTH}

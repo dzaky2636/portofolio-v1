@@ -842,7 +842,12 @@
       "cv": "CV DIDAPAT. BACA SAMPAI HABIS.",
       "live": "SITUS ASLI. LIHAT SAJA.",
       "cousin": "ITU SEPUPU SAYA."
-    }
+    },
+    "statLine": "LV {level} // XP {xp}/{next}",
+    "feedButton": "[ KASIH MAKAN ]",
+    "fed": "NYAM NYAM.",
+    "notHungry": "MASIH KENYANG. NANTI LAGI.",
+    "levelUp": "LEVEL {level}! SAYA TUMBUH."
   },
   "contact": {
     "title": "KONTAK",
@@ -939,6 +944,14 @@
         "description": "lompat ke bagian"
       },
       {
+        "command": "boar",
+        "description": "lihat statistik babi hutan"
+      },
+      {
+        "command": "feed",
+        "description": "kasih makan babi hutan"
+      },
+      {
         "command": "crt",
         "description": "ubah efek layar CRT"
       },
@@ -967,6 +980,20 @@
     ],
     "remove": "usaha bagus. izin ditolak.",
     "boar": "OINK.",
-    "crt": "mode crt diubah."
+    "crt": "mode crt diubah.",
+    "fed": "babi hutan sudah makan. xp naik.",
+    "notHungry": "babi hutan masih kenyang. coba semenit lagi.",
+    "petStats": {
+      "level": "level",
+      "visits": "kunjungan",
+      "pokes": "colekan",
+      "feeds": "makan",
+      "mood": "suasana"
+    },
+    "moods": {
+      "full": "kenyang",
+      "peckish": "agak lapar",
+      "starving": "kelaparan"
+    }
   }
 }

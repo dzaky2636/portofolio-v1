@@ -135,6 +135,11 @@ export interface Dictionary {
     click: string[];
     rage: string;
     reactions: { email: string; cv: string; live: string; cousin: string };
+    statLine: string;
+    feedButton: string;
+    fed: string;
+    notHungry: string;
+    levelUp: string;
   };
   footer: {
     builtWith: string;

@@ -20,6 +20,10 @@ export interface TerminalLabels {
   remove: string;
   boar: string;
   crt: string;
+  fed: string;
+  notHungry: string;
+  petStats: { level: string; visits: string; pokes: string; feeds: string; mood: string };
+  moods: { full: string; peckish: string; starving: string };
 }
 
 export interface TerminalData {
@@ -46,6 +50,8 @@ export type TerminalAction =
   | { type: 'cv' }
   | { type: 'status' }
   | { type: 'crt' }
+  | { type: 'petStats' }
+  | { type: 'feed' }
   | { type: 'link'; url: string }
   | { type: 'goto'; section: MainSectionId };
 
@@ -188,7 +194,9 @@ export function runCommand(input: string, data: TerminalData): TerminalResult {
     }
     case 'boar':
     case 'oink':
-      return { lines: [accent(labels.boar)], action: none };
+      return { lines: [accent(labels.boar)], action: { type: 'petStats' } };
+    case 'feed':
+      return { lines: [], action: { type: 'feed' } };
     case 'sudo': {
       const task = argument.toLowerCase();
       if (task === 'hire dzaky') return { lines: labels.hire.map(accent), action: none };

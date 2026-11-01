@@ -842,7 +842,12 @@
       "cv": "CV ACQUIRED. READ IT ALL.",
       "live": "REAL SITE. GO LOOK.",
       "cousin": "THAT'S MY COUSIN."
-    }
+    },
+    "statLine": "LV {level} // XP {xp}/{next}",
+    "feedButton": "[ FEED ]",
+    "fed": "OM NOM NOM.",
+    "notHungry": "TOO FULL. TRY LATER.",
+    "levelUp": "LEVEL {level}! I GREW."
   },
   "contact": {
     "title": "CONTACT",
@@ -939,6 +944,14 @@
         "description": "jump to a section"
       },
       {
+        "command": "boar",
+        "description": "show boar stats"
+      },
+      {
+        "command": "feed",
+        "description": "feed the boar"
+      },
+      {
         "command": "crt",
         "description": "toggle CRT screen effect"
       },
@@ -967,6 +980,20 @@
     ],
     "remove": "nice try. permission denied.",
     "boar": "OINK.",
-    "crt": "crt mode toggled."
+    "crt": "crt mode toggled.",
+    "fed": "boar fed. xp up.",
+    "notHungry": "boar is too full. try again in a minute.",
+    "petStats": {
+      "level": "level",
+      "visits": "visits",
+      "pokes": "pokes",
+      "feeds": "feeds",
+      "mood": "mood"
+    },
+    "moods": {
+      "full": "full",
+      "peckish": "peckish",
+      "starving": "starving"
+    }
   }
 }

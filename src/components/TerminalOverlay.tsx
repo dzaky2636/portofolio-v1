@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from 'react';
+import { feedPet, levelOf, moodOf, readPet, xpForNextLevel } from '@/lib/boarPet';
 import type { StatusReport } from '@/lib/siteStatus';
 import {
   completeInput,
@@ -153,6 +154,26 @@ export default function TerminalOverlay({
         case 'crt':
           window.dispatchEvent(new Event('crt:toggle'));
           break;
+        case 'petStats': {
+          const pet = readPet();
+          const { petStats, moods } = data.labels;
+          print(
+            [
+              [petStats.level, `${levelOf(pet.xp)} (xp ${pet.xp}/${xpForNextLevel(pet.xp)})`],
+              [petStats.visits, String(pet.visits)],
+              [petStats.pokes, String(pet.pokes)],
+              [petStats.feeds, String(pet.feeds)],
+              [petStats.mood, moods[moodOf(pet, Date.now())]],
+            ].map(([label, stat]) => ({ text: `${label.padEnd(10)}${stat}`, kind: 'output' }))
+          );
+          break;
+        }
+        case 'feed': {
+          const { fed } = feedPet(Date.now());
+          window.dispatchEvent(new Event('boar:changed'));
+          print([{ text: fed ? data.labels.fed : data.labels.notHungry, kind: 'accent' }]);
+          break;
+        }
         case 'link':
           window.open(action.url, '_blank', 'noopener,noreferrer');
           break;
@@ -163,7 +184,7 @@ export default function TerminalOverlay({
           break;
       }
     },
-    [close, cvFile, loadStatus]
+    [close, cvFile, data.labels, loadStatus, print]
   );
 
   const handleInputKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
