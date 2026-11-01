@@ -343,18 +343,6 @@
   100% { transform: translateX(0); opacity: 1; }
 }
 
-/* Fan Vibration Global */
-@keyframes fanVibrateGlobal {
-  0%, 100% { transform: translateY(0); }
-  25% { transform: translateY(0.3px); }
-  75% { transform: translateY(-0.3px); }
-}
-
-/* Fan Vibration Utility */
-.animate-fan {
-  animation: fanVibrateGlobal 0.05s linear infinite;
-}
-
 /* ----------------------------------------------------------
    3. REDUCED MOTION
    ---------------------------------------------------------- */

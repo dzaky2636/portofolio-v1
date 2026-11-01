@@ -1,16 +1,36 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useRef } from "react";
+
+const SPOTLIGHT_MASK =
+  "radial-gradient(circle 350px at var(--spot-x, -1000px) var(--spot-y, -1000px), rgba(0,0,0,1) 0%, rgba(0,0,0,0.25) 100%)";
 
 export default function InteractiveBackground() {
-  const [mouse, setMouse] = useState({ x: -1000, y: -1000 });
+  const dotsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMouse({ x: e.clientX, y: e.clientY });
+    let frame = 0;
+    let x = 0;
+    let y = 0;
+
+    // Mice report far more often than the screen redraws, so only the latest spot per frame counts.
+    const applySpot = () => {
+      frame = 0;
+      dotsRef.current?.style.setProperty("--spot-x", `${x}px`);
+      dotsRef.current?.style.setProperty("--spot-y", `${y}px`);
     };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+
+    const handleMouseMove = (e: MouseEvent) => {
+      x = e.clientX;
+      y = e.clientY;
+      frame ||= window.requestAnimationFrame(applySpot);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   return (
@@ -50,13 +70,14 @@ export default function InteractiveBackground() {
       </svg>
 
       <div
+        ref={dotsRef}
         className="absolute inset-0"
         style={{
           backgroundImage:
             "radial-gradient(circle, #0C0C0C 1px, transparent 1px)",
           backgroundSize: "20px 20px",
-          WebkitMaskImage: `radial-gradient(circle 350px at ${mouse.x}px ${mouse.y}px, rgba(0,0,0,1) 0%, rgba(0,0,0,0.25) 100%)`,
-          maskImage: `radial-gradient(circle 350px at ${mouse.x}px ${mouse.y}px, rgba(0,0,0,1) 0%, rgba(0,0,0,0.25) 100%)`,
+          WebkitMaskImage: SPOTLIGHT_MASK,
+          maskImage: SPOTLIGHT_MASK,
           opacity: 0.5,
         }}
       />

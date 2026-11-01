@@ -190,14 +190,12 @@ export default function OsWindowFrame({
       return new THREE.MeshBasicMaterial({
         map: titleTexture,
         transparent: true,
-        side: THREE.DoubleSide,
       });
     }
     return new THREE.MeshBasicMaterial({
       color: titleBarColor,
       transparent: true,
       opacity: isDecorative ? 0.78 : 1,
-      side: THREE.DoubleSide,
     });
   }, [titleTexture, titleBarColor, isDecorative]);
 
@@ -311,7 +309,6 @@ export default function OsWindowFrame({
             color={WEBGL_PALETTE.ink}
             transparent
             opacity={0}
-            side={THREE.DoubleSide}
           />
         </mesh>
       )}
@@ -322,7 +319,6 @@ export default function OsWindowFrame({
           map={isDecorative || compact ? null : getWindowContentTexture(content)}
           transparent
           opacity={0.07}
-          side={THREE.DoubleSide}
         />
       </mesh>
       <lineSegments ref={edgeRef} geometry={edgesGeo}>
@@ -338,7 +334,6 @@ export default function OsWindowFrame({
             color={WEBGL_PALETTE.blue}
             transparent
             opacity={0.5}
-            side={THREE.DoubleSide}
           />
         </mesh>
       )}
