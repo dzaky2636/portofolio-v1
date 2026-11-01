@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, type RefObject } from 'react';
-import { useFrame, useThree } from '@react-three/fiber';
+import { useFrame } from '@react-three/fiber';
 import { PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
 import { useSyncExternalStore } from 'react';
@@ -65,11 +65,7 @@ function BackgroundRenderPass({
 }: {
   backgroundCamRef: RefObject<THREE.PerspectiveCamera | null>;
 }) {
-  const gl = useThree((s) => s.gl);
-  const scene = useThree((s) => s.scene);
-  const size = useThree((s) => s.size);
-
-  useFrame(() => {
+  useFrame(({ gl, scene, size }) => {
     const cam = backgroundCamRef.current;
     if (!cam) return;
 

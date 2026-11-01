@@ -209,24 +209,8 @@ export default function OsWindowFrame({
     };
   }, [titleTexture, shellGeo, titleGeo, bodyGeo, edgesGeo, progressGeo, shadowGeo, titleMat]);
 
-  const bodyMatRef = useRef(
-    new THREE.MeshBasicMaterial({
-      // Filler and compact stay plain line art: low-opacity content smudges and fights page text.
-      map: isDecorative || compact ? null : getWindowContentTexture(content),
-      transparent: true,
-      opacity: 0.07,
-      side: THREE.DoubleSide,
-    })
-  );
-
-  const edgeMatRef = useRef(
-    new THREE.LineBasicMaterial({
-      color: WEBGL_PALETTE.ink,
-      transparent: true,
-      opacity: 0.32,
-    })
-  );
-
+  const bodyRef = useRef<THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>>(null);
+  const edgeRef = useRef<THREE.LineSegments<THREE.BufferGeometry, THREE.LineBasicMaterial>>(null);
   const titleRef = useRef<THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>>(null);
   const progressRef = useRef<THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>>(null);
   const shadowRef = useRef<THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>>(null);
@@ -286,13 +270,16 @@ export default function OsWindowFrame({
     const blink =
       behavior === 'flicker' && Math.sin(time * 1.3) * Math.sin(time * 2.7) > 0.86 ? 2.6 : 1;
 
-    bodyMatRef.current.opacity = Math.min(bodyOpacityRef.current * blink, 1) * fade;
+    const edgeMaterial = edgeRef.current?.material;
+    if (bodyRef.current) {
+      bodyRef.current.material.opacity = Math.min(bodyOpacityRef.current * blink, 1) * fade;
+    }
     if (shadowRef.current) shadowRef.current.material.opacity = bodyOpacityRef.current * SHADOW_SHARE * fade;
-    edgeMatRef.current.opacity = Math.min(edgeOpacityRef.current * blink, 1) * fade;
+    if (edgeMaterial) edgeMaterial.opacity = Math.min(edgeOpacityRef.current * blink, 1) * fade;
     const titleMaterial = titleRef.current?.material;
     if (titleMaterial) titleMaterial.opacity = (isDecorative ? decorativeTitleOpacity : 1) * fade;
 
-    if (!active) edgeMatRef.current.color.lerp(fieldState.edge, lerp);
+    if (!active) edgeMaterial?.color.lerp(fieldState.edge, lerp);
     if (accentTitle && !titleTexture) titleMaterial?.color.lerp(fieldState.title, lerp);
 
     if (progressRef.current) {
@@ -319,8 +306,18 @@ export default function OsWindowFrame({
         </mesh>
       )}
       <mesh ref={titleRef} geometry={titleGeo} position={[0, titleY, zFront]} material={titleMat} />
-      <mesh geometry={bodyGeo} position={[0, bodyY, zFront]} material={bodyMatRef.current} />
-      <lineSegments geometry={edgesGeo} material={edgeMatRef.current} />
+      <mesh ref={bodyRef} geometry={bodyGeo} position={[0, bodyY, zFront]}>
+        {/* Filler and compact stay plain line art: low-opacity content smudges and fights page text. */}
+        <meshBasicMaterial
+          map={isDecorative || compact ? null : getWindowContentTexture(content)}
+          transparent
+          opacity={0.07}
+          side={THREE.DoubleSide}
+        />
+      </mesh>
+      <lineSegments ref={edgeRef} geometry={edgesGeo}>
+        <lineBasicMaterial color={WEBGL_PALETTE.ink} transparent opacity={0.32} />
+      </lineSegments>
       {behavior === 'progress' && (
         <mesh
           ref={progressRef}
