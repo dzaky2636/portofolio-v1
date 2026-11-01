@@ -21,6 +21,8 @@ const SCROLLBAR_WIDTH = 0.14;
 const SHADOW_OFFSET = 0.12;
 const SHADOW_SHARE = 0.6;
 const ACTIVE_SCALE = 1.25;
+const PASSED_FADE_START = 0.005;
+const PASSED_FADE_END = 0.12;
 const FADE_NEAR_START = 1.5;
 const FADE_NEAR_END = 6;
 const FADE_FAR_START = 30;
@@ -109,6 +111,8 @@ interface OsWindowFrameProps {
   content?: WindowContent;
   /** False fades the window out, for satellites whose section is not active. */
   present?: boolean;
+  /** Set on section windows, which clear out as the camera leaves so they never slide under text. */
+  sectionIndex?: number;
 }
 
 export default function OsWindowFrame({
@@ -124,6 +128,7 @@ export default function OsWindowFrame({
   phase = 0,
   content = 'text',
   present = true,
+  sectionIndex,
 }: OsWindowFrameProps) {
   const isDecorative = kind === 'decorative';
   const hasTitleText = !isDecorative || behavior === 'labelled';
@@ -253,8 +258,13 @@ export default function OsWindowFrame({
 
     const time = state.clock.elapsedTime + phase;
     const distance = fieldState.cameraZ - position[2];
+    const passed =
+      sectionIndex === undefined
+        ? 1
+        : smoothstep(PASSED_FADE_END, PASSED_FADE_START, fieldState.progress - sectionIndex);
     const fade =
       presenceRef.current *
+      passed *
       smoothstep(FADE_NEAR_START, FADE_NEAR_END, distance) *
       smoothstep(FADE_FAR_START, FADE_FAR_END, distance);
 

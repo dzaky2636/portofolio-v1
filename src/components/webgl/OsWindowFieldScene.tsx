@@ -124,6 +124,7 @@ function ParallaxCamera({
     // Looks straight ahead so it can never fly past a target and spin; banks only mid-travel.
     cam.rotation.set(0, 0, Math.sin(progress * Math.PI * 2) * 0.02);
     fieldState.cameraZ = cam.position.z;
+    fieldState.progress = progress;
 
     const sectionId = MAIN_SECTION_IDS.includes(activeSection as MainSectionId)
       ? (activeSection as MainSectionId)
@@ -172,6 +173,7 @@ function WindowField({ compact }: { compact: boolean }) {
           key={`${win.id}-${compact}`}
           kind={win.kind}
           present={!win.section || win.section === activeSection}
+          sectionIndex={win.section ? MAIN_SECTION_IDS.indexOf(win.section) : undefined}
           title={win.title}
           active={false}
           accentTitle={win.accentTitle}
@@ -184,7 +186,7 @@ function WindowField({ compact }: { compact: boolean }) {
           compact={compact}
         />
       ))}
-      {MAIN_SECTION_IDS.map((sectionId) => {
+      {MAIN_SECTION_IDS.map((sectionId, sectionIndex) => {
         const layout = OS_WINDOW_LAYOUT[sectionId];
         return (
           <OsWindowFrame
@@ -192,6 +194,7 @@ function WindowField({ compact }: { compact: boolean }) {
             kind="chapter"
             title={OS_WINDOW_TITLES[sectionId]}
             content={OS_WINDOW_CONTENT[sectionId]}
+            sectionIndex={sectionIndex}
             active={activeSection === sectionId}
             position={layout.position}
             rotation={layout.rotation}

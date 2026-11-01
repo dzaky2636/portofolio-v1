@@ -59,7 +59,7 @@ export const SECTION_CAMERA_Z = [-1, -9, -14, -18, -22] as const;
 
 /** Where each section's window sits on screen, -1 to 1 from the center, clear of the page content. */
 const SECTION_FRAMING: Record<MainSectionId, { x: number; y: number }> = {
-  profile: { x: 0.08, y: 0.1 },
+  profile: { x: 0.13, y: 0.1 },
   inventory: { x: 0.52, y: 0.3 },
   realms: { x: 0.52, y: 0.3 },
   logs: { x: 0.52, y: 0.3 },
