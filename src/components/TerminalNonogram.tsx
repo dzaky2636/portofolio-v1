@@ -14,6 +14,13 @@ import {
   type NonogramCell,
   type NonogramPuzzle,
 } from '@/lib/nonogram';
+import {
+  playGameWin,
+  playNonogramClear,
+  playNonogramFill,
+  playNonogramLine,
+  playNonogramMark,
+} from '@/lib/gameSounds';
 import { RANDOM_SIZES, type RandomSize } from '@/lib/nonogramSizes';
 import type { TerminalNonogramLabels } from '@/lib/terminalCommands';
 
@@ -30,6 +37,12 @@ function cellClass(cell: NonogramCell) {
   return cell === 'marked' ? 'bg-[#0C0C0C] text-[#F4F3ED]/50' : 'bg-[#0C0C0C]';
 }
 
+function playCellSound(cell: NonogramCell) {
+  if (cell === 'filled') playNonogramFill();
+  else if (cell === 'marked') playNonogramMark();
+  else playNonogramClear();
+}
+
 export default function TerminalNonogram({
   labels,
   startRandomSize,
@@ -41,6 +54,7 @@ export default function TerminalNonogram({
 }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const paintRef = useRef<NonogramCell | null>(null);
+  const lineProgressRef = useRef<{ puzzle: NonogramPuzzle; done: number } | null>(null);
   const [savedIds, setSavedIds] = useState(readSolved);
   const [puzzleIndex, setPuzzleIndex] = useState(() => firstUnsolvedIndex(savedIds));
   const [randomPuzzle, setRandomPuzzle] = useState<NonogramPuzzle | null>(() =>
@@ -62,6 +76,9 @@ export default function TerminalNonogram({
   const solved = isSolved(board, puzzle);
   const solvedCount = new Set(solved ? [...savedIds, puzzle.id] : savedIds).size;
   const randomCount = randomWins + (isRandom && solved ? 1 : 0);
+  const doneLines =
+    target.rows.filter((clue, y) => sameClue(clue, current.rows[y])).length +
+    target.cols.filter((clue, x) => sameClue(clue, current.cols[x])).length;
 
   const loadPuzzle = useCallback((index: number) => {
     setSavedIds(readSolved());
@@ -88,6 +105,16 @@ export default function TerminalNonogram({
     const ids = readSolved();
     if (!ids.includes(puzzle.id)) saveSolved([...ids, puzzle.id]);
   }, [isRandom, puzzle.id, solved]);
+
+  useEffect(() => {
+    if (solved) playGameWin();
+  }, [solved]);
+
+  useEffect(() => {
+    const previous = lineProgressRef.current;
+    if (previous?.puzzle === puzzle && doneLines > previous.done && !solved) playNonogramLine();
+    lineProgressRef.current = { puzzle, done: doneLines };
+  }, [doneLines, puzzle, solved]);
 
   const setCell = useCallback((x: number, y: number, value: NonogramCell) => {
     setBoard((rows) =>
@@ -159,6 +186,12 @@ export default function TerminalNonogram({
       }));
     };
 
+    const toggleCursorCell = (value: NonogramCell) => {
+      if (solved) return;
+      playCellSound(board[cursor.y][cursor.x] === value ? 'empty' : value);
+      toggleAt(cursor.x, cursor.y, value);
+    };
+
     const handleKeyDown = (event: KeyboardEvent) => {
       const key = event.key.toLowerCase();
       let handled = true;
@@ -167,11 +200,9 @@ export default function TerminalNonogram({
       else if (key === 'arrowdown' || key === 's') move(0, 1);
       else if (key === 'arrowleft' || key === 'a') move(-1, 0);
       else if (key === 'arrowright' || key === 'd') move(1, 0);
-      else if (key === ' ' || key === 'enter') {
-        if (!solved) toggleAt(cursor.x, cursor.y, 'filled');
-      } else if (key === 'x') {
-        if (!solved) toggleAt(cursor.x, cursor.y, 'marked');
-      } else if (key === 'n') nextPuzzle();
+      else if (key === ' ' || key === 'enter') toggleCursorCell('filled');
+      else if (key === 'x') toggleCursorCell('marked');
+      else if (key === 'n') nextPuzzle();
       else if (key === 'r') resetBoard();
       else if (key === 'g') switchMode();
       else if (key === 'z') changeSize();
@@ -186,7 +217,7 @@ export default function TerminalNonogram({
 
     window.addEventListener('keydown', handleKeyDown, true);
     return () => window.removeEventListener('keydown', handleKeyDown, true);
-  }, [changeSize, cursor, exit, height, nextPuzzle, resetBoard, solved, switchMode, toggleAt, width]);
+  }, [board, changeSize, cursor, exit, height, nextPuzzle, resetBoard, solved, switchMode, toggleAt, width]);
 
   useEffect(() => {
     const endPaint = () => {
@@ -203,18 +234,23 @@ export default function TerminalNonogram({
 
     const cell = board[y][x];
     if (event.pointerType === 'touch') {
-      setCell(x, y, cell === 'empty' ? 'filled' : cell === 'filled' ? 'marked' : 'empty');
+      const next = cell === 'empty' ? 'filled' : cell === 'filled' ? 'marked' : 'empty';
+      playCellSound(next);
+      setCell(x, y, next);
       return;
     }
 
     const stroke: NonogramCell = event.button === 2 ? 'marked' : 'filled';
     const value = cell === stroke ? 'empty' : stroke;
     paintRef.current = value;
+    playCellSound(value);
     setCell(x, y, value);
   };
 
   const handleCellEnter = (x: number, y: number) => {
-    if (paintRef.current && !solved) setCell(x, y, paintRef.current);
+    if (!paintRef.current || solved) return;
+    if (board[y][x] !== paintRef.current) playCellSound(paintRef.current);
+    setCell(x, y, paintRef.current);
   };
 
   const gridStyle: CSSProperties = {

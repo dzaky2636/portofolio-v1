@@ -1,4 +1,4 @@
-import { getAudioContext, prefersReducedMotion } from '@/lib/retroAudio';
+import { getAudioContext, playSquareTone, prefersReducedMotion } from '@/lib/retroAudio';
 
 const KONAMI_STEPS = 10;
 
@@ -12,25 +12,6 @@ function stepDuration(stepIndex: number): number {
 
 function stepGain(stepIndex: number): number {
   return 0.08 + stepIndex * 0.0065;
-}
-
-function playSquareTone(
-  ctx: AudioContext,
-  start: number,
-  freq: number,
-  duration: number,
-  gainPeak: number
-) {
-  const osc = ctx.createOscillator();
-  const gain = ctx.createGain();
-  osc.type = 'square';
-  osc.frequency.setValueAtTime(freq, start);
-  gain.gain.setValueAtTime(gainPeak, start);
-  gain.gain.exponentialRampToValueAtTime(0.001, start + duration);
-  osc.connect(gain);
-  gain.connect(ctx.destination);
-  osc.start(start);
-  osc.stop(start + duration + 0.02);
 }
 
 /** Escalating blip for each correct Konami key (stepIndex 0–9). */

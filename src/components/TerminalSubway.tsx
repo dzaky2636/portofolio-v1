@@ -2,6 +2,18 @@
 
 import { useCallback, useEffect, useRef, useState, type TouchEvent } from 'react';
 import {
+  playGameStart,
+  playSubwayCoin,
+  playSubwayCrash,
+  playSubwayJump,
+  playSubwayLane,
+  playSubwayMagnet,
+  playSubwayRoll,
+  playSubwayStumble,
+} from '@/lib/gameSounds';
+import {
+  MAX_SPEED,
+  START_SPEED,
   createSubwayGame,
   jump,
   moveLane,
@@ -10,12 +22,14 @@ import {
   subwayScore,
   type SubwayState,
 } from '@/lib/subwayGame';
+import { setSubwayMusicRate, startSubwayMusic, stopSubwayMusic } from '@/lib/subwayMusic';
 import { drawSubway, SUBWAY_HEIGHT, SUBWAY_WIDTH } from '@/lib/subwayRender';
 import type { TerminalSubwayLabels } from '@/lib/terminalCommands';
 
 const MAX_STEP_SECONDS = 1 / 30;
 const SWIPE_MIN_PX = 20;
 const BEST_SCORE_KEY = 'dzaky-corner-subway-best';
+const MAX_MUSIC_SPEED_UP = 0.2;
 
 type SubwayAction = (state: SubwayState) => SubwayState;
 
@@ -30,6 +44,29 @@ const KEY_ACTIONS: Record<string, SubwayAction> = {
   s: roll,
   ' ': jump,
 };
+
+function playActionSound(before: SubwayState, after: SubwayState) {
+  if (before.status === 'ready') playGameStart();
+
+  if (after.status === 'over') playSubwayCrash();
+  else if (after.stumbleTimer > before.stumbleTimer) playSubwayStumble();
+  else if (after.lane !== before.lane) playSubwayLane();
+  else if (after.rollTimer > before.rollTimer) playSubwayRoll();
+  else if (after.velocityY > 0 && before.velocityY <= 0) playSubwayJump();
+}
+
+function playStepSound(before: SubwayState, after: SubwayState) {
+  if (after.status === 'over') playSubwayCrash();
+  else if (after.magnetTimer > before.magnetTimer) playSubwayMagnet();
+  else if (after.coins > before.coins) playSubwayCoin();
+
+  // A jump buffered before landing fires on this step, not on the key press.
+  if (after.velocityY > 0 && before.velocityY <= 0) playSubwayJump();
+}
+
+function musicRate(speed: number) {
+  return 1 + ((speed - START_SPEED) / (MAX_SPEED - START_SPEED)) * MAX_MUSIC_SPEED_UP;
+}
 
 function readBest() {
   try {
@@ -92,7 +129,9 @@ export default function TerminalSubway({
 
   const act = useCallback(
     (action: SubwayAction) => {
-      stateRef.current = action(stateRef.current);
+      const before = stateRef.current;
+      stateRef.current = action(before);
+      playActionSound(before, stateRef.current);
       setStatus(stateRef.current.status);
       if (stateRef.current.status === 'over') recordBest();
     },
@@ -109,6 +148,13 @@ export default function TerminalSubway({
   useEffect(() => {
     if (status !== 'playing') return;
 
+    startSubwayMusic();
+    return stopSubwayMusic;
+  }, [status]);
+
+  useEffect(() => {
+    if (status !== 'playing') return;
+
     let frame = 0;
     let last = performance.now();
 
@@ -116,8 +162,11 @@ export default function TerminalSubway({
       const dt = Math.min((now - last) / 1000, MAX_STEP_SECONDS);
       last = now;
 
-      const next = stepSubway(stateRef.current, dt);
+      const before = stateRef.current;
+      const next = stepSubway(before, dt);
       stateRef.current = next;
+      playStepSound(before, next);
+      setSubwayMusicRate(musicRate(next.speed));
       render(now);
       setScore(subwayScore(next));
       setCoins(next.coins);

@@ -1,6 +1,13 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState, type TouchEvent } from 'react';
+import {
+  playGameOver,
+  playGameStart,
+  playGameWin,
+  playSnakeEat,
+  playSnakeTurn,
+} from '@/lib/gameSounds';
 import { createSnakeGame, queueTurn, stepSnake, type SnakeDirection, type SnakeState } from '@/lib/snakeGame';
 import type { TerminalSnakeLabels } from '@/lib/terminalCommands';
 
@@ -86,8 +93,11 @@ export default function TerminalSnake({
   }, [onExit]);
 
   const turn = useCallback((direction: SnakeDirection) => {
-    stateRef.current = queueTurn(stateRef.current, direction);
+    const before = stateRef.current;
+    stateRef.current = queueTurn(before, direction);
     setStatus(stateRef.current.status);
+    if (before.status === 'ready') playGameStart();
+    else if (stateRef.current.turns.length > before.turns.length) playSnakeTurn();
   }, []);
 
   useEffect(() => {
@@ -103,7 +113,8 @@ export default function TerminalSnake({
     let timer = 0;
 
     const tick = () => {
-      const next = stepSnake(stateRef.current);
+      const before = stateRef.current;
+      const next = stepSnake(before);
       stateRef.current = next;
       render();
       setScore(next.score);
@@ -113,6 +124,10 @@ export default function TerminalSnake({
         setBest(next.score);
         saveBest(next.score);
       }
+
+      if (next.status === 'won') playGameWin();
+      else if (next.status === 'over') playGameOver();
+      else if (next.score > before.score) playSnakeEat(next.score);
 
       if (next.status !== 'playing') {
         setStatus(next.status);

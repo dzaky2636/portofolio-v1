@@ -57,8 +57,8 @@ export const MAGNET_SECONDS = 8;
 export const ROLL_SECONDS = 0.6;
 
 const LANES: SubwayLane[] = [-1, 0, 1];
-const START_SPEED = 24;
-const MAX_SPEED = 50;
+export const START_SPEED = 24;
+export const MAX_SPEED = 50;
 const ACCELERATION = 0.25;
 const LANE_CHANGE_SPEED = 8;
 const GRAVITY = 40;
