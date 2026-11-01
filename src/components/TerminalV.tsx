@@ -62,6 +62,7 @@ export default function TerminalV({
       const name = labels.colors[state.signal.word];
       drawV(ctx, state, {
         word: state.signal.reversed ? [...name].reverse().join('') : name,
+        colorName: (color) => labels.colors[color],
         swappedLabel: labels.swapped,
         channelLabel: labels.channel,
         sinceTuneMs: now - tunedAtRef.current,

@@ -1,6 +1,17 @@
 export type VColor = 'red' | 'green' | 'blue' | 'yellow' | 'white' | 'purple';
 export type VSide = 'left' | 'right';
 export type VStatus = 'ready' | 'playing' | 'over';
+export type VEffect =
+  | 'bars'
+  | 'wobble'
+  | 'ghost'
+  | 'shrink'
+  | 'sway'
+  | 'spin'
+  | 'snow'
+  | 'glitch'
+  | 'decoys'
+  | 'shutter';
 
 export interface VSignal {
   word: VColor;
@@ -8,6 +19,9 @@ export interface VSignal {
   background: number;
   reversed: boolean;
   swapped: boolean;
+  effects: VEffect[];
+  /** Fixes where this signal's effects start, so they differ between channels. */
+  seed: number;
 }
 
 export interface VState {
@@ -36,6 +50,22 @@ const BACKGROUND_FROM_CHANNEL = 15;
 const BACKGROUND_CHANCE = 0.6;
 const SWAPPED_FROM_CHANNEL = 25;
 const SWAPPED_CHANCE = 0.25;
+/** The channel each effect first appears on. */
+export const V_EFFECT_UNLOCKS: Record<VEffect, number> = {
+  bars: 10,
+  wobble: 14,
+  ghost: 18,
+  shrink: 22,
+  sway: 26,
+  spin: 30,
+  snow: 34,
+  glitch: 40,
+  decoys: 46,
+  shutter: 52,
+};
+/** Each of these channels lets one more effect stack on the same signal. */
+const EFFECT_STACK_CHANNELS = [10, 24, 40, 60];
+const EFFECT_CHANCE = 0.8;
 const START_LIMIT_MS = 3200;
 const FASTEST_LIMIT_MS = 1200;
 const LIMIT_DROP_PER_CHANNEL_MS = 50;
@@ -54,6 +84,20 @@ export function crossesFor(streak: number) {
   return Math.min(Math.floor(streak / V_STREAK_PER_CROSS), V_MAX_CROSSES);
 }
 
+function pickEffects(channel: number, random: () => number): VEffect[] {
+  if (random() >= EFFECT_CHANCE) return [];
+
+  const unlocked = (Object.keys(V_EFFECT_UNLOCKS) as VEffect[]).filter(
+    (effect) => channel >= V_EFFECT_UNLOCKS[effect]
+  );
+  const count = EFFECT_STACK_CHANNELS.filter((from) => channel >= from).length;
+  const picked: VEffect[] = [];
+  while (picked.length < count && unlocked.length > 0) {
+    picked.push(...unlocked.splice(Math.floor(random() * unlocked.length), 1));
+  }
+  return picked;
+}
+
 function createSignal(channel: number, random: () => number): VSignal {
   const word = pick(V_COLORS, random);
   const ink =
@@ -68,6 +112,8 @@ function createSignal(channel: number, random: () => number): VSignal {
         : 0,
     reversed: channel >= REVERSED_FROM_CHANNEL && random() < REVERSED_CHANCE,
     swapped: channel >= SWAPPED_FROM_CHANNEL && random() < SWAPPED_CHANCE,
+    effects: pickEffects(channel, random),
+    seed: random(),
   };
 }
 
