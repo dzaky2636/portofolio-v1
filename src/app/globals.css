@@ -7,6 +7,12 @@
   --font-sans: var(--font-instrument-serif), ui-serif, Georgia, serif;
 }
 
+/* Rubber-banding shifts the page but not the fixed WebGL canvas, knocking 3D views out of their frames. */
+html,
+body {
+  overscroll-behavior: none;
+}
+
 .skip-to-content {
   position: absolute;
   left: 1rem;
