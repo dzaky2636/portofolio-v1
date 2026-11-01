@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useRef, useState, type CSSProperties, type PointerEvent } from 'react';
 import {
   NONOGRAM_PUZZLES,
-  RANDOM_SIZES,
   boardClues,
   createBoard,
   createRandomPuzzle,
@@ -14,8 +13,8 @@ import {
   sameClue,
   type NonogramCell,
   type NonogramPuzzle,
-  type RandomSize,
 } from '@/lib/nonogram';
+import { RANDOM_SIZES, type RandomSize } from '@/lib/nonogramSizes';
 import type { TerminalNonogramLabels } from '@/lib/terminalCommands';
 
 const CLUE_DONE = 'text-[#F4F3ED]/30';

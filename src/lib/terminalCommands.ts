@@ -1,5 +1,5 @@
-import { RANDOM_SIZES } from '@/lib/nonogram';
-import type { NonogramCell, NonogramPuzzleId, RandomSize } from '@/lib/nonogram';
+import type { NonogramCell, NonogramPuzzleId } from '@/lib/nonogram';
+import { RANDOM_SIZES, type RandomSize } from '@/lib/nonogramSizes';
 import type { MainSectionId } from '@/lib/sectionIds';
 
 export interface TerminalSnakeLabels {

@@ -1,3 +1,5 @@
+import type { RandomSize } from '@/lib/nonogramSizes';
+
 export type NonogramCell = 'empty' | 'filled' | 'marked';
 
 export type NonogramPuzzleId =
@@ -394,8 +396,6 @@ const RANDOM_FILL_MIN = 0.55;
 const RANDOM_FILL_MAX = 0.7;
 const RANDOM_MAX_ATTEMPTS = 2000;
 
-export const RANDOM_SIZES = [5, 8, 10] as const;
-export type RandomSize = (typeof RANDOM_SIZES)[number];
 
 export function lineClue(line: boolean[]): number[] {
   const runs: number[] = [];

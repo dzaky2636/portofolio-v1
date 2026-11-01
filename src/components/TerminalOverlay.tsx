@@ -1,11 +1,9 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from 'react';
-import TerminalNonogram from '@/components/TerminalNonogram';
-import TerminalSnake from '@/components/TerminalSnake';
-import TerminalSubway from '@/components/TerminalSubway';
 import { feedPet, levelOf, moodOf, readPet, xpForNextLevel } from '@/lib/boarPet';
-import type { RandomSize } from '@/lib/nonogram';
+import type { RandomSize } from '@/lib/nonogramSizes';
 import type { StatusReport } from '@/lib/siteStatus';
 import {
   completeInput,
@@ -14,6 +12,10 @@ import {
   type TerminalData,
   type TerminalLine,
 } from '@/lib/terminalCommands';
+
+const TerminalSnake = dynamic(() => import('@/components/TerminalSnake'), { ssr: false });
+const TerminalSubway = dynamic(() => import('@/components/TerminalSubway'), { ssr: false });
+const TerminalNonogram = dynamic(() => import('@/components/TerminalNonogram'), { ssr: false });
 
 const LINE_STYLE: Record<TerminalLine['kind'], string> = {
   output: 'text-[#F4F3ED]',

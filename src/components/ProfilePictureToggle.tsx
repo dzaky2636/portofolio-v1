@@ -1,11 +1,14 @@
 'use client';
 
 import { useCallback, useState } from 'react';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import { View, PerspectiveCamera } from '@react-three/drei';
-import VoxelBoar from '@/components/webgl/VoxelBoar';
-import ViewSceneBackground from '@/components/webgl/ViewSceneBackground';
+import { useDeferred3D } from '@/hooks/useDeferred3D';
 import { playRetroClick } from '@/lib/retroClick';
+
+const ProfileVoxelView = dynamic(() => import('@/components/webgl/ProfileVoxelView'), {
+  ssr: false,
+});
 
 interface ProfilePictureToggleProps {
   alt: string;
@@ -19,6 +22,7 @@ export default function ProfilePictureToggle({
   toggleToPhotoAria,
 }: ProfilePictureToggleProps) {
   const [showBoar, setShowBoar] = useState(false);
+  const show3D = useDeferred3D();
 
   const toggle = useCallback(() => {
     playRetroClick();
@@ -27,15 +31,7 @@ export default function ProfilePictureToggle({
 
   return (
     <div className="relative aspect-square w-full">
-      <View
-        className="absolute inset-0 box-border block h-full w-full min-h-0 border-[10px] border-[#F4F3ED] bg-transparent"
-      >
-        <ViewSceneBackground />
-        <PerspectiveCamera position={[0, 0, 3.1]} fov={44} near={0.1} far={50} />
-        <group scale={0.9}>
-          <VoxelBoar />
-        </group>
-      </View>
+      {show3D && <ProfileVoxelView />}
 
       <button
         type="button"

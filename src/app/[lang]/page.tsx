@@ -1,4 +1,4 @@
-import RetroCanvas from '@/components/RetroCanvas';
+import RetroCanvasLoader from '@/components/RetroCanvasLoader';
 import ProjectSection from '@/components/ProjectSection';
 import ExperienceLogViewer from '@/components/ExperienceLogViewer';
 import AnimateOnScroll from '@/components/AnimateOnScroll';
@@ -199,7 +199,7 @@ export default async function Page({
               interactive={false}
               bodyClassName="p-0 overflow-hidden"
             >
-              <RetroCanvas />
+              <RetroCanvasLoader />
             </Window>
           </div>
         </div>

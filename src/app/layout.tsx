@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import InteractiveBackground from "@/components/InteractiveBackground";
-import WebGLRoot from "@/components/webgl/WebGLRoot";
+import WebGLLoader from "@/components/webgl/WebGLLoader";
 import EnvironmentalEffects from "@/components/EnvironmentalEffects";
 import BootLockScript from "@/components/BootLockScript";
 import { SITE_URL } from "@/lib/site";
@@ -40,7 +40,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-serif">
         <BootLockScript />
         <InteractiveBackground />
-        <WebGLRoot />
+        <WebGLLoader />
         <EnvironmentalEffects />
         {children}
       </body>
