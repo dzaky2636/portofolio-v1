@@ -6,15 +6,14 @@ import * as THREE from 'three';
 import { fieldState } from '@/components/webgl/fieldState';
 import { mulberry32 } from '@/components/webgl/osWindowLayout';
 
-const FLOOR_Y = -9;
-const CEILING_Y = 10;
-const ROOM_HALF_WIDTH = 34;
+const FLOOR_Y = -6.5;
+const CEILING_Y = 7.5;
+const ROOM_HALF_WIDTH = 15;
 const ROOM_NEAR_Z = 8;
 const ROOM_FAR_Z = -64;
-const GRID_STEP = 4;
-const COLUMN_X = 19;
-const COLUMN_STEP = 24;
-const COLUMN_HALF_WIDTH = 0.8;
+const GRID_STEP = 3;
+const WALL_STEP = 3.5;
+const PORTAL_STEP = 6;
 const FOOT_MARK_SIZE = 0.18;
 
 const VERT = `
@@ -24,7 +23,7 @@ varying float vFade;
 void main() {
   vec4 viewPosition = modelViewMatrix * vec4(position, 1.0);
   float distance = -viewPosition.z;
-  vFade = smoothstep(1.5, 8.0, distance) * (1.0 - smoothstep(18.0, 40.0, distance));
+  vFade = smoothstep(1.5, 8.0, distance) * (1.0 - smoothstep(22.0, 46.0, distance));
   gl_Position = projectionMatrix * viewPosition;
   gl_PointSize = clamp(pointScale / distance, 1.0, 4.0);
 }
@@ -68,34 +67,27 @@ function RoomMaterial({ opacity, pointScale = 0 }: { opacity: number; pointScale
   );
 }
 
+/** A long corridor of nested portals, so every line leads to one vanishing point. */
 function buildRoomSegments(): number[] {
   const segments: number[] = [];
+  const west = -ROOM_HALF_WIDTH;
+  const east = ROOM_HALF_WIDTH;
 
-  for (const y of [FLOOR_Y, CEILING_Y]) {
-    for (let x = -ROOM_HALF_WIDTH; x <= ROOM_HALF_WIDTH; x += GRID_STEP) {
-      segments.push(x, y, ROOM_NEAR_Z, x, y, ROOM_FAR_Z);
-    }
-    for (let z = ROOM_NEAR_Z; z >= ROOM_FAR_Z; z -= GRID_STEP) {
-      segments.push(-ROOM_HALF_WIDTH, y, z, ROOM_HALF_WIDTH, y, z);
-    }
+  for (let x = west; x <= east; x += GRID_STEP) {
+    segments.push(x, FLOOR_Y, ROOM_NEAR_Z, x, FLOOR_Y, ROOM_FAR_Z);
+    segments.push(x, CEILING_Y, ROOM_NEAR_Z, x, CEILING_Y, ROOM_FAR_Z);
   }
 
-  for (const side of [-1, 1]) {
-    for (let z = ROOM_NEAR_Z - COLUMN_STEP; z > ROOM_FAR_Z; z -= COLUMN_STEP) {
-      const corners = [
-        [side * COLUMN_X - COLUMN_HALF_WIDTH, z - COLUMN_HALF_WIDTH],
-        [side * COLUMN_X + COLUMN_HALF_WIDTH, z - COLUMN_HALF_WIDTH],
-        [side * COLUMN_X + COLUMN_HALF_WIDTH, z + COLUMN_HALF_WIDTH],
-        [side * COLUMN_X - COLUMN_HALF_WIDTH, z + COLUMN_HALF_WIDTH],
-      ];
-      corners.forEach(([cx, cz], index) => {
-        const [nextX, nextZ] = corners[(index + 1) % corners.length];
-        segments.push(cx, FLOOR_Y, cz, cx, CEILING_Y, cz);
-        for (const y of [FLOOR_Y, CEILING_Y]) {
-          segments.push(cx, y, cz, nextX, y, nextZ);
-        }
-      });
-    }
+  for (let y = FLOOR_Y + WALL_STEP; y < CEILING_Y; y += WALL_STEP) {
+    segments.push(west, y, ROOM_NEAR_Z, west, y, ROOM_FAR_Z);
+    segments.push(east, y, ROOM_NEAR_Z, east, y, ROOM_FAR_Z);
+  }
+
+  for (let z = ROOM_NEAR_Z; z >= ROOM_FAR_Z; z -= PORTAL_STEP) {
+    segments.push(west, FLOOR_Y, z, east, FLOOR_Y, z);
+    segments.push(west, CEILING_Y, z, east, CEILING_Y, z);
+    segments.push(west, FLOOR_Y, z, west, CEILING_Y, z);
+    segments.push(east, FLOOR_Y, z, east, CEILING_Y, z);
   }
 
   return segments;
@@ -152,7 +144,7 @@ export default function FieldRoom({ anchors, compact }: FieldRoomProps) {
   return (
     <>
       <lineSegments geometry={roomGeo} renderOrder={-1} frustumCulled={false}>
-        <RoomMaterial opacity={0.12} />
+        <RoomMaterial opacity={0.17} />
       </lineSegments>
       <lineSegments geometry={tetherGeo} renderOrder={-1} frustumCulled={false}>
         <RoomMaterial opacity={0.24} />

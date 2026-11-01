@@ -173,8 +173,9 @@ function WindowField({ compact }: { compact: boolean }) {
       <FieldRoom anchors={CHAPTER_ANCHORS} compact={compact} />
       {decorative.map((win) => (
         <OsWindowFrame
-          key={win.id}
-          kind="decorative"
+          key={`${win.id}-${compact}`}
+          kind={win.kind}
+          present={!win.section || win.section === activeSection}
           title={win.title}
           active={false}
           accentTitle={win.accentTitle}
@@ -191,7 +192,7 @@ function WindowField({ compact }: { compact: boolean }) {
         const layout = OS_WINDOW_LAYOUT[sectionId];
         return (
           <OsWindowFrame
-            key={sectionId}
+            key={`${sectionId}-${compact}`}
             kind="chapter"
             title={OS_WINDOW_TITLES[sectionId]}
             content={OS_WINDOW_CONTENT[sectionId]}

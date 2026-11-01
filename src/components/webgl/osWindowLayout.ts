@@ -93,6 +93,9 @@ export type WindowBehavior = 'still' | 'flicker' | 'progress' | 'popup' | 'label
 
 export interface DecorativeWindowSpec {
   id: string;
+  kind: 'satellite' | 'decorative';
+  /** Satellites show only while this section is active. */
+  section?: MainSectionId;
   title: string;
   position: [number, number, number];
   rotation: [number, number, number];
@@ -102,6 +105,72 @@ export interface DecorativeWindowSpec {
   phase: number;
   content: WindowContent;
 }
+
+interface SatelliteWindow {
+  title: string;
+  content: WindowContent;
+  /** Relative to the section window. */
+  offset: [number, number, number];
+  size: [number, number];
+  accentTitle?: boolean;
+  behavior?: WindowBehavior;
+}
+
+/**
+ * Hand-placed around each section window: a cascade stepping back toward the vanishing point at
+ * screen center, plus a small popup on the near corner. Listed in priority order for compact.
+ */
+const SECTION_SATELLITES: Record<MainSectionId, SatelliteWindow[]> = {
+  profile: [
+    { title: 'BOOT.INI', content: 'text', offset: [-3.4, 2.6, -1.5], size: [2.6, 1.6] },
+    { title: 'SCRNSAVE.SCR', content: 'image', offset: [1.2, 5, -4], size: [2.8, 1.8] },
+    {
+      title: 'ERROR_404',
+      content: 'dialog',
+      offset: [-1.2, -1.4, 0.6],
+      size: [1.5, 0.95],
+      accentTitle: true,
+      behavior: 'popup',
+    },
+  ],
+  inventory: [
+    { title: 'TASKMGR.COM', content: 'chart', offset: [-3, 0.9, -3], size: [2.8, 1.9] },
+    { title: 'NOTEPAD.SYS', content: 'text', offset: [-5.2, 1.6, -7], size: [2.4, 1.6] },
+    {
+      title: 'UNINST.EXE',
+      content: 'dialog',
+      offset: [-2.1, -0.9, 0.7],
+      size: [1.5, 0.95],
+      accentTitle: true,
+      behavior: 'popup',
+    },
+  ],
+  realms: [
+    { title: 'MEMDUMP.BIN', content: 'hex', offset: [-3, 0.8, -3], size: [2.8, 1.9] },
+    { title: 'PRINT.SPL', content: 'image', offset: [-5.4, 1.5, -6.5], size: [2.4, 1.6] },
+    {
+      title: 'SETUP.MSI',
+      content: 'dialog',
+      offset: [-2.1, -1, 0.7],
+      size: [1.5, 0.95],
+      accentTitle: true,
+      behavior: 'popup',
+    },
+  ],
+  logs: [
+    { title: 'QUEUE.DAT', content: 'table', offset: [-3, 0.6, -3], size: [2.8, 1.9] },
+    { title: 'PENDING.UP', content: 'chart', offset: [-5, 1.2, -6], size: [2.4, 1.6] },
+    {
+      title: 'SYSWARN.LOG',
+      content: 'dialog',
+      offset: [-2.2, -0.9, 0.7],
+      size: [1.5, 0.95],
+      accentTitle: true,
+      behavior: 'popup',
+    },
+  ],
+  contact: [],
+};
 
 const DECORATIVE_TITLES: { title: string; content: WindowContent }[] = [
   { title: 'README.TXT', content: 'text' },
@@ -150,6 +219,22 @@ const CORRIDOR_X = 3.4;
 const CORRIDOR_X_COMPACT = 1.2;
 const CORRIDOR_Y = 2.4;
 const SIGHTLINE_RADIUS = 3;
+const MIN_WINDOW_SPACING = 2.8;
+const QUIET_ZONE_DEPTH = 18;
+const WIDE_ASPECT = 1.6;
+
+/** True when a point lands on the text side of the screen at any section's camera station. */
+function inQuietZone(x: number, y: number, z: number): boolean {
+  return MAIN_SECTION_IDS.some((_, index) => {
+    const depth = SECTION_CAMERA_Z[index] - z;
+    if (depth <= 0 || depth > QUIET_ZONE_DEPTH) return false;
+    const [cameraX, cameraY] = getCameraStation(index, WIDE_ASPECT, false);
+    const halfHeight = depth * Math.tan((CAMERA_FOV / 2) * (Math.PI / 180));
+    const screenX = (x - cameraX) / (halfHeight * WIDE_ASPECT);
+    const screenY = (y - cameraY) / halfHeight;
+    return screenX < 0 && screenY > -0.7 && screenY < 0.45;
+  });
+}
 
 /** True when a point sits between a section's camera station and its window. */
 function blocksSightline(x: number, y: number, z: number, compact: boolean): boolean {
@@ -158,7 +243,7 @@ function blocksSightline(x: number, y: number, z: number, compact: boolean): boo
     const cameraZ = SECTION_CAMERA_Z[index];
     const along = (z - windowZ) / (cameraZ - windowZ);
     if (along < 0 || along > 1) return false;
-    const [cameraX, cameraY] = getCameraStation(index, compact ? 0.5 : 1.6, compact);
+    const [cameraX, cameraY] = getCameraStation(index, compact ? 0.5 : WIDE_ASPECT, compact);
     return (
       Math.hypot(x - (windowX + (cameraX - windowX) * along), y - (windowY + (cameraY - windowY) * along)) <
       SIGHTLINE_RADIUS
@@ -174,15 +259,41 @@ function pickBehavior(roll: number): WindowBehavior {
   return 'labelled';
 }
 
-/** Procedural filler windows — a sparse field the camera flies through. */
+function buildSatellites(compact: boolean, rand: () => number): DecorativeWindowSpec[] {
+  return MAIN_SECTION_IDS.flatMap((sectionId) =>
+    SECTION_SATELLITES[sectionId].slice(0, compact ? 1 : undefined).map((satellite, index) => {
+      const { position, rotation } = OS_WINDOW_LAYOUT[sectionId];
+      return {
+        id: `satellite-${sectionId}-${index}`,
+        kind: 'satellite' as const,
+        section: sectionId,
+        title: satellite.title,
+        position: [
+          position[0] + satellite.offset[0],
+          position[1] + satellite.offset[1],
+          position[2] + satellite.offset[2],
+        ] as [number, number, number],
+        rotation,
+        size: satellite.size,
+        accentTitle: satellite.accentTitle ?? false,
+        behavior: satellite.behavior ?? 'still',
+        phase: rand() * 100,
+        content: satellite.content,
+      };
+    })
+  );
+}
+
+/** Hand-placed satellites plus a sparse, evenly spaced field of filler the camera flies through. */
 export function generateDecorativeWindows(compact: boolean): DecorativeWindowSpec[] {
   const rand = mulberry32(0x0c0c0c);
-  const target = compact ? 16 : 30;
+  const target = compact ? 12 : 24;
+  const satellites = buildSatellites(compact, rand);
   const specs: DecorativeWindowSpec[] = [];
   const minChapterGap = compact ? 2.8 : 3.2;
 
-  const xSpan = compact ? 7 : 14;
-  const ySpan = compact ? 8 : 10;
+  const xSpan = compact ? 7 : 13;
+  const ySpan = compact ? 5 : 5.5;
   const zNear = -6;
   const zFar = compact ? -32 : -38;
 
@@ -201,6 +312,12 @@ export function generateDecorativeWindows(compact: boolean): DecorativeWindowSpe
 
     if (distToChapter(x, y, z) < minChapterGap) continue;
     if (blocksSightline(x, y, z, compact)) continue;
+    if (!compact && inQuietZone(x, y, z)) continue;
+    const crowded = [...satellites, ...specs].some(
+      ({ position }) =>
+        Math.hypot(x - position[0], y - position[1], z - position[2]) < MIN_WINDOW_SPACING
+    );
+    if (crowded) continue;
     // Keeps the camera's flight path clear so no window fills the screen behind text.
     const corridorX = compact ? CORRIDOR_X_COMPACT : CORRIDOR_X;
     if (Math.abs(x) < corridorX && Math.abs(y - 1) < CORRIDOR_Y) continue;
@@ -211,6 +328,7 @@ export function generateDecorativeWindows(compact: boolean): DecorativeWindowSpe
 
     specs.push({
       id: `decor-${specs.length}`,
+      kind: 'decorative',
       title,
       position: [x, y, z],
       rotation: [
@@ -226,5 +344,5 @@ export function generateDecorativeWindows(compact: boolean): DecorativeWindowSpe
     });
   }
 
-  return specs;
+  return [...satellites, ...specs];
 }

@@ -34,13 +34,13 @@ function smoothstep(edge0: number, edge1: number, value: number) {
   return t * t * (3 - 2 * t);
 }
 
-function createTitleTexture(title: string, active: boolean): THREE.CanvasTexture {
+function createTitleTexture(title: string, active: boolean, accent: boolean): THREE.CanvasTexture {
   const canvas = document.createElement('canvas');
   canvas.width = 512;
   canvas.height = 64;
   const ctx = canvas.getContext('2d');
   if (ctx) {
-    ctx.fillStyle = active ? WEBGL_PALETTE.blue : WEBGL_PALETTE.paper;
+    ctx.fillStyle = active ? WEBGL_PALETTE.blue : accent ? WEBGL_PALETTE.yellow : WEBGL_PALETTE.paper;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = active ? '#FFFFFF' : WEBGL_PALETTE.ink;
     ctx.font = 'bold 22px monospace';
@@ -92,7 +92,7 @@ function buildChromeSegments(bodyW: number, bodyH: number): number[] {
   return segments;
 }
 
-export type OsWindowFrameKind = 'chapter' | 'decorative';
+export type OsWindowFrameKind = 'chapter' | 'satellite' | 'decorative';
 
 interface OsWindowFrameProps {
   title: string;
@@ -107,6 +107,8 @@ interface OsWindowFrameProps {
   behavior?: WindowBehavior;
   phase?: number;
   content?: WindowContent;
+  /** False fades the window out, for satellites whose section is not active. */
+  present?: boolean;
 }
 
 export default function OsWindowFrame({
@@ -121,11 +123,13 @@ export default function OsWindowFrame({
   behavior = 'still',
   phase = 0,
   content = 'text',
+  present = true,
 }: OsWindowFrameProps) {
   const isDecorative = kind === 'decorative';
   const hasTitleText = !isDecorative || behavior === 'labelled';
   const groupRef = useRef<THREE.Group>(null);
   const scaleRef = useRef(1);
+  const presenceRef = useRef(present ? 1 : 0);
   const bodyOpacityRef = useRef(0.07);
   const edgeOpacityRef = useRef(0.32);
 
@@ -155,7 +159,7 @@ export default function OsWindowFrame({
     );
     shellEdges.dispose();
     const shadow = new THREE.PlaneGeometry(bodyW + BORDER * 2, bodyH + TITLE_BAR_HEIGHT + BORDER * 2);
-    const tex = hasTitleText ? createTitleTexture(title, active) : null;
+    const tex = hasTitleText ? createTitleTexture(title, active, accentTitle) : null;
     // Anchored at its left edge so scaling on X fills like a progress bar.
     const progress = new THREE.PlaneGeometry(bodyW * 0.8, 0.12);
     progress.translate((bodyW * 0.8) / 2, 0, 0);
@@ -168,7 +172,7 @@ export default function OsWindowFrame({
       progressGeo: progress,
       shadowGeo: shadow,
     };
-  }, [bodyW, bodyH, title, active, hasTitleText]);
+  }, [bodyW, bodyH, title, active, accentTitle, hasTitleText]);
 
   const titleBarColor = active
     ? WEBGL_PALETTE.blue
@@ -207,7 +211,8 @@ export default function OsWindowFrame({
 
   const bodyMatRef = useRef(
     new THREE.MeshBasicMaterial({
-      map: getWindowContentTexture(content),
+      // Filler and compact stay plain line art: low-opacity content smudges and fights page text.
+      map: isDecorative || compact ? null : getWindowContentTexture(content),
       transparent: true,
       opacity: 0.07,
       side: THREE.DoubleSide,
@@ -230,18 +235,27 @@ export default function OsWindowFrame({
   const targetBodyOpacity = active
     ? compact
       ? 0.24
-      : 0.92
+      : 1
     : isDecorative
       ? compact
-        ? 0.12
-        : 0.22
-      : compact
         ? 0.2
-        : 0.3;
-  const decorativeEdgeOpacity = compact ? 0.14 : 0.2;
-  const decorativeTitleOpacity = compact ? 0.3 : 0.4;
+        : 0.4
+      : kind === 'satellite'
+        ? compact
+          ? 0.16
+          : 0.9
+        : compact
+          ? 0.14
+          : 0.35;
+  const decorativeEdgeOpacity = compact ? 0.14 : 0.32;
+  const decorativeTitleOpacity = compact ? 0.3 : 0.6;
   const activeEdgeOpacity = compact ? 0.5 : 0.9;
-  const targetEdgeOpacity = active ? activeEdgeOpacity : isDecorative ? decorativeEdgeOpacity : 0.3;
+  const restingEdgeOpacity = compact ? 0.3 : kind === 'satellite' ? 0.75 : 0.4;
+  const targetEdgeOpacity = active
+    ? activeEdgeOpacity
+    : isDecorative
+      ? decorativeEdgeOpacity
+      : restingEdgeOpacity;
 
   useFrame((state, delta) => {
     const group = groupRef.current;
@@ -251,10 +265,12 @@ export default function OsWindowFrame({
     scaleRef.current += (targetScale - scaleRef.current) * lerp;
     bodyOpacityRef.current += (targetBodyOpacity - bodyOpacityRef.current) * lerp;
     edgeOpacityRef.current += (targetEdgeOpacity - edgeOpacityRef.current) * lerp;
+    presenceRef.current += ((present ? 1 : 0) - presenceRef.current) * lerp;
 
     const time = state.clock.elapsedTime + phase;
     const distance = fieldState.cameraZ - position[2];
     const fade =
+      presenceRef.current *
       smoothstep(FADE_NEAR_START, FADE_NEAR_END, distance) *
       smoothstep(FADE_FAR_START, FADE_FAR_END, distance);
 
@@ -292,14 +308,16 @@ export default function OsWindowFrame({
 
   return (
     <group ref={groupRef} position={position} rotation={rotation}>
-      <mesh ref={shadowRef} geometry={shadowGeo} position={[SHADOW_OFFSET, -SHADOW_OFFSET, -DEPTH]}>
-        <meshBasicMaterial
-          color={WEBGL_PALETTE.ink}
-          transparent
-          opacity={0}
-          side={THREE.DoubleSide}
-        />
-      </mesh>
+      {!isDecorative && (
+        <mesh ref={shadowRef} geometry={shadowGeo} position={[SHADOW_OFFSET, -SHADOW_OFFSET, -DEPTH]}>
+          <meshBasicMaterial
+            color={WEBGL_PALETTE.ink}
+            transparent
+            opacity={0}
+            side={THREE.DoubleSide}
+          />
+        </mesh>
+      )}
       <mesh ref={titleRef} geometry={titleGeo} position={[0, titleY, zFront]} material={titleMat} />
       <mesh geometry={bodyGeo} position={[0, bodyY, zFront]} material={bodyMatRef.current} />
       <lineSegments geometry={edgesGeo} material={edgeMatRef.current} />
