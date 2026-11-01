@@ -484,3 +484,51 @@ html[data-crt='on'] [data-crt-toggle] {
     display: none;
   }
 }
+
+/* Pixel cursors */
+@media (pointer: fine) {
+  html,
+  .cursor-default {
+    cursor: url('/cursors/arrow.png') 0 0, auto;
+  }
+
+  a,
+  button,
+  select,
+  summary,
+  label,
+  [role='button'],
+  [role='tab'],
+  [role='option'],
+  .cursor-pointer {
+    cursor: url('/cursors/hand.png') 9 1, pointer;
+  }
+
+  input,
+  textarea {
+    cursor: url('/cursors/text.png') 13 16, text;
+  }
+
+  .cursor-grab {
+    cursor: url('/cursors/grab.png') 16 16, grab;
+  }
+
+  .active\:cursor-grabbing:active {
+    cursor: url('/cursors/grabbing.png') 16 16, grabbing;
+  }
+
+  @media (min-width: 64rem) {
+    .lg\:cursor-grab {
+      cursor: url('/cursors/grab.png') 16 16, grab;
+    }
+
+    .lg\:active\:cursor-grabbing:active {
+      cursor: url('/cursors/grabbing.png') 16 16, grabbing;
+    }
+  }
+
+  html[data-boar-rage='on'],
+  html[data-boar-rage='on'] * {
+    cursor: url('/cursors/boar.png') 16 16, auto !important;
+  }
+}

@@ -136,6 +136,7 @@ export default function BoarMascot({ content }: { content: BoarMascotContent }) 
     let clickIndex = 0;
     let clickTimes: number[] = [];
     let bubbleTimer = 0;
+    let rageTimer = 0;
     let growth = growthOf(recordVisit().pet.xp);
 
     const startHop = (target: HTMLElement, toX: number, height: number, durationMs: number) => {
@@ -211,6 +212,11 @@ export default function BoarMascot({ content }: { content: BoarMascotContent }) 
         clickTimes = [];
         rageUntil = now + RAGE_MS;
         idleUntil = 0;
+        document.documentElement.dataset.boarRage = 'on';
+        window.clearTimeout(rageTimer);
+        rageTimer = window.setTimeout(() => {
+          delete document.documentElement.dataset.boarRage;
+        }, RAGE_MS);
         say(content.rage);
         return;
       }
@@ -291,6 +297,8 @@ export default function BoarMascot({ content }: { content: BoarMascotContent }) 
     return () => {
       cancelAnimationFrame(raf);
       window.clearTimeout(bubbleTimer);
+      window.clearTimeout(rageTimer);
+      delete document.documentElement.dataset.boarRage;
       document.removeEventListener('click', handleDocumentClick);
       window.removeEventListener('boar:changed', handlePetChange);
       pokeRef.current = () => {};
