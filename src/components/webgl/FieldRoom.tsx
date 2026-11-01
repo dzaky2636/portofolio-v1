@@ -11,11 +11,10 @@ const CEILING_Y = 10;
 const ROOM_HALF_WIDTH = 34;
 const ROOM_NEAR_Z = 8;
 const ROOM_FAR_Z = -64;
-const GRID_STEP = 2;
+const GRID_STEP = 4;
 const COLUMN_X = 19;
-const COLUMN_STEP = 12;
+const COLUMN_STEP = 24;
 const COLUMN_HALF_WIDTH = 0.8;
-const COLUMN_BAND_STEP = 3.8;
 const FOOT_MARK_SIZE = 0.18;
 
 const VERT = `
@@ -25,7 +24,7 @@ varying float vFade;
 void main() {
   vec4 viewPosition = modelViewMatrix * vec4(position, 1.0);
   float distance = -viewPosition.z;
-  vFade = smoothstep(1.5, 8.0, distance) * (1.0 - smoothstep(30.0, 52.0, distance));
+  vFade = smoothstep(1.5, 8.0, distance) * (1.0 - smoothstep(18.0, 40.0, distance));
   gl_Position = projectionMatrix * viewPosition;
   gl_PointSize = clamp(pointScale / distance, 1.0, 4.0);
 }
@@ -92,7 +91,7 @@ function buildRoomSegments(): number[] {
       corners.forEach(([cx, cz], index) => {
         const [nextX, nextZ] = corners[(index + 1) % corners.length];
         segments.push(cx, FLOOR_Y, cz, cx, CEILING_Y, cz);
-        for (let y = FLOOR_Y; y <= CEILING_Y; y += COLUMN_BAND_STEP) {
+        for (const y of [FLOOR_Y, CEILING_Y]) {
           segments.push(cx, y, cz, nextX, y, nextZ);
         }
       });
@@ -102,7 +101,7 @@ function buildRoomSegments(): number[] {
   return segments;
 }
 
-/** A plumb line from each window to the floor, ending in a cross, so nothing simply floats. */
+/** A plumb line from a window to the floor, ending in a cross, so it reads as grounded. */
 function buildTetherSegments(anchors: [number, number, number][]): number[] {
   return anchors.flatMap(([x, y, z]) => [
     x, y, z, x, FLOOR_Y, z,
@@ -127,7 +126,7 @@ function positionsGeometry(positions: number[]) {
 }
 
 interface FieldRoomProps {
-  /** Bottom edge of each window, in world space. */
+  /** Bottom edge of each section window, in world space. */
   anchors: [number, number, number][];
   compact: boolean;
 }
@@ -137,7 +136,7 @@ export default function FieldRoom({ anchors, compact }: FieldRoomProps) {
     () => ({
       roomGeo: positionsGeometry(buildRoomSegments()),
       tetherGeo: positionsGeometry(buildTetherSegments(anchors)),
-      speckGeo: positionsGeometry(buildSpeckPoints(compact ? 120 : 280)),
+      speckGeo: positionsGeometry(buildSpeckPoints(compact ? 40 : 90)),
     }),
     [anchors, compact]
   );
@@ -153,13 +152,13 @@ export default function FieldRoom({ anchors, compact }: FieldRoomProps) {
   return (
     <>
       <lineSegments geometry={roomGeo} renderOrder={-1} frustumCulled={false}>
-        <RoomMaterial opacity={0.2} />
+        <RoomMaterial opacity={0.12} />
       </lineSegments>
       <lineSegments geometry={tetherGeo} renderOrder={-1} frustumCulled={false}>
         <RoomMaterial opacity={0.24} />
       </lineSegments>
       <points geometry={speckGeo} renderOrder={-1} frustumCulled={false}>
-        <RoomMaterial opacity={0.5} pointScale={26} />
+        <RoomMaterial opacity={0.3} pointScale={26} />
       </points>
     </>
   );

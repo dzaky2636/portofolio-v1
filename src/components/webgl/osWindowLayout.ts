@@ -1,4 +1,3 @@
-import * as THREE from 'three';
 import { WEBGL_PALETTE } from '@/components/webgl/palette';
 import type { WindowContent } from '@/components/webgl/windowContent';
 import { MAIN_SECTION_IDS, type MainSectionId } from '@/lib/sectionIds';
@@ -27,8 +26,8 @@ export interface OsWindowLayoutEntry {
 
 export const OS_WINDOW_LAYOUT: Record<MainSectionId, OsWindowLayoutEntry> = {
   profile: {
-    position: [-5.5, 2.5, -10],
-    rotation: [0.08, 0.22, -0.04],
+    position: [1.8, 1.5, -10],
+    rotation: [0.06, -0.12, -0.03],
     size: [3.2, 2.2],
   },
   inventory: {
@@ -37,8 +36,8 @@ export const OS_WINDOW_LAYOUT: Record<MainSectionId, OsWindowLayoutEntry> = {
     size: [3.4, 2.4],
   },
   realms: {
-    position: [-4, -1, -20],
-    rotation: [0.12, 0.35, 0],
+    position: [3, 0.5, -20],
+    rotation: [0.06, -0.22, 0.03],
     size: [3.8, 2.6],
   },
   logs: {
@@ -53,13 +52,33 @@ export const OS_WINDOW_LAYOUT: Record<MainSectionId, OsWindowLayoutEntry> = {
   },
 };
 
-export function getWindowWorldPosition(sectionId: MainSectionId): THREE.Vector3 {
-  const { position } = OS_WINDOW_LAYOUT[sectionId];
-  return new THREE.Vector3(position[0], position[1], position[2]);
-}
+export const CAMERA_FOV = 78;
 
 /** Camera depth while each section fills the viewport, in MAIN_SECTION_IDS order. */
-export const SECTION_CAMERA_Z = [2, -7, -12, -16, -20] as const;
+export const SECTION_CAMERA_Z = [-1, -9, -14, -18, -22] as const;
+
+/** Where each section's window sits on screen, -1 to 1 from the center, clear of the page content. */
+const SECTION_FRAMING: Record<MainSectionId, { x: number; y: number }> = {
+  profile: { x: 0.08, y: 0.1 },
+  inventory: { x: 0.52, y: 0.3 },
+  realms: { x: 0.52, y: 0.3 },
+  logs: { x: 0.52, y: 0.3 },
+  contact: { x: 0, y: 0.2 },
+};
+
+/** Camera x/y that puts a section's window at its framed spot while looking straight ahead. */
+export function getCameraStation(
+  sectionIndex: number,
+  aspect: number,
+  compact: boolean
+): [number, number] {
+  const sectionId = MAIN_SECTION_IDS[sectionIndex];
+  const [x, y, z] = OS_WINDOW_LAYOUT[sectionId].position;
+  const halfHeight =
+    (SECTION_CAMERA_Z[sectionIndex] - z) * Math.tan((CAMERA_FOV / 2) * (Math.PI / 180));
+  const framing = SECTION_FRAMING[sectionId];
+  return [x - (compact ? 0 : framing.x) * halfHeight * aspect, y - framing.y * halfHeight];
+}
 
 /** Line and accent colors the field shifts to per section. */
 export const SECTION_COLORS: Record<MainSectionId, { edge: string; title: string }> = {
@@ -130,6 +149,22 @@ function distToChapter(x: number, y: number, z: number): number {
 const CORRIDOR_X = 3.4;
 const CORRIDOR_X_COMPACT = 1.2;
 const CORRIDOR_Y = 2.4;
+const SIGHTLINE_RADIUS = 3;
+
+/** True when a point sits between a section's camera station and its window. */
+function blocksSightline(x: number, y: number, z: number, compact: boolean): boolean {
+  return MAIN_SECTION_IDS.some((id, index) => {
+    const [windowX, windowY, windowZ] = OS_WINDOW_LAYOUT[id].position;
+    const cameraZ = SECTION_CAMERA_Z[index];
+    const along = (z - windowZ) / (cameraZ - windowZ);
+    if (along < 0 || along > 1) return false;
+    const [cameraX, cameraY] = getCameraStation(index, compact ? 0.5 : 1.6, compact);
+    return (
+      Math.hypot(x - (windowX + (cameraX - windowX) * along), y - (windowY + (cameraY - windowY) * along)) <
+      SIGHTLINE_RADIUS
+    );
+  });
+}
 
 function pickBehavior(roll: number): WindowBehavior {
   if (roll < 0.45) return 'still';
@@ -142,7 +177,7 @@ function pickBehavior(roll: number): WindowBehavior {
 /** Procedural filler windows — a sparse field the camera flies through. */
 export function generateDecorativeWindows(compact: boolean): DecorativeWindowSpec[] {
   const rand = mulberry32(0x0c0c0c);
-  const target = compact ? 36 : 72;
+  const target = compact ? 16 : 30;
   const specs: DecorativeWindowSpec[] = [];
   const minChapterGap = compact ? 2.8 : 3.2;
 
@@ -165,6 +200,7 @@ export function generateDecorativeWindows(compact: boolean): DecorativeWindowSpe
     const y = (rand() - 0.5) * 2 * ySpan;
 
     if (distToChapter(x, y, z) < minChapterGap) continue;
+    if (blocksSightline(x, y, z, compact)) continue;
     // Keeps the camera's flight path clear so no window fills the screen behind text.
     const corridorX = compact ? CORRIDOR_X_COMPACT : CORRIDOR_X;
     if (Math.abs(x) < corridorX && Math.abs(y - 1) < CORRIDOR_Y) continue;

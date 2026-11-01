@@ -19,11 +19,12 @@ const CONTROL_SIZE = 0.13;
 const CONTROL_GAP = 0.04;
 const SCROLLBAR_WIDTH = 0.14;
 const SHADOW_OFFSET = 0.12;
-const SHADOW_OPACITY = 0.22;
+const SHADOW_SHARE = 0.6;
+const ACTIVE_SCALE = 1.25;
 const FADE_NEAR_START = 1.5;
 const FADE_NEAR_END = 6;
-const FADE_FAR_START = 40;
-const FADE_FAR_END = 24;
+const FADE_FAR_START = 30;
+const FADE_FAR_END = 14;
 const PROGRESS_STEPS = 10;
 const POPUP_PERIOD_SECONDS = 9;
 const POPUP_OPEN_SHARE = 0.72;
@@ -225,21 +226,22 @@ export default function OsWindowFrame({
   const progressRef = useRef<THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>>(null);
   const shadowRef = useRef<THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial>>(null);
 
-  const targetScale = active ? 1.06 : 1;
+  const targetScale = active ? ACTIVE_SCALE : 1;
   const targetBodyOpacity = active
     ? compact
-      ? 0.4
-      : 0.6
+      ? 0.24
+      : 0.92
     : isDecorative
       ? compact
-        ? 0.22
-        : 0.42
+        ? 0.12
+        : 0.22
       : compact
-        ? 0.25
-        : 0.48;
-  const decorativeEdgeOpacity = compact ? 0.18 : 0.3;
-  const decorativeTitleOpacity = compact ? 0.45 : 0.78;
-  const targetEdgeOpacity = active ? 0.58 : isDecorative ? decorativeEdgeOpacity : 0.38;
+        ? 0.2
+        : 0.3;
+  const decorativeEdgeOpacity = compact ? 0.14 : 0.2;
+  const decorativeTitleOpacity = compact ? 0.3 : 0.4;
+  const activeEdgeOpacity = compact ? 0.5 : 0.9;
+  const targetEdgeOpacity = active ? activeEdgeOpacity : isDecorative ? decorativeEdgeOpacity : 0.3;
 
   useFrame((state, delta) => {
     const group = groupRef.current;
@@ -269,7 +271,7 @@ export default function OsWindowFrame({
       behavior === 'flicker' && Math.sin(time * 1.3) * Math.sin(time * 2.7) > 0.86 ? 2.6 : 1;
 
     bodyMatRef.current.opacity = Math.min(bodyOpacityRef.current * blink, 1) * fade;
-    if (shadowRef.current) shadowRef.current.material.opacity = SHADOW_OPACITY * fade;
+    if (shadowRef.current) shadowRef.current.material.opacity = bodyOpacityRef.current * SHADOW_SHARE * fade;
     edgeMatRef.current.opacity = Math.min(edgeOpacityRef.current * blink, 1) * fade;
     const titleMaterial = titleRef.current?.material;
     if (titleMaterial) titleMaterial.opacity = (isDecorative ? decorativeTitleOpacity : 1) * fade;
@@ -294,7 +296,7 @@ export default function OsWindowFrame({
         <meshBasicMaterial
           color={WEBGL_PALETTE.ink}
           transparent
-          opacity={SHADOW_OPACITY}
+          opacity={0}
           side={THREE.DoubleSide}
         />
       </mesh>

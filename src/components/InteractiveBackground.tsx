@@ -42,14 +42,8 @@ export default function InteractiveBackground() {
             height="200"
             patternUnits="userSpaceOnUse"
           >
-            <path d="M100 0V200M0 100H200" stroke="#0C0C0C" strokeOpacity="0.07" fill="none" />
-            <path d="M200 0H0V200" stroke="#0C0C0C" strokeOpacity="0.14" fill="none" />
-            <path
-              d="M92 100H108M100 92V108M0 8V0H8M192 0H200M0 192V200"
-              stroke="#0C0C0C"
-              strokeOpacity="0.45"
-              fill="none"
-            />
+            <path d="M200 0H0V200" stroke="#0C0C0C" strokeOpacity="0.08" fill="none" />
+            <path d="M92 100H108M100 92V108" stroke="#0C0C0C" strokeOpacity="0.2" fill="none" />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#weirdcore-drafting-grid)" />

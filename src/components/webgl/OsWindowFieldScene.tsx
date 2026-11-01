@@ -9,13 +9,14 @@ import FieldRoom from '@/components/webgl/FieldRoom';
 import OsWindowFrame from '@/components/webgl/OsWindowFrame';
 import { fieldState } from '@/components/webgl/fieldState';
 import {
+  CAMERA_FOV,
   OS_WINDOW_CONTENT,
   OS_WINDOW_LAYOUT,
   OS_WINDOW_TITLES,
   SECTION_CAMERA_Z,
   SECTION_COLORS,
   generateDecorativeWindows,
-  getWindowWorldPosition,
+  getCameraStation,
 } from '@/components/webgl/osWindowLayout';
 import {
   getActiveSection,
@@ -24,29 +25,39 @@ import {
 import { MAIN_SECTION_IDS, type MainSectionId } from '@/lib/sectionIds';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
-/** Position along the sections: 0 at the first, 1 at the second, 1.5 halfway to the third. */
-function readSectionProgress() {
-  const anchor = window.scrollY + window.innerHeight * 0.3;
-  const tops = MAIN_SECTION_IDS.map((id) => {
-    const el = document.getElementById(id);
-    return el ? el.getBoundingClientRect().top + window.scrollY : 0;
-  });
+// Travel between sections spans this much scroll, in viewports, around each section's top.
+const TRAVEL_LEAD_VIEWPORTS = 0.8;
+const TRAVEL_TRAIL_VIEWPORTS = 0.1;
 
-  for (let index = tops.length - 1; index > 0; index -= 1) {
-    if (anchor >= tops[index]) {
-      const next = tops[index + 1];
-      if (next === undefined) return index;
-      return index + (anchor - tops[index]) / (next - tops[index]);
-    }
-  }
-  return tops[1] > 0 ? Math.max(0, anchor / tops[1]) : 0;
+const CHAPTER_ANCHORS = MAIN_SECTION_IDS.map((id): [number, number, number] => {
+  const { position, size } = OS_WINDOW_LAYOUT[id];
+  return [position[0], position[1] - size[1] * 0.45, position[2]];
+});
+
+function smootherstep(value: number) {
+  const t = Math.min(Math.max(value, 0), 1);
+  return t * t * t * (t * (t * 6 - 15) + 10);
 }
 
-function cameraZAt(progress: number) {
-  const index = Math.min(Math.floor(progress), SECTION_CAMERA_Z.length - 1);
-  const from = SECTION_CAMERA_Z[index];
-  const to = SECTION_CAMERA_Z[Math.min(index + 1, SECTION_CAMERA_Z.length - 1)];
-  return from + (to - from) * (progress - index);
+/**
+ * Position along the sections: 0 at the first, 1 at the second. The camera travels over a fixed
+ * scroll span at each boundary and holds still between them, so a section's height never changes
+ * how fast it moves.
+ */
+function readSectionProgress() {
+  const viewport = window.innerHeight;
+  const anchor = window.scrollY + viewport * 0.3;
+  return MAIN_SECTION_IDS.slice(1).reduce((progress, id) => {
+    const el = document.getElementById(id);
+    if (!el) return progress;
+    const start = el.getBoundingClientRect().top + window.scrollY - viewport * TRAVEL_LEAD_VIEWPORTS;
+    const span = viewport * (TRAVEL_LEAD_VIEWPORTS + TRAVEL_TRAIL_VIEWPORTS);
+    return progress + smootherstep((anchor - start) / span);
+  }, 0);
+}
+
+function mix(from: number, to: number, amount: number) {
+  return from + (to - from) * amount;
 }
 
 function BackgroundRenderPass({
@@ -80,16 +91,17 @@ function BackgroundRenderPass({
 function ParallaxCamera({
   backgroundCamRef,
   activeSection,
+  compact,
 }: {
   backgroundCamRef: RefObject<THREE.PerspectiveCamera | null>;
   activeSection: string;
+  compact: boolean;
 }) {
   const mouseRef = useRef({ x: 0, y: 0 });
   const progressRef = useRef(0);
   const targetRef = useRef({ mx: 0, my: 0, progress: 0 });
   const edgeColorRef = useRef(new THREE.Color());
   const titleColorRef = useRef(new THREE.Color());
-  const lookAtRef = useRef(new THREE.Vector3(0, 1.5, -12));
 
   useFrame((state, delta) => {
     const cam = backgroundCamRef.current;
@@ -103,9 +115,18 @@ function ParallaxCamera({
     const time = state.clock.elapsedTime;
     const progress = targetRef.current.progress;
 
-    cam.position.x = targetRef.current.mx * 0.6 + Math.sin(progress * 1.4) * 0.5;
-    cam.position.y = targetRef.current.my * 0.35 + 1 + Math.sin(time * 0.3) * 0.08;
-    cam.position.z = cameraZAt(progress);
+    const lastSection = MAIN_SECTION_IDS.length - 1;
+    const fromIndex = Math.min(Math.floor(progress), lastSection);
+    const toIndex = Math.min(fromIndex + 1, lastSection);
+    const travel = progress - fromIndex;
+    const [fromX, fromY] = getCameraStation(fromIndex, cam.aspect, compact);
+    const [toX, toY] = getCameraStation(toIndex, cam.aspect, compact);
+
+    cam.position.x = mix(fromX, toX, travel) + targetRef.current.mx * 0.3;
+    cam.position.y = mix(fromY, toY, travel) + targetRef.current.my * 0.2 + Math.sin(time * 0.3) * 0.08;
+    cam.position.z = mix(SECTION_CAMERA_Z[fromIndex], SECTION_CAMERA_Z[toIndex], travel);
+    // Looks straight ahead so it can never fly past a target and spin; banks only mid-travel.
+    cam.rotation.set(0, 0, Math.sin(progress * Math.PI * 2) * 0.02);
     fieldState.cameraZ = cam.position.z;
 
     const sectionId = MAIN_SECTION_IDS.includes(activeSection as MainSectionId)
@@ -114,12 +135,6 @@ function ParallaxCamera({
     const colors = SECTION_COLORS[sectionId];
     fieldState.edge.lerp(edgeColorRef.current.set(colors.edge), lerp);
     fieldState.title.lerp(titleColorRef.current.set(colors.title), lerp);
-
-    const focus = getWindowWorldPosition(sectionId);
-    const desiredLook = new THREE.Vector3(focus.x * 0.35, focus.y * 0.5 + 1, focus.z + 6);
-    lookAtRef.current.lerp(desiredLook, lerp);
-    cam.lookAt(lookAtRef.current);
-    cam.rotateZ(Math.sin(progress * 1.4) * 0.025);
   });
 
   useEffect(() => {
@@ -153,21 +168,9 @@ function WindowField({ compact }: { compact: boolean }) {
 
   const decorative = useMemo(() => generateDecorativeWindows(compact), [compact]);
 
-  const anchors = useMemo(
-    () =>
-      [...decorative, ...MAIN_SECTION_IDS.map((id) => OS_WINDOW_LAYOUT[id])].map(
-        ({ position: [x, y, z], size: [, height] }): [number, number, number] => [
-          x,
-          y - height * 0.45,
-          z,
-        ]
-      ),
-    [decorative]
-  );
-
   return (
     <>
-      <FieldRoom anchors={anchors} compact={compact} />
+      <FieldRoom anchors={CHAPTER_ANCHORS} compact={compact} />
       {decorative.map((win) => (
         <OsWindowFrame
           key={win.id}
@@ -215,8 +218,8 @@ export default function OsWindowFieldScene() {
 
   return (
     <>
-      <PerspectiveCamera ref={backgroundCamRef} position={[0, 1, SECTION_CAMERA_Z[0]]} fov={78} />
-      <ParallaxCamera backgroundCamRef={backgroundCamRef} activeSection={activeSection} />
+      <PerspectiveCamera ref={backgroundCamRef} position={[0, 1, SECTION_CAMERA_Z[0]]} fov={CAMERA_FOV} />
+      <ParallaxCamera backgroundCamRef={backgroundCamRef} activeSection={activeSection} compact={compact} />
       <WindowField compact={compact} />
       <BackgroundRenderPass backgroundCamRef={backgroundCamRef} />
     </>
