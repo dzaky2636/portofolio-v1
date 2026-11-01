@@ -18,7 +18,6 @@ export interface ExperienceLogViewerLabels {
   detailTitle: string;
   listLabel: string;
   emptyHint: string;
-  lineAria: string;
 }
 
 interface ExperienceLogViewerProps {
@@ -30,20 +29,6 @@ function isActiveDuration(duration: string | undefined): boolean {
   if (!duration) return false;
   const upper = duration.toUpperCase();
   return upper.includes('NOW') || upper.includes('SEKARANG');
-}
-
-function formatLineAria(
-  template: string,
-  index: number,
-  exp: Experience
-): string {
-  const logId = `LOG-${String(index + 1).padStart(3, '0')}`;
-  const duration = exp.duration ?? '';
-  return template
-    .replace('{index}', logId)
-    .replace('{role}', exp.role)
-    .replace('{company}', exp.company)
-    .replace('{duration}', duration);
 }
 
 export default function ExperienceLogViewer({
@@ -128,7 +113,6 @@ export default function ExperienceLogViewer({
                     type="button"
                     role="option"
                     aria-selected={isSelected}
-                    aria-label={formatLineAria(labels.lineAria, index, exp)}
                     onClick={() => selectIndex(index, true)}
                     className={`w-full text-left font-mono uppercase tracking-widest text-xs md:text-sm px-4 py-3 border-b border-[#F4F3ED]/15 transition-colors duration-75 retro-focus ${
                       isSelected
@@ -138,7 +122,7 @@ export default function ExperienceLogViewer({
                   >
                     <span className="flex flex-col gap-1 sm:flex-row sm:flex-wrap sm:items-baseline sm:gap-x-2">
                       <span className="shrink-0 text-[#FFD700]">
-                        {active ? '█' : '░'} [{logId}]
+                        <span aria-hidden="true">{active ? '█' : '░'}</span> [{logId}]
                       </span>
                       <span className="tabular-nums shrink-0 opacity-90">[{duration}]</span>
                       <span className="min-w-0 break-words">{exp.role}</span>

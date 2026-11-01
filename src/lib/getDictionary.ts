@@ -125,7 +125,6 @@ export interface Dictionary {
       detailTitle: string;
       listLabel: string;
       emptyHint: string;
-      lineAria: string;
     };
     items: { role: string; company: string; duration: string; details: string }[];
   };

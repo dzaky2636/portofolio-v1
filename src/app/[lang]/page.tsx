@@ -498,15 +498,14 @@ export default async function Page({
 
         <div className="max-w-7xl mx-auto mt-10 pt-4 border-t-2 border-black flex flex-col sm:flex-row justify-between items-center gap-2 font-mono uppercase tracking-widest text-[10px]">
           <CopyEmailButton
-            className="hover:text-[#2945FF] hover:underline retro-focus pointer-events-auto"
-            aria-label={dict.contact.emailCopied}
+            className="inline-flex min-h-6 items-center px-1 hover:text-[#2945FF] hover:underline retro-focus pointer-events-auto"
           >
             {PORTFOLIO_EMAIL}
           </CopyEmailButton>
           <button
             type="button"
             data-terminal-open
-            className="hover:text-[#2945FF] hover:underline retro-focus pointer-events-auto"
+            className="inline-flex min-h-6 items-center px-1 hover:text-[#2945FF] hover:underline retro-focus pointer-events-auto"
           >
             {dict.terminal.openButton}
           </button>
@@ -515,7 +514,7 @@ export default async function Page({
             data-crt-toggle
             aria-pressed="false"
             aria-label={dict.crt.aria}
-            className="px-1 hover:text-[#2945FF] hover:underline retro-focus pointer-events-auto"
+            className="inline-flex min-h-6 items-center px-1 hover:text-[#2945FF] hover:underline retro-focus pointer-events-auto"
           >
             {dict.crt.label}
           </button>
@@ -524,7 +523,7 @@ export default async function Page({
             data-music-toggle
             aria-pressed="false"
             aria-label={dict.music.aria}
-            className="px-1 hover:text-[#2945FF] hover:underline retro-focus pointer-events-auto"
+            className="inline-flex min-h-6 items-center px-1 hover:text-[#2945FF] hover:underline retro-focus pointer-events-auto"
           >
             {dict.music.label}
           </button>

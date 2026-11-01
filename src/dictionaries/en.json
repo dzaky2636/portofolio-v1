@@ -777,8 +777,7 @@
       "windowStatus": "READ-ONLY",
       "detailTitle": "INSPECT_OUTPUT",
       "listLabel": "AUDIT_TRAIL",
-      "emptyHint": "SELECT A LOG LINE",
-      "lineAria": "{index}: {role}, {company}, {duration}"
+      "emptyHint": "SELECT A LOG LINE"
     },
     "items": [
       {
