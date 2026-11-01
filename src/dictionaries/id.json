@@ -956,6 +956,14 @@
         "description": "main snake"
       },
       {
+        "command": "subway",
+        "description": "lari di rel, hindari kereta"
+      },
+      {
+        "command": "nonogram [random]",
+        "description": "main nonogram, atau papan acak"
+      },
+      {
         "command": "crt",
         "description": "ubah efek layar CRT"
       },
@@ -1009,6 +1017,71 @@
       "won": "Papan sudah penuh. R mulai ulang, Q keluar.",
       "quit": "[ Q ] KELUAR",
       "result": "snake selesai. skor {score}, terbaik {best}."
+    },
+    "subway": {
+      "aria": "Permainan lari di rel",
+      "score": "skor",
+      "coins": "koin",
+      "best": "terbaik",
+      "start": "Tekan panah atau WASD untuk lari. Geser di layar sentuh.",
+      "controls": "Kiri dan kanan pindah rel. Atas melompat. Bawah berguling. R mulai ulang. Q keluar.",
+      "gameOver": "Tertangkap. R mulai ulang, Q keluar. Ketuk untuk mulai ulang di layar sentuh.",
+      "quit": "[ Q ] KELUAR",
+      "result": "lari subway selesai. skor {score}, koin {coins}, terbaik {best}."
+    },
+    "nonogram": {
+      "aria": "Papan nonogram",
+      "puzzle": "puzzle {n}/{total}",
+      "solvedCount": "selesai {n}/{total}",
+      "controls": "Panah bergerak, Spasi mengisi, X menandai. Klik atau seret untuk mengisi, klik kanan untuk menandai, ketuk untuk berganti. Angka menunjukkan deret terisi di tiap baris.",
+      "solved": "Selesai: {name}! Tekan N untuk puzzle berikutnya.",
+      "next": "[ N ] LANJUT",
+      "reset": "[ R ] ULANG",
+      "quit": "[ Q ] KELUAR",
+      "result": "nonogram selesai. tuntas {solved}/{total}.",
+      "randomHeader": "acak {size}x{size}",
+      "randomCount": "selesai {n}",
+      "randomSolved": "Selesai! Tekan N untuk papan acak baru.",
+      "randomResult": "nonogram selesai. papan acak tuntas: {n}.",
+      "randomButton": "[ G ] ACAK",
+      "picturesButton": "[ G ] GAMBAR",
+      "sizeButton": "[ Z ] UKURAN",
+      "usage": "pemakaian: nonogram [random [5|8|10]]",
+      "names": {
+        "random": "pola acak",
+        "heart": "hati",
+        "house": "rumah",
+        "arrow": "panah",
+        "cursor": "kursor",
+        "gem": "permata",
+        "invader": "penyerbu luar angkasa",
+        "gamepad": "gamepad",
+        "crown": "mahkota",
+        "fish": "ikan",
+        "ship": "kapal",
+        "lock": "gembok",
+        "lightning": "petir",
+        "tree": "pohon pinus",
+        "star": "bintang",
+        "umbrella": "payung",
+        "ghost": "hantu",
+        "skull": "tengkorak",
+        "cat": "kucing",
+        "mushroom": "jamur",
+        "potion": "ramuan",
+        "bomb": "bom",
+        "flag": "bendera",
+        "music": "not musik",
+        "floppy": "disket",
+        "coffee": "kopi",
+        "terminal": "terminal",
+        "boar": "babi hutan"
+      },
+      "cells": {
+        "empty": "kosong",
+        "filled": "terisi",
+        "marked": "ditandai"
+      }
     }
   }
 }

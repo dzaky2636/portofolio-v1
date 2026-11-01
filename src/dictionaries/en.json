@@ -956,6 +956,14 @@
         "description": "play snake"
       },
       {
+        "command": "subway",
+        "description": "run the rails, dodge the trains"
+      },
+      {
+        "command": "nonogram [random]",
+        "description": "play nonogram, or a random board"
+      },
+      {
         "command": "crt",
         "description": "toggle CRT screen effect"
       },
@@ -1009,6 +1017,71 @@
       "won": "You filled the board. R restarts, Q quits.",
       "quit": "[ Q ] QUIT",
       "result": "snake finished. score {score}, best {best}."
+    },
+    "subway": {
+      "aria": "Subway runner game",
+      "score": "score",
+      "coins": "coins",
+      "best": "best",
+      "start": "Press an arrow key or WASD to run. Swipe on touch screens.",
+      "controls": "Left and right switch tracks. Up jumps. Down rolls. R restarts. Q quits.",
+      "gameOver": "Busted. R restarts, Q quits. Tap to restart on touch screens.",
+      "quit": "[ Q ] QUIT",
+      "result": "subway run finished. score {score}, coins {coins}, best {best}."
+    },
+    "nonogram": {
+      "aria": "Nonogram board",
+      "puzzle": "puzzle {n}/{total}",
+      "solvedCount": "solved {n}/{total}",
+      "controls": "Arrows move, Space fills, X marks. Click or drag to fill, right-click to mark, tap to cycle. Numbers show each line's filled runs.",
+      "solved": "Solved: {name}! Press N for the next puzzle.",
+      "next": "[ N ] NEXT",
+      "reset": "[ R ] RESET",
+      "quit": "[ Q ] QUIT",
+      "result": "nonogram finished. solved {solved}/{total}.",
+      "randomHeader": "random {size}x{size}",
+      "randomCount": "solved {n}",
+      "randomSolved": "Solved! Press N for a new random board.",
+      "randomResult": "nonogram finished. random boards solved: {n}.",
+      "randomButton": "[ G ] RANDOM",
+      "picturesButton": "[ G ] PICTURES",
+      "sizeButton": "[ Z ] SIZE",
+      "usage": "usage: nonogram [random [5|8|10]]",
+      "names": {
+        "random": "random pattern",
+        "heart": "heart",
+        "house": "house",
+        "arrow": "arrow",
+        "cursor": "cursor",
+        "gem": "gem",
+        "invader": "space invader",
+        "gamepad": "gamepad",
+        "crown": "crown",
+        "fish": "fish",
+        "ship": "ship",
+        "lock": "padlock",
+        "lightning": "lightning",
+        "tree": "pine tree",
+        "star": "star",
+        "umbrella": "umbrella",
+        "ghost": "ghost",
+        "skull": "skull",
+        "cat": "cat",
+        "mushroom": "mushroom",
+        "potion": "potion",
+        "bomb": "bomb",
+        "flag": "flag",
+        "music": "music notes",
+        "floppy": "floppy disk",
+        "coffee": "coffee",
+        "terminal": "terminal",
+        "boar": "boar"
+      },
+      "cells": {
+        "empty": "empty",
+        "filled": "filled",
+        "marked": "marked"
+      }
     }
   }
 }

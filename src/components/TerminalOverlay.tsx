@@ -1,8 +1,11 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from 'react';
+import TerminalNonogram from '@/components/TerminalNonogram';
 import TerminalSnake from '@/components/TerminalSnake';
+import TerminalSubway from '@/components/TerminalSubway';
 import { feedPet, levelOf, moodOf, readPet, xpForNextLevel } from '@/lib/boarPet';
+import type { RandomSize } from '@/lib/nonogram';
 import type { StatusReport } from '@/lib/siteStatus';
 import {
   completeInput,
@@ -41,7 +44,8 @@ export default function TerminalOverlay({
     data.labels.welcome.map((text, id) => ({ id, text, kind: 'accent' }))
   );
   const [value, setValue] = useState('');
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [game, setGame] = useState<'snake' | 'subway' | 'nonogram' | null>(null);
+  const [nonogramRandomSize, setNonogramRandomSize] = useState<RandomSize | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const logRef = useRef<HTMLDivElement>(null);
   const nextIdRef = useRef(data.labels.welcome.length);
@@ -69,8 +73,8 @@ export default function TerminalOverlay({
   }, []);
 
   useEffect(() => {
-    if (isOpen && !isPlaying) inputRef.current?.focus();
-  }, [isOpen, isPlaying]);
+    if (isOpen && !game) inputRef.current?.focus();
+  }, [game, isOpen]);
 
   useEffect(() => {
     const log = logRef.current;
@@ -157,7 +161,14 @@ export default function TerminalOverlay({
           window.dispatchEvent(new Event('crt:toggle'));
           break;
         case 'snake':
-          setIsPlaying(true);
+          setGame('snake');
+          break;
+        case 'subway':
+          setGame('subway');
+          break;
+        case 'nonogram':
+          setNonogramRandomSize(action.randomSize);
+          setGame('nonogram');
           break;
         case 'petStats': {
           const pet = readPet();
@@ -218,8 +229,26 @@ export default function TerminalOverlay({
     }
   };
 
+  const handleNonogramExit = (message: string) => {
+    setGame(null);
+    print([{ text: message, kind: 'accent' }]);
+  };
+
+  const handleSubwayExit = (score: number, coins: number, best: number) => {
+    setGame(null);
+    print([
+      {
+        text: data.labels.subway.result
+          .replace('{score}', String(score))
+          .replace('{coins}', String(coins))
+          .replace('{best}', String(best)),
+        kind: 'accent',
+      },
+    ]);
+  };
+
   const handleSnakeExit = (score: number, best: number) => {
-    setIsPlaying(false);
+    setGame(null);
     print([
       {
         text: data.labels.snake.result
@@ -251,9 +280,20 @@ export default function TerminalOverlay({
         </button>
       </div>
 
-      {isPlaying ? (
+      {game === 'snake' && (
         <TerminalSnake labels={data.labels.snake} onExit={handleSnakeExit} />
-      ) : (
+      )}
+      {game === 'subway' && (
+        <TerminalSubway labels={data.labels.subway} onExit={handleSubwayExit} />
+      )}
+      {game === 'nonogram' && (
+        <TerminalNonogram
+          labels={data.labels.nonogram}
+          startRandomSize={nonogramRandomSize}
+          onExit={handleNonogramExit}
+        />
+      )}
+      {!game && (
       <>
       <div
         ref={logRef}

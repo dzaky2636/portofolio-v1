@@ -1,3 +1,5 @@
+import { RANDOM_SIZES } from '@/lib/nonogram';
+import type { NonogramCell, NonogramPuzzleId, RandomSize } from '@/lib/nonogram';
 import type { MainSectionId } from '@/lib/sectionIds';
 
 export interface TerminalSnakeLabels {
@@ -8,6 +10,40 @@ export interface TerminalSnakeLabels {
   controls: string;
   gameOver: string;
   won: string;
+  quit: string;
+  result: string;
+}
+
+export interface TerminalNonogramLabels {
+  aria: string;
+  puzzle: string;
+  solvedCount: string;
+  controls: string;
+  solved: string;
+  next: string;
+  reset: string;
+  quit: string;
+  result: string;
+  randomHeader: string;
+  randomCount: string;
+  randomSolved: string;
+  randomResult: string;
+  randomButton: string;
+  picturesButton: string;
+  sizeButton: string;
+  usage: string;
+  names: Record<NonogramPuzzleId, string>;
+  cells: Record<NonogramCell, string>;
+}
+
+export interface TerminalSubwayLabels {
+  aria: string;
+  score: string;
+  coins: string;
+  best: string;
+  start: string;
+  controls: string;
+  gameOver: string;
   quit: string;
   result: string;
 }
@@ -35,6 +71,8 @@ export interface TerminalLabels {
   fed: string;
   notHungry: string;
   snake: TerminalSnakeLabels;
+  subway: TerminalSubwayLabels;
+  nonogram: TerminalNonogramLabels;
   petStats: { level: string; visits: string; pokes: string; feeds: string; mood: string };
   moods: { full: string; peckish: string; starving: string };
 }
@@ -64,6 +102,8 @@ export type TerminalAction =
   | { type: 'status' }
   | { type: 'crt' }
   | { type: 'snake' }
+  | { type: 'subway' }
+  | { type: 'nonogram'; randomSize: RandomSize | null }
   | { type: 'petStats' }
   | { type: 'feed' }
   | { type: 'link'; url: string }
@@ -221,6 +261,18 @@ export function runCommand(input: string, data: TerminalData): TerminalResult {
       return { lines: [accent(labels.crt)], action: { type: 'crt' } };
     case 'snake':
       return { lines: [], action: { type: 'snake' } };
+    case 'subway':
+      return { lines: [], action: { type: 'subway' } };
+    case 'nonogram': {
+      const [mode, size] = args.map((value) => value.toLowerCase());
+      if (!mode) return { lines: [], action: { type: 'nonogram', randomSize: null } };
+
+      const randomSize = size ? RANDOM_SIZES.find((option) => String(option) === size) : 10;
+      if (mode !== 'random' || !randomSize || args.length > 2) {
+        return { lines: [error(labels.nonogram.usage)], action: none };
+      }
+      return { lines: [], action: { type: 'nonogram', randomSize } };
+    }
     case 'clear':
       return { lines: [], action: { type: 'clear' } };
     case 'exit':
