@@ -22,7 +22,7 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Analytics lives at /_vercel/insights/*, or /<unique-path>/insights/* when Vercel sets a prefix.
-    "/((?!api|_next/static|_next/image|_vercel|[^/]+/insights/|favicon.ico|robots\\.txt|sitemap\\.xml|images|models|boar\\.svg|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|woff|woff2|ttf|obj|mtl|glb|gltf|pdf)$).*)",
+    // Vercel's own routes, including the default analytics paths, skip the locale redirect.
+    "/((?!api|_next/static|_next/image|_vercel|favicon.ico|robots\\.txt|sitemap\\.xml|images|models|boar\\.svg|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|woff|woff2|ttf|obj|mtl|glb|gltf|pdf)$).*)",
   ],
 };
