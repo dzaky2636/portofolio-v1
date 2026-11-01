@@ -1,8 +1,10 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import InteractiveBackground from "@/components/InteractiveBackground";
 import WebGLLoader from "@/components/webgl/WebGLLoader";
 import EnvironmentalEffects from "@/components/EnvironmentalEffects";
+import ActionTracker from "@/components/ActionTracker";
 import BootLockScript from "@/components/BootLockScript";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
@@ -43,6 +45,8 @@ export default function RootLayout({
         <WebGLLoader />
         <EnvironmentalEffects />
         {children}
+        <ActionTracker />
+        <Analytics />
       </body>
     </html>
   );

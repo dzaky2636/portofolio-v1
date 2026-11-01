@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from 'react';
+import { trackAction } from '@/lib/actionTracking';
 import { feedPet, levelOf, moodOf, readPet, xpForNextLevel } from '@/lib/boarPet';
 import type { MinesweeperLevel } from '@/lib/minesweeper';
 import type { RandomSize } from '@/lib/nonogramSizes';
@@ -161,6 +162,7 @@ export default function TerminalOverlay({
           link.href = cvFile;
           link.download = '';
           link.click();
+          trackAction('cv-download');
           break;
         }
         case 'status':
