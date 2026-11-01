@@ -6,9 +6,10 @@ import Image from 'next/image';
 import { useDeferred3D } from '@/hooks/useDeferred3D';
 import { playRetroClick } from '@/lib/retroClick';
 
-const ProfileVoxelView = dynamic(() => import('@/components/webgl/ProfileVoxelView'), {
-  ssr: false,
-});
+const ProfileVoxelView = dynamic(
+  () => import('@/components/webgl/scene3d').then((m) => m.ProfileVoxelView),
+  { ssr: false }
+);
 
 interface ProfilePictureToggleProps {
   alt: string;

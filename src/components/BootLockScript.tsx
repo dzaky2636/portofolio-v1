@@ -1,7 +1,7 @@
 import Script from 'next/script';
-import { BOOT_RUN_EVERY_LOAD, BOOT_SESSION_KEY } from '@/lib/bootSession';
+import { BOOT_RUN_EVERY_LOAD, BOOT_SESSION_KEY, BOOT_SKIP_QUERY } from '@/lib/bootSession';
 
-const bootLockScript = `(function(){try{var k='${BOOT_SESSION_KEY}';var always=${BOOT_RUN_EVERY_LOAD};if(!always&&sessionStorage.getItem(k)==='1')return;if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){if(!always)sessionStorage.setItem(k,'1');return;}document.documentElement.classList.add('boot-lock');}catch(e){}})();`;
+const bootLockScript = `(function(){try{var k='${BOOT_SESSION_KEY}';var always=${BOOT_RUN_EVERY_LOAD};if(!always&&sessionStorage.getItem(k)==='1')return;if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||window.matchMedia('${BOOT_SKIP_QUERY}').matches){if(!always)sessionStorage.setItem(k,'1');return;}document.documentElement.classList.add('boot-lock');}catch(e){}})();`;
 
 /** Runs before React hydrates to hide page until boot finishes. */
 export default function BootLockScript() {

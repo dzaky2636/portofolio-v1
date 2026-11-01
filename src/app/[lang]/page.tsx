@@ -181,7 +181,7 @@ export default async function Page({
           <p
             data-packet
             className="text-xl md:text-2xl font-serif leading-relaxed max-w-xl animate-drawer"
-            style={{ animationDelay: '0.75s', animationFillMode: 'both' }}
+            style={{ animationDelay: '0.4s', animationFillMode: 'both' }}
           >
             {dict.hero.summary}
           </p>

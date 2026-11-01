@@ -6,13 +6,14 @@ import {
   clearBootLock,
   markBootSessionComplete,
   hasBootedThisSession,
+  BOOT_SKIP_QUERY,
   BOOT_SURFACE_COLOR,
 } from '@/lib/bootSession';
 import { usePrefersReducedMotion } from '@/hooks/useMediaQuery';
 
-const BOOT_TARGET_MS = 1500;
-const STEP_MS = 250;
-const EXIT_MS = 300;
+const BOOT_TARGET_MS = 900;
+const STEP_MS = 120;
+const EXIT_MS = 200;
 
 function holdAfterMs(lineCount: number) {
   const transitions = Math.max(0, lineCount - 1);
@@ -34,7 +35,7 @@ export default function BootSequenceOverlay({ lines, skipHint }: BootSequenceOve
   useLayoutEffect(() => {
     setPortalReady(true);
 
-    if (reducedMotion) {
+    if (reducedMotion || window.matchMedia(BOOT_SKIP_QUERY).matches) {
       markBootSessionComplete();
       clearBootLock();
       return;
