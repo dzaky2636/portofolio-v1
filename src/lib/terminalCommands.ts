@@ -1,5 +1,17 @@
 import type { MainSectionId } from '@/lib/sectionIds';
 
+export interface TerminalSnakeLabels {
+  aria: string;
+  score: string;
+  best: string;
+  start: string;
+  controls: string;
+  gameOver: string;
+  won: string;
+  quit: string;
+  result: string;
+}
+
 export interface TerminalLabels {
   title: string;
   closeAria: string;
@@ -22,6 +34,7 @@ export interface TerminalLabels {
   crt: string;
   fed: string;
   notHungry: string;
+  snake: TerminalSnakeLabels;
   petStats: { level: string; visits: string; pokes: string; feeds: string; mood: string };
   moods: { full: string; peckish: string; starving: string };
 }
@@ -50,6 +63,7 @@ export type TerminalAction =
   | { type: 'cv' }
   | { type: 'status' }
   | { type: 'crt' }
+  | { type: 'snake' }
   | { type: 'petStats' }
   | { type: 'feed' }
   | { type: 'link'; url: string }
@@ -205,6 +219,8 @@ export function runCommand(input: string, data: TerminalData): TerminalResult {
     }
     case 'crt':
       return { lines: [accent(labels.crt)], action: { type: 'crt' } };
+    case 'snake':
+      return { lines: [], action: { type: 'snake' } };
     case 'clear':
       return { lines: [], action: { type: 'clear' } };
     case 'exit':

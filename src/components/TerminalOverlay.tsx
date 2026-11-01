@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from 'react';
+import TerminalSnake from '@/components/TerminalSnake';
 import { feedPet, levelOf, moodOf, readPet, xpForNextLevel } from '@/lib/boarPet';
 import type { StatusReport } from '@/lib/siteStatus';
 import {
@@ -40,6 +41,7 @@ export default function TerminalOverlay({
     data.labels.welcome.map((text, id) => ({ id, text, kind: 'accent' }))
   );
   const [value, setValue] = useState('');
+  const [isPlaying, setIsPlaying] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const logRef = useRef<HTMLDivElement>(null);
   const nextIdRef = useRef(data.labels.welcome.length);
@@ -67,8 +69,8 @@ export default function TerminalOverlay({
   }, []);
 
   useEffect(() => {
-    if (isOpen) inputRef.current?.focus();
-  }, [isOpen]);
+    if (isOpen && !isPlaying) inputRef.current?.focus();
+  }, [isOpen, isPlaying]);
 
   useEffect(() => {
     const log = logRef.current;
@@ -154,6 +156,9 @@ export default function TerminalOverlay({
         case 'crt':
           window.dispatchEvent(new Event('crt:toggle'));
           break;
+        case 'snake':
+          setIsPlaying(true);
+          break;
         case 'petStats': {
           const pet = readPet();
           const { petStats, moods } = data.labels;
@@ -213,6 +218,18 @@ export default function TerminalOverlay({
     }
   };
 
+  const handleSnakeExit = (score: number, best: number) => {
+    setIsPlaying(false);
+    print([
+      {
+        text: data.labels.snake.result
+          .replace('{score}', String(score))
+          .replace('{best}', String(best)),
+        kind: 'accent',
+      },
+    ]);
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -234,6 +251,10 @@ export default function TerminalOverlay({
         </button>
       </div>
 
+      {isPlaying ? (
+        <TerminalSnake labels={data.labels.snake} onExit={handleSnakeExit} />
+      ) : (
+      <>
       <div
         ref={logRef}
         aria-live="polite"
@@ -262,6 +283,8 @@ export default function TerminalOverlay({
           className="min-w-0 flex-1 bg-transparent text-base text-[#F4F3ED] outline-none md:text-sm"
         />
       </div>
+      </>
+      )}
     </section>
   );
 }

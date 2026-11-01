@@ -952,6 +952,10 @@
         "description": "kasih makan babi hutan"
       },
       {
+        "command": "snake",
+        "description": "main snake"
+      },
+      {
         "command": "crt",
         "description": "ubah efek layar CRT"
       },
@@ -994,6 +998,17 @@
       "full": "kenyang",
       "peckish": "agak lapar",
       "starving": "kelaparan"
+    },
+    "snake": {
+      "aria": "Permainan ular",
+      "score": "skor",
+      "best": "terbaik",
+      "start": "Tekan panah atau WASD untuk mulai. Geser di layar sentuh.",
+      "controls": "Panah atau WASD untuk belok. R mulai ulang. Q keluar.",
+      "gameOver": "Permainan selesai. R mulai ulang, Q keluar. Ketuk untuk mulai ulang di layar sentuh.",
+      "won": "Papan sudah penuh. R mulai ulang, Q keluar.",
+      "quit": "[ Q ] KELUAR",
+      "result": "snake selesai. skor {score}, terbaik {best}."
     }
   }
 }

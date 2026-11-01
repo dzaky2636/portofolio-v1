@@ -952,6 +952,10 @@
         "description": "feed the boar"
       },
       {
+        "command": "snake",
+        "description": "play snake"
+      },
+      {
         "command": "crt",
         "description": "toggle CRT screen effect"
       },
@@ -994,6 +998,17 @@
       "full": "full",
       "peckish": "peckish",
       "starving": "starving"
+    },
+    "snake": {
+      "aria": "Snake game",
+      "score": "score",
+      "best": "best",
+      "start": "Press an arrow key or WASD to start. Swipe on touch screens.",
+      "controls": "Arrows or WASD to steer. R restarts. Q quits.",
+      "gameOver": "Game over. R restarts, Q quits. Tap to restart on touch screens.",
+      "won": "You filled the board. R restarts, Q quits.",
+      "quit": "[ Q ] QUIT",
+      "result": "snake finished. score {score}, best {best}."
     }
   }
 }
