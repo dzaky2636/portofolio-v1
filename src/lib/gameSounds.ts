@@ -116,6 +116,24 @@ export function playMinesweeperBoom() {
   playSweep(160, 40, 0.5, 0.12);
 }
 
+/** Pitch climbs with the streak, then resets when the combo breaks. */
+export function playVCorrect(streak: number) {
+  playSweep(420 + Math.min(streak, 12) * 30, 620 + Math.min(streak, 12) * 30, 0.04, 0.05);
+}
+
+export function playVCross() {
+  playNotes([587, 784, 988], 0.05, 0.04, 0.07);
+}
+
+export function playVWrong() {
+  playNoise(0.14, 0.09);
+  playSweep(200, 90, 0.14, 0.08);
+}
+
+export function playVHold() {
+  playSweep(300, 900, 0.1, 0.06);
+}
+
 export function playNonogramFill() {
   playSweep(640, 420, 0.03, 0.05);
 }

@@ -839,6 +839,7 @@
     "subway": "SUBWAY.EXE",
     "nonogram": "NONOGRAM.EXE",
     "minesweeper": "MINESWEEPER.EXE",
+    "v": "V.EXE",
     "crt": "CRT MODE",
     "music": "BACKGROUND MUSIC",
     "cv": "DOWNLOAD CV",
@@ -995,6 +996,10 @@
         "description": "sweep for mines: easy, medium or hard"
       },
       {
+        "command": "v",
+        "description": "flip channels: does the word match its color?"
+      },
+      {
         "command": "crt",
         "description": "toggle CRT screen effect"
       },
@@ -1084,6 +1089,32 @@
         "flag": "flagged",
         "mine": "mine",
         "open": "{n} mines nearby"
+      }
+    },
+    "v": {
+      "aria": "V, a color channel reaction game",
+      "signal": "signal",
+      "cp": "cp",
+      "best": "best ch",
+      "channel": "CH",
+      "start": "Does the word match its color? Press left or right to tune in.",
+      "controls": "Left: the word names its own color. Right: it doesn't. H skips a channel.",
+      "gameOver": "Signal lost. R or tap restarts, Q quits.",
+      "swapped": "CONTROLS SWAPPED",
+      "leftMatch": "[ < ] MATCH",
+      "leftNo": "[ < ] NO MATCH",
+      "rightMatch": "[ > ] MATCH",
+      "rightNo": "[ > ] NO MATCH",
+      "hold": "[ H ] HOLD x{n}",
+      "quit": "[ Q ] QUIT",
+      "result": "v off the air. channel {channel}, cp {cp}, best channel {best}.",
+      "colors": {
+        "red": "RED",
+        "green": "GREEN",
+        "blue": "BLUE",
+        "yellow": "YELLOW",
+        "white": "WHITE",
+        "purple": "PURPLE"
       }
     },
     "nonogram": {

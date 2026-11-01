@@ -839,6 +839,7 @@
     "subway": "SUBWAY.EXE",
     "nonogram": "NONOGRAM.EXE",
     "minesweeper": "MINESWEEPER.EXE",
+    "v": "V.EXE",
     "crt": "MODE CRT",
     "music": "MUSIK LATAR",
     "cv": "UNDUH CV",
@@ -995,6 +996,10 @@
         "description": "cari ranjau: easy, medium, atau hard"
       },
       {
+        "command": "v",
+        "description": "ganti saluran: apakah kata cocok dengan warnanya?"
+      },
+      {
         "command": "crt",
         "description": "ubah efek layar CRT"
       },
@@ -1084,6 +1089,32 @@
         "flag": "ditandai",
         "mine": "ranjau",
         "open": "{n} ranjau di sekitar"
+      }
+    },
+    "v": {
+      "aria": "V, game reaksi warna saluran",
+      "signal": "sinyal",
+      "cp": "cp",
+      "best": "ch terbaik",
+      "channel": "CH",
+      "start": "Apakah kata cocok dengan warnanya? Tekan kiri atau kanan untuk mulai.",
+      "controls": "Kiri: kata menyebut warnanya sendiri. Kanan: tidak. H melewati saluran.",
+      "gameOver": "Sinyal hilang. R atau ketuk untuk ulang, Q keluar.",
+      "swapped": "KONTROL TERTUKAR",
+      "leftMatch": "[ < ] COCOK",
+      "leftNo": "[ < ] TIDAK",
+      "rightMatch": "[ > ] COCOK",
+      "rightNo": "[ > ] TIDAK",
+      "hold": "[ H ] TAHAN x{n}",
+      "quit": "[ Q ] KELUAR",
+      "result": "v selesai siaran. saluran {channel}, cp {cp}, saluran terbaik {best}.",
+      "colors": {
+        "red": "MERAH",
+        "green": "HIJAU",
+        "blue": "BIRU",
+        "yellow": "KUNING",
+        "white": "PUTIH",
+        "purple": "UNGU"
       }
     },
     "nonogram": {

@@ -5,6 +5,7 @@ import {
 import type { NonogramCell, NonogramPuzzleId } from '@/lib/nonogram';
 import { RANDOM_SIZES, type RandomSize } from '@/lib/nonogramSizes';
 import type { MainSectionId } from '@/lib/sectionIds';
+import type { VColor } from '@/lib/vGame';
 
 export interface TerminalSnakeLabels {
   aria: string;
@@ -74,6 +75,26 @@ export interface TerminalMinesweeperLabels {
   cells: { hidden: string; flag: string; mine: string; open: string };
 }
 
+export interface TerminalVLabels {
+  aria: string;
+  signal: string;
+  cp: string;
+  best: string;
+  channel: string;
+  start: string;
+  controls: string;
+  gameOver: string;
+  swapped: string;
+  leftMatch: string;
+  leftNo: string;
+  rightMatch: string;
+  rightNo: string;
+  hold: string;
+  quit: string;
+  result: string;
+  colors: Record<VColor, string>;
+}
+
 export interface TerminalLabels {
   title: string;
   closeAria: string;
@@ -100,6 +121,7 @@ export interface TerminalLabels {
   subway: TerminalSubwayLabels;
   nonogram: TerminalNonogramLabels;
   minesweeper: TerminalMinesweeperLabels;
+  v: TerminalVLabels;
   petStats: { level: string; visits: string; pokes: string; feeds: string; mood: string };
   moods: { full: string; peckish: string; starving: string };
 }
@@ -132,6 +154,7 @@ export type TerminalAction =
   | { type: 'subway' }
   | { type: 'nonogram'; randomSize: RandomSize | null }
   | { type: 'minesweeper'; level: MinesweeperLevel }
+  | { type: 'v' }
   | { type: 'petStats' }
   | { type: 'feed' }
   | { type: 'link'; url: string }
@@ -309,6 +332,8 @@ export function runCommand(input: string, data: TerminalData): TerminalResult {
       if (argument && !level) return { lines: [error(labels.minesweeper.usage)], action: none };
       return { lines: [], action: { type: 'minesweeper', level: level ?? 'easy' } };
     }
+    case 'v':
+      return { lines: [], action: { type: 'v' } };
     case 'clear':
       return { lines: [], action: { type: 'clear' } };
     case 'exit':

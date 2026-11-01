@@ -17,6 +17,7 @@ export interface TaskbarLabels {
   subway: string;
   nonogram: string;
   minesweeper: string;
+  v: string;
   crt: string;
   music: string;
   cv: string;
@@ -87,6 +88,7 @@ export default function Taskbar({
     { command: 'subway', label: labels.subway },
     { command: 'nonogram', label: labels.nonogram },
     { command: 'minesweeper', label: labels.minesweeper },
+    { command: 'v', label: labels.v },
   ];
 
   return (

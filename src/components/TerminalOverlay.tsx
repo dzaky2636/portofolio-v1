@@ -18,6 +18,7 @@ import {
 const TerminalSnake = dynamic(() => import('@/components/TerminalSnake'), { ssr: false });
 const TerminalSubway = dynamic(() => import('@/components/TerminalSubway'), { ssr: false });
 const TerminalNonogram = dynamic(() => import('@/components/TerminalNonogram'), { ssr: false });
+const TerminalV = dynamic(() => import('@/components/TerminalV'), { ssr: false });
 const TerminalMinesweeper = dynamic(() => import('@/components/TerminalMinesweeper'), {
   ssr: false,
 });
@@ -51,7 +52,7 @@ export default function TerminalOverlay({
     data.labels.welcome.map((text, id) => ({ id, text, kind: 'accent' }))
   );
   const [value, setValue] = useState('');
-  const [game, setGame] = useState<'snake' | 'subway' | 'nonogram' | 'minesweeper' | null>(
+  const [game, setGame] = useState<'snake' | 'subway' | 'nonogram' | 'minesweeper' | 'v' | null>(
     null
   );
   const [nonogramRandomSize, setNonogramRandomSize] = useState<RandomSize | null>(null);
@@ -185,6 +186,9 @@ export default function TerminalOverlay({
           setMinesweeperLevel(action.level);
           setGame('minesweeper');
           break;
+        case 'v':
+          setGame('v');
+          break;
         case 'petStats': {
           const pet = readPet();
           const { petStats, moods } = data.labels;
@@ -278,6 +282,19 @@ export default function TerminalOverlay({
     ]);
   };
 
+  const handleVExit = (channel: number, cp: number, best: number) => {
+    setGame(null);
+    print([
+      {
+        text: data.labels.v.result
+          .replace('{channel}', String(channel))
+          .replace('{cp}', String(cp))
+          .replace('{best}', String(best)),
+        kind: 'accent',
+      },
+    ]);
+  };
+
   const handleSnakeExit = (score: number, best: number) => {
     setGame(null);
     print([
@@ -331,6 +348,7 @@ export default function TerminalOverlay({
           onExit={handleMessageExit}
         />
       )}
+      {game === 'v' && <TerminalV labels={data.labels.v} onExit={handleVExit} />}
       {!game && (
       <>
       <div
