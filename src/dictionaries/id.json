@@ -494,12 +494,14 @@
         "name": "E-MANUNTUNG",
         "realm": "Teknologi Sipil",
         "org": "DISKOMINFO",
-        "description": "Satu dari tiga sistem pemerintah kota yang saya rilis ke produksi saat magang di Diskominfo Balikpapan: aplikasi web dan mobile Flutter yang menghadirkan layanan kota seperti retribusi daerah, pajak kendaraan, CCTV, dan JDIH bagi warga.",
+        "description": "Portal layanan publik resmi Kota Balikpapan, dengan 100 rb+ unduhan di Google Play. Dikembangkan dengan Flutter saat magang di Diskominfo: retribusi daerah, pajak kendaraan, CCTV kota, dan JDIH dalam satu aplikasi.",
         "stack": [
           "Flutter",
           "Dart"
         ],
-        "metrics": ["masih berjalan"],
+        "metrics": ["100 rb+ unduhan", "masih berjalan"],
+        "liveUrl": "https://play.google.com/store/apps/details?id=com.emanuntung.balikpapan&hl=id",
+        "liveLabel": "[ GOOGLE_PLAY ]",
         "images": [
           "/images/e-manuntung/1.jpg",
           "/images/e-manuntung/2.png"

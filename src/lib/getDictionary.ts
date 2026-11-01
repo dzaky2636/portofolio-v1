@@ -111,6 +111,7 @@ export interface Dictionary {
       featured?: boolean;
       liveUrl?: string;
       sourceUrl?: string;
+      liveLabel?: string;
       metrics?: string[];
       caseStudy?: CaseStudy;
     }[];

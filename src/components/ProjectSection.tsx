@@ -26,6 +26,8 @@ export interface ProjectItem {
   featured?: boolean;
   liveUrl?: string;
   sourceUrl?: string;
+  /** Replaces the default live link label, for links that aren't websites. */
+  liveLabel?: string;
   metrics?: string[];
   caseStudy?: CaseStudy;
 }
@@ -125,7 +127,7 @@ function ProjectCard({
   onOpen: (project: ProjectItem, view?: ProjectView) => void;
 }) {
   const externalHref = project.liveUrl ?? project.sourceUrl;
-  const externalLabel = project.liveUrl ? liveLabel : sourceLabel;
+  const externalLabel = project.liveUrl ? (project.liveLabel ?? liveLabel) : sourceLabel;
   const hasImages = project.images.length > 0;
   const thumbSrc = project.images[0];
   const previews = project.images.slice(0, 3);
