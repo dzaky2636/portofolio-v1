@@ -1098,7 +1098,7 @@
       "best": "ch terbaik",
       "channel": "CH",
       "start": "Apakah kata cocok dengan warnanya? Tekan kiri atau kanan untuk mulai.",
-      "controls": "Kiri: kata menyebut warnanya sendiri. Kanan: tidak. H melewati saluran.",
+      "controls": "Kiri: kata menyebut warnanya sendiri. Kanan: tidak. H melewati saluran. M bisukan musik.",
       "gameOver": "Sinyal hilang. R atau ketuk untuk ulang, Q keluar.",
       "swapped": "KONTROL TERTUKAR",
       "leftMatch": "[ < ] COCOK",
@@ -1106,6 +1106,8 @@
       "rightMatch": "[ > ] COCOK",
       "rightNo": "[ > ] TIDAK",
       "hold": "[ H ] TAHAN x{n}",
+      "musicOn": "[ M ] MUSIK NYALA",
+      "musicOff": "[ M ] MUSIK MATI",
       "quit": "[ Q ] KELUAR",
       "result": "v selesai siaran. saluran {channel}, cp {cp}, saluran terbaik {best}.",
       "colors": {

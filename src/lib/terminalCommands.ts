@@ -90,6 +90,8 @@ export interface TerminalVLabels {
   rightMatch: string;
   rightNo: string;
   hold: string;
+  musicOn: string;
+  musicOff: string;
   quit: string;
   result: string;
   colors: Record<VColor, string>;

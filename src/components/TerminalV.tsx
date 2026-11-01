@@ -14,10 +14,20 @@ import {
   type VSide,
   type VState,
 } from '@/lib/vGame';
+import {
+  setVMusicIntensity,
+  setVMusicMuted,
+  setVMusicRate,
+  startVMusic,
+  stopVMusic,
+} from '@/lib/vMusic';
 import { drawV, V_HEIGHT, V_WIDTH } from '@/lib/vRender';
 
 const MAX_STEP_MS = 100;
 const BEST_CHANNEL_KEY = 'dzaky-corner-v-best';
+const MUSIC_MUTED_KEY = 'dzaky-corner-v-muted';
+const MUSIC_FULL_SPEED_CHANNEL = 60;
+const MAX_MUSIC_SPEED_UP = 0.25;
 
 function readBest() {
   try {
@@ -35,6 +45,26 @@ function saveBest(channel: number) {
   }
 }
 
+function readMuted() {
+  try {
+    return localStorage.getItem(MUSIC_MUTED_KEY) === 'on';
+  } catch {
+    return false;
+  }
+}
+
+function saveMuted(muted: boolean) {
+  try {
+    localStorage.setItem(MUSIC_MUTED_KEY, muted ? 'on' : 'off');
+  } catch {
+    /* the setting just won't survive a reload */
+  }
+}
+
+function musicRate(channel: number) {
+  return 1 + (Math.min(channel, MUSIC_FULL_SPEED_CHANNEL) / MUSIC_FULL_SPEED_CHANNEL) * MAX_MUSIC_SPEED_UP;
+}
+
 export default function TerminalV({
   labels,
   onExit,
@@ -48,7 +78,9 @@ export default function TerminalV({
   const stateRef = useRef(game);
   const tunedAtRef = useRef(0);
   const bestRef = useRef(0);
+  const mutedRef = useRef(false);
   const [best, setBest] = useState(0);
+  const [musicMuted, setMusicMuted] = useState(false);
   const reducedMotion = usePrefersReducedMotion();
 
   const { status } = game;
@@ -89,6 +121,8 @@ export default function TerminalV({
       stateRef.current = next;
       setGame(next);
       if (next.signal !== before.signal) tunedAtRef.current = performance.now();
+      setVMusicIntensity(crossesFor(next.streak));
+      setVMusicRate(musicRate(next.channel));
 
       if (next.status === 'over') {
         playGameOver();
@@ -130,6 +164,14 @@ export default function TerminalV({
     apply((state) => hold(state));
   }, [apply]);
 
+  const toggleMusic = useCallback(() => {
+    const next = !mutedRef.current;
+    mutedRef.current = next;
+    setMusicMuted(next);
+    saveMuted(next);
+    setVMusicMuted(next);
+  }, []);
+
   const exit = useCallback(() => {
     recordBest();
     onExit(stateRef.current.channel, stateRef.current.cp, bestRef.current);
@@ -138,9 +180,19 @@ export default function TerminalV({
   useEffect(() => {
     bestRef.current = readBest();
     setBest(bestRef.current);
+    mutedRef.current = readMuted();
+    setMusicMuted(mutedRef.current);
+    setVMusicMuted(mutedRef.current);
     rootRef.current?.focus();
     render(performance.now());
   }, [render]);
+
+  useEffect(() => {
+    if (status !== 'playing') return;
+
+    startVMusic();
+    return stopVMusic;
+  }, [status]);
 
   useEffect(() => {
     render(performance.now());
@@ -172,6 +224,7 @@ export default function TerminalV({
         if (!event.repeat) answer('right');
       } else if (key === 'h') holdChannel();
       else if (key === 'r') restart();
+      else if (key === 'm') toggleMusic();
       else if (key === 'escape' || key === 'q' || key === '`' || key === '~') exit();
       else handled = false;
 
@@ -183,7 +236,7 @@ export default function TerminalV({
 
     window.addEventListener('keydown', handleKeyDown, true);
     return () => window.removeEventListener('keydown', handleKeyDown, true);
-  }, [answer, exit, restart, holdChannel]);
+  }, [answer, exit, restart, holdChannel, toggleMusic]);
 
   const handleCanvasClick = (event: MouseEvent<HTMLCanvasElement>) => {
     if (stateRef.current.status === 'over') {
@@ -243,6 +296,17 @@ export default function TerminalV({
         </button>
         <button type="button" onClick={holdChannel} disabled={game.holds === 0} className={`${buttonClass} disabled:opacity-40`}>
           {labels.hold.replace('{n}', String(game.holds))}
+        </button>
+        <button
+          type="button"
+          aria-pressed={musicMuted}
+          onClick={() => {
+            toggleMusic();
+            rootRef.current?.focus();
+          }}
+          className={buttonClass}
+        >
+          {musicMuted ? labels.musicOff : labels.musicOn}
         </button>
         <button type="button" onClick={exit} className={buttonClass}>
           {labels.quit}

@@ -1098,7 +1098,7 @@
       "best": "best ch",
       "channel": "CH",
       "start": "Does the word match its color? Press left or right to tune in.",
-      "controls": "Left: the word names its own color. Right: it doesn't. H skips a channel.",
+      "controls": "Left: the word names its own color. Right: it doesn't. H skips a channel. M mutes music.",
       "gameOver": "Signal lost. R or tap restarts, Q quits.",
       "swapped": "CONTROLS SWAPPED",
       "leftMatch": "[ < ] MATCH",
@@ -1106,6 +1106,8 @@
       "rightMatch": "[ > ] MATCH",
       "rightNo": "[ > ] NO MATCH",
       "hold": "[ H ] HOLD x{n}",
+      "musicOn": "[ M ] MUSIC ON",
+      "musicOff": "[ M ] MUSIC OFF",
       "quit": "[ Q ] QUIT",
       "result": "v off the air. channel {channel}, cp {cp}, best channel {best}.",
       "colors": {
