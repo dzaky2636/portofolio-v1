@@ -15,6 +15,8 @@ export interface NavLink {
 }
 
 interface SiteHeaderProps {
+  crtLabel: string;
+  crtAria: string;
   navLinks: NavLink[];
   currentLang: string;
   menuOpen: string;
@@ -29,6 +31,8 @@ function hrefToId(href: string) {
 }
 
 export default function SiteHeader({
+  crtLabel,
+  crtAria,
   navLinks,
   currentLang,
   menuOpen,
@@ -158,6 +162,15 @@ export default function SiteHeader({
 
         <div className="flex items-center gap-2 pointer-events-auto">
           <HeaderSystemClock timezoneLabel={systemClockTz} />
+          <button
+            type="button"
+            data-crt-toggle
+            aria-pressed="false"
+            aria-label={crtAria}
+            className="hidden sm:block whitespace-nowrap font-mono uppercase tracking-widest text-xs border-2 border-black px-2 py-1 bg-white hover:bg-[#2945FF] hover:text-white transition-colors duration-75 retro-focus"
+          >
+            {crtLabel}
+          </button>
           <LanguageToggle currentLang={currentLang} />
           <button
             ref={menuButtonRef}

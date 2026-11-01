@@ -19,6 +19,7 @@ export interface TerminalLabels {
   hire: string[];
   remove: string;
   boar: string;
+  crt: string;
 }
 
 export interface TerminalData {
@@ -44,6 +45,7 @@ export type TerminalAction =
   | { type: 'close' }
   | { type: 'cv' }
   | { type: 'status' }
+  | { type: 'crt' }
   | { type: 'link'; url: string }
   | { type: 'goto'; section: MainSectionId };
 
@@ -193,6 +195,8 @@ export function runCommand(input: string, data: TerminalData): TerminalResult {
       if (task.startsWith('rm')) return { lines: [error(labels.remove)], action: none };
       break;
     }
+    case 'crt':
+      return { lines: [accent(labels.crt)], action: { type: 'crt' } };
     case 'clear':
       return { lines: [], action: { type: 'clear' } };
     case 'exit':

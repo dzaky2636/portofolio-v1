@@ -824,6 +824,10 @@
   "windowManager": {
     "reset": "[ RESET_WINDOWS ]"
   },
+  "crt": {
+    "label": "[ CRT ]",
+    "aria": "Toggle CRT screen effect"
+  },
   "mascot": {
     "click": [
       "OINK.",
@@ -935,6 +939,10 @@
         "description": "jump to a section"
       },
       {
+        "command": "crt",
+        "description": "toggle CRT screen effect"
+      },
+      {
         "command": "clear",
         "description": "clear the screen"
       },
@@ -958,6 +966,7 @@
       "next step: type cv, or type contact."
     ],
     "remove": "nice try. permission denied.",
-    "boar": "OINK."
+    "boar": "OINK.",
+    "crt": "crt mode toggled."
   }
 }

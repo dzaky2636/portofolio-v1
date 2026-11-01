@@ -824,6 +824,10 @@
   "windowManager": {
     "reset": "[ RESET_JENDELA ]"
   },
+  "crt": {
+    "label": "[ CRT ]",
+    "aria": "Ubah efek layar CRT"
+  },
   "mascot": {
     "click": [
       "OINK.",
@@ -935,6 +939,10 @@
         "description": "lompat ke bagian"
       },
       {
+        "command": "crt",
+        "description": "ubah efek layar CRT"
+      },
+      {
         "command": "clear",
         "description": "bersihkan layar"
       },
@@ -958,6 +966,7 @@
       "langkah berikutnya: ketik cv, atau ketik contact."
     ],
     "remove": "usaha bagus. izin ditolak.",
-    "boar": "OINK."
+    "boar": "OINK.",
+    "crt": "mode crt diubah."
   }
 }

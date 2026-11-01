@@ -150,6 +150,9 @@ export default function TerminalOverlay({
         case 'status':
           void loadStatus();
           break;
+        case 'crt':
+          window.dispatchEvent(new Event('crt:toggle'));
+          break;
         case 'link':
           window.open(action.url, '_blank', 'noopener,noreferrer');
           break;

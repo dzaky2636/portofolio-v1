@@ -11,6 +11,7 @@ import WindowDragManager from '@/components/WindowDragManager';
 import TechStackTags from '@/components/TechStackTags';
 import FooterSocial from '@/components/FooterSocial';
 import CopyEmailButton from '@/components/CopyEmailButton';
+import CrtController from '@/components/CrtController';
 import ProfilePictureToggle from '@/components/ProfilePictureToggle';
 import StatusPanel from '@/components/StatusPanel';
 import BoarMascot from '@/components/BoarMascot';
@@ -89,6 +90,7 @@ export default async function Page({
       <BoarMascot content={dict.mascot} />
       <WindowDragManager resetLabel={dict.windowManager.reset} />
       <TerminalOverlay data={terminalData} cvFile={dict.hero.cvFile} />
+      <CrtController />
       <KonamiCheatListener
         content={{
           title: dict.easterEgg.konamiTitle,
@@ -99,6 +101,8 @@ export default async function Page({
       />
       <SkipToContent label={dict.nav.skipToContent} targetId="profile" />
       <SiteHeader
+        crtLabel={dict.crt.label}
+        crtAria={dict.crt.aria}
         navLinks={navLinks}
         currentLang={lang}
         menuOpen={dict.nav.menuOpen}
@@ -478,6 +482,15 @@ export default async function Page({
             className="hover:text-[#2945FF] hover:underline retro-focus pointer-events-auto"
           >
             {dict.terminal.openButton}
+          </button>
+          <button
+            type="button"
+            data-crt-toggle
+            aria-pressed="false"
+            aria-label={dict.crt.aria}
+            className="px-1 hover:text-[#2945FF] hover:underline retro-focus pointer-events-auto"
+          >
+            {dict.crt.label}
           </button>
           <span data-twitch>{dict.footer.tagline}</span>
         </div>
