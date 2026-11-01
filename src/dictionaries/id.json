@@ -254,7 +254,7 @@
         "name": "CHATRIGO",
         "realm": "SaaS & Orkestrasi AI",
         "org": "PT RIGO INOVASI DIGITAL",
-        "description": "SaaS chatbot B2B omnichannel multi-tenant yang menyatukan WhatsApp, Instagram, Telegram, LINE, dan web chat ke dalam workspace per tenant, dengan billing QRIS Xendit, ringkasan chat, dan RBAC per tenant. Merancang lapisan orkestrasi RAG dan AI sales agent dengan rekomendasi produk berbasis bukti, dengan seluruh query dibatasi per tenant. Memegang arsitektur dan code review untuk tim berisi 8 intern.",
+        "description": "Memimpin arsitektur dan code review untuk tim 8 intern di SaaS chatbot B2B multi-tenant ini: WhatsApp, Instagram, Telegram, LINE, dan web chat per tenant, dengan lapisan RAG dan agen penjualan AI yang dibatasi per tenant.",
         "stack": [
           "NestJS/Fastify",
           "Next.js 16",
@@ -337,7 +337,7 @@
         "name": "CHATRIGO MOBILE",
         "realm": "SaaS & Mobile",
         "org": "PT RIGO INOVASI DIGITAL",
-        "description": "Aplikasi mobile pendamping platform omnichannel Chatrigo — membantu tim mengikuti percakapan pelanggan dan alur kerja agen di mana saja, terhubung ke backend SaaS yang sama dengan produk web.",
+        "description": "Pendamping Chatrigo berbasis Expo dan React Native: kotak masuk chat, pelanggan, produk, knowledge base, dan penagihan di mobile, memakai backend SaaS yang sama dengan produk web.",
         "stack": [
           "Expo",
           "React Native",
@@ -355,7 +355,7 @@
         "name": "E-SIGN",
         "realm": "Teknologi Sipil",
         "org": "DISKOMINFO",
-        "description": "Platform tanda tangan digital dan verifikasi dokumen untuk pemerintah kota: stempel QR code, pemrosesan PDF asinkron berbasis queue, dan verifikasi melalui API resmi pemerintah. Digunakan untuk penandatanganan dokumen di 278 sekolah dasar dan menengah pertama di Balikpapan (198 SD, 80 SMP).",
+        "description": "Dipakai untuk penandatanganan dokumen di 278 sekolah SD dan SMP Balikpapan: platform tanda tangan elektronik pemerintah kota dengan stempel QR, pemrosesan PDF berantrean, dan verifikasi melalui API resmi pemerintah.",
         "stack": [
           "Laravel",
           "Tailwind CSS",
@@ -430,11 +430,12 @@
         "name": "E-KGB",
         "realm": "Teknologi Sipil",
         "org": "DISKOMINFO",
-        "description": "Aplikasi web manajemen kepegawaian untuk pegawai pemerintah kota, mencakup pengajuan Kenaikan Gaji Berkala (KGB) dan promosi, dengan dashboard berbasis role, otomasi proses, dan kontrol akses terautentikasi.",
+        "description": "Dirilis ke produksi untuk pegawai pemerintah kota Balikpapan selama magang lima bulan dan masih berjalan: pengajuan Kenaikan Gaji Berkala (KGB) dan promosi dengan dashboard berbasis role, otomasi proses, dan kontrol akses.",
         "stack": [
           "Laravel",
           "Tailwind CSS"
         ],
+        "metrics": ["masih berjalan"],
         "images": [
           "/images/e-kgb/1.png",
           "/images/e-kgb/2.png"
@@ -493,10 +494,12 @@
         "name": "E-MANUNTUNG",
         "realm": "Teknologi Sipil",
         "org": "DISKOMINFO",
-        "description": "Aplikasi layanan publik berbasis Flutter (web dan mobile) yang dibangun di Diskominfo Balikpapan untuk meningkatkan layanan komunikasi dan informatika bagi warga.",
+        "description": "Satu dari tiga sistem pemerintah kota yang saya rilis ke produksi saat magang di Diskominfo Balikpapan: aplikasi web dan mobile Flutter yang menghadirkan layanan kota seperti retribusi daerah, pajak kendaraan, CCTV, dan JDIH bagi warga.",
         "stack": [
-          "Flutter"
+          "Flutter",
+          "Dart"
         ],
+        "metrics": ["masih berjalan"],
         "images": [
           "/images/e-manuntung/1.jpg",
           "/images/e-manuntung/2.png"
@@ -508,10 +511,10 @@
         "name": "UNITY 2025",
         "realm": "Kampus / Acara",
         "org": "UNITY UMN",
-        "description": "Memimpin pengembangan dan pemeliharaan website kompetisi Bahasa Inggris UNITY UMN (2025) — registrasi acara, akurasi konten, dan alur publikasi bersama tim lintas fungsi.",
+        "description": "Website Lead kompetisi Bahasa Inggris UNITY UMN (2025): membangun dan memelihara situsnya bersamaan dengan magang di Diskominfo, memegang registrasi acara dan publikasi konten.",
         "stack": [
-          "Next.js",
-          "TypeScript",
+          "React",
+          "Vite",
           "Tailwind CSS"
         ],
         "images": [
@@ -529,10 +532,11 @@
         "name": "STARLIGHT 2024",
         "realm": "Kampus / Acara",
         "org": "STARLIGHT UMN",
-        "description": "Website acara dan kompetisi STARLIGHT UMN (2024) — alur registrasi, konten yang dipublikasikan, dan pemeliharaan situs program kampus.",
+        "description": "Berkontribusi pada website acara STARLIGHT UMN (2024) bersama tim mahasiswa: situs React dan Vite dengan halaman stages, rekrutmen, dan FAQ.",
         "stack": [
-          "Next.js",
-          "TypeScript",
+          "React",
+          "Vite",
+          "MUI",
           "Tailwind CSS"
         ],
         "images": [
@@ -715,7 +719,7 @@
         "name": "PORTOFOLIO WEBSITE",
         "realm": "Personal / Frontend",
         "org": "PORTOFOLIO V1",
-        "description": "Portofolio ini — tata letak naratif satu halaman dengan routing EN/ID, UI Corporate Weirdcore, modal image viewer proyek, dan kanvas hero Three.js low-poly.",
+        "description": "Situs ini: dossier Corporate Weirdcore di Next.js 16 dengan routing EN/ID, hamparan jendela OS Three.js, terminal di browser dengan empat game, dan musik yang dihasilkan kode.",
         "stack": [
           "Next.js 16",
           "React 19",

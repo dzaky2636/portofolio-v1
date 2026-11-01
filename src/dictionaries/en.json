@@ -254,7 +254,7 @@
         "name": "CHATRIGO",
         "realm": "SaaS & AI Orchestration",
         "org": "PT RIGO INOVASI DIGITAL",
-        "description": "Multi-tenant B2B omnichannel chatbot SaaS unifying WhatsApp, Instagram, Telegram, LINE, and web chat into per-tenant workspaces, with Xendit QRIS billing, conversation summaries, and tenant RBAC. Designed the RAG orchestration layer and an AI sales agent with evidence-bound product recommendations, scoping every query by tenant. Led architecture and code review for a team of 8 interns.",
+        "description": "Led architecture and code review for a team of 8 interns on this multi-tenant B2B chatbot SaaS: WhatsApp, Instagram, Telegram, LINE, and web chat per tenant, with a RAG layer and AI sales agent scoped to each tenant.",
         "stack": [
           "NestJS/Fastify",
           "Next.js 16",
@@ -337,7 +337,7 @@
         "name": "CHATRIGO MOBILE",
         "realm": "SaaS & Mobile",
         "org": "PT RIGO INOVASI DIGITAL",
-        "description": "Companion mobile app for the Chatrigo omnichannel platform — lets teams stay on top of customer conversations and agent workflows on the go, connected to the same SaaS backend as the web product.",
+        "description": "Expo and React Native companion to Chatrigo: chat inbox, customers, products, knowledge base, and billing on mobile, on the same SaaS backend as the web product.",
         "stack": [
           "Expo",
           "React Native",
@@ -355,7 +355,7 @@
         "name": "E-SIGN",
         "realm": "Civic Tech",
         "org": "DISKOMINFO",
-        "description": "Digital signature and document verification platform for the city government: QR-code stamping, queued background PDF processing, and verification against official government APIs. Deployed for school document signing across Balikpapan's 278 primary and junior-secondary schools (198 SD, 80 SMP).",
+        "description": "Deployed for document signing across Balikpapan's 278 primary and junior-secondary schools: a city government e-signature platform with QR stamping, queued PDF processing, and verification against official government APIs.",
         "stack": [
           "Laravel",
           "Tailwind CSS",
@@ -430,11 +430,12 @@
         "name": "E-KGB",
         "realm": "Civic Tech",
         "org": "DISKOMINFO",
-        "description": "Personnel management web app for municipal staff, covering periodic salary review and promotion (KGB) requests with role-based dashboards, process automation, and authenticated access control.",
+        "description": "Shipped to production for Balikpapan's municipal staff during a five-month internship and still live: periodic salary review and promotion (KGB) requests with role-based dashboards, process automation, and access control.",
         "stack": [
           "Laravel",
           "Tailwind CSS"
         ],
+        "metrics": ["live in production"],
         "images": [
           "/images/e-kgb/1.png",
           "/images/e-kgb/2.png"
@@ -493,10 +494,12 @@
         "name": "E-MANUNTUNG",
         "realm": "Civic Tech",
         "org": "DISKOMINFO",
-        "description": "Flutter-based web and mobile public-service application built at Diskominfo Balikpapan to improve communications and informatics services for citizens.",
+        "description": "One of three municipal systems I shipped to production during my Diskominfo Balikpapan internship: a Flutter web and mobile app bringing city services like local levies, vehicle tax, CCTV, and JDIH to citizens.",
         "stack": [
-          "Flutter"
+          "Flutter",
+          "Dart"
         ],
+        "metrics": ["live in production"],
         "images": [
           "/images/e-manuntung/1.jpg",
           "/images/e-manuntung/2.png"
@@ -508,10 +511,10 @@
         "name": "UNITY 2025",
         "realm": "Campus / Events",
         "org": "UNITY UMN",
-        "description": "Led development and maintenance of the UNITY UMN English competition website (2025) — event registration, content accuracy, and publication pipelines coordinated with cross-functional teams.",
+        "description": "Website Lead for the UNITY UMN English competition (2025): built and maintained the site alongside my Diskominfo internship, owning event registration and content publishing.",
         "stack": [
-          "Next.js",
-          "TypeScript",
+          "React",
+          "Vite",
           "Tailwind CSS"
         ],
         "images": [
@@ -529,10 +532,11 @@
         "name": "STARLIGHT 2024",
         "realm": "Campus / Events",
         "org": "STARLIGHT UMN",
-        "description": "Event and competition website for STARLIGHT UMN (2024) — registration flows, published content, and site upkeep for the campus program.",
+        "description": "Contributed to the STARLIGHT UMN event website (2024) with a student team: a React and Vite site with stages, recruitment, and FAQ pages.",
         "stack": [
-          "Next.js",
-          "TypeScript",
+          "React",
+          "Vite",
+          "MUI",
           "Tailwind CSS"
         ],
         "images": [
@@ -715,7 +719,7 @@
         "name": "PORTFOLIO WEBSITE",
         "realm": "Personal / Frontend",
         "org": "PORTFOLIO V1",
-        "description": "This portfolio — single-page narrative layout with EN/ID routing, Corporate Weirdcore UI, project image viewer modal, and a low-poly Three.js hero canvas.",
+        "description": "This site: a Corporate Weirdcore dossier in Next.js 16 with EN/ID routing, a Three.js field of OS windows, an in-browser terminal with four playable games, and code-generated music.",
         "stack": [
           "Next.js 16",
           "React 19",

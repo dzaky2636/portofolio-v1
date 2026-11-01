@@ -240,7 +240,7 @@ function ProjectCard({
             ))}
           </div>
 
-          <p className="mt-2 font-serif text-base md:text-lg leading-snug line-clamp-2">
+          <p className="mt-2 font-serif text-base md:text-lg leading-snug md:line-clamp-2">
             {project.description}
           </p>
 
