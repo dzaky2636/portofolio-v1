@@ -15,8 +15,9 @@ interface Target {
   url: string;
 }
 
+// A custom liveLabel marks a link that isn't the project's own site, like a store page.
 const targets: Target[] = en.projects.items.flatMap((project) =>
-  'liveUrl' in project && project.liveUrl
+  'liveUrl' in project && project.liveUrl && !('liveLabel' in project)
     ? [{ id: project.id, name: project.name, url: project.liveUrl }]
     : []
 );

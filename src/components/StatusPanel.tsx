@@ -84,15 +84,15 @@ export default function StatusPanel({ labels }: { labels: StatusPanelLabels }) {
                 href={site.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full bg-white p-4 md:p-5 hover:bg-[#F4F3ED] retro-focus"
+                className="w-full bg-white p-3 md:p-4 hover:bg-[#F4F3ED] retro-focus"
               >
-                <span className="block font-serif font-bold text-2xl leading-tight">
+                <span className="block font-serif font-bold text-xl leading-tight">
                   {site.name}
                 </span>
                 <span className="block mt-1 font-mono text-[10px] tracking-widest break-all">
                   {hostOf(site.url)}
                 </span>
-                <span className="mt-3 flex flex-wrap items-center gap-2 font-mono uppercase tracking-widest text-[10px]">
+                <span className="mt-2 flex flex-wrap items-center gap-2 font-mono uppercase tracking-widest text-[10px]">
                   <span className={`border-2 border-black px-2 py-0.5 ${STATE_STYLE[site.state]}`}>
                     {labels[site.state]}
                   </span>
