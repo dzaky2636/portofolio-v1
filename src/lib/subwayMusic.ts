@@ -1,3 +1,4 @@
+import { holdBackgroundMusic } from '@/lib/backgroundMusic';
 import { getAudioContext } from '@/lib/retroAudio';
 
 const BEATS_PER_MINUTE = 132;
@@ -183,6 +184,8 @@ function schedule(ctx: AudioContext, output: AudioNode) {
 export function startSubwayMusic() {
   if (master) return;
 
+  holdBackgroundMusic(true);
+
   const ctx = getAudioContext();
   const output = ctx.createGain();
   output.gain.setValueAtTime(MASTER_GAIN, ctx.currentTime);
@@ -210,6 +213,8 @@ export function stopSubwayMusic() {
   output.gain.setValueAtTime(output.gain.value, ctx.currentTime);
   output.gain.linearRampToValueAtTime(0, ctx.currentTime + FADE_OUT_SECONDS);
   window.setTimeout(() => output.disconnect(), 400);
+
+  holdBackgroundMusic(false);
 }
 
 /** 1 plays at the written tempo; the game raises this as the run speeds up. */

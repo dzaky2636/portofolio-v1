@@ -17,6 +17,7 @@ export interface TaskbarLabels {
   subway: string;
   nonogram: string;
   crt: string;
+  music: string;
   cv: string;
   boar: string;
 }
@@ -131,6 +132,9 @@ export default function Taskbar({
             <MenuGroup title={labels.system}>
               <button type="button" data-crt-toggle className={ITEM_CLASS}>
                 {labels.crt}
+              </button>
+              <button type="button" data-music-toggle className={ITEM_CLASS}>
+                {labels.music}
               </button>
               <button type="button" onClick={() => runInTerminal('boar')} className={ITEM_CLASS}>
                 {labels.boar}

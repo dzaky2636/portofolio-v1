@@ -13,6 +13,7 @@ import TechStackTags from '@/components/TechStackTags';
 import FooterSocial from '@/components/FooterSocial';
 import CopyEmailButton from '@/components/CopyEmailButton';
 import CrtController from '@/components/CrtController';
+import MusicController from '@/components/MusicController';
 import ProfilePictureToggle from '@/components/ProfilePictureToggle';
 import StatusPanel from '@/components/StatusPanel';
 import BoarMascot from '@/components/BoarMascot';
@@ -92,6 +93,7 @@ export default async function Page({
       <WindowDragManager resetLabel={dict.windowManager.reset} />
       <TerminalOverlay data={terminalData} cvFile={dict.hero.cvFile} />
       <CrtController />
+      <MusicController />
       <Taskbar
         labels={dict.taskbar}
         navLinks={navLinks}
@@ -110,6 +112,8 @@ export default async function Page({
       <SiteHeader
         crtLabel={dict.crt.label}
         crtAria={dict.crt.aria}
+        musicLabel={dict.music.label}
+        musicAria={dict.music.aria}
         navLinks={navLinks}
         currentLang={lang}
         menuOpen={dict.nav.menuOpen}
@@ -497,6 +501,15 @@ export default async function Page({
             className="px-1 hover:text-[#2945FF] hover:underline retro-focus pointer-events-auto"
           >
             {dict.crt.label}
+          </button>
+          <button
+            type="button"
+            data-music-toggle
+            aria-pressed="false"
+            aria-label={dict.music.aria}
+            className="px-1 hover:text-[#2945FF] hover:underline retro-focus pointer-events-auto"
+          >
+            {dict.music.label}
           </button>
           <span data-twitch>{dict.footer.tagline}</span>
         </div>

@@ -833,6 +833,7 @@
     "subway": "SUBWAY.EXE",
     "nonogram": "NONOGRAM.EXE",
     "crt": "MODE CRT",
+    "music": "MUSIK LATAR",
     "cv": "UNDUH CV",
     "boar": "STATISTIK BABI HUTAN"
   },
@@ -842,6 +843,10 @@
   "crt": {
     "label": "[ CRT ]",
     "aria": "Ubah efek layar CRT"
+  },
+  "music": {
+    "label": "[ MUSIK ]",
+    "aria": "Nyalakan atau matikan musik latar"
   },
   "mascot": {
     "click": [

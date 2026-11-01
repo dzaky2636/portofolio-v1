@@ -16,6 +16,8 @@ export interface NavLink {
 interface SiteHeaderProps {
   crtLabel: string;
   crtAria: string;
+  musicLabel: string;
+  musicAria: string;
   navLinks: NavLink[];
   currentLang: string;
   menuOpen: string;
@@ -31,6 +33,8 @@ function hrefToId(href: string) {
 export default function SiteHeader({
   crtLabel,
   crtAria,
+  musicLabel,
+  musicAria,
   navLinks,
   currentLang,
   menuOpen,
@@ -166,6 +170,15 @@ export default function SiteHeader({
             className="hidden sm:block whitespace-nowrap font-mono uppercase tracking-widest text-xs border-2 border-black px-2 py-1 bg-white hover:bg-[#2945FF] hover:text-white transition-colors duration-75 retro-focus"
           >
             {crtLabel}
+          </button>
+          <button
+            type="button"
+            data-music-toggle
+            aria-pressed="false"
+            aria-label={musicAria}
+            className="hidden sm:block whitespace-nowrap font-mono uppercase tracking-widest text-xs border-2 border-black px-2 py-1 bg-white hover:bg-[#2945FF] hover:text-white transition-colors duration-75 retro-focus"
+          >
+            {musicLabel}
           </button>
           <LanguageToggle currentLang={currentLang} />
           <button

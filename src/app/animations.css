@@ -434,7 +434,8 @@ html[data-crt='on'] main {
     -0.6px 0 rgba(255, 0, 0, 0.25);
 }
 
-html[data-crt='on'] [data-crt-toggle] {
+html[data-crt='on'] [data-crt-toggle],
+html[data-music='on'] [data-music-toggle] {
   background: #ffd700;
   color: #0c0c0c;
 }

@@ -833,6 +833,7 @@
     "subway": "SUBWAY.EXE",
     "nonogram": "NONOGRAM.EXE",
     "crt": "CRT MODE",
+    "music": "BACKGROUND MUSIC",
     "cv": "DOWNLOAD CV",
     "boar": "BOAR STATS"
   },
@@ -842,6 +843,10 @@
   "crt": {
     "label": "[ CRT ]",
     "aria": "Toggle CRT screen effect"
+  },
+  "music": {
+    "label": "[ MUSIC ]",
+    "aria": "Toggle background music"
   },
   "mascot": {
     "click": [

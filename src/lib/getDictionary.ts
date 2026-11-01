@@ -132,6 +132,7 @@ export interface Dictionary {
   windowManager: { reset: string };
   taskbar: TaskbarLabels;
   crt: { label: string; aria: string };
+  music: { label: string; aria: string };
   terminal: TerminalLabels;
   mascot: {
     click: string[];
